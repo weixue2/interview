@@ -16,6 +16,6 @@ import static com.huatu.common.consts.ApolloConfigConsts.NAMESPACE_TIKU_DB;
 @EnableApolloConfig(NAMESPACE_TIKU_DB)
 @EnableTransactionManagement(proxyTargetClass=true)
 @EnableJpaRepositories(value = "com.huatu.tiku.interview.repository",repositoryImplementationPostfix = "Impl")//jpa包配置
-@EntityScan("com.huatu.tiku.interview.entity")//jpa实体类包配置
+@EntityScan("com.huatu.tiku.interview.entity.po")//jpa实体类包配置
 public class JpaConfig {
 }
