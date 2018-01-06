@@ -6,6 +6,9 @@ package com.huatu.tiku.interview.constant;
  * @create 2018-01-03 下午7:48
  **/
 public class WeChatUrlConstant {
+    /* 获取用户信息  phone=xxxxx&timeStamp=xxxxxx进行3des加密传参，返回值也是3des加密的   */
+    public static String PHP_GET_USER_INFO = "http://testapi.huatu.com/app_ztk/getGdmsinfo.php?p=";
+
     public static String ACCESS_TOKEN = "ACCESS_TOKEN";
     /*发送模板消息接口*/
     public static String TEMPLATE_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";

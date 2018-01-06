@@ -8,5 +8,5 @@ import javax.servlet.http.HttpServletRequest;
  * @create 2018-01-04 下午12:12
  **/
 public interface CoreService {
-    public  String processRequest(HttpServletRequest request) ;
+      String processRequest(HttpServletRequest request) ;
 }

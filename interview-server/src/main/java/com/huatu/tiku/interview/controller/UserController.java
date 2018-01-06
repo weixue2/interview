@@ -7,6 +7,7 @@ import com.huatu.common.utils.reflect.BeanUtil;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,6 +33,14 @@ public class UserController {
             throw new BizException(ErrorResult.create(403,"参数有误"));
         }
         userService.updateUser(user);
+    }
+    @PostMapping
+    public void createUser(@RequestBody String openId){
+        log.info("id:{}",openId);
+        if(StringUtils.isBlank(openId)){
+            throw new BizException(ErrorResult.create(403,"参数有误"));
+        }
+        userService.createUser(openId);
     }
     @GetMapping
     public Object getUserInfo(String openId){

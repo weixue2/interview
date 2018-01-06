@@ -9,5 +9,6 @@ import com.huatu.tiku.interview.entity.po.User;
  **/
 public interface UserService {
      void updateUser(User user);
+     void createUser(String openId);
     User getUser(String openId);
 }

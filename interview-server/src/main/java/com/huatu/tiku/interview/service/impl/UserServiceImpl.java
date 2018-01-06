@@ -21,6 +21,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void createUser(String openId) {
+        User user = new User();
+        user.setOpenId(openId);
+        userRepository.save(user);
+    }
+
+    @Override
     public User getUser(String openId) {
         return userRepository.getUserByOpenIdAndStatus(openId,1);
     }
