@@ -36,7 +36,8 @@ public class CoreController {
     WeiXinAccessTokenUtil weiXinAccessTokenUtil;
 
 
-    @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
+   // @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
+    @PostMapping(value = "")
     public Object post(HttpServletRequest req) {
         // 调用核心业务类接收消息、处理消息跟推送消息
         log.info("--------------core-------------------");
