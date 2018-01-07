@@ -3,7 +3,9 @@ package com.huatu.tiku.interview.controller;
 import com.huatu.tiku.interview.util.CheckUtil;
 import com.huatu.tiku.interview.util.SignUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,7 @@ import java.io.PrintWriter;
  **/
 @RestController
 @Slf4j
+@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class LoginController {
     @GetMapping(value = "")
     public String checkSignature(@RequestParam(name = "signature" ,required = false) String signature  ,
@@ -26,7 +29,7 @@ public class LoginController {
                                  @RequestParam(name = "timestamp",required = false) String  timestamp ,
                                  @RequestParam(name = "echostr",required = false) String  echostr){
         // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-        log.info("-------开始验证----------");
+        log.info("-------开始验证----------signature:{},nonce:{},timestamp:{},echostr:{}",signature,nonce,timestamp,echostr);
         if (SignUtil.checkSignature(signature, timestamp, nonce)) {
             log.info("接入成功");
             return echostr;
