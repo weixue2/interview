@@ -1,10 +1,12 @@
 package com.huatu.tiku.interview.controller;
 
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.material.MaterialList;
 import com.huatu.tiku.interview.service.MaterialService;
 import com.huatu.tiku.interview.task.AccessTokenThread;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,14 +25,15 @@ public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
-
+    @Autowired
+    StringRedisTemplate redisTemplate;
 
 
     //上传临时素材
     @RequestMapping(value="/addtem",method = RequestMethod.POST)
     public String add(){
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         //这里只是单纯地用图片image来测试
 
         if(at!=null){
@@ -47,7 +50,7 @@ public class MaterialController {
     @RequestMapping(value="/addper",method = RequestMethod.POST)
     public String addper(){
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at =redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         //这里只是单纯地用图片image来测试
         if(at!=null){
             String i=materialService.uploadPermanentMedia1(at,null,null);
@@ -69,7 +72,7 @@ public class MaterialController {
     @RequestMapping(value="/getall",method = RequestMethod.GET)
     public ModelAndView getall(){
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at =redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         String url="https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token="+at;
         ModelAndView mv=new ModelAndView("redirect:"+url);
         return mv;
@@ -79,7 +82,7 @@ public class MaterialController {
     @RequestMapping(value = "/getlist",method = RequestMethod.POST)
     public String getlist(){
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at =redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         if(at!=null) {
             String a=materialService.getlist(getlist1(), at);
             log.info("获取素材列表为："+a);

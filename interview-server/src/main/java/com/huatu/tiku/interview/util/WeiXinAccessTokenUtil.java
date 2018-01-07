@@ -33,7 +33,6 @@ public class WeiXinAccessTokenUtil {
     public AccessToken getWeiXinAccessToken() {
         AccessToken accessToken = restTemplate.getForObject(WeChatUrlConstant.TOKEN_URL, AccessToken.class);
         log.info("result:" + accessToken);
-        System.out.println(accessToken.getAccess_token());
         return accessToken;
     }
     /**

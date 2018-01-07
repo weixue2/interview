@@ -5,10 +5,12 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Maps;
 import com.huatu.common.ErrorResult;
 import com.huatu.common.exception.BizException;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.*;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,32 +37,12 @@ public class TestController {
     WeiXinAccessTokenUtil weiXinAccessTokenUtil;
     @Autowired
     RestTemplate restTemplate;
-    Cache cache = null;
-    static String ACCESS_TOKEN = "accessToken";
-
-    //TODO accessToken放到redis中，这里是示例代码
-    @PostMapping("button")
-    public void createButton() {
-        log.info("button post");
-        AccessToken accessToken = weiXinAccessTokenUtil.getWeiXinAccessToken();
-        if (accessToken != null) {
-            cache = CacheBuilder.newBuilder().maximumSize(1).expireAfterWrite(accessToken.getExpires_in(), TimeUnit.SECONDS).build();
-            cache.put(ACCESS_TOKEN, accessToken.getAccess_token());
-        } else {
-            log.error(".......");
-        }
-
-    }
-
+    @Autowired
+    StringRedisTemplate redisTemplate;
 
     @GetMapping("template")
     public void template() {
         log.info("template get");
-        String accessToken = null;
-        if (cache == null) {
-            createButton();
-        }
-        accessToken = (String) cache.getIfPresent(ACCESS_TOKEN);
 
         WeChatTemplate wechatTemplate = new WeChatTemplate();
         Map<String, TemplateData> m = Maps.newHashMapWithExpectedSize(16);
@@ -98,10 +80,7 @@ public class TestController {
         wechatTemplate.setTemplate_id("1TNrzYDSfkLO2Z0chx_JeEwTFn-znJOpAskYS4MNDK8");
         wechatTemplate.setTouser("");
         wechatTemplate.setUrl("http://v.huatu.com");
-        if (accessToken == null) {
-            throw new BizException(ErrorResult.create(1000001, "瞎搞"));
-        }
-        weiXinAccessTokenUtil.sendTemplateMessage(accessToken, wechatTemplate);
+        weiXinAccessTokenUtil.sendTemplateMessage(  redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN), wechatTemplate);
     }
 
 

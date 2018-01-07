@@ -13,9 +13,9 @@ public class WeChatUrlConstant {
     /*发送模板消息接口*/
     public static String TEMPLATE_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
     /*  秘钥  */
-    public static final String ACCESS_SECRETE = "78b688afb80faf735ebf3e2a3525ef35";
-    public static final String APP_ID = "wx4e6e2dc624081b58";
-    public static String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APP_ID + "&secret=" + ACCESS_SECRETE;
+   // public static final String ACCESS_SECRETE = "78b688afb80faf735ebf3e2a3525ef35";
+    //public static final String APP_ID = "wx4e6e2dc624081b58";
+    public static String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=78b688afb80faf735ebf3e2a3525ef35&secret=78b688afb80faf735ebf3e2a3525ef35";
     // 菜单创建（POST） 限1000（次/天）
     public static String MENU_CREATE_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 

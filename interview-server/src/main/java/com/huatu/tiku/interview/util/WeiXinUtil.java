@@ -91,7 +91,7 @@ public class WeiXinUtil {
     }
 
     // 获取access_token的接口地址（GET） 限200（次/天）
-    public final static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+  // public final static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
     /**
      * 获取access_token
@@ -100,25 +100,25 @@ public class WeiXinUtil {
      * @param appsecret 密钥
      * @return
      */
-    public static AccessToken getAccessToken(String appid, String appsecret) {
-        AccessToken accessToken = null;
-
-        String requestUrl = access_token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
-        JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
-        // 如果请求成功
-        if (null != jsonObject) {
-            try {
-                accessToken = new AccessToken();
-
-                accessToken.setAccess_token(jsonObject.getString("access_token"));
-                accessToken.setExpires_in(jsonObject.getInt("expires_in"));
-            } catch (Exception e) {
-                accessToken = null;
-                // 获取token失败
-                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
-            }
-        }
-        return accessToken;
-    }
+//    public static AccessToken getAccessToken(String appid, String appsecret) {
+//        AccessToken accessToken = null;
+//
+//        String requestUrl = access_token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
+//        JSONObject jsonObject = httpRequest(requestUrl, "GET", null);
+//        // 如果请求成功
+//        if (null != jsonObject) {
+//            try {
+//                accessToken = new AccessToken();
+//
+//                accessToken.setAccess_token(jsonObject.getString("access_token"));
+//                accessToken.setExpires_in(jsonObject.getInt("expires_in"));
+//            } catch (Exception e) {
+//                accessToken = null;
+//                // 获取token失败
+//                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+//            }
+//        }
+//        return accessToken;
+//    }
 
 }

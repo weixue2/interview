@@ -24,10 +24,10 @@ import java.io.PrintWriter;
 @RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class LoginController {
     @GetMapping(value = "")
-    public String checkSignature(@RequestParam(name = "signature" ,required = false) String signature  ,
+    public Object checkSignature(@RequestParam(name = "signature" ,required = false) String signature  ,
                                  @RequestParam(name = "nonce",required = false) String  nonce ,
                                  @RequestParam(name = "timestamp",required = false) String  timestamp ,
-                                 @RequestParam(name = "echostr",required = false) String  echostr){
+                                 @RequestParam(name = "echostr",required = false) Object  echostr){
         // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
         log.info("-------开始验证----------signature:{},nonce:{},timestamp:{},echostr:{}",signature,nonce,timestamp,echostr);
         if (SignUtil.checkSignature(signature, timestamp, nonce)) {
