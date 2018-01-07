@@ -4,8 +4,6 @@ import com.huatu.tiku.interview.entity.material.MaterialList;
 import com.huatu.tiku.interview.service.MaterialService;
 import com.huatu.tiku.interview.task.AccessTokenThread;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,14 +16,13 @@ import java.io.File;
  * @Description: 与微信对接登陆验证
  * @create 2018-01-04 上午11:53
  **/
-@RestController
 @Slf4j
+@RestController
 @RequestMapping("/api/material")
 public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
-    private static Logger log = LoggerFactory.getLogger(MaterialController.class);
 
 
 

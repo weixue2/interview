@@ -26,7 +26,7 @@ public class CoreController {
 
 
     @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
-    public String post(HttpServletRequest req) {
+    public Object post(HttpServletRequest req) {
         // 调用核心业务类接收消息、处理消息跟推送消息
         log.info("--------------core-------------------");
         String respMessage = coreService.processRequest(req);
