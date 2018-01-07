@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class AccessTokenThread {
 
     // 第三方用户唯一凭证
-    public static AccessToken accessToken =   new AccessToken("5_NKz1dTTDmC1l52aJcxtLK5g3KkqvfwtUgqLACkKOQr5STt5-bmJOgOXuoi-xnV6Dhgx28IZ2PnYWpWqccNjxQwtCqkZ-QMVYRQVMfykcr-TMrY56sC_t2W-cBE4QFRcACAVKW",100);
+    public static AccessToken accessToken =   new AccessToken("5_f2LWdG3R96BetLeYP8pNm8mG3eO6qnoqbAvDZt1VssabSHi9G8VS4rKH4uH31vc7TT8hIIB8KFPp-uctGVLFodmJlxg6mecWqNBuJz-sH01PFZXvrquUxc_XwARNuOQCkSPGuQtO84-QkKUVHAMiACAXQC",100);
 //TODO 存缓存
   //  @Scheduled(fixedDelay = 2*3600*1000)
     //7200秒执行一次
