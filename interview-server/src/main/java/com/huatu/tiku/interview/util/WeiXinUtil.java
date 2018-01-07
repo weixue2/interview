@@ -79,12 +79,14 @@ public class WeiXinUtil {
             inputStreamReader.close();
             // 释放资源
             inputStream.close();
-            inputStream = null;
             httpUrlConn.disconnect();
+            log.info("返回的结果:"+buffer.toString());
                jsonObject = JSONObject.fromObject(buffer.toString());
         } catch (ConnectException ce) {
+            ce.printStackTrace();;
             log.error("WeiXin server connection timed out.");
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("https request error:{}", e);
         }
         return jsonObject;
