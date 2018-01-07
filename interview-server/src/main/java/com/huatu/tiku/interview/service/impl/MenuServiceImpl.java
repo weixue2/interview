@@ -2,11 +2,13 @@ package com.huatu.tiku.interview.service.impl;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.service.MenuService;
 import com.huatu.tiku.interview.util.WeiXinUtil;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,16 +19,11 @@ import java.util.Map;
  * @Description: TODO
  * @create 2018-01-04 下午1:58
  **/
+@Slf4j
 @Service("menuService")
 public class MenuServiceImpl implements MenuService {
-
-
-
-    private static Logger log = LoggerFactory.getLogger(MenuServiceImpl.class);
-
-
-
-
+    @Autowired
+    RestTemplate restTemplate;
 
     /**
      * 查询菜单

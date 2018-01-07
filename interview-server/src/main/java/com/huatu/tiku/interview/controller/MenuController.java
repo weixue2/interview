@@ -6,6 +6,7 @@ import com.huatu.tiku.interview.task.AccessTokenThread;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class MenuController {
 
-
+    @Autowired
+    StringRedisTemplate redisTemplate;
 
     @Autowired
     private MenuService menuService;
@@ -28,7 +30,7 @@ public class MenuController {
     @GetMapping("menus")
     public String getMenu() {
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         JSONObject jsonObject = null;
         if (at != null) {
             // 调用接口查询菜单
@@ -45,7 +47,7 @@ public class MenuController {
     @PostMapping(value = "menus")
     public int createMenu() {
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         int result = 0;
         if (at != null) {
             // 调用接口创建菜单
@@ -64,7 +66,7 @@ public class MenuController {
     @DeleteMapping(value = "menus")
     public int deleteMenu() {
         // 调用接口获取access_token
-        String at = AccessTokenThread.accessToken.getAccess_token();
+        String at = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         int result = 0;
         if (at != null) {
             // 删除菜单
