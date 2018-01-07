@@ -125,7 +125,7 @@ security:
 
 htonline:
 ## 开启ResponseBodyAdvice
-  wrapper.enabled: true
+  wrapper.enabled: false
   httpclient.enabled: false
   okhttp.enabled: true
   executor.enabled: true
