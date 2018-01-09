@@ -34,14 +34,14 @@ public class UserController {
         }
         userService.updateUser(user);
     }
-    @PostMapping
-    public void createUser(@RequestBody String openId){
-        log.info("id:{}",openId);
-        if(StringUtils.isBlank(openId)){
-            throw new BizException(ErrorResult.create(403,"参数有误"));
-        }
-        userService.createUser(openId);
-    }
+//    @PostMapping
+//    public void createUser(@RequestBody String openId){
+//        log.info("id:{}",openId);
+//        if(StringUtils.isBlank(openId)){
+//            throw new BizException(ErrorResult.create(403,"参数有误"));
+//        }
+//        userService.createUser(openId);
+//    }
     @GetMapping
     public Object getUserInfo(String openId){
         User user  =userService.getUser(openId);
