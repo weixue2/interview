@@ -45,12 +45,13 @@ public class CoreServiceImpl implements CoreService {
             String respContent = "请求处理异常，请稍候尝试！";
             // xml请求解析
             Map<String, String> requestMap = MessageUtil.parseXml(request);
+            requestMap.forEach((k,v)->{
+                log.info("key:{},value:{}",k,v);
+            });
             // 发送方帐号（open_id）
             String fromUserName = requestMap.get("FromUserName");
-            log.info("FromUserName:{}", fromUserName);
             // 公众帐号
             String toUserName = requestMap.get("ToUserName");
-            log.info("toUserName:{}", toUserName);
             // 消息类型
             String msgType = requestMap.get("MsgType");
             // 回复文本消息
