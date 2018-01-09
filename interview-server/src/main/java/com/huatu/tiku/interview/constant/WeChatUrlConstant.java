@@ -7,7 +7,7 @@ package com.huatu.tiku.interview.constant;
  **/
 public class WeChatUrlConstant {
     //okdNOuFFsk83SU9bvABn4rJinTvs
-
+//739040d83f6d5c73fa961e3b1a48540f     //线上环境密钥
     /* 获取用户信息  phone=xxxxx&timeStamp=xxxxxx进行3des加密传参，返回值也是3des加密的   */
     public static String PHP_GET_USER_INFO = "http://testapi.huatu.com/app_ztk/getGdmsinfo.php?p=";
 
@@ -17,7 +17,9 @@ public class WeChatUrlConstant {
     /*  秘钥  */
    // public static final String ACCESS_SECRETE = "78b688afb80faf735ebf3e2a3525ef35";
     //public static final String APP_ID = "wx4e6e2dc624081b58";
-    public static String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4e6e2dc624081b58&secret=78b688afb80faf735ebf3e2a3525ef35";
+    public static String TOKEN_URL_TEST = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx4e6e2dc624081b58&secret=78b688afb80faf735ebf3e2a3525ef35";
+  //online
+    public static String TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx53505056175d5968&secret=739040d83f6d5c73fa961e3b1a48540f";
     // 菜单创建（POST） 限1000（次/天）
     public static String MENU_CREATE_URL = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 
