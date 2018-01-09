@@ -130,22 +130,15 @@ public class CoreServiceImpl implements CoreService {
                 // 自定义菜单点击事件
                 if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                     switch (EventKey) {
-                        case "11": {
-                            respContent = "这是第一栏第一个";
-                            break;
-                        }
-                        case "12": {
-                            respContent = "这是第一栏第一个";
-                            break;
-                        }
-                        case "21": {
-                            respContent = "这是第二栏第一个";
+                        case "m_imgmsg": {
+                            log.info("sign:"+fromUserName);
+                            respContent = "恭喜，签到成功";
                             break;
                         }
 
                         default: {
                             log.error("开发者反馈：EventKey值没找到，它是:" + EventKey);
-                            respContent = "很抱歉，此按键功能正在升级无法使用";
+                            respContent = "程序员玩命开发中。。。";
                         }
                     }
                     textMessage.setContent(respContent);
