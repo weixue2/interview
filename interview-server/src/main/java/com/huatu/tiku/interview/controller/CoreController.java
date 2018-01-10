@@ -76,23 +76,4 @@ public class CoreController {
     }
 
 
-    @GetMapping("token")
-    public String getToken() {
-        log.info("getToken");
-        return redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
-    }
-
-    @PutMapping("token")
-    public Object getAndSetToken() {
-        log.info("getAndSetToken");
-        AccessToken accessToken = weiXinAccessTokenUtil.getWeiXinAccessToken();
-
-        if (accessToken.getAccess_token() != null) {
-            redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN, accessToken.getAccess_token());
-            log.info("获取成功，accessToken:" + accessToken.getAccess_token());
-        } else {
-            log.error("获取token失败");
-        }
-        return accessToken;
-    }
 }

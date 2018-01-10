@@ -27,7 +27,7 @@ public class EventHandler {
      * @return
      */
     public final String subscribeEvent(String fromUserName, NewsToMessage newsMessage, String respMessage) {
-            //创建用户，记录openId
+            //创建用户，记录openId TODO 校验是否存在，存在说明是重复关注不处理
         userService.createUser(fromUserName);
 
         List<Article> articleList = new ArrayList<Article>();
