@@ -11,4 +11,5 @@ public interface UserService {
      void updateUser(User user);
      void createUser(String openId);
     User getUser(String openId);
+    public User getUserByOpenId(String openId);
 }

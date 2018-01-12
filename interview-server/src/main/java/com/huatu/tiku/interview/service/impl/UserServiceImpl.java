@@ -31,4 +31,8 @@ public class UserServiceImpl implements UserService {
     public User getUser(String openId) {
         return userRepository.getUserByOpenIdAndStatus(openId,1);
     }
+
+    public User getUserByOpenId(String openId){
+        return userRepository.findByOpenId(openId);
+    }
 }

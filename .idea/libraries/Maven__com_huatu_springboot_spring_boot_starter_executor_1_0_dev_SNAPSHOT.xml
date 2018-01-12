@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.huatu.springboot:spring-boot-starter-executor:1.0-dev-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://F:/ht-maven/repository/com/huatu/springboot/spring-boot-starter-executor/1.0-dev-SNAPSHOT/spring-boot-starter-executor-1.0-dev-20180111.061158-29.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/ht-maven/repository/com/huatu/springboot/spring-boot-starter-executor/1.0-dev-SNAPSHOT/spring-boot-starter-executor-1.0-dev-20180111.061158-29-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/ht-maven/repository/com/huatu/springboot/spring-boot-starter-executor/1.0-dev-SNAPSHOT/spring-boot-starter-executor-1.0-dev-20180111.061158-29-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

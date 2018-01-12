@@ -1,12 +1,7 @@
 package com.huatu.tiku.interview.controller;
 
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
-import com.huatu.common.ErrorResult;
-import com.huatu.common.exception.BizException;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
-import com.huatu.tiku.interview.entity.po.User;
-import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
 import java.util.UUID;
 
 /**

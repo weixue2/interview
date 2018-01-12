@@ -1,11 +1,7 @@
 package com.huatu.tiku.interview.controller;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
-import com.huatu.common.ErrorResult;
-import com.huatu.common.exception.BizException;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.*;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
@@ -19,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author zhouwei

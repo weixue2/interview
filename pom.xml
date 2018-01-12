@@ -6,7 +6,7 @@
 	<modules>
 		<module>interview-common</module>
 		<module>interview-server</module>
-	</modules>
+    </modules>
 	<parent>
 		<groupId>com.huatu</groupId>
 		<artifactId>tiku-base-parent</artifactId>

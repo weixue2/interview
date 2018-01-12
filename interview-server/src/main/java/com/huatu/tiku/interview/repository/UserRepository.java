@@ -13,4 +13,5 @@ import org.springframework.transaction.annotation.Transactional;
  **/
 public interface UserRepository extends JpaRepository<User, Long> {
     User getUserByOpenIdAndStatus(String openId,int status);
+    User findByOpenId(String openId);
 }

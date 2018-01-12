@@ -1,7 +1,8 @@
 package com.huatu.tiku.interview.event;
 
 import com.huatu.tiku.interview.entity.Article;
-import com.huatu.tiku.interview.entity.to.NewsToMessage;
+import com.huatu.tiku.interview.entity.message.NewsMessage;
+import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,22 @@ public class EventHandler {
     @Autowired
     UserService userService;
 
+
+
     /**
      * @param fromUserName 发送者OpenId
      * @param newsMessage
      * @param respMessage
      * @return
      */
-    public final String subscribeEvent(String fromUserName, NewsToMessage newsMessage, String respMessage) {
+    public final String subscribeEvent(String fromUserName, NewsMessage newsMessage, String respMessage) {
             //创建用户，记录openId TODO 校验是否存在，存在说明是重复关注不处理
-        userService.createUser(fromUserName);
+        User user = userService.getUserByOpenId(fromUserName);
+//        System.out.println(user.getOpenId());
+        if(user == null){
+            userService.createUser(fromUserName);
+        }
+
 
         List<Article> articleList = new ArrayList<Article>();
         //测试单图文回复
@@ -42,7 +50,7 @@ public class EventHandler {
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);
-        respMessage = MessageUtil.newsMessageToXml(newsMessage);
+        respMessage = MessageUtil.MessageToXml(newsMessage);
         return respMessage;
     }
 }

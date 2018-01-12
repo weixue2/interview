@@ -1,13 +1,10 @@
 package com.huatu.tiku.interview.controller;
 
-import com.huatu.tiku.interview.constant.WeChatUrlConstant;
-import com.huatu.tiku.interview.entity.AccessToken;
 import com.huatu.tiku.interview.service.CoreService;
-import com.huatu.tiku.interview.task.AccessTokenThread;
+import com.huatu.tiku.interview.util.MessageUtil;
 import com.huatu.tiku.interview.util.SignUtil;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,13 +37,12 @@ public class CoreController {
 
 
    // @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
-    @PostMapping("process")
-    public Object post(HttpServletRequest req) {
-        // 调用核心业务类接收消息、处理消息跟推送消息
-        log.info("--------------core-------------------");
-        String respMessage = coreService.processRequest(req);
-        return respMessage;
-    }
+   @PostMapping("process")
+   public Object post(HttpServletRequest request) throws Exception {
+       // 调用核心业务类接收消息、处理消息跟推送消息
+       log.info("--------------core-------------------");
+       return coreService.processRequest(MessageUtil.parseXml(request),request);
+   }
 
     @GetMapping(value = "process")
     public void checkSignature(@RequestParam(name = "signature" ,required = false) String signature  ,
