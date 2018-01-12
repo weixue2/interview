@@ -24,6 +24,10 @@ public class MessageHandlerImpl implements MessageHandler {
 
     @Override
     public String TextMessageHandler(Map<String, String> requestMap){
+
+        if(requestMap.get("Content").equals("get")){
+
+        }
         // TODO 这里还要做特定字符验证，以及正则验证
         TextMessage tm = new TextMessage("暂无验证",requestMap);
         return MessageUtil.MessageToXml(tm);

@@ -9,5 +9,5 @@ import java.util.Map;
  * @create 2018-01-04 下午12:12
  **/
 public interface CoreService {
-      String processRequest(Map<String, String> requestMap, HttpServletRequest request) ;
+      Object processRequest(Map<String, String> requestMap, HttpServletRequest request) ;
 }

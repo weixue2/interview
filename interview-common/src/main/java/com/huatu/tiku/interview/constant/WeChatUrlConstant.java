@@ -13,7 +13,7 @@ public class WeChatUrlConstant {
 
     public static String ACCESS_TOKEN = "ACCESS_TOKEN";
     /*发送模板消息接口*/
-    public static String TEMPLATE_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
+    public static String TEMPLATE_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=";
     /*  秘钥  */
     // public static final String ACCESS_SECRETE = "78b688afb80faf735ebf3e2a3525ef35";
     //public static final String APP_ID = "wx4e6e2dc624081b58";

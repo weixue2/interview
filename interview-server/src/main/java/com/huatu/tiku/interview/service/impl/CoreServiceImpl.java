@@ -36,7 +36,7 @@ public class CoreServiceImpl implements CoreService {
      * @return
      */
     @Override
-    public String processRequest(Map<String, String> requestMap, HttpServletRequest request) {
+    public Object processRequest(Map<String, String> requestMap, HttpServletRequest request) {
 //        System.out.println("进来了吗");
         String result = null;
         try {

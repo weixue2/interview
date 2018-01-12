@@ -19,7 +19,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class LearningSituation extends  BaseEntity implements Serializable{
+public class LearningSituation extends  BaseEntity {
 
     //---------通知类型---------
     private Long notificationType;
