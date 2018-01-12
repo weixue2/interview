@@ -1,15 +1,22 @@
 package com.huatu.tiku.interview.service.impl;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
+import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.handler.event.EventHandler;
 import com.huatu.tiku.interview.handler.message.MessageHandler;
 import com.huatu.tiku.interview.service.CoreService;
+import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.MessageUtil;
+import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,11 +29,16 @@ import java.util.regex.Pattern;
 @Slf4j
 public class CoreServiceImpl implements CoreService {
 
+    private static final JsonParser JSON_PARSER = new JsonParser();
+
     @Autowired
     private EventHandler eventHandler;
 
     @Autowired
     private MessageHandler messageHandler;
+
+    @Autowired
+    private WechatTemplateMsgService templateMsgService;
 
 
     /**
@@ -37,7 +49,7 @@ public class CoreServiceImpl implements CoreService {
      */
     @Override
     public Object processRequest(Map<String, String> requestMap, HttpServletRequest request) {
-//        System.out.println("进来了吗");
+        System.out.println("进来了吗");
         String result = null;
         try {
 //            System.out.println("1------");
@@ -48,42 +60,60 @@ public class CoreServiceImpl implements CoreService {
             switch (requestMap.get("MsgType")){
                 //文本消息
                 case MessageUtil.REQ_MESSAGE_TYPE_TEXT:{
-                    result = messageHandler.TextMessageHandler(requestMap);break;
+                    System.out.println("1------");
+                    TemplateMsgResult templateMsgResult = null;
+                    TreeMap<String,TreeMap<String,String>> params = new TreeMap<String,TreeMap<String,String>>();
+                    //模板参数
+//                        params.put("first", WechatTemplateMsg.item("的", "#000000"));
+                    WechatTemplateMsg wechatTemplateMsg = new WechatTemplateMsg();
+                    wechatTemplateMsg.setTemplate_id("5BP20zR4h-LaEfFWbiqOrw4CPXEqfCxi4v5kNBXHqAc");
+                    wechatTemplateMsg.setTouser(requestMap.get("FromUserName"));
+//                        wechatTemplateMsg.setUrl("http://music.163.com/#/song?id=27867140");
+                    wechatTemplateMsg.setUrl("http://music.163.com/song?id=498040743&userid=84550482");
+//                        wechatTemplateMsg.setData(params);
+                    String data = JsonUtil.toJson(wechatTemplateMsg);
+                    templateMsgResult =  templateMsgService.sendTemplate("5_vg_Qd7rN-JAaIH9q9g-6uwlIg9FP5i1xxqYwKiBZkUc1pIdQufmSsiRxkp7B-R_wyZurNi3l8l18b_RaUyfSJXYwImTCGBLozIMCkFi1B6eCS2zv9hD78pwFlenf9OmIAAWFfVY89BsfAQkNQXNjAFACJZ", data);
+                    System.out.println(templateMsgResult);
+                    break;
                 }
                 case MessageUtil.REQ_MESSAGE_TYPE_IMAGE:{
-
+                    System.out.println("2------");
                     break;
                 }
                 case MessageUtil.REQ_MESSAGE_TYPE_LINK:{
-
+                    System.out.println("3------");
                     break;
                 }
                 case MessageUtil.REQ_MESSAGE_TYPE_LOCATION:{
-
+                    System.out.println("4------");
                     break;
                 }
                 case MessageUtil.REQ_MESSAGE_TYPE_VOICE:{
-
+                    System.out.println("5------");
                     break;
                 }
                 case MessageUtil.REQ_MESSAGE_TYPE_EVENT:{
-
+                    System.out.println("6------");
+                    System.out.println(requestMap.get("Event"));
                     switch (requestMap.get("Event")){
                         case MessageUtil.EVENT_TYPE_CLICK:{
+                            System.out.println("9------");
                             break;
                         }
                         // 订阅时的处理
                         case MessageUtil.EVENT_TYPE_SUBSCRIBE:{
+                            System.out.println("10------");
                             result = eventHandler.subscribeHandler(requestMap);
                             break;
                         }
                         case  MessageUtil.EVENT_TYPE_UNSUBSCRIBE:{
+                            System.out.println("11------");
                             // TODO 取关之后的操作
                         }
                     } break;
                 }
                 default:{
-
+                    System.out.println("7------");
                     break;
                 }
             }
@@ -91,8 +121,8 @@ public class CoreServiceImpl implements CoreService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return result;
+        System.out.println("8------");
+        return null;
     }
 
 //    public String processRequest(HttpServletRequest request) {
