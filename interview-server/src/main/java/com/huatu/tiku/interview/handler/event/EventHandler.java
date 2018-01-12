@@ -12,6 +12,5 @@ import java.util.Map;
 public interface EventHandler {
 
     public String subscribeHandler(Map<String, String> requestMap);
-//    public String subscribeEvent(Map<String, String> requestMap);
     public String unsubscribeHandler(Map<String, String> requestMap);
 }

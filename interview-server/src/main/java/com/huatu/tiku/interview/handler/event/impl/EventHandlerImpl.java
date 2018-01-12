@@ -27,11 +27,15 @@ public class EventHandlerImpl implements EventHandler {
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
+        String fromUserName = requestMap.get("FromUserName");
+        User user = userService.getUserByOpenId(fromUserName);
+        if(user == null){
+            userService.createUser(fromUserName);
+        }
         NewsMessage nm = new NewsMessage(requestMap);
         List<Article> as = new ArrayList<>();
         Article a = new Article();
         a.setTitle("谢谢您的关注！!");
-        // 图文消息中可以使用QQ表情、符号表情
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         a.setUrl(BasicParameters.LINK_SUBSCRIBE_001);
