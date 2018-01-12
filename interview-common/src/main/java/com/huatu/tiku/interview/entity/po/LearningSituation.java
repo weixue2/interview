@@ -1,11 +1,10 @@
 package com.huatu.tiku.interview.entity.po;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,7 +17,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name="t_learning_situation")
 @Entity
-public class LearningSituation extends  BaseEntity{
+@Getter
+@Setter
+public class LearningSituation extends  BaseEntity implements Serializable{
 
     //---------通知类型---------
     private Long notificationType;

@@ -27,9 +27,11 @@ public class EventHandlerImpl implements EventHandler {
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
+        // TODO 因为可以验证取关的事件，所以这里的逻辑可以删掉
         String fromUserName = requestMap.get("FromUserName");
         User user = userService.getUserByOpenId(fromUserName);
         if(user == null){
+            System.out.println("已经有数据了");
             userService.createUser(fromUserName);
         }
         NewsMessage nm = new NewsMessage(requestMap);
