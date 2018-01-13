@@ -3,7 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="ae1da406-6c99-415a-9ff3-d724f97c9509" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" />
+      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/constant/TemplateEnum.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/constant/TemplateEnum.class" />
+      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/template/WechatTemplateMsg.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/template/WechatTemplateMsg.class" />
+      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/git.properties" afterPath="$PROJECT_DIR$/interview-common/target/classes/git.properties" />
+      <change beforePath="$PROJECT_DIR$/interview-common/target/interview-common-1.0-dev-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/interview-common/target/interview-common-1.0-dev-SNAPSHOT.jar" />
+      <change beforePath="$PROJECT_DIR$/interview-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/interview-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/task/AccessTokenThread.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/git.properties" afterPath="$PROJECT_DIR$/interview-server/target/classes/git.properties" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/interview-server-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/interview-server/target/interview-server-1.0-SNAPSHOT.jar" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/interview.jar" afterPath="$PROJECT_DIR$/interview-server/target/interview.jar" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/interview.tar.gz" afterPath="$PROJECT_DIR$/interview-server/target/interview.tar.gz" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/interview-server/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterPath="$PROJECT_DIR$/interview-server/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/interview-common/target/" />
@@ -28,6 +41,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="MessageHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/MessageHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageHandlerImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="WeChatUrlConstant.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/WeChatUrlConstant.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -38,10 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccessTokenThread.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AccessTokenThread.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="570">
               <caret line="60" column="84" lean-forward="false" selection-start-line="60" selection-start-column="84" selection-end-line="60" selection-end-column="84" />
               <folding />
             </state>
@@ -143,8 +176,8 @@
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/template/MyHashMap.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/TemplateEnum.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/template/WechatTemplateMsg.java" />
-        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" />
+        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java" />
       </list>
     </option>
   </component>
@@ -551,6 +584,38 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="interview" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="interview-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="interview" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="interview-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+              <item name="message" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="interview" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="interview-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="interview" type="462c0819:PsiDirectoryNode" />
               <item name="repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -746,7 +811,7 @@
       <workItem from="1515717771274" duration="40366000" />
       <workItem from="1515782351079" duration="779000" />
       <workItem from="1515819130160" duration="8000" />
-      <workItem from="1515819305293" duration="19129000" />
+      <workItem from="1515819305293" duration="20071000" />
     </task>
     <task id="LOCAL-00001" summary="大改">
       <created>1515729292511</created>
@@ -797,11 +862,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515838351825</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="注释">
+      <created>1515839703070</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1515839703070</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108545000" />
+    <option name="totallyTimeSpent" value="109487000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -879,7 +951,8 @@
     <MESSAGE value="加了个模板" />
     <MESSAGE value="稍微改动" />
     <MESSAGE value="模板消息改动" />
-    <option name="LAST_COMMIT_MESSAGE" value="模板消息改动" />
+    <MESSAGE value="注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="注释" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1186,26 +1259,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/MessageHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#555#556#0" expanded="true" />
-            <element signature="e#582#583#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#385#386#0" expanded="false" />
+            <element signature="e#412#413#0" expanded="false" />
+            <element signature="e#479#480#0" expanded="false" />
+            <element signature="e#506#507#0" expanded="false" />
+            <element signature="e#555#556#0" expanded="false" />
+            <element signature="e#582#583#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1223,7 +1288,7 @@
         <state relative-caret-position="950">
           <caret line="43" column="27" lean-forward="false" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
           <folding>
-            <element signature="e#1864#1880#0" expanded="true" />
+            <element signature="e#1864#1880#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1241,9 +1306,9 @@
         <state relative-caret-position="350">
           <caret line="14" column="40" lean-forward="false" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2068#2069#0" expanded="true" />
-            <element signature="e#2095#2096#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2068#2069#0" expanded="false" />
+            <element signature="e#2095#2096#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1261,16 +1326,8 @@
         <state relative-caret-position="325">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="42" column="27" lean-forward="false" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1279,7 +1336,7 @@
         <state relative-caret-position="221">
           <caret line="24" column="14" lean-forward="false" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1318,8 +1375,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
+        <state relative-caret-position="570">
           <caret line="60" column="84" lean-forward="false" selection-start-line="60" selection-start-column="84" selection-end-line="60" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/MessageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
           <folding />
         </state>
       </provider>

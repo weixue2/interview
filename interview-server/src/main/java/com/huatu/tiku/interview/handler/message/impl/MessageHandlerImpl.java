@@ -39,7 +39,7 @@ public class MessageHandlerImpl implements MessageHandler {
     @Override
     public String TextMessageHandler(Map<String, String> requestMap){
 
-        if(requestMap.get("Content").equals("get")){
+        if(!requestMap.get("Content").equals("get")){
             //这个是直接生成String
 //            String templateMsgJson = WechatTemplateMsg.getJson(TemplateEnum.No_2,requestMap);
             WechatTemplateMsg templateMsg = new WechatTemplateMsg(TemplateEnum.No_2,requestMap);
@@ -49,6 +49,7 @@ public class MessageHandlerImpl implements MessageHandler {
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
                     "5_1hcD4A3fwMRlyiX4H-MVOLceEHR8qNJ-_Yu9KilDVHmx5113sS63X4AOEWhl0d3LbF2CbbUu1WE0jCU3pRqIGKZjPFyXDF1eocu-Hfjt4_dqGHCjquDQ7g12_SWIKdD3AoAxRxgeciyAjo7gARUeACAIZC",
                     templateMsgJson);
+            return null;
         }
         // TODO 这里还要做特定字符验证，以及正则验证
         TextMessage tm = new TextMessage("暂无验证",requestMap);
