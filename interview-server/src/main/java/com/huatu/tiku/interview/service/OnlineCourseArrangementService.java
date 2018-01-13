@@ -11,6 +11,6 @@ public interface OnlineCourseArrangementService {
     Boolean add(OnlineCourseArrangement arrangement);
     // 这个其实是多余的，我跟你讲
     Boolean update(OnlineCourseArrangement arrangement);
-    Boolean del(Long id);
+    void del(Long id);
 
 }

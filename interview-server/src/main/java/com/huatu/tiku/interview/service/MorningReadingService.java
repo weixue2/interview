@@ -11,5 +11,5 @@ public interface MorningReadingService {
     Boolean add(MorningReading reading);
     // 这个其实是多余的，我跟你讲
     Boolean update(MorningReading reading);
-    Boolean del(Long id);
+    void del(Long id);
 }

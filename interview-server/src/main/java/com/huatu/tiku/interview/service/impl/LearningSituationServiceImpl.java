@@ -27,7 +27,6 @@ public class LearningSituationServiceImpl implements LearningSituationService {
     }
 
     @Override
-    public Boolean del(Long id) {
-        return null;
+    public void del(Long id) {
     }
 }

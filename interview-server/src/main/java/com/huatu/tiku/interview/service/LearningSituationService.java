@@ -12,6 +12,6 @@ public interface LearningSituationService {
     Boolean add(LearningSituation data);
     // 这个其实是多余的，我跟你讲
     Boolean update(LearningSituation data);
-    Boolean del(Long id);
+    void del(Long id);
 
 }

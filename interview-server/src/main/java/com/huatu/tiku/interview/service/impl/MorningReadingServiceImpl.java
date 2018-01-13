@@ -1,7 +1,9 @@
 package com.huatu.tiku.interview.service.impl;
 
 import com.huatu.tiku.interview.entity.po.MorningReading;
+import com.huatu.tiku.interview.repository.MorningReadingRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Author ZhenYang
@@ -9,9 +11,13 @@ import com.huatu.tiku.interview.service.MorningReadingService;
  * @Description
  */
 public class MorningReadingServiceImpl implements MorningReadingService {
+
+    @Autowired
+    private MorningReadingRepository morningReadingRepository;
+
     @Override
-    public Boolean add(MorningReading reading) {
-        return null;
+    public Boolean add(MorningReading data) {
+        return morningReadingRepository.save(data)==null?false:true;
     }
 
     @Override
@@ -20,7 +26,6 @@ public class MorningReadingServiceImpl implements MorningReadingService {
     }
 
     @Override
-    public Boolean del(Long id) {
-        return null;
+    public void del(Long id) {
     }
 }

@@ -1,7 +1,9 @@
 package com.huatu.tiku.interview.service.impl;
 
 import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
+import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Author ZhenYang
@@ -9,9 +11,12 @@ import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
  * @Description
  */
 public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangementService {
+
+    @Autowired
+    private OnlineCourseArrangementRepository onlineCourseArrangementRepository;
     @Override
-    public Boolean add(OnlineCourseArrangement arrangement) {
-        return null;
+    public Boolean add(OnlineCourseArrangement data) {
+        return onlineCourseArrangementRepository.save(data)==null?false:true;
     }
 
     @Override
@@ -20,7 +25,7 @@ public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangeme
     }
 
     @Override
-    public Boolean del(Long id) {
-        return null;
+    public void del(Long id) {
+
     }
 }
