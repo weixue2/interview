@@ -17,7 +17,17 @@ public class LearningSituationServiceImpl implements LearningSituationService {
     @Autowired
     private LearningSituationRepository learningSituationRepository;
     @Override
-    public Boolean insertLearningSituation(LearningSituation data) {
+    public Boolean add(LearningSituation data) {
         return learningSituationRepository.save(data)==null?false:true;
+    }
+
+    @Override
+    public Boolean update(LearningSituation data) {
+        return null;
+    }
+
+    @Override
+    public Boolean del(Long id) {
+        return null;
     }
 }

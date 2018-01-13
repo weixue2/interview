@@ -1,0 +1,10 @@
+com\huatu\tiku\interview\util\MyX509TrustManager.class
+com\huatu\tiku\interview\config\WechatConfig.class
+com\huatu\tiku\interview\entity\result\WechatResult.class
+com\huatu\tiku\interview\entity\result\ResultState.class
+com\huatu\tiku\interview\util\HttpReqUtil$1.class
+com\huatu\tiku\interview\util\json\JsonUtil.class
+com\huatu\tiku\interview\util\HttpReqUtil.class
+com\huatu\tiku\interview\entity\template\WechatTemplateMsg.class
+com\huatu\tiku\interview\config\SystemConfig.class
+com\huatu\tiku\interview\entity\template\TemplateMsgResult.class

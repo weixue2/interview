@@ -9,5 +9,9 @@ import com.huatu.tiku.interview.entity.po.LearningSituation;
  */
 public interface LearningSituationService {
 
-    public Boolean insertLearningSituation(LearningSituation data);
+    Boolean add(LearningSituation data);
+    // 这个其实是多余的，我跟你讲
+    Boolean update(LearningSituation data);
+    Boolean del(Long id);
+
 }

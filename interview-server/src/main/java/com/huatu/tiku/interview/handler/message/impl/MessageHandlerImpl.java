@@ -10,6 +10,7 @@ import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.handler.message.MessageHandler;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.MessageUtil;
+import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,11 +40,15 @@ public class MessageHandlerImpl implements MessageHandler {
     public String TextMessageHandler(Map<String, String> requestMap){
 
         if(requestMap.get("Content").equals("get")){
-            String TemplateMsg = WechatTemplateMsg.getJson(TemplateEnum.No_1,requestMap);
+            //这个是直接生成String
+//            String templateMsgJson = WechatTemplateMsg.getJson(TemplateEnum.No_2,requestMap);
+            WechatTemplateMsg templateMsg = new WechatTemplateMsg(TemplateEnum.No_2,requestMap);
+
+            String templateMsgJson = JsonUtil.toJson(templateMsg);
             log.info("accessToken为："+servletContext.getAttribute("accessToken"));
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-                    "5_6AzWGpl3wEk40nz28ZTkyvCTNPB85IzqfzYkO_cQ-T3NspDthejadHV2Kb73YPryDOWetfIXptoOHfFaPZaB1K-Vn6W6Qyi40MeHgl5d1UPaN6JqzYg1OZ0tSelQWjQoDvNYk8-pvT20wK86IZLfAIAOFR",
-                    TemplateMsg);
+                    "5_1hcD4A3fwMRlyiX4H-MVOLceEHR8qNJ-_Yu9KilDVHmx5113sS63X4AOEWhl0d3LbF2CbbUu1WE0jCU3pRqIGKZjPFyXDF1eocu-Hfjt4_dqGHCjquDQ7g12_SWIKdD3AoAxRxgeciyAjo7gARUeACAIZC",
+                    templateMsgJson);
         }
         // TODO 这里还要做特定字符验证，以及正则验证
         TextMessage tm = new TextMessage("暂无验证",requestMap);
