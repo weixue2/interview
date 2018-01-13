@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.entity;
+package com.huatu.tiku.interview.entity.template;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

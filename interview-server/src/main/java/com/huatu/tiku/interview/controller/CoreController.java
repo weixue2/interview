@@ -28,20 +28,20 @@ import java.io.PrintWriter;
 public class CoreController {
     @Autowired
     private CoreService coreService;
-    @Autowired
-    StringRedisTemplate redisTemplate;
+//    @Autowired
+//    StringRedisTemplate redisTemplate;
 
 
-    @Autowired
-    WeiXinAccessTokenUtil weiXinAccessTokenUtil;
+//    @Autowired
+//    WeiXinAccessTokenUtil weiXinAccessTokenUtil;
 
 
    // @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
    @PostMapping("process")
-   public Object post(HttpServletRequest request) throws Exception {
+   public String post(HttpServletRequest request ,HttpServletResponse response) throws Exception {
        // 调用核心业务类接收消息、处理消息跟推送消息
        log.info("--------------core-------------------");
-       return coreService.processRequest(MessageUtil.parseXml(request),request);
+       return coreService.processRequest(MessageUtil.parseXml(request),request,response);
    }
 
     @GetMapping(value = "process")

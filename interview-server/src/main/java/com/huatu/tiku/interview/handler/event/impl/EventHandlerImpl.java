@@ -31,7 +31,6 @@ public class EventHandlerImpl implements EventHandler {
         String fromUserName = requestMap.get("FromUserName");
         User user = userService.getUserByOpenId(fromUserName);
         if(user == null){
-            System.out.println("已经有数据了");
             userService.createUser(fromUserName);
         }
         NewsMessage nm = new NewsMessage(requestMap);

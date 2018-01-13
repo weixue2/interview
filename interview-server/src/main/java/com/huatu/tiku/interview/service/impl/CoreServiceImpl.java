@@ -2,6 +2,9 @@ package com.huatu.tiku.interview.service.impl;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
+import com.huatu.tiku.interview.entity.WeChatTemplate;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.handler.event.EventHandler;
@@ -9,12 +12,20 @@ import com.huatu.tiku.interview.handler.message.MessageHandler;
 import com.huatu.tiku.interview.service.CoreService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.MessageUtil;
+import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -27,6 +38,8 @@ import java.util.regex.Pattern;
  **/
 @Service
 @Slf4j
+//@PropertySource(value = {"classpath:application.yml"},
+//        ignoreResourceNotFound = true,encoding = "utf-8")
 public class CoreServiceImpl implements CoreService {
 
     private static final JsonParser JSON_PARSER = new JsonParser();
@@ -37,9 +50,17 @@ public class CoreServiceImpl implements CoreService {
     @Autowired
     private MessageHandler messageHandler;
 
-    @Autowired
-    private WechatTemplateMsgService templateMsgService;
 
+
+    @Autowired
+    private WeiXinAccessTokenUtil accessTokenUtil;
+
+    /**
+     * accessToken放在servletContext内，这种方法比较方便吧，因为不知道测试环境的Redis怎么用，所以之后用这种古老的方法
+     * servletContext，所有用户共用一个。所以，为了节省空间，提高效率，ServletContext中，要放必须的、重要的、所有用户需要共享的线程又是安全的一些信息。
+     */
+    @Autowired
+    private ServletContext servletContext;
 
     /**
      * 处理微信发来的请求（包括事件的推送）
@@ -47,82 +68,55 @@ public class CoreServiceImpl implements CoreService {
      * @param request
      * @return
      */
+
     @Override
-    public Object processRequest(Map<String, String> requestMap, HttpServletRequest request) {
-        System.out.println("进来了吗");
+    public String processRequest(Map<String, String> requestMap, HttpServletRequest request,HttpServletResponse response) {
         String result = null;
         try {
-//            System.out.println("1------");
-//            System.out.println(requestMap.get("MsgType"));
-//            requestMap.forEach((k,v)->{
-//                log.info("key:{},value:{}",k,v);
-//            });
+            requestMap.forEach((k,v)->{
+                log.info("key:{},value:{}",k,v);
+            });
             switch (requestMap.get("MsgType")){
-                //文本消息
+                    //文本消息
                 case MessageUtil.REQ_MESSAGE_TYPE_TEXT:{
-                    System.out.println("1------");
-                    TemplateMsgResult templateMsgResult = null;
-                    TreeMap<String,TreeMap<String,String>> params = new TreeMap<String,TreeMap<String,String>>();
-                    //模板参数
-//                        params.put("first", WechatTemplateMsg.item("的", "#000000"));
-                    WechatTemplateMsg wechatTemplateMsg = new WechatTemplateMsg();
-                    wechatTemplateMsg.setTemplate_id("5BP20zR4h-LaEfFWbiqOrw4CPXEqfCxi4v5kNBXHqAc");
-                    wechatTemplateMsg.setTouser(requestMap.get("FromUserName"));
-//                        wechatTemplateMsg.setUrl("http://music.163.com/#/song?id=27867140");
-                    wechatTemplateMsg.setUrl("http://music.163.com/song?id=498040743&userid=84550482");
-//                        wechatTemplateMsg.setData(params);
-                    String data = JsonUtil.toJson(wechatTemplateMsg);
-                    templateMsgResult =  templateMsgService.sendTemplate("5_vg_Qd7rN-JAaIH9q9g-6uwlIg9FP5i1xxqYwKiBZkUc1pIdQufmSsiRxkp7B-R_wyZurNi3l8l18b_RaUyfSJXYwImTCGBLozIMCkFi1B6eCS2zv9hD78pwFlenf9OmIAAWFfVY89BsfAQkNQXNjAFACJZ", data);
-                    System.out.println(templateMsgResult);
-                    break;
-                }
+                    result  = messageHandler.TextMessageHandler(requestMap);
+                }   //图片消息
                 case MessageUtil.REQ_MESSAGE_TYPE_IMAGE:{
-                    System.out.println("2------");
                     break;
-                }
+                }   //链接消息
                 case MessageUtil.REQ_MESSAGE_TYPE_LINK:{
-                    System.out.println("3------");
                     break;
-                }
+                }   //地理消息
                 case MessageUtil.REQ_MESSAGE_TYPE_LOCATION:{
-                    System.out.println("4------");
                     break;
-                }
+                }   //音频消息
                 case MessageUtil.REQ_MESSAGE_TYPE_VOICE:{
-                    System.out.println("5------");
                     break;
-                }
+                }   //事件
                 case MessageUtil.REQ_MESSAGE_TYPE_EVENT:{
-                    System.out.println("6------");
-                    System.out.println(requestMap.get("Event"));
                     switch (requestMap.get("Event")){
+                            //自定义菜单点击事件
                         case MessageUtil.EVENT_TYPE_CLICK:{
-                            System.out.println("9------");
                             break;
-                        }
-                        // 订阅时的处理
+                        }   // 订阅时的处理
                         case MessageUtil.EVENT_TYPE_SUBSCRIBE:{
-                            System.out.println("10------");
                             result = eventHandler.subscribeHandler(requestMap);
                             break;
-                        }
+                        }   //取关
                         case  MessageUtil.EVENT_TYPE_UNSUBSCRIBE:{
-                            System.out.println("11------");
                             // TODO 取关之后的操作
+                            break;
+                        }   //万恶之源
+                        case  MessageUtil.TEMPLATESENDJOBFINISH :{
+                            // 模板验证消息
+                            break;
                         }
                     } break;
                 }
-                default:{
-                    System.out.println("7------");
-                    break;
-                }
+                default:{break; }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("8------");
-        return null;
+        } catch (Exception e) {e.printStackTrace();}finally { }
+        return result;
     }
 
 //    public String processRequest(HttpServletRequest request) {

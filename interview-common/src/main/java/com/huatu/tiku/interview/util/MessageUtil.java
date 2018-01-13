@@ -100,7 +100,10 @@ public class MessageUtil {
      */
     public static final String EVENT_TYPE_TRANSFER_CUSTOMER_SERVICE = "transfer_customer_service";
 
-
+    /**
+     * 事件类型：消息验证
+     */
+    public static final String TEMPLATESENDJOBFINISH="TEMPLATESENDJOBFINISH";
     /**
      * 解析微信发来的请求（XML）
      *

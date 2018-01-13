@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.huatu.commons.sdk:common-serialize:1.0-dev-SNAPSHOT">
     <CLASSES>
-      <root url="jar://F:/ht-maven/repository/com/huatu/commons/sdk/common-serialize/1.0-dev-SNAPSHOT/common-serialize-1.0-dev-20180111.105410-35.jar!/" />
+      <root url="jar://F:/ht-maven/repository/com/huatu/commons/sdk/common-serialize/1.0-dev-SNAPSHOT/common-serialize-1.0-dev-20180112.060534-37.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://F:/ht-maven/repository/com/huatu/commons/sdk/common-serialize/1.0-dev-SNAPSHOT/common-serialize-1.0-dev-20180111.105410-35-javadoc.jar!/" />
+      <root url="jar://F:/ht-maven/repository/com/huatu/commons/sdk/common-serialize/1.0-dev-SNAPSHOT/common-serialize-1.0-dev-20180112.060534-37-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://F:/ht-maven/repository/com/huatu/commons/sdk/common-serialize/1.0-dev-SNAPSHOT/common-serialize-1.0-dev-20180111.105410-35-sources.jar!/" />
+      <root url="jar://F:/ht-maven/repository/com/huatu/commons/sdk/common-serialize/1.0-dev-SNAPSHOT/common-serialize-1.0-dev-20180112.060534-37-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
