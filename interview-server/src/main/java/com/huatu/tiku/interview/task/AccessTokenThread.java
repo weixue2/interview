@@ -58,7 +58,7 @@ public class AccessTokenThread {
             redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN, accessToken);
             log.info("获取成功，accessToken:" + accessToken);
         } else {
-            log.error("获取token失败");
+            log.error("获取token失败,测试时为了减少accessToken损耗，特将appID修改，请到basicParameters中修改");
         }
         accessToken = "测试是是是是是是是";
         servletContext.setAttribute("accessToken",accessToken);
