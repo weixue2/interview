@@ -4,12 +4,14 @@ import com.huatu.tiku.interview.entity.po.MorningReading;
 import com.huatu.tiku.interview.repository.MorningReadingRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author ZhenYang
  * @Date Created in 2018/1/13 17:17
  * @Description
  */
+@Service
 public class MorningReadingServiceImpl implements MorningReadingService {
 
     @Autowired

@@ -7,7 +7,9 @@ import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Author ZhenYang
@@ -22,7 +24,10 @@ public class OnlineCourseArrangementController {
     private OnlineCourseArrangementService arrangementService;
 
     @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json
-    public ReqResult add(OnlineCourseArrangement onlineCourseArrangement){
+    public ReqResult add(OnlineCourseArrangement onlineCourseArrangement,@RequestParam("file") MultipartFile file){
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        System.out.println("contentType:"+contentType+"---fileName:"+fileName);
         return arrangementService.add(onlineCourseArrangement)? ReqResult.ok():ReqResult.build(ResultEnum.insertFail);
     }
 }

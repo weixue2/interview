@@ -36,6 +36,8 @@ public class UserController {
         }
         userService.updateUser(user);
     }
+
+
 //    @PostMapping
 //    public void createUser(@RequestBody String openId){
 //        log.info("id:{}",openId);
