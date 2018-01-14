@@ -8,7 +8,9 @@ package com.huatu.tiku.interview.constant;
 public enum ResultEnum {
     success(20000,"成功"),
     error(50000,"错误"),
-    insertFail(50001,"插入失败"),
+    insertFail(50001,"插入数据失败"),
+    imageFormatError(50002,"图片格式错误"),
+    fileError(50003,"文件读写错误"),
 
     ;
     private Integer code;
