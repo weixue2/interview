@@ -47,7 +47,7 @@ public class MessageHandlerImpl implements MessageHandler {
             String templateMsgJson = JsonUtil.toJson(templateMsg);
             log.info("accessToken为："+servletContext.getAttribute("accessToken"));
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-                    "5_1hcD4A3fwMRlyiX4H-MVOLceEHR8qNJ-_Yu9KilDVHmx5113sS63X4AOEWhl0d3LbF2CbbUu1WE0jCU3pRqIGKZjPFyXDF1eocu-Hfjt4_dqGHCjquDQ7g12_SWIKdD3AoAxRxgeciyAjo7gARUeACAIZC",
+                    "5_7lDDbkX7g-UUIpPS0ZIYc-9MGJhBtXiBYfuaECIZ5a9e4A1J-wxNO73NdxXFTXWHqa5nPj2o9IyU_TB7tphs91VhyOjeeeOSsBHuQMr4RxWMYlCVV0EXFyEL_vQDa_9ZNMyJ2IWCsmU2l5d0DWUaACAUNL",
                     templateMsgJson);
             return null;
         }
