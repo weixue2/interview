@@ -4,12 +4,14 @@ import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author ZhenYang
  * @Date Created in 2018/1/13 17:16
  * @Description
  */
+@Service
 public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangementService {
 
     @Autowired

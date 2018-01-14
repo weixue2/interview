@@ -2,14 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae1da406-6c99-415a-9ff3-d724f97c9509" name="Default" comment="添加了一些基本业务">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_base_1_0_dev_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_base_1_0_dev_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_base_tiku_1_0_dev_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_base_tiku_1_0_dev_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_test_1_0_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_test_1_0_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_utils_1_0_dev_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_common_utils_1_0_dev_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_sdk_common_jpa_1_0_dev_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_sdk_common_jpa_1_0_dev_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_sdk_common_serialize_1_0_dev_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_sdk_common_serialize_1_0_dev_SNAPSHOT.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_sdk_common_spring_1_0_dev_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_huatu_commons_sdk_common_spring_1_0_dev_SNAPSHOT.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/git.properties" afterPath="$PROJECT_DIR$/interview-common/target/classes/git.properties" />
+      <change beforePath="$PROJECT_DIR$/interview-common/target/interview-common-1.0-dev-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/interview-common/target/interview-common-1.0-dev-SNAPSHOT.jar" />
+      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java" />
+      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/UserController.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/UserController.java" />
+      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/controller/UserController.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/controller/UserController.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/repository/LearningSituationRepository.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/repository/LearningSituationRepository.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/repository/UserRepository.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/repository/UserRepository.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/LearningSituationService.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/LearningSituationService.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/MorningReadingService.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/MorningReadingService.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/OnlineCourseArrangementService.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/OnlineCourseArrangementService.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/git.properties" afterPath="$PROJECT_DIR$/interview-server/target/classes/git.properties" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/interview-server-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/interview-server/target/interview-server-1.0-SNAPSHOT.jar" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/interview.jar" afterPath="$PROJECT_DIR$/interview-server/target/interview.jar" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/interview.tar.gz" afterPath="$PROJECT_DIR$/interview-server/target/interview.tar.gz" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/interview-common/target/" />
@@ -37,18 +52,31 @@
       <file leaf-file-name="CoreServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1125">
               <caret line="74" column="13" lean-forward="false" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+=======
+            <state relative-caret-position="275">
+              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="LearningSituationController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
               <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="26" />
+=======
+      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/UserServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -57,13 +85,22 @@
       <file leaf-file-name="MessageUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/MessageUtil.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="1800">
               <caret line="89" column="18" lean-forward="false" selection-start-line="89" selection-start-column="18" selection-end-line="89" selection-end-column="27" />
               <folding />
+=======
+            <state relative-caret-position="356">
+              <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="MessageHandlerImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -79,6 +116,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1350">
               <caret line="63" column="39" lean-forward="false" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+=======
+      <file leaf-file-name="MorningReadingServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -87,28 +131,63 @@
       <file leaf-file-name="MessageHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/MessageHandler.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="250">
               <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
               <folding />
+=======
+            <state relative-caret-position="600">
+              <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+              <folding>
+                <element signature="e#676#677#0" expanded="true" />
+                <element signature="e#754#755#0" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="EventHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/event/EventHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
               <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+=======
+      <file leaf-file-name="OnlineCourseArrangementServiceImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file leaf-file-name="EventHandlerImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/event/impl/EventHandlerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="550">
               <caret line="34" column="9" lean-forward="false" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+=======
+      <file leaf-file-name="OnlineCourseArrangementService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/OnlineCourseArrangementService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MorningReadingService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/MorningReadingService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+>>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
@@ -117,11 +196,17 @@
       <file leaf-file-name="TemplateEnum.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/TemplateEnum.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="300">
               <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="200">
+              <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -215,7 +300,6 @@
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/repository/UserRepository.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/repository/LearningSituationRepository.java" />
-        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/OnlineCourseArrangementService.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/MorningReadingService.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/LearningSituationService.java" />
@@ -223,6 +307,11 @@
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/MorningReadingController.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java" />
+<<<<<<< Updated upstream
+=======
+        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java" />
+        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -481,8 +570,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< Updated upstream
       <pane id="Scratches" />
       <pane id="ProjectPane">
+=======
+      <pane id="PackagesPane">
+>>>>>>> Stashed changes
         <subPane>
           <expand>
             <path>
@@ -534,6 +627,18 @@
               <item name="interview" type="462c0819:PsiDirectoryNode" />
               <item name="constant" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< Updated upstream
+=======
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+>>>>>>> Stashed changes
             <path>
               <item name="interview" type="b2602c69:ProjectViewProjectNode" />
               <item name="interview" type="462c0819:PsiDirectoryNode" />
@@ -779,6 +884,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -937,7 +1043,13 @@
       <workItem from="1515782351079" duration="779000" />
       <workItem from="1515819130160" duration="8000" />
       <workItem from="1515819305293" duration="21105000" />
+<<<<<<< Updated upstream
       <workItem from="1515859833163" duration="88000" />
+=======
+      <workItem from="1515910986861" duration="897000" />
+      <workItem from="1515911975123" duration="2153000" />
+      <workItem from="1515916934245" duration="117000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="大改">
       <created>1515729292511</created>
@@ -1020,10 +1132,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="110667000" />
+=======
+    <option name="totallyTimeSpent" value="114114000" />
+>>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1031,6 +1148,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< Updated upstream
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1040,6 +1158,13 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26812366" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36619717" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29469123" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2675906" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> Stashed changes
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1403,6 +1528,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1423,6 +1549,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+=======
+    <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/config/SystemConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/MorningReadingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="22" column="64" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="26" />
+>>>>>>> Stashed changes
           <folding />
         </state>
       </provider>
@@ -1435,6 +1584,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -1450,10 +1600,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1125">
           <caret line="74" column="13" lean-forward="false" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
+=======
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/CoreController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="43" column="35" lean-forward="false" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="14" lean-forward="false" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/OnlineCourseArrangement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+>>>>>>> Stashed changes
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -1465,12 +1638,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="22" column="64" lean-forward="true" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="64" />
+=======
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MobilServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MenuServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -1478,13 +1674,83 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MaterialServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1300">
+          <caret line="81" column="54" lean-forward="false" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/WechatTemplateMsgServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="100">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="26" />
+=======
+        <state relative-caret-position="250">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+>>>>>>> Stashed changes
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/MorningReadingServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/MorningReadingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/OnlineCourseArrangementService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="13" column="8" lean-forward="false" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
           <folding />
         </state>
       </provider>
