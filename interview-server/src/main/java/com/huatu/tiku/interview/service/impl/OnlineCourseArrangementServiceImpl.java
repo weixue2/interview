@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.service.impl;
 import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
+import com.huatu.tiku.interview.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,16 @@ public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangeme
     }
 
     @Override
-    public void del(Long id) {
-
+    public Boolean del(Long id) {
+        OnlineCourseArrangement arrangement = onlineCourseArrangementRepository.findOne(id);
+        if(arrangement != null){
+            if(FileUtil.delete(arrangement.getImageUrl())){
+                onlineCourseArrangementRepository.delete(id);
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 }

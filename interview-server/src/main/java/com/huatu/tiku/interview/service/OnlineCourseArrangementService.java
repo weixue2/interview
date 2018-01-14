@@ -16,6 +16,6 @@ public interface OnlineCourseArrangementService {
      * 删除的时候记得要连带图片文件
      * @param id
      */
-    void del(Long id);
+    Boolean del(Long id);
 
 }

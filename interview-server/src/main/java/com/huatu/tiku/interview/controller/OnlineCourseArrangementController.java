@@ -8,10 +8,7 @@ import com.huatu.tiku.interview.entity.result.ReqResult;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +52,12 @@ public class OnlineCourseArrangementController {
             }
         }
         return ReqResult.build(ResultEnum.insertFail);
+    }
+
+    @GetMapping("deleteOnlineCourseArrangement")
+    public ReqResult del(Long id){
+        System.out.println("id:"+id);
+        return arrangementService.del(id) ? ReqResult.ok() : ReqResult.build(ResultEnum.delFail);
     }
 
 //    @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
