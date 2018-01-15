@@ -26,7 +26,7 @@ public class OnlineCourseArrangementController {
     @Autowired
     private FileUtil fileUtil;
 
-    @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    @PutMapping() //@requestBody --> Json 不行，这个因为有个文件，就用
     public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
 
         String fileUrl = fileUtil.ftpUploadArrangement(file);
@@ -34,7 +34,7 @@ public class OnlineCourseArrangementController {
         return arrangementService.add(onlineCourseArrangement) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
     }
 
-    @GetMapping("deleteOnlineCourseArrangement")
+    @DeleteMapping
     public Result del(Long id){
         System.out.println("id:"+id);
         return arrangementService.del(id) ? Result.ok() : Result.build(ResultEnum.DELETE_FAIL);
