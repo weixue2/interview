@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ae1da406-6c99-415a-9ff3-d724f97c9509" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/task/AccessTokenThread.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/task/AccessTokenThread.class" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/CoreServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/CoreServiceImpl.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/interview-common/target/" />
@@ -24,8 +21,8 @@
       <file leaf-file-name="AccessTokenThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
+            <state relative-caret-position="207">
+              <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -901,7 +898,7 @@
       <workItem from="1515917458921" duration="133000" />
       <workItem from="1515917599359" duration="130000" />
       <workItem from="1515918057425" duration="1052000" />
-      <workItem from="1515979524087" duration="25665000" />
+      <workItem from="1515979524087" duration="27030000" />
     </task>
     <task id="LOCAL-00001" summary="大改">
       <created>1515729292511</created>
@@ -1015,11 +1012,18 @@
       <option name="project" value="LOCAL" />
       <updated>1516010162958</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="accessToken">
+      <created>1516010727313</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1516010727313</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151779000" />
+    <option name="totallyTimeSpent" value="153144000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1041,10 +1045,10 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36619717" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36619717" sideWeight="0.49573562" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29469123" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27025586" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27025586" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1104,7 +1108,8 @@
     <MESSAGE value="图片上传" />
     <MESSAGE value="删除文件" />
     <MESSAGE value="枚举大小写" />
-    <option name="LAST_COMMIT_MESSAGE" value="枚举大小写" />
+    <MESSAGE value="accessToken" />
+    <option name="LAST_COMMIT_MESSAGE" value="accessToken" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1527,8 +1532,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
+        <state relative-caret-position="207">
+          <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
           <folding />
         </state>
       </provider>
