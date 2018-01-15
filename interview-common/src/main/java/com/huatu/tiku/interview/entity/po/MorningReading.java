@@ -34,7 +34,7 @@ public class MorningReading extends BaseEntity{
     @Column(columnDefinition="varchar(50) COMMENT '标题啊'")
     private String title;
 
-    @Column(length = 16777216,columnDefinition="varchar(50) COMMENT '富文本。。很多很多文本'")
+//    @Column(length = 16777216)
     private String richText;
 
 }

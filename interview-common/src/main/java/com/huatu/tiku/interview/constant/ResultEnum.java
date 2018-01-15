@@ -3,7 +3,7 @@ package com.huatu.tiku.interview.constant;
 /**
  * @Author: ZhenYang
  * @Date: Created in 2018/1/11 15:05
- * @Modefied By:
+ * @Modefied By: 返回码啥的
  */
 public enum ResultEnum {
     SUCCESS(20000,"成功"),

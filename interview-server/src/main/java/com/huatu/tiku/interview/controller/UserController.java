@@ -62,7 +62,7 @@ public class UserController {
         // xml请求解析
 //        Map<String, String> requestMap = MessageUtil.parseXml(req);
 //        String openId = requestMap.get("FromUserName");
-        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
+//        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
         mobileService.checkPHP(mobile);
     }
 
