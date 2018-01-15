@@ -1,82 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae1da406-6c99-415a-9ff3-d724f97c9509" name="Default" comment="删除文件">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_net_commons_net_3_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/exception/ReqException.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/handler/SomeExceptionHandler.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/etag/Base64.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/etag/Etag.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/etag/UrlSafeBase64.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/file/FileUtil.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/file/FtpClientPool.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/config/SpringConfig.java" />
+    <list default="true" id="ae1da406-6c99-415a-9ff3-d724f97c9509" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/interview-common/interview-common.iml" afterPath="$PROJECT_DIR$/interview-common/interview-common.iml" />
-      <change beforePath="$PROJECT_DIR$/interview-common/pom.xml" afterPath="$PROJECT_DIR$/interview-common/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/BasicParameters.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/BasicParameters.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/ResultEnum.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/ResultEnum.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/BaseEntity.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/BaseEntity.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/LearningSituation.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/LearningSituation.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/LearningSituation_old.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/MorningReading.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/MorningReading.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/OnlineCourseArrangement.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/OnlineCourseArrangement.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/User.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/User.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/ErrorResult.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/ErrorResult.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/ReqResult.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/Result.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/Result.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/BaseResult.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/FileUtil.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/HttpReqUtil.java" afterPath="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/HttpReqUtil.java" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/constant/BasicParameters.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/constant/BasicParameters.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/constant/ResultEnum.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/constant/ResultEnum.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/BaseEntity.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/BaseEntity.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/LearningSituation.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/LearningSituation.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/MorningReading.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/MorningReading.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/OnlineCourseArrangement.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/OnlineCourseArrangement.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/User.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/po/User.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/result/ErrorResult.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/result/ErrorResult.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/result/ReqResult.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/result/Result.class" afterPath="$PROJECT_DIR$/interview-common/target/classes/com/huatu/tiku/interview/entity/result/Result.class" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/classes/git.properties" afterPath="$PROJECT_DIR$/interview-common/target/classes/git.properties" />
-      <change beforePath="$PROJECT_DIR$/interview-common/target/interview-common-1.0-dev-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/interview-common/target/interview-common-1.0-dev-SNAPSHOT.jar" />
-      <change beforePath="$PROJECT_DIR$/interview-server/interview-server.iml" afterPath="$PROJECT_DIR$/interview-server/interview-server.iml" />
-      <change beforePath="$PROJECT_DIR$/interview-server/pom.xml" afterPath="$PROJECT_DIR$/interview-server/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/InterviewApplication.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/InterviewApplication.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/MorningReadingController.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/MorningReadingController.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/UserController.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/UserController.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/event/EventHandler.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/event/EventHandler.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/event/EventHandler.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/event/EventHandler.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/event/impl/EventHandlerImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/event/impl/EventHandlerImpl.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/MessageHandler.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/MessageHandler.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/LearningSituationService.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/LearningSituationService.java" />
       <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.java" />
       <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" />
-      <change beforePath="$PROJECT_DIR$/interview-server/src/main/resources/application.yml" afterPath="$PROJECT_DIR$/interview-server/src/main/resources/application.yml" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/application.yml" afterPath="$PROJECT_DIR$/interview-server/target/classes/application.yml" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/InterviewApplication.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/InterviewApplication.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/controller/LearningSituationController.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/controller/LearningSituationController.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/controller/UserController.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/controller/UserController.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/event/EventHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/handler/event/EventHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/handler/event/impl/EventHandlerImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/handler/message/MessageHandler.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/handler/message/impl/MessageHandlerImpl.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/LearningSituationService.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/LearningSituationService.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/OnlineCourseArrangementService.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/OnlineCourseArrangementService.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/CoreServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/CoreServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/service/impl/OnlineCourseArrangementServiceImpl.class" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/git.properties" afterPath="$PROJECT_DIR$/interview-server/target/classes/git.properties" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/interview-server-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/interview-server/target/interview-server-1.0-SNAPSHOT.jar" />
-      <change beforePath="$PROJECT_DIR$/interview-server/target/interview.tar.gz" afterPath="$PROJECT_DIR$/interview-server/target/interview.tar.gz" />
+      <change beforePath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java" afterPath="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java" />
+      <change beforePath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/task/AccessTokenThread.class" afterPath="$PROJECT_DIR$/interview-server/target/classes/com/huatu/tiku/interview/task/AccessTokenThread.class" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/interview-common/target/" />
@@ -91,101 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OnlineCourseArrangementController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="39" column="93" lean-forward="false" selection-start-line="39" selection-start-column="93" selection-end-line="39" selection-end-column="93" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultEnum.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/ResultEnum.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Result.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/result/Result.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="66" column="33" lean-forward="false" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/file/FileUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="351" column="64" lean-forward="false" selection-start-line="351" selection-start-column="64" selection-end-line="351" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MorningReadingController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/MorningReadingController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="24" column="99" lean-forward="false" selection-start-line="24" selection-start-column="99" selection-end-line="24" selection-end-column="99" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LearningSituationController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="39" column="105" lean-forward="false" selection-start-line="39" selection-start-column="105" selection-end-line="39" selection-end-column="105" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TemplateEnum.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/TemplateEnum.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicParameters.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/BasicParameters.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccessTokenThread.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AccessTokenThread.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="54" column="54" lean-forward="false" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
+            <state relative-caret-position="375">
+              <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeiXinAccessTokenUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/util/WeiXinAccessTokenUtil.java">
+      <file leaf-file-name="TestController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/TestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="52" column="25" lean-forward="false" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+            <state relative-caret-position="272">
+              <caret line="75" column="113" lean-forward="false" selection-start-line="75" selection-start-column="50" selection-end-line="75" selection-end-column="113" />
               <folding />
             </state>
           </provider>
@@ -238,14 +88,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/CoreService.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/handler/event/impl/EventHandlerImpl.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/util/MessageUtil.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/LearningSituation_old.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/PracticeContent.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/NotificationType.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/ListController.java" />
-        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/repository/MorningReadingRepository.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/repository/OnlineCourseArrangementRepository.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/template/TemplateMap.java" />
@@ -279,7 +127,6 @@
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/UserController.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/LearningSituationService.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/po/LearningSituation.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/BasicParameters.java" />
@@ -289,6 +136,9 @@
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/MorningReadingController.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/LearningSituationController.java" />
         <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/OnlineCourseArrangementController.java" />
+        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java" />
+        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java" />
+        <option value="$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java" />
       </list>
     </option>
   </component>
@@ -1051,7 +901,7 @@
       <workItem from="1515917458921" duration="133000" />
       <workItem from="1515917599359" duration="130000" />
       <workItem from="1515918057425" duration="1052000" />
-      <workItem from="1515979524087" duration="25074000" />
+      <workItem from="1515979524087" duration="25665000" />
     </task>
     <task id="LOCAL-00001" summary="大改">
       <created>1515729292511</created>
@@ -1158,11 +1008,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515929691925</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="枚举大小写">
+      <created>1516010162958</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1516010162958</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151188000" />
+    <option name="totallyTimeSpent" value="151779000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1246,7 +1103,8 @@
     <MESSAGE value="测试" />
     <MESSAGE value="图片上传" />
     <MESSAGE value="删除文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除文件" />
+    <MESSAGE value="枚举大小写" />
+    <option name="LAST_COMMIT_MESSAGE" value="枚举大小写" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1255,14 +1113,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://F:/ht-maven/repository/org/springframework/spring-core/4.3.9.RELEASE/spring-core-4.3.9.RELEASE.jar!/org/springframework/core/io/InputStreamSource.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://F:/ht-maven/repository/org/springframework/spring-web/4.3.9.RELEASE/spring-web-4.3.9.RELEASE-sources.jar!/org/springframework/web/multipart/MultipartFile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1374,14 +1224,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/LearningSituationService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/LearningSituationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
@@ -1392,14 +1234,6 @@
             <element signature="e#929#930#0" expanded="false" />
             <element signature="e#983#984#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/WeChatUrlConstant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="19" column="176" lean-forward="false" selection-start-line="19" selection-start-column="144" selection-end-line="19" selection-end-column="176" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1499,14 +1333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/TestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/entity/WeChatTemplate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1551,46 +1377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-275">
           <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/CoreService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="67" column="51" lean-forward="false" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/MessageHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="47">
-          <caret line="34" column="18" lean-forward="false" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="54" column="54" lean-forward="false" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -1671,6 +1457,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="39" column="93" lean-forward="false" selection-start-line="39" selection-start-column="93" selection-end-line="39" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/LearningSituationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="13" column="16" lean-forward="false" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/CoreService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://F:/ht-maven/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar!/javax/servlet/ServletContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/service/impl/CoreServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="64" column="53" lean-forward="true" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/MessageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/userHandler/message/impl/MessageHandlerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="41" column="66" lean-forward="true" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-common/src/main/java/com/huatu/tiku/interview/constant/WeChatUrlConstant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="13" column="25" lean-forward="false" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="75" column="113" lean-forward="false" selection-start-line="75" selection-start-column="50" selection-end-line="75" selection-end-column="113" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interview-server/src/main/java/com/huatu/tiku/interview/task/AccessTokenThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="68" column="35" lean-forward="false" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
           <folding />
         </state>
       </provider>

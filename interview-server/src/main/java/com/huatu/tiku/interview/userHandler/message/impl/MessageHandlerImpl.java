@@ -40,7 +40,6 @@ public class MessageHandlerImpl implements MessageHandler {
             WechatTemplateMsg templateMsg = new WechatTemplateMsg(TemplateEnum.No_2,requestMap);
 
             String templateMsgJson = JsonUtil.toJson(templateMsg);
-            log.info("accessToken为："+servletContext.getAttribute("accessToken"));
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
                     "5_7lDDbkX7g-UUIpPS0ZIYc-9MGJhBtXiBYfuaECIZ5a9e4A1J-wxNO73NdxXFTXWHqa5nPj2o9IyU_TB7tphs91VhyOjeeeOSsBHuQMr4RxWMYlCVV0EXFyEL_vQDa_9ZNMyJ2IWCsmU2l5d0DWUaACAUNL",
                     templateMsgJson);

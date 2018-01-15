@@ -41,10 +41,7 @@ public class CoreServiceImpl implements CoreService {
     @Autowired
     private WeiXinAccessTokenUtil accessTokenUtil;
 
-    /**
-     * accessToken放在servletContext内，这种方法比较方便吧，因为不知道测试环境的Redis怎么用，所以之后用这种古老的方法
-     * servletContext，所有用户共用一个。所以，为了节省空间，提高效率，ServletContext中，要放必须的、重要的、所有用户需要共享的线程又是安全的一些信息。
-     */
+
     @Autowired
     private ServletContext servletContext;
 
