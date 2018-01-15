@@ -1,33 +1,19 @@
 package com.huatu.tiku.interview.service.impl;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.huatu.tiku.interview.constant.TemplateEnum;
-import com.huatu.tiku.interview.constant.WeChatUrlConstant;
-import com.huatu.tiku.interview.entity.WeChatTemplate;
-import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
-import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
-import com.huatu.tiku.interview.handler.event.EventHandler;
-import com.huatu.tiku.interview.handler.message.MessageHandler;
+import com.huatu.tiku.interview.userHandler.event.EventHandler;
+import com.huatu.tiku.interview.userHandler.message.MessageHandler;
 import com.huatu.tiku.interview.service.CoreService;
-import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.MessageUtil;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
-import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

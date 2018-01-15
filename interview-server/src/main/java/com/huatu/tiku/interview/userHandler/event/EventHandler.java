@@ -1,6 +1,4 @@
-package com.huatu.tiku.interview.handler.event;
-
-import com.huatu.tiku.interview.entity.message.NewsMessage;
+package com.huatu.tiku.interview.userHandler.event;
 
 import java.util.Map;
 

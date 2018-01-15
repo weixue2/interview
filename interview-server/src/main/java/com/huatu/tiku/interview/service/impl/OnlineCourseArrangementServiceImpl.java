@@ -3,7 +3,7 @@ package com.huatu.tiku.interview.service.impl;
 import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
-import com.huatu.tiku.interview.util.FileUtil;
+import com.huatu.tiku.interview.util.file.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

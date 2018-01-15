@@ -1,10 +1,10 @@
-package com.huatu.tiku.interview.handler.event.impl;
+package com.huatu.tiku.interview.userHandler.event.impl;
 
 import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
 import com.huatu.tiku.interview.entity.po.User;
-import com.huatu.tiku.interview.handler.event.EventHandler;
+import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.MessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;

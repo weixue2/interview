@@ -5,7 +5,7 @@ package com.huatu.tiku.interview.entity.result;
  * @Date: Created in 2018/1/12 9:09
  * @Modefied By:
  */
-public class ErrorResult implements Result {
+public class ErrorResult implements BaseResult {
     private String message;
     private Integer code;
     private Object data;

@@ -2,7 +2,7 @@ package com.huatu.tiku.interview.controller;
 
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.MorningReading;
-import com.huatu.tiku.interview.entity.result.ReqResult;
+import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ public class MorningReadingController {
     private MorningReadingService readingService;
 
     @PostMapping("insertMorningReading") //@requestBody --> Json
-    public ReqResult add(MorningReading morningReading){
-        return readingService.add(morningReading)? ReqResult.ok():ReqResult.build(ResultEnum.insertFail);
+    public Result add(MorningReading morningReading){
+        return readingService.add(morningReading)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }
 }

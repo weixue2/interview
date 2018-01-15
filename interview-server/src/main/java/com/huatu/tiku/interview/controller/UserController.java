@@ -42,7 +42,7 @@ public class UserController {
 //    public void createUser(@RequestBody String openId){
 //        log.info("id:{}",openId);
 //        if(StringUtils.isBlank(openId)){
-//            throw new BizException(ErrorResult.create(403,"参数有误"));
+//            throw new ReqException(ErrorResult.create(403,"参数有误"));
 //        }
 //        userService.createUser(openId);
 //    }
@@ -62,7 +62,6 @@ public class UserController {
         // xml请求解析
 //        Map<String, String> requestMap = MessageUtil.parseXml(req);
 //        String openId = requestMap.get("FromUserName");
-        System.out.println("test???"+mobile);
         System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
         mobileService.checkPHP(mobile);
     }

@@ -1,13 +1,10 @@
-package com.huatu.tiku.interview.handler.message.impl;
+package com.huatu.tiku.interview.userHandler.message.impl;
 
-import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.TemplateEnum;
-import com.huatu.tiku.interview.entity.Article;
-import com.huatu.tiku.interview.entity.message.NewsMessage;
 import com.huatu.tiku.interview.entity.message.TextMessage;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
-import com.huatu.tiku.interview.handler.message.MessageHandler;
+import com.huatu.tiku.interview.userHandler.message.MessageHandler;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.MessageUtil;
 import com.huatu.tiku.interview.util.json.JsonUtil;
@@ -16,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**

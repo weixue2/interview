@@ -18,13 +18,13 @@ public class BaseEntity implements Serializable{
     @Id
     @GeneratedValue
     protected long id;
-    @Column(columnDefinition = "smallint default 0")
+    @Column(columnDefinition = "smallint default 0 COMMENT '。。'")
     protected int bizStatus;
-    @Column(columnDefinition = "smallint default 1")
+    @Column(columnDefinition = "smallint default 1 COMMENT '。。'")
     protected int status;
-    @Column(columnDefinition = "varchar(128) default ''")
+    @Column(columnDefinition = "varchar(128) default '' COMMENT '创建者'")
     protected String creator;
-    @Column(columnDefinition = "varchar(128) default ''")
+    @Column(columnDefinition = "varchar(128) default '' COMMENT '修正者'")
     protected String modifier;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)

@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author zhouwei
@@ -20,27 +18,29 @@ import javax.persistence.Table;
 @Table(name="t_user")
 @Entity
 public class User {
-    @Id
+
+    @Id @GeneratedValue
     private long id;
-    /* 微信Id */
+
+    @Column(columnDefinition="varchar(50) COMMENT '微信Id啊'")
     private String openId;
-    /* 姓名 */
+    @Column(columnDefinition="varchar(20) COMMENT '姓名'")
     private String name;
-    /* 手机号 */
+    @Column(columnDefinition="varchar(15) COMMENT '手机号'")
     private String phone;
-    /* 身份证 */
+    @Column(columnDefinition="varchar(15) COMMENT '身份证'")
     private String idCard;
-    /* 名族 */
+    @Column(columnDefinition="varchar(15) COMMENT '民族呗'")
     private String nation;
-    /* 饮食禁忌 */
+    @Column(columnDefinition="varchar(255) COMMENT '饮食禁忌'")
     private String diet;
-    /* 生活禁忌 */
+    @Column(columnDefinition="varchar(255) COMMENT '生活禁忌'")
     private String life;
-    /* 紧急联系人 */
+    @Column(columnDefinition="varchar(50) COMMENT '紧急联系人'")
     private String keyContact;
-    /* 备考状态 */
+    @Column(columnDefinition="int(2) COMMENT '备考状态'")
     private int examStatus;
-    /* 状态 */
+    @Column(columnDefinition="int(2) COMMENT '状态'")
     private int status;
 
 

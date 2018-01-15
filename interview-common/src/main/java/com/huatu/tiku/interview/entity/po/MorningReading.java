@@ -19,16 +19,22 @@ import java.util.Map;
 @AllArgsConstructor
 @Table(name="t_morning_reading")
 public class MorningReading extends BaseEntity{
-    @ElementCollection(targetClass = Date.class)
-    @CollectionTable(name = "morning_reading_push_time",joinColumns = @JoinColumn(name = "morning_reading_id"))
-    @MapKeyClass(String.class)
-    @MapKeyColumn(name = "week")
-    @Column(name = "time")
-    private Map<String,Date> pushTime;
+    //产品真滴是误导人，传一个时间就传一个时间呗，你非得跟我解释每周七天推送时间是不同的云云，我靠，一个简单的时间字段你给我解释出花来
+//    @ElementCollection(targetClass = Date.class)
+//    @CollectionTable(name = "morning_reading_push_time",joinColumns = @JoinColumn(name = "morning_reading_id"))
+//    @MapKeyClass(String.class)
+//    @MapKeyColumn(name = "week")
+//    @Column(name = "time")
+//    private Map<String,Date> pushTime;
+    private Date pushTime;
 
+    @Column(columnDefinition="varchar(50) default '鸡汤及晨读内容' COMMENT '肯定是通知类型啊，写死的'")
+    private String type;
+
+    @Column(columnDefinition="varchar(50) COMMENT '标题啊'")
     private String title;
 
-    @Column(length = 16777216)
+    @Column(length = 16777216,columnDefinition="varchar(50) COMMENT '富文本。。很多很多文本'")
     private String richText;
 
 }

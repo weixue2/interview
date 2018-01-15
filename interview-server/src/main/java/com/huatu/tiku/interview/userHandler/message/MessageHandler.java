@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.handler.message;
+package com.huatu.tiku.interview.userHandler.message;
 
 import java.util.Map;
 

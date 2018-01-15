@@ -9,9 +9,12 @@ import com.huatu.tiku.interview.entity.po.LearningSituation;
  */
 public interface LearningSituationService {
 
-    Boolean add(LearningSituation data);
+    LearningSituation findOne(Long id);
+
+    Boolean save(LearningSituation data);
     // 这个其实是多余的，我跟你讲
-    Boolean update(LearningSituation data);
+//    Boolean update(LearningSituation data);
+    //无验证，暂不需要，删没删除你前端心里没点数？
     void del(Long id);
 
 }

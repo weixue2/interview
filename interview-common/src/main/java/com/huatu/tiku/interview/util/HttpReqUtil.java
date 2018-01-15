@@ -242,7 +242,7 @@ public class HttpReqUtil {
      * 根据返回的头信息返回具体信息
      *
      * @param contentType  contentType请求头信息
-     * @return Result.type==1 表示文本消息,
+     * @return BaseResult.type==1 表示文本消息,
      */
     private static WechatResult contentType(String contentType, HttpURLConnection conn, String savePath) {
         WechatResult result = new WechatResult();
