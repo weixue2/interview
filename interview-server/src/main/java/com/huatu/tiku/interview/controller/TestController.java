@@ -99,4 +99,10 @@ public class TestController {
         log.info("result:"+result);
         return result;
     }
+    @GetMapping("test1")
+    public String test1(){
+        String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
+        System.out.println(accessToken);
+        return accessToken;
+    }
 }
