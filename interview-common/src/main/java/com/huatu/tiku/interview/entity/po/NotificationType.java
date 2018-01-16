@@ -11,10 +11,11 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@MappedSuperclass
+//@MappedSuperclass
 @DynamicInsert
 @DynamicUpdate(true)
-public class BaseEntity implements Serializable{
+@Entity
+public class NotificationType implements Serializable{
     @Id
     @GeneratedValue
     protected long id;
