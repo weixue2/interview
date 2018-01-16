@@ -34,7 +34,7 @@ public class OnlineCourseArrangementController {
         return arrangementService.add(onlineCourseArrangement) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
     }
 
-    @GetMapping("deleteOnlineCourseArrangement")
+    @DeleteMapping
     public Result del(Long id){
         System.out.println("id:"+id);
         return arrangementService.del(id) ? Result.ok() : Result.build(ResultEnum.DELETE_FAIL);
