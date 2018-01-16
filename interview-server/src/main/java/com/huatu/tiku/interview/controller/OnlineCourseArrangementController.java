@@ -26,7 +26,7 @@ public class OnlineCourseArrangementController {
     @Autowired
     private FileUtil fileUtil;
 
-    @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    @PutMapping() //@requestBody --> Json 不行，这个因为有个文件，就用
     public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
 
         String fileUrl = fileUtil.ftpUploadArrangement(file);

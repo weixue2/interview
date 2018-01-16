@@ -20,7 +20,7 @@ public class MorningReadingController {
     @Autowired
     private MorningReadingService readingService;
 
-    @PostMapping("insertMorningReading") //@requestBody --> Json
+    @PostMapping //@requestBody --> Json
     public Result add(MorningReading morningReading){
         return readingService.add(morningReading)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }

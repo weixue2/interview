@@ -19,19 +19,19 @@ public class LearningSituationController {
     @Autowired
     private LearningSituationService learningSituationService;
 
-    @PostMapping(value = "insert") //@RequestBody 用这个测试的话没法传进来日期，先用Form吧
+    @PostMapping //@RequestBody 用这个测试的话没法传进来日期，先用Form吧
     public Result addLearningSituation(LearningSituation learningSituation){
         System.out.println(learningSituation);
         return learningSituationService.save(learningSituation)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }
 
-    @GetMapping(value = "delete")
+    @DeleteMapping
     public Result del(Long id){
         learningSituationService.del(id);
         return Result.ok();
     }
 
-    @PostMapping(value = "update")
+    @PutMapping
     public Result update(LearningSituation learningSituation){
         learningSituation = learningSituationService.findOne(learningSituation.getId());
         if (learningSituation == null){
