@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @Author: ZhenYang
  * @Date: Created in 2018/1/11 14:34
- * @Modefied By:
+ * @Modefied By: 学习情况
  */
 @RestController
 @RequestMapping("/api/ls")
@@ -20,7 +20,7 @@ public class LearningSituationController {
     private LearningSituationService learningSituationService;
 
     @PostMapping //@RequestBody 用这个测试的话没法传进来日期，先用Form吧
-    public Result addLearningSituation(LearningSituation learningSituation){
+    public Result addLearningSituation(@RequestBody LearningSituation learningSituation){
         System.out.println(learningSituation);
         return learningSituationService.save(learningSituation)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }

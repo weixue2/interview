@@ -3,7 +3,9 @@ package com.huatu.tiku.interview.controller;
 import com.google.common.collect.Maps;
 import com.huatu.common.ErrorResult;
 import com.huatu.common.exception.BizException;
+import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.User;
+import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.MobileService;
 import com.huatu.tiku.interview.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,12 @@ public class UserController {
         userService.updateUser(user);
     }
 
+    @PostMapping
+    public Result insertUser(@RequestBody User user){
+
+        return userService.updateUser(user)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
+    }
+
 
 //    @PostMapping
 //    public void createUser(@RequestBody String openId){
@@ -49,21 +57,22 @@ public class UserController {
 
 
     @GetMapping
-    public Object getUserInfo(String openId){
+    public Result getUserInfo(String openId){
 //        System.out.println("你知道吗 openId:"+openId);
         User user  =userService.getUser(openId);
         Map<String,User> map = Maps.newHashMapWithExpectedSize(4);
         map.put("user",user);
-        return  map;
+        return  Result.ok(map);
     }
 
-    @PostMapping("getMobile")
-    public void test(String mobile,HttpServletRequest req){
+    @GetMapping("getMobile")
+    public Result getMobile(String mobile,String openId,HttpServletRequest req){
         // xml请求解析
 //        Map<String, String> requestMap = MessageUtil.parseXml(req);
 //        String openId = requestMap.get("FromUserName");
 //        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
-        mobileService.checkPHP(mobile);
+//        mobileService.checkPHP(mobile,openId);
+        return Result.ok(mobileService.checkPHP(mobile,openId));
     }
 
 }

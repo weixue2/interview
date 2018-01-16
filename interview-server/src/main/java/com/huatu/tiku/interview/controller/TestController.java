@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.*;
+import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.entity.template.TemplateData;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -104,5 +105,10 @@ public class TestController {
         String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         System.out.println(accessToken);
         return accessToken;
+    }
+
+    @GetMapping("test2")
+    public Result test2(){
+        return Result.ok("xx");
     }
 }
