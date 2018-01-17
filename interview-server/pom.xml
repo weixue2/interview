@@ -22,6 +22,16 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.huatu.ztk</groupId>
+			<artifactId>sms-util</artifactId>
+			<version>1.0-dev-SNAPSHOT</version>
+		</dependency>
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.20</version>
+        </dependency>
 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
