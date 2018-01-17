@@ -10,6 +10,8 @@ import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.MessageUtil;
+import com.sun.media.jfxmedia.logging.Logger;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage;
@@ -31,6 +33,7 @@ import java.util.Map;
  * 用户事件处理类
  */
 @Component
+@Slf4j
 public class EventHandlerImpl implements EventHandler {
     @Autowired
     UserService userService;
@@ -99,6 +102,7 @@ public class EventHandlerImpl implements EventHandler {
         String h = new SimpleDateFormat("HH").format(new Date());
         String str;
         if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {
+            log.info("开始签到");
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("签到成功")
@@ -106,6 +110,7 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build().toXml();
         } else {
+            log.info("签到失败");
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("签到失败")
@@ -119,12 +124,15 @@ public class EventHandlerImpl implements EventHandler {
 
     @Override
     public String eventClick(Map<String, String> requestMap) {
-        String str=WxMpXmlOutMessage
-                .IMAGE()
-                .mediaId("")
-                .fromUser(requestMap.get("ToUserName"))
-                .toUser(requestMap.get("FromUserName"))
-                .build().toXml();
-        return null;
+        String str=null;
+        if ("course".equals(requestMap.get("EventKey"))) {
+            str = WxMpXmlOutMessage
+                    .IMAGE()
+                    .mediaId("Bfmnlf2k6LOgXFHII34PCz1BCErjN4IuK1Q3-bkrNav577jG8EWW9e_CAnsOAERR")
+                    .fromUser(requestMap.get("ToUserName"))
+                    .toUser(requestMap.get("FromUserName"))
+                    .build().toXml();
+        }
+        return str;
     }
 }
