@@ -39,8 +39,8 @@ public class OnlineCourseArrangementController {
     @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
     public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
-        config.setAppId("wx4e6e2dc624081b58"); // 设置微信公众号的appid
-        config.setSecret("78b688afb80faf735ebf3e2a3525ef35"); // 设置微信公众号的app corpSecret
+        config.setAppId("wx53505056175d5968"); // 设置微信公众号的appid
+        config.setSecret("739040d83f6d5c73fa961e3b1a48540f"); // 设置微信公众号的app corpSecret
 
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(config);
