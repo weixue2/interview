@@ -3,10 +3,15 @@ package com.huatu.tiku.interview.userHandler.event.impl;
 import com.huatu.common.utils.date.DateFormatUtil;
 import com.huatu.common.utils.date.DateUtil;
 import com.huatu.tiku.interview.constant.BasicParameters;
+import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
 import com.huatu.tiku.interview.entity.message.TextMessage;
+import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
+import com.huatu.tiku.interview.entity.po.SignIn;
 import com.huatu.tiku.interview.entity.po.User;
+import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
+import com.huatu.tiku.interview.repository.SignIdRepository;
 import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.MessageUtil;
@@ -17,6 +22,7 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
@@ -36,7 +42,11 @@ import java.util.Map;
 @Slf4j
 public class EventHandlerImpl implements EventHandler {
     @Autowired
-    UserService userService;
+    private UserService userService;
+    @Autowired
+    private SignIdRepository signIdRepository;
+    @Autowired
+    private OnlineCourseArrangementRepository onlineCourseArrangementRepository;
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
@@ -59,32 +69,6 @@ public class EventHandlerImpl implements EventHandler {
         return MessageUtil.MessageToXml(nm);
     }
 
-//    @Override
-//    public String subscribeEvent(Map<String, String> requestMap) {
-//        String fromUserName = requestMap.get("FromUserName");
-//        NewsMessage newsMessage = new NewsMessage(requestMap);
-//        //创建用户，记录openId TODO 校验是否存在，存在说明是重复关注不处理
-//        User user = userService.getUserByOpenId(fromUserName);
-////        System.out.println(user.getOpenId());
-//        if(user == null){
-//            userService.createUser(fromUserName);
-//        }
-//
-//
-//        List<Article> articleList = new ArrayList<Article>();
-//        //测试单图文回复
-//        Article article = new Article();
-//        article.setTitle("谢谢您的关注！");
-//        // 图文消息中可以使用QQ表情、符号表情
-//        article.setDescription("点击图文可以跳转到华图首页");
-//        // 将图片置为空
-//        article.setPicUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515474563395&di=7fd2315a708740c4b8ed01b68ff8d1d4&imgtype=0&src=http%3A%2F%2Fwww.zhlzw.com%2FUploadFiles%2FArticle_UploadFiles%2F201204%2F20120412123904521.jpg");
-//        article.setUrl("http://v.huatu.com");
-//        articleList.add(article);
-//        newsMessage.setArticleCount(articleList.size());
-//        newsMessage.setArticles(articleList);
-//        return MessageUtil.MessageToXml(newsMessage);
-//    }
 
     @Override
     public String unsubscribeHandler(Map<String, String> requestMap) {
@@ -101,7 +85,8 @@ public class EventHandlerImpl implements EventHandler {
     public String signIn(Map<String, String> requestMap) {
         String h = new SimpleDateFormat("HH").format(new Date());
         String str;
-        if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {
+        //if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {
+        if (System.currentTimeMillis() % 2 == 1) {
             log.info("开始签到");
             str = WxMpXmlOutMessage
                     .TEXT()
@@ -109,6 +94,11 @@ public class EventHandlerImpl implements EventHandler {
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build().toXml();
+            SignIn signIn = new SignIn();
+            signIn.setOpenId(requestMap.get("FromUserName"));
+            signIn.setSignTime(new Date());
+            signIn.setBizStatus(1);
+            signIn.setStatus(1);
         } else {
             log.info("签到失败");
             str = WxMpXmlOutMessage
@@ -118,20 +108,35 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build().toXml();
         }
-
         return str;
     }
 
+    /**
+     * 处理点击事件
+     *
+     * @param requestMap
+     * @return
+     */
     @Override
     public String eventClick(Map<String, String> requestMap) {
-        String str=null;
+        String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
+            List<OnlineCourseArrangement> onlineCourseArrangements = onlineCourseArrangementRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "UpdateTimestamp"), WXStatusEnum.BizStatus.NORMAL, WXStatusEnum.Status.ONLINE);
             str = WxMpXmlOutMessage
                     .IMAGE()
-                    .mediaId("Bfmnlf2k6LOgXFHII34PCz1BCErjN4IuK1Q3-bkrNav577jG8EWW9e_CAnsOAERR")
+                    .mediaId(onlineCourseArrangements.get(0).getWxImageId())
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
-                    .build().toXml();
+                    .build()
+                    .toXml();
+        } else {
+            str = WxMpXmlOutMessage
+                    .TEXT()
+                    .content("正在开发")
+                    .fromUser(requestMap.get("ToUserName"))
+                    .toUser(requestMap.get("FromUserName"))
+                    .build()
+                    .toXml();
         }
         return str;
     }
