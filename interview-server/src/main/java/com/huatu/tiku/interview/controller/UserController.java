@@ -76,9 +76,10 @@ public class UserController {
         return Result.ok(mobileService.checkPHP(mobile,openId,req));
     }
     @GetMapping(value = "getNext")
-    public Object userCaptcha(String mobile, String captcha) {
+    public Result userCaptcha(String mobile, String captcha) {
         mobileService.userCaptcha(mobile, captcha);
-        return SuccessMessage.create("验证通过");
+//        return SuccessMessage.create("验证通过");
+        return Result.build(ResultEnum.CAPTCHA_PASS);
     }
 
 }
