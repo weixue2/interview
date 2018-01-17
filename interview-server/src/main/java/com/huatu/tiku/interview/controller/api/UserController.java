@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.api;
 
 import com.google.common.collect.Maps;
 import com.huatu.common.ErrorResult;
@@ -22,6 +22,8 @@ import java.util.Map;
  * @Description: TODO
  * @create 2018-01-05 下午5:36
  **/
+
+@CrossOrigin
 @Slf4j
 @RestController
 @RequestMapping(value = "/api/user",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
