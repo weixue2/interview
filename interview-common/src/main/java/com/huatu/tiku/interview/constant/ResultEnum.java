@@ -21,6 +21,9 @@ public enum ResultEnum {
     PHP_PARAMETER_ERROR(50021,"参数错误"),
     PHP_MOBILE_ERROR(50022,"手机号错误"),
     PHP_REQUEST_LOSED(50023,"请求失效"),
+
+    CAPTCHA_EXPIRE(50030,"验证码过期"),
+    CAPTCHA_ERROR(50031,"验证码错误"),
         ;
     private Integer code;
 

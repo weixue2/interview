@@ -2,6 +2,7 @@ package com.huatu.tiku.interview.controller;
 
 import com.google.common.collect.Maps;
 import com.huatu.common.ErrorResult;
+import com.huatu.common.SuccessMessage;
 import com.huatu.common.exception.BizException;
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.User;
@@ -73,6 +74,11 @@ public class UserController {
 //        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
 //        mobileService.checkPHP(mobile,openId);
         return Result.ok(mobileService.checkPHP(mobile,openId,req));
+    }
+    @GetMapping(value = "getNext")
+    public Object userCaptcha(String mobile, String captcha) {
+        mobileService.userCaptcha(mobile, captcha);
+        return SuccessMessage.create("验证通过");
     }
 
 }

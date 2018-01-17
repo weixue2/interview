@@ -105,6 +105,23 @@ public class MobilServiceImpl implements MobileService {
         return user;
     }
 
+    @Override
+    public void userCaptcha(String mobile, String captcha) {
+        //验证码对应的key
+        String captchaKey = String.format(UserRedisKeys.CAPTCHA_MOBILE, mobile);
+        //实际验证码
+        final Object actualCaptcha = redisTemplate.opsForValue().get(captchaKey);
+
+        if (actualCaptcha == null) {
+            throw new ReqException(ResultEnum.CAPTCHA_EXPIRE);
+        }
+
+        //验证码错误
+        if (!captcha.equals(actualCaptcha.toString())) {
+            throw new ReqException(ResultEnum.CAPTCHA_ERROR);
+        }
+    }
+
     /**
      * 简单判断agent是否合法
      *
