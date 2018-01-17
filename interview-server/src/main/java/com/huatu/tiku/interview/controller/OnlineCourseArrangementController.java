@@ -5,6 +5,8 @@ import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.file.FileUtil;
+import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
+import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -26,8 +28,13 @@ public class OnlineCourseArrangementController {
     @Autowired
     private FileUtil fileUtil;
 
-    @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
     public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+
+        WxMpMaterial wxMaterial = new WxMpMaterial();
+        wxMaterial.setFile(file);
+        wxMaterial.setName(fileName);
+        WxMpMaterialUploadResult res = wxService.getMaterialService().materialFileUpload(mediaType, wxMaterial);
 
         String fileUrl = fileUtil.ftpUploadArrangement(file);
         onlineCourseArrangement.setImageUrl(fileUrl);

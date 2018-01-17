@@ -1,16 +1,26 @@
 package com.huatu.tiku.interview.userHandler.event.impl;
 
+import com.huatu.common.utils.date.DateFormatUtil;
+import com.huatu.common.utils.date.DateUtil;
 import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
+import com.huatu.tiku.interview.entity.message.TextMessage;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.MessageUtil;
+import me.chanjar.weixin.common.bean.menu.WxMenuButton;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +40,7 @@ public class EventHandlerImpl implements EventHandler {
         // TODO 因为可以验证取关的事件，所以这里的逻辑可以删掉
         String fromUserName = requestMap.get("FromUserName");
         User user = userService.getUserByOpenId(fromUserName);
-        if(user == null){
+        if (user == null) {
             userService.createUser(fromUserName);
         }
         NewsMessage nm = new NewsMessage(requestMap);
@@ -75,6 +85,46 @@ public class EventHandlerImpl implements EventHandler {
 
     @Override
     public String unsubscribeHandler(Map<String, String> requestMap) {
+        return null;
+    }
+
+    /**
+     * 这东西太他妈太反人类了
+     *
+     * @param requestMap
+     * @return
+     */
+    @Override
+    public String signIn(Map<String, String> requestMap) {
+        String h = new SimpleDateFormat("HH").format(new Date());
+        String str;
+        if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {
+            str = WxMpXmlOutMessage
+                    .TEXT()
+                    .content("签到成功")
+                    .fromUser(requestMap.get("ToUserName"))
+                    .toUser(requestMap.get("FromUserName"))
+                    .build().toXml();
+        } else {
+            str = WxMpXmlOutMessage
+                    .TEXT()
+                    .content("签到失败")
+                    .fromUser(requestMap.get("ToUserName"))
+                    .toUser(requestMap.get("FromUserName"))
+                    .build().toXml();
+        }
+
+        return str;
+    }
+
+    @Override
+    public String eventClick(Map<String, String> requestMap) {
+        String str=WxMpXmlOutMessage
+                .IMAGE()
+                .mediaId("")
+                .fromUser(requestMap.get("ToUserName"))
+                .toUser(requestMap.get("FromUserName"))
+                .build().toXml();
         return null;
     }
 }

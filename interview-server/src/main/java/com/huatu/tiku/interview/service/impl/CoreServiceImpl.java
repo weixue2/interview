@@ -37,7 +37,6 @@ public class CoreServiceImpl implements CoreService {
     private MessageHandler messageHandler;
 
 
-
     @Autowired
     private WeiXinAccessTokenUtil accessTokenUtil;
 
@@ -53,52 +52,62 @@ public class CoreServiceImpl implements CoreService {
      */
 
     @Override
-    public String processRequest(Map<String, String> requestMap, HttpServletRequest request,HttpServletResponse response) {
+    public String processRequest(Map<String, String> requestMap, HttpServletRequest request, HttpServletResponse response) {
         String result = null;
         try {
-            requestMap.forEach((k,v)->{
-                log.info("key:{},value:{}",k,v);
+            requestMap.forEach((k, v) -> {
+                log.info("key:{},value:{}", k, v);
             });
-            switch (requestMap.get("MsgType")){
-                    //文本消息
-                case MessageUtil.REQ_MESSAGE_TYPE_TEXT:{
-                    result  = messageHandler.TextMessageHandler(requestMap);
+            switch (requestMap.get("MsgType")) {
+                //文本消息
+                case MessageUtil.REQ_MESSAGE_TYPE_TEXT: {
+                    result = messageHandler.TextMessageHandler(requestMap);
                 }   //图片消息
-                case MessageUtil.REQ_MESSAGE_TYPE_IMAGE:{
+                case MessageUtil.REQ_MESSAGE_TYPE_IMAGE: {
                     break;
                 }   //链接消息
-                case MessageUtil.REQ_MESSAGE_TYPE_LINK:{
+                case MessageUtil.REQ_MESSAGE_TYPE_LINK: {
                     break;
                 }   //地理消息
-                case MessageUtil.REQ_MESSAGE_TYPE_LOCATION:{
+                case MessageUtil.REQ_MESSAGE_TYPE_LOCATION: {
                     break;
                 }   //音频消息
-                case MessageUtil.REQ_MESSAGE_TYPE_VOICE:{
+                case MessageUtil.REQ_MESSAGE_TYPE_VOICE: {
                     break;
                 }   //事件
-                case MessageUtil.REQ_MESSAGE_TYPE_EVENT:{
-                    switch (requestMap.get("Event")){
-                            //自定义菜单点击事件
-                        case MessageUtil.EVENT_TYPE_CLICK:{
+                case MessageUtil.REQ_MESSAGE_TYPE_EVENT: {
+                    switch (requestMap.get("Event")) {
+                        //自定义菜单点击事件
+                        case MessageUtil.EVENT_TYPE_CLICK: {
+                            result=eventHandler.eventClick(requestMap);
                             break;
                         }   // 订阅时的处理
-                        case MessageUtil.EVENT_TYPE_SUBSCRIBE:{
+                        case MessageUtil.EVENT_TYPE_SUBSCRIBE: {
                             result = eventHandler.subscribeHandler(requestMap);
                             break;
                         }   //取关
-                        case  MessageUtil.EVENT_TYPE_UNSUBSCRIBE:{
+                        case MessageUtil.EVENT_TYPE_UNSUBSCRIBE: {
                             // TODO 取关之后的操作
                             break;
                         }   //万恶之源
-                        case  MessageUtil.TEMPLATESENDJOBFINISH :{
+                        case MessageUtil.TEMPLATESENDJOBFINISH: {
                             // 模板验证消息
                             break;
                         }
-                    } break;
+                        case MessageUtil.SCANCODE_WAITMSG: {
+                            result=eventHandler.signIn(requestMap);
+                        }
+                    }
+                    break;
                 }
-                default:{break; }
+                default: {
+                    break;
+                }
             }
-        } catch (Exception e) {e.printStackTrace();}finally { }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
         return result;
     }
 
@@ -281,7 +290,6 @@ public class CoreServiceImpl implements CoreService {
         }
         return result;
     }
-
 
 
 }

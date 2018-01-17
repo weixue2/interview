@@ -1,4 +1,6 @@
 package com.huatu.tiku.interview.util;
+import org.springframework.beans.factory.annotation.Value;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -9,6 +11,7 @@ import java.util.Arrays;
  * @create 2018-01-04 上午11:57
  **/
 public class SignUtil {
+    @Value("${token}")
     // 与接口配置信息中的Token要一致
     private static String token = "tongzhuogongkao_weixin";
 
