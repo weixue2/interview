@@ -1,6 +1,9 @@
 package com.huatu.tiku.interview.service;
 
 import com.huatu.tiku.interview.entity.po.User;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author: ZhenYang
@@ -8,5 +11,6 @@ import com.huatu.tiku.interview.entity.po.User;
  * @Modefied By:
  */
 public interface MobileService {
-    User checkPHP(String mobile, String openId);
+    User checkPHP(String mobile, String openId,HttpServletRequest request);
+    void userCaptcha(String mobile,String captcha);
 }
