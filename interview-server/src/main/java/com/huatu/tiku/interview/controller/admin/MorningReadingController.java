@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.admin;
 
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.MorningReading;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @RestController
-@RequestMapping("/api/mr")
+@RequestMapping("/mr")
 public class MorningReadingController {
     @Autowired
     private MorningReadingService readingService;
