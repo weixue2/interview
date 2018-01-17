@@ -15,9 +15,13 @@ public enum ResultEnum {
 
     IMAGE_FORMAT_ERROR(50010,"图片格式错误"),
     FILE_ERROR(50011,"文件读写错误"),
-
     UPLOAD_FILE_FAILED(50012,"上传文件失败"),
-    ;
+
+    PHP_ERROR(50020,"未知错误"),
+    PHP_PARAMETER_ERROR(50021,"参数错误"),
+    PHP_MOBILE_ERROR(50022,"手机号错误"),
+    PHP_REQUEST_LOSED(50023,"请求失效"),
+        ;
     private Integer code;
 
     private String message;

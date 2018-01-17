@@ -8,8 +8,8 @@ import com.huatu.tiku.interview.entity.po.User;
  * @create 2018-01-05 下午4:31
  **/
 public interface UserService {
-     void updateUser(User user);
+    Boolean updateUser(User user);
      void createUser(String openId);
     User getUser(String openId);
-    public User getUserByOpenId(String openId);
+     User getUserByOpenId(String openId);
 }

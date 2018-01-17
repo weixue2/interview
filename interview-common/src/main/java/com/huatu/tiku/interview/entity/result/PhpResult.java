@@ -11,4 +11,5 @@ import lombok.Data;
 public class PhpResult {
     private String code;
     private String msg;
+    private String data;
 }
