@@ -32,18 +32,18 @@ public class UserController {
     @Autowired
     private MobileService mobileService;
     @PutMapping
-    public void updateUserInfo(@RequestBody User user){
+    public void updateUserInfo(@RequestBody User user,HttpServletRequest request){
         log.info("id:{}",user.getId());
         if(user==null || user.getId()==0){
             throw new BizException(ErrorResult.create(403,"参数有误"));
         }
-        userService.updateUser(user);
+        userService.updateUser(user,request);
     }
 
     @PostMapping
-    public Result insertUser(@RequestBody User user){
+    public Result updateUser(@RequestBody User user,HttpServletRequest request){
 
-        return userService.updateUser(user)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
+        return userService.updateUser(user,request)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }
 
 

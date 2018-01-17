@@ -25,6 +25,8 @@ public enum ResultEnum {
     CAPTCHA_EXPIRE(50030,"验证码过期"),
     CAPTCHA_ERROR(50031,"验证码错误"),
     CAPTCHA_PASS(20000,"验证通过"),
+
+    OPENID_ERROR(50040,"OpenID错误"),
         ;
     private Integer code;
 
