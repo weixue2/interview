@@ -28,7 +28,7 @@ public class User {
     private String name;
     @Column(columnDefinition="varchar(15) COMMENT '手机号'")
     private String phone;
-    @Column(columnDefinition="varchar(15) COMMENT '身份证'")
+    @Column(columnDefinition="varchar(20) COMMENT '身份证'")
     private String idCard;
     @Column(columnDefinition="varchar(15) COMMENT '民族呗'")
     private String nation;
@@ -44,8 +44,9 @@ public class User {
     private String keyContact;
 //    @Column(columnDefinition="int(2) COMMENT '备考状态'")
 //    private int examStatus;
-    @Column(columnDefinition="int(2) COMMENT '状态'")
-    private int status;
+//    @Column(columnDefinition="int(2) COMMENT '状态'")
+    private Integer status;
 
 
+    private Boolean existStatus;
 }

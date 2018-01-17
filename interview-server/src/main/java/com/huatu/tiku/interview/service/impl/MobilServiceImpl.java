@@ -53,7 +53,7 @@ public class MobilServiceImpl implements MobileService {
     @Override
     public User checkPHP(String mobile,String openId,HttpServletRequest request) {
         // TODO 这里固定使用了一个openID
-        openId = "omsLn0dOlKTbFpGPkCDiqWy79oJY";
+        openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
         String token = Crypt3Des.encryptMode("phone="+mobile+"&timeStamp="+System.currentTimeMillis());
         System.out.println("token:"+token);
         // 请求php
@@ -100,7 +100,7 @@ public class MobilServiceImpl implements MobileService {
         }
 
         sendCaptcha(mobile, clientIp, true);
-
+        request.getSession().setAttribute("openId",openId);
 //        return SuccessMessage.create("发送验证码成功");
         return user;
     }
