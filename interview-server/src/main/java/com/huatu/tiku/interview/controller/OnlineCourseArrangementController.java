@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  * @Author ZhenYang
@@ -29,21 +33,16 @@ public class OnlineCourseArrangementController {
     private FileUtil fileUtil;
 
     @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
-    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
-
-        WxMpMaterial wxMaterial = new WxMpMaterial();
-        wxMaterial.setFile(file);
-        wxMaterial.setName(fileName);
-        WxMpMaterialUploadResult res = wxService.getMaterialService().materialFileUpload(mediaType, wxMaterial);
+    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws Exception {
 
         String fileUrl = fileUtil.ftpUploadArrangement(file);
         onlineCourseArrangement.setImageUrl(fileUrl);
-        return arrangementService.add(onlineCourseArrangement) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
+        return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
     }
 
     @DeleteMapping
-    public Result del(Long id){
-        System.out.println("id:"+id);
+    public Result del(Long id) {
+        System.out.println("id:" + id);
         return arrangementService.del(id) ? Result.ok() : Result.build(ResultEnum.DELETE_FAIL);
     }
 //    @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用

@@ -2,6 +2,7 @@ package com.huatu.tiku.interview.util.file;
 
 
 import com.huatu.tiku.interview.constant.BasicParameters;
+import com.huatu.tiku.interview.constant.CourseConstant;
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.exception.ReqException;
 import com.huatu.tiku.interview.util.etag.Etag;
@@ -30,6 +31,7 @@ public class FileUtil {
     @Autowired
     private FtpClientPool ftpClientPool;
 
+
     //图片文件的基本保存路径
     public static final String IMG_FILE_BASE_BATH = "/var/www/cdn/images/vhuatu/interview/arrangement/";
 
@@ -41,12 +43,13 @@ public class FileUtil {
 
     /**
      * ftp上传文件
-     * @param file file对象
+     *
+     * @param file     file对象
      * @param fileName 文件名称
      * @param savePath 保存路径
      * @return
      */
-    public void ftpUpload(File file, String fileName, String savePath){
+    public void ftpUpload(File file, String fileName, String savePath) {
         //从连接池获取ftp 客户端
         final FTPClient ftpClient = ftpClientPool.getFTPClient();
         FileInputStream fis = null;
@@ -68,7 +71,7 @@ public class FileUtil {
                     fis.close();
                     file.delete();
                 }
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             ftpClientPool.returnFTPClient(ftpClient);
@@ -78,11 +81,12 @@ public class FileUtil {
 
     /**
      * 上传文件
+     *
      * @param file
      * @param fileName
      * @param savePath
      */
-    public void ftpUploadFile(File file, String fileName, String savePath){
+    public void ftpUploadFile(File file, String fileName, String savePath) {
 
         logger.info("===上传文件开始===");
         //从连接池获取ftp 客户端
@@ -91,11 +95,11 @@ public class FileUtil {
             //目录不存在，创建目录
             boolean makeDir = ftpClient.makeDirectory(savePath);
             //切换工作目录
-            boolean changeWork =  ftpClient.changeWorkingDirectory(savePath);
+            boolean changeWork = ftpClient.changeWorkingDirectory(savePath);
             //ftp上传服务器
             boolean storeFile = ftpClient.storeFile(fileName, new FileInputStream(file));
 
-            logger.info(""+makeDir + changeWork +storeFile) ;
+            logger.info("" + makeDir + changeWork + storeFile);
             logger.info("===上传文件结束===");
         } catch (IOException e) {
             logger.error("ex", e);
@@ -107,7 +111,6 @@ public class FileUtil {
     }
 
     /**
-     *
      * @param fileInput
      * @param fileName
      * @param savePath
@@ -121,11 +124,11 @@ public class FileUtil {
             //目录不存在，创建目录
             boolean makeDir = ftpClient.makeDirectory(savePath);
             //切换工作目录
-            boolean changeWork =  ftpClient.changeWorkingDirectory(savePath);
+            boolean changeWork = ftpClient.changeWorkingDirectory(savePath);
             //ftp上传服务器
-            boolean storeFile = ftpClient.storeFile(fileName,fileInput);
+            boolean storeFile = ftpClient.storeFile(fileName, fileInput);
 
-            logger.info(""+makeDir + changeWork +storeFile) ;
+            logger.info("" + makeDir + changeWork + storeFile);
             logger.info("===上传文件结束===");
         } catch (IOException e) {
             logger.error("ex", e);
@@ -150,13 +153,13 @@ public class FileUtil {
     }
 
 
-
     /**
      * ftp 上传图片
+     *
      * @param imgFile
      * @return
      */
-    public String ftpUploadPic(File imgFile){
+    public String ftpUploadPic(File imgFile) {
         String fileName = makeImgFileName(imgFile);
         String savePath = makeImgSavePath(fileName);
         ftpUpload(imgFile, fileName, savePath);
@@ -166,93 +169,60 @@ public class FileUtil {
 
     /**
      * 也是上传图片，但是是课程安排
+     *
      * @param
      * @return
      */
-    public String ftpUploadArrangement(MultipartFile multipartFile){
-        Pattern pattern = Pattern.compile(BasicParameters.RegExForImageUpload);
-        // 忽略大小写
-        // Pattern pattern = Pattern.compile(regEx, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(multipartFile.getOriginalFilename());
-        String url = "";
-
-
-        File file = null;
-//        try {
-//            file =  (File)multipartFile;
-//
-//        }catch (Exception e){
-//            System.out.println("文件强转失败");
-//        }
-        String[] strs = multipartFile.getContentType().split("/");
-        if (strs.length == 2) {
-            if (strs[0].equals("image")) {
-                if (matcher.find()) {
-                    String filePath = BasicParameters.fileUploadPath;
-                    String fileName = UUID.randomUUID().toString() + "." + strs[1];
-                    try {
-                        FileUtil.uploadFile(multipartFile.getBytes(), filePath, fileName);
-                    } catch (Exception e) {
-                        throw new ReqException(ResultEnum.UPLOAD_FILE_FAILED);
-                    } finally {
-                        // TODO 把这个文件存到？？？文件？那这里不就不需要写入了吗直接传啊
-//                        onlineCourseArrangement.setImageUrl(filePath + fileName);
-                        // TODO MultipartFile 转 File真滴是坑，先这么解决吧，再说
-                        String filePath_ = filePath + fileName;
-                        file = new File(filePath_);
-                        ftpUpload(file, fileName, IMG_FILE_BASE_BATH);
-                        file.delete();
-                    }
-
-                    url = IMG_BASE_URL + fileName;
-                    System.out.println("url:"+url);
-                }
-            }
-        }
+    public String ftpUploadArrangement(MultipartFile multipartFile) throws IOException {
+        String[] split = multipartFile.getContentType().split("/");
+        String fileName = UUID.randomUUID().toString() + split[1];
+        ftpUploadFileInputStream(multipartFile.getInputStream(), fileName, CourseConstant.IMG_FILE_BASE_BATH.getMessage());
+        String url = CourseConstant.IMG_BASE_URL.getMessage() + fileName;
         return url;
     }
 
 
     /**
+     * 【功能描述：删除文件夹】
+     * 【功能详细描述：功能详细描述】
      *
-     *【功能描述：删除文件夹】
-     *【功能详细描述：功能详细描述】
-     * @see   【类、类#方法、类#成员】
      * @param ftpClient
-     * @param ftpPath  文件夹的地址
+     * @param ftpPath   文件夹的地址
      * @return true 表似成功，false 失败
      * @throws IOException
+     * @see 【类、类#方法、类#成员】
      */
-    public static boolean iterateDelete(FTPClient ftpClient,String ftpPath) throws IOException{
+    public static boolean iterateDelete(FTPClient ftpClient, String ftpPath) throws IOException {
         FTPFile[] files = ftpClient.listFiles(ftpPath);
         boolean flag = false;
-        for(FTPFile f:files){
-            String path = ftpPath+File.separator+f.getName();
-            if(f.isFile()){
+        for (FTPFile f : files) {
+            String path = ftpPath + File.separator + f.getName();
+            if (f.isFile()) {
                 // 是文件就删除文件
                 ftpClient.deleteFile(path);
-            }else if(f.isDirectory()){
-                iterateDelete(ftpClient,path);
+            } else if (f.isDirectory()) {
+                iterateDelete(ftpClient, path);
             }
         }
         // 每次删除文件夹以后就去查看该文件夹下面是否还有文件，没有就删除该空文件夹
         FTPFile[] files2 = ftpClient.listFiles(ftpPath);
-        if(files2.length==0){
+        if (files2.length == 0) {
             flag = ftpClient.removeDirectory(ftpPath);
-        }else{
+        } else {
             flag = false;
         }
         return flag;
     }
+
     /**
+     * 【功能描述：删除文件】
+     * 【功能详细描述：功能详细描述】
      *
-     *【功能描述：删除文件】
-     *【功能详细描述：功能详细描述】
-     * @see   【类、类#方法、类#成员】
      * @param filePath
      * @return
+     * @see 【类、类#方法、类#成员】
      */
-    public  boolean deleteFtpFile(String filePath){
+    public boolean deleteFtpFile(String filePath) {
         boolean flag = false;
         try {
             final FTPClient ftpClient = ftpClientPool.getFTPClient();
@@ -264,21 +234,22 @@ public class FileUtil {
         return flag;
 
     }
+
     /**
      * ftp 上传图片
+     *
      * @param imgFile
      * @return
      */
     public String ftpUploadPicByThread(File imgFile) {
         String fileName = makeImgFileName(imgFile);
         String savePath = makeImgSavePath(fileName);
-        Thread thread = new Thread(new Runnable(){
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     ftpUpload(imgFile, fileName, savePath);
-                }
-                catch (ReqException e){
+                } catch (ReqException e) {
                     throw new ReqException(ResultEnum.UPLOAD_FILE_FAILED);
                 }
             }
@@ -298,11 +269,11 @@ public class FileUtil {
         return IMG_BASE_URL + fileName.charAt(0) + "/" + fileName;
     }
 
-    public static void  downLoadFromUrl(String urlStr,String fileName,String savePath) throws IOException{
+    public static void downLoadFromUrl(String urlStr, String fileName, String savePath) throws IOException {
         URL url = new URL(urlStr);
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         //设置超时间为3秒
-        conn.setConnectTimeout(3*1000);
+        conn.setConnectTimeout(3 * 1000);
         //防止屏蔽程序抓取而返回403错误
         conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
 
@@ -313,26 +284,27 @@ public class FileUtil {
 
         //文件保存位置
         File saveDir = new File(savePath);
-        if(!saveDir.exists()){
+        if (!saveDir.exists()) {
             saveDir.mkdir();
         }
-        File file = new File(saveDir+File.separator+fileName);
+        File file = new File(saveDir + File.separator + fileName);
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(getData);
-        if(fos!=null){
+        if (fos != null) {
             fos.close();
         }
-        if(inputStream!=null){
+        if (inputStream != null) {
             inputStream.close();
         }
 
 
-        System.out.println("info:"+url+" download success");
+        System.out.println("info:" + url + " download success");
 
     }
 
     /**
      * 组装图片名称
+     *
      * @param file
      * @return
      * @throws Exception
@@ -341,7 +313,7 @@ public class FileUtil {
         String fileName = "";
         try {
             //保持文件后缀名
-            String extName =file.getName().substring(file.getName().lastIndexOf("."));
+            String extName = file.getName().substring(file.getName().lastIndexOf("."));
             final InputStream stream = new FileInputStream(file);
             //生成文件名
             String fileNameTmp = Etag.stream(stream, stream.available()) + extName;
@@ -357,15 +329,16 @@ public class FileUtil {
 
     /**
      * 从输入流中获取字节数组
+     *
      * @param inputStream
      * @return
      * @throws IOException
      */
-    public static  byte[] readInputStream(InputStream inputStream) throws IOException {
+    public static byte[] readInputStream(InputStream inputStream) throws IOException {
         byte[] buffer = new byte[1024];
         int len = 0;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        while((len = inputStream.read(buffer)) != -1) {
+        while ((len = inputStream.read(buffer)) != -1) {
             bos.write(buffer, 0, len);
         }
         bos.close();
@@ -374,7 +347,8 @@ public class FileUtil {
 
     /**
      * 上传文件
-     * @param file 文件
+     *
+     * @param file     文件
      * @param filePath 路径
      * @param fileName 文件名
      * @throws Exception
@@ -383,19 +357,19 @@ public class FileUtil {
         File targetFile = new File(filePath);
         System.out.println(targetFile.getPath());
         System.out.println("到这里没有");
-        if(!targetFile.exists()){
+        if (!targetFile.exists()) {
             targetFile.mkdirs();
         }
-        FileOutputStream out = new FileOutputStream(filePath+fileName);
+        FileOutputStream out = new FileOutputStream(filePath + fileName);
         out.write(file);
         out.flush();
         out.close();
     }
+
     /**
      * 删除文件，可以是文件或文件夹
      *
-     * @param fileName
-     *            要删除的文件名
+     * @param fileName 要删除的文件名
      * @return 删除成功返回true，否则返回false
      */
     public static boolean delete(String fileName) {
@@ -414,8 +388,7 @@ public class FileUtil {
     /**
      * 删除单个文件
      *
-     * @param fileName
-     *            要删除的文件的文件名
+     * @param fileName 要删除的文件的文件名
      * @return 单个文件删除成功返回true，否则返回false
      */
     public static boolean deleteFile(String fileName) {
@@ -438,8 +411,7 @@ public class FileUtil {
     /**
      * 删除目录及目录下的文件
      *
-     * @param dir
-     *            要删除的目录的文件路径
+     * @param dir 要删除的目录的文件路径
      * @return 目录删除成功返回true，否则返回false
      */
     public static boolean deleteDirectory(String dir) {
