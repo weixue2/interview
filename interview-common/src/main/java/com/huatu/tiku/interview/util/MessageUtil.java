@@ -104,6 +104,7 @@ public class MessageUtil {
      * 事件类型：消息验证
      */
     public static final String TEMPLATESENDJOBFINISH="TEMPLATESENDJOBFINISH";
+    public static final String SCANCODE_WAITMSG="scancode_waitmsg";
     /**
      * 解析微信发来的请求（XML）
      *

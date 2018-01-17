@@ -36,21 +36,21 @@ public class CoreController {
 //    WeiXinAccessTokenUtil weiXinAccessTokenUtil;
 
 
-   // @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
-   @PostMapping("process")
-   public String post(HttpServletRequest request ,HttpServletResponse response) throws Exception {
-       // 调用核心业务类接收消息、处理消息跟推送消息
-       log.info("--------------core-------------------");
-       return coreService.processRequest(MessageUtil.parseXml(request),request,response);
-   }
+    // @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
+    @PostMapping("process")
+    public String post(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        // 调用核心业务类接收消息、处理消息跟推送消息
+        log.info("--------------core-------------------");
+        return coreService.processRequest(MessageUtil.parseXml(request), request, response);
+    }
 
     @GetMapping(value = "process")
-    public void checkSignature(@RequestParam(name = "signature" ,required = false) String signature  ,
-                               @RequestParam(name = "nonce",required = false) String  nonce ,
-                               @RequestParam(name = "timestamp",required = false) String  timestamp ,
-                               @RequestParam(name = "echostr",required = false) Object  echostr,HttpServletResponse resp){
+    public void checkSignature(@RequestParam(name = "signature", required = false) String signature,
+                               @RequestParam(name = "nonce", required = false) String nonce,
+                               @RequestParam(name = "timestamp", required = false) String timestamp,
+                               @RequestParam(name = "echostr", required = false) Object echostr, HttpServletResponse resp) {
         // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-        log.info("-------开始验证----------signature:{},nonce:{},timestamp:{},echostr:{}",signature,nonce,timestamp,echostr);
+        log.info("-------开始验证----------signature:{},nonce:{},timestamp:{},echostr:{}", signature, nonce, timestamp, echostr);
         try {
 
             PrintWriter out = resp.getWriter();

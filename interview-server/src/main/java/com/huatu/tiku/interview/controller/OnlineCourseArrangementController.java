@@ -5,11 +5,17 @@ import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.file.FileUtil;
+import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
+import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  * @Author ZhenYang
@@ -26,17 +32,17 @@ public class OnlineCourseArrangementController {
     @Autowired
     private FileUtil fileUtil;
 
-    @PostMapping() //@requestBody --> Json 不行，这个因为有个文件，就用
-    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws Exception {
 
         String fileUrl = fileUtil.ftpUploadArrangement(file);
         onlineCourseArrangement.setImageUrl(fileUrl);
-        return arrangementService.add(onlineCourseArrangement) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
+        return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
     }
 
     @DeleteMapping
-    public Result del(Long id){
-        System.out.println("id:"+id);
+    public Result del(Long id) {
+        System.out.println("id:" + id);
         return arrangementService.del(id) ? Result.ok() : Result.build(ResultEnum.DELETE_FAIL);
     }
 //    @PostMapping("insertOnlineCourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
