@@ -5,10 +5,15 @@ import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.file.FileUtil;
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,10 +37,21 @@ public class OnlineCourseArrangementController {
     @Autowired
     private FileUtil fileUtil;
 
-    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
-    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws Exception {
 
+    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+        WxMpService wxMpService = new WxMpServiceImpl();
         String fileUrl = fileUtil.ftpUploadArrangement(file);
+
+        FileOutputStream fileOutputStream = new FileOutputStream("D:/lol.jpg");
+        fileOutputStream.write(file.getBytes());
+        fileOutputStream.close();
+        file.getInputStream().close();
+        WxMpMaterial wxMpMaterial = new WxMpMaterial();
+        wxMpMaterial.setFile(new File("D:/lol.jpg"));
+        wxMpMaterial.setName("test");
+        WxMpMaterialUploadResult res = wxMpService.getMaterialService().materialFileUpload(WxConsts.MediaFileType.IMAGE, wxMpMaterial);
+        onlineCourseArrangement.setWxImageId(res.getMediaId());
         onlineCourseArrangement.setImageUrl(fileUrl);
         return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
     }

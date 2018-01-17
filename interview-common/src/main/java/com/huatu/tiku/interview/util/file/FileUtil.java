@@ -175,7 +175,7 @@ public class FileUtil {
      */
     public String ftpUploadArrangement(MultipartFile multipartFile) throws IOException {
         String[] split = multipartFile.getContentType().split("/");
-        String fileName = UUID.randomUUID().toString() + split[1];
+        String fileName = UUID.randomUUID().toString() + "."+split[1];
         ftpUploadFileInputStream(multipartFile.getInputStream(), fileName, CourseConstant.IMG_FILE_BASE_BATH.getMessage());
         String url = CourseConstant.IMG_BASE_URL.getMessage() + fileName;
         return url;

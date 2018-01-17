@@ -29,6 +29,6 @@ public class OnlineCourseArrangement extends NotificationType {
     /**
      * 微信认证图片id
      */
-    private Integer wxImageId;
+    private String wxImageId;
 
 }
