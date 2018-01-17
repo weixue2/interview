@@ -42,16 +42,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         super.addArgumentResolvers(argumentResolvers);
     }
 
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowCredentials(true)
-                .allowedMethods("GET", "POST", "DELETE", "PUT")
-                .exposedHeaders("Set-Cookie")
-                .maxAge(3600);
-    }
+//
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("*")
+//                .allowCredentials(true)
+//                .allowedMethods("GET", "POST", "DELETE", "PUT")
+//                .exposedHeaders("Set-Cookie")
+//                .maxAge(3600);
+//    }
 
     /**
      * springBoot中的messageconverters构建-》httpmessageconverters->webmvcconfig(configures)->autowebmvcConfig
