@@ -12,12 +12,12 @@ import javax.persistence.Table;
  * @Date Created in 2018/1/13 15:09
  * @Description 线上课程安排
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-//@Table(name="t_online_course_arrangement")
-public class OnlineCourseArrangement extends NotificationType {
+@Table(name="t_online_course_arrangement")
+public class OnlineCourseArrangement extends BaseEntity {
     /**
      * 名字
      */

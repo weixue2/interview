@@ -35,7 +35,7 @@ public class WeChatUrlConstant {
     //根据OpenID列表群发
     public static String MESSAGE_MANY_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
 
-    public static String MENU_CONTENT = "{\"button\":[{\"name\":\"学习资料\",\"sub_button\":[{\"type\":\"view\",\"name\":\"跳转网页\",\"key\":\"m_joke\",\"url\":\"https://www.baidu.com\"},{\"type\":\"scancode_waitmsg\",\"name\":\"扫码签到\",\"key\":\"m_duanzi\"},{\"type\":\"pic_photo_or_album\",\"name\":\"晚间阅读\",\"key\":\"m_laughImg\"}]},{\"name\":\"信息中心\",\"sub_button\":[{\"type\":\"click\",\"name\":\"今日菜单\",\"key\":\"m_weather\"},{\"type\":\"location_select\",\"name\":\"我的位置\",\"key\":\"m_bus\"}]},{\"name\":\"我的\",\"sub_button\":[{\"type\":\"view\",\"name\":\"关于华图\",\"key\":\"huatu\",\"url\":\"http://v.huatu.com\"},{\"type\":\"click\",\"name\":\"我的信息\",\"key\":\"m_imgmsg\"}]}]}";
+    public static String MENU_CONTENT = "{\"button\":[{\"type\":\"scancode_waitmsg\",\"name\":\"扫码签到\",\"key\":\"m_duanzi\"},{\"type\":\"click\",\"name\":\"课程安排\",\"key\":\"course\"},{\"name\":\"我的\",\"sub_button\":[{\"type\":\"view\",\"name\":\"关于华图\",\"key\":\"huatu\",\"url\":\"http://v.huatu.com\"},{\"type\":\"click\",\"name\":\"我的信息\",\"key\":\"m_imgmsg\"}]}]}";
 
 
 }

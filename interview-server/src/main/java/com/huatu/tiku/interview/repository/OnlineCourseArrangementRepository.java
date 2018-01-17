@@ -15,5 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface OnlineCourseArrangementRepository extends JpaRepository<OnlineCourseArrangement, Long> {
-    List<OnlineCourseArrangement> findByBizStatusAndStatus(Sort updateTimestamp, WXStatusEnum.BizStatus normal, WXStatusEnum.Status online);
+
+    List<OnlineCourseArrangement> findByBizStatusAndStatus(Sort id, int bizSatus, int status);
 }

@@ -18,7 +18,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "t_sign_in")
-public class SignIn extends NotificationType {
+public class SignIn extends BaseEntity {
 
     /**
      * 签到时间
