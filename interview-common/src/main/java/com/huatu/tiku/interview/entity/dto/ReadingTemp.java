@@ -14,10 +14,12 @@ import java.util.Date;
 public class ReadingTemp implements Serializable {
     private Long id;
     private Date date;
+    private Boolean status;
 
-    public ReadingTemp(Long id, Date date) {
+    public ReadingTemp(Long id, Date date, Boolean status) {
         this.id = id;
         this.date = date;
+        this.status = status;
     }
 
     public ReadingTemp() {
