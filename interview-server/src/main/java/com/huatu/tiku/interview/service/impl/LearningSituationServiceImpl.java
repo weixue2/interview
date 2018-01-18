@@ -24,13 +24,12 @@ public class LearningSituationServiceImpl implements LearningSituationService {
 
     @Override
     public Boolean save(LearningSituation data) {
-        return learningSituationRepository.save(data)==null?false:true;
+        LearningSituation save = learningSituationRepository.save(data);
+        return  save == null ?false:true;
     }
-
-
 
     @Override
     public void del(Long id) {
-        learningSituationRepository.delete(id);
+        learningSituationRepository.updateToDel(id);
     }
 }
