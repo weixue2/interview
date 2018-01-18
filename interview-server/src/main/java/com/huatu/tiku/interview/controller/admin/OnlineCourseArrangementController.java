@@ -1,7 +1,7 @@
 package com.huatu.tiku.interview.controller.admin;
 
 import com.huatu.tiku.interview.constant.ResultEnum;
-import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
+import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.file.FileUtil;
@@ -38,7 +38,7 @@ public class OnlineCourseArrangementController {
 
 
     @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
-    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") MultipartFile file, @RequestParam("title") String title) throws Exception {
+    public Result add(NotificationType notificationType, @RequestParam("file") MultipartFile file, @RequestParam("title") String title) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
         //TODO 有时间再改
         // 设置微信公众号的appid
@@ -57,9 +57,9 @@ public class OnlineCourseArrangementController {
         //通过微信服务器获取图片官方id
         WxMpMaterialUploadResult res = wxMpService.getMaterialService().materialFileUpload(WxConsts.MediaFileType.IMAGE, wxMpMaterial);
         //装入对象
-        onlineCourseArrangement.setWxImageId(res.getMediaId());
-        onlineCourseArrangement.setImageUrl(fileUrl);
-        onlineCourseArrangement.setTitle(title);
-        return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
+        notificationType.setWxImageId(res.getMediaId());
+        notificationType.setImageUrl(fileUrl);
+        notificationType.setTitle(title);
+        return arrangementService.add(notificationType) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
     }
 }

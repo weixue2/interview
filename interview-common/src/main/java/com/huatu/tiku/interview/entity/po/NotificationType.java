@@ -22,9 +22,6 @@ public class NotificationType   extends BaseEntity implements Serializable{
          * 通知类型  1线上课程安排  2晨读鸡汤  3 报道通知
          */
         private Integer type;
-
-
-
         /**
          * 图片url
          */
