@@ -38,17 +38,17 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                 System.out.println("获取时间表出错");
             }
             // TODO 获取时间表
-            System.out.println("获取时间表");
+//            System.out.println("获取时间表");
             Object o = redisTemplate.opsForValue().get("readings");
             if(o != null){
-                List<ReadingTemp> rts =  JSON.parseArray(o.toString(),ReadingTemp.class);
-                Date date1 = rts.get(0).getDate();
-                Date date2 = new Date();
-                Date date3 = new Date();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date1);
-                System.out.println(cal.getTime());
-                System.out.println(cal.get(Calendar.MONTH) + cal.get(Calendar.YEAR));
+//                List<ReadingTemp> rts =  JSON.parseArray(o.toString(),ReadingTemp.class);
+//                Date date1 = rts.get(0).getDate();
+//                Date date2 = new Date();
+//                Date date3 = new Date();
+//                Calendar cal = Calendar.getInstance();
+//                cal.setTime(date1);
+//                System.out.println(cal.getTime());
+//                System.out.println(cal.get(Calendar.MONTH) + cal.get(Calendar.YEAR));
             }
 
         }
