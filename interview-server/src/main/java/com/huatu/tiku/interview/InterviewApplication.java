@@ -30,9 +30,9 @@ public class InterviewApplication {
 //	public MorningReadingPushRunner startupRunner(){
 //		return new MorningReadingPushRunner();
 //	}
-	@Bean
-	public GetReadingTableRunner getReading(){
-		return new GetReadingTableRunner();
-	}
+//	@Bean
+//	public GetReadingTableRunner getReading(){
+//		return new GetReadingTableRunner();
+//	}
 
 }

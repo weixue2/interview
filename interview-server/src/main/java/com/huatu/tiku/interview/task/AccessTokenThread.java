@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.AccessToken;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
-import com.huatu.tiku.interview.entity.po.MorningReading;
-import com.huatu.tiku.interview.repository.MorningReadingRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;

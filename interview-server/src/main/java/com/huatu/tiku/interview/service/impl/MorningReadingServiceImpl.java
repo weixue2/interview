@@ -26,6 +26,7 @@ public class MorningReadingServiceImpl implements MorningReadingService {
 
     @Override
     public Boolean add(NotificationType data) {
+        System.out.println(data);
         return notificationTypeRepository.save(data)==null?false:true;
     }
 

@@ -33,9 +33,9 @@ public class GetReadingTableRunner{
 
     //获取晨读。。
     @Scheduled(fixedDelay = 2 * 3600 * 1000)
-    public void getReading(){
+    public void getReading() throws InterruptedException {
         List<NotificationType> all = readingRepository.findAll();
-
+        System.out.println("通知有几个？"+all.size());
         for (NotificationType nt : all){
 
         }
@@ -46,9 +46,8 @@ public class GetReadingTableRunner{
                 rts.add(new ReadingTemp(mr.getId(),mr.getPushTime(),true));
             }
             String json = JSON.toJSONString(rts);
+            Thread.sleep(1000*60);
             stringRedisTemplate.opsForValue().set("readings", json);
-//            redisTemplate.opsForValue().set("readings",rts);
-//            httpSession.setAttribute("test1996","tesst1996");
         }
     }
 }
