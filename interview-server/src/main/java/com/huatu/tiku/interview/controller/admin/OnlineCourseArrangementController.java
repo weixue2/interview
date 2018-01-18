@@ -13,17 +13,18 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.UUID;
 
 /**
- * @Author ZhenYang
- * @Date Created in 2018/1/13 18:59
- * @Description
+ * @Author jbzm
+ * @Date Create on 2018/1/17 17:21
  */
 @RestController
 @RequestMapping("/end/oca")
@@ -60,11 +61,5 @@ public class OnlineCourseArrangementController {
         onlineCourseArrangement.setImageUrl(fileUrl);
         onlineCourseArrangement.setTitle(title);
         return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
-    }
-
-    @DeleteMapping
-    public Result del(Long id) {
-        System.out.println("id:" + id);
-        return arrangementService.del(id) ? Result.ok() : Result.build(ResultEnum.DELETE_FAIL);
     }
 }

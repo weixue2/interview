@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @Author ZhenYang
- * @Date Created in 2018/1/13 17:16
- * @Description
+ * @Author jbzm
+ * @Date Create on 2018/1/17 17:21
  */
 @Service
 public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangementService {
@@ -26,24 +25,5 @@ public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangeme
         data.setBizStatus(WXStatusEnum.BizStatus.NORMAL.getBizSatus());
         data.setStatus(WXStatusEnum.Status.ONLINE.getStatus());
         return onlineCourseArrangementRepository.save(data) == null ? false : true;
-    }
-
-    @Override
-    public Boolean update(OnlineCourseArrangement arrangement) {
-        return null;
-    }
-
-    @Override
-    public Boolean del(Long id) {
-        OnlineCourseArrangement arrangement = onlineCourseArrangementRepository.findOne(id);
-        if (arrangement != null) {
-            if (FileUtil.delete(arrangement.getImageUrl())) {
-                onlineCourseArrangementRepository.delete(id);
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return false;
     }
 }

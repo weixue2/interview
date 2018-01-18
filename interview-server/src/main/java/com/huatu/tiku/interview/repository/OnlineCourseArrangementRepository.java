@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @Author ZhenYang
- * @Date Created in 2018/1/13 17:00
- * @Description
+ * @Author jbzm
+ * @Date Create on 2018/1/17 17:21
  */
 @Repository
 public interface OnlineCourseArrangementRepository extends JpaRepository<OnlineCourseArrangement, Long> {
