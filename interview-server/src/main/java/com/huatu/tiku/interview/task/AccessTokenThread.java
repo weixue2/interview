@@ -9,6 +9,7 @@ import com.huatu.tiku.interview.repository.MorningReadingRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxConsts;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -72,7 +73,7 @@ public class AccessTokenThread {
     }
 
     //7200秒执行一次
-    @Scheduled(fixedDelay = 2 * 3600 * 1000)
+    @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
     public void getToken() {
         String token = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         if(StringUtils.isEmpty(token)){
@@ -92,16 +93,3 @@ public class AccessTokenThread {
 
     }
 }
-//7200秒执行一次
-//    @Scheduled(fixedDelay = 2 * 3600 * 1000)
-//    public void getToken() {
-//        log.info("getToken");
-//        accessToken = weiXinAccessTokenUtil.getWeiXinAccessToken();
-//        //accessToken 不可能为空 不用判断
-//        if (accessToken.getAccess_token() != null) {
-//            redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN, accessToken.getAccess_token());
-//            log.info("获取成功，accessToken:" + accessToken.getAccess_token());
-//        } else {
-//            log.error("获取token失败");
-//        }
-//    }

@@ -25,6 +25,7 @@ import java.io.PrintWriter;
  **/
 @RestController
 @Slf4j
+
 public class CoreController {
     @Autowired
     private CoreService coreService;

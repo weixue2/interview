@@ -9,7 +9,7 @@ import java.io.IOException;
  * @Author jbzm
  * @Date Create on 2018/1/17 16:29
  */
-@WebFilter(filterName = "wx",urlPatterns="/wx/api/oca/*")
+//@WebFilter(filterName = "wx",urlPatterns="/wx/api/oca/*")
 public class WXFilter implements Filter {
 //TODO 不确定使用这个
     @Override

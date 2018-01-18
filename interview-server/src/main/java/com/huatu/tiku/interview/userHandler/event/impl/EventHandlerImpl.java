@@ -1,31 +1,23 @@
 package com.huatu.tiku.interview.userHandler.event.impl;
 
-import com.huatu.common.utils.date.DateFormatUtil;
-import com.huatu.common.utils.date.DateUtil;
 import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
-import com.huatu.tiku.interview.entity.message.TextMessage;
 import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.entity.po.SignIn;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
-import com.huatu.tiku.interview.repository.SignIdRepository;
+import com.huatu.tiku.interview.repository.SignInRepository;
 import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.util.MessageUtil;
-import com.sun.media.jfxmedia.logging.Logger;
 import lombok.extern.slf4j.Slf4j;
-import me.chanjar.weixin.common.bean.menu.WxMenuButton;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import me.chanjar.weixin.mp.bean.message.WxMpXmlOutTextMessage;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,9 +36,10 @@ public class EventHandlerImpl implements EventHandler {
     @Autowired
     private UserService userService;
     @Autowired
-    private SignIdRepository signIdRepository;
+    private SignInRepository signInRepository;
     @Autowired
     private OnlineCourseArrangementRepository onlineCourseArrangementRepository;
+
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
@@ -93,12 +86,14 @@ public class EventHandlerImpl implements EventHandler {
                     .content("签到成功")
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
-                    .build().toXml();
+                    .build()
+                    .toXml();
             SignIn signIn = new SignIn();
             signIn.setOpenId(requestMap.get("FromUserName"));
             signIn.setSignTime(new Date());
             signIn.setBizStatus(1);
             signIn.setStatus(1);
+            signInRepository.save(signIn);
         } else {
             log.info("签到失败");
             str = WxMpXmlOutMessage
@@ -121,7 +116,7 @@ public class EventHandlerImpl implements EventHandler {
     public String eventClick(Map<String, String> requestMap) {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
-            List<OnlineCourseArrangement> onlineCourseArrangements = onlineCourseArrangementRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "UpdateTimestamp"), WXStatusEnum.BizStatus.NORMAL, WXStatusEnum.Status.ONLINE);
+            List<OnlineCourseArrangement> onlineCourseArrangements = onlineCourseArrangementRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.NORMAL.getBizSatus(), WXStatusEnum.Status.ONLINE.getStatus());
             str = WxMpXmlOutMessage
                     .IMAGE()
                     .mediaId(onlineCourseArrangements.get(0).getWxImageId())

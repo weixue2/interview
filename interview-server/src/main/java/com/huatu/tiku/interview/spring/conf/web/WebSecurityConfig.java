@@ -24,8 +24,8 @@ import java.util.Arrays;
  * @author hanchao
  * @date 2017/12/27 17:06
  */
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.application.name:unknown}")
@@ -33,16 +33,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .antMatchers("/end/**")
-                .authenticated()
-                .anyRequest()
-                .permitAll()
-                .and()
-                .cors()
-                .and()
+     //   http.csrf().disable()
+        http.authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
+//                .antMatchers("/end/**")
+//                .authenticated()
+//                .anyRequest()
+//                .permitAll()
+//                .and()
+//                .cors()
+//                .and()
 //                .formLogin()
 //                .loginPage("/auth/tologin")
 //                .loginProcessingUrl("/auth/login")
@@ -59,13 +59,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
              //   .key(applicationName)
              //   .tokenRepository(new InMemoryTokenRepositoryImpl())
             //    .and()
-                .exceptionHandling();
+              //  .exceptionHandling();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        //取消拦截静态资源   ///wx/api/** 开发使用
-        web.ignoring().antMatchers("/wx/api/**","/","/**/*.html","/**/*.css","/**/*.js","/**/*.ico","/img/**","/fonts/**","/l10n/**","/**/*.woff")
+        //取消拦截静态资源
+        web.ignoring().antMatchers("/","/**/*.html","/**/*.css","/**/*.js","/**/*.ico","/img/**","/fonts/**","/l10n/**","/**/*.woff")
                 .antMatchers("/validcode/img","/echo/**","/download/**");
     }
 
