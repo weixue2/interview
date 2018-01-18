@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,30 +18,32 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Table(name="t_learning_situation")
-public class LearningSituation extends NotificationType {
-    //---------通知类型---------
-//    @Column(columnDefinition="long(10) COMMENT '通知类型，说过了'")
-//    private Long notificationType;
+@Table(name="t_learning_situation")
+public class LearningSituation extends BaseEntity  implements Serializable {
     //---------答题日期---------
-    @Column(columnDefinition="date COMMENT '答题日期'")
     private Date answerDate;
     //---------姓名---------
-    @Column(columnDefinition="varchar(50) COMMENT '姓名，这都不认识。。'")
     private String name;
     //---------用户ID---------
-    @Column(columnDefinition="bigint(20) COMMENT '用户ID'")
     private Long userId;
-    //----------练习内容-------------
-    @Column(columnDefinition="int(2) COMMENT '练习内容'")
+    //----------练习内容(1自我认知  2工作实务   3策划组织  4综合分析   5材料题与特殊题型   6套题演练)-------------
     private Integer practiceContent;
+
+
+
     //------------举止仪态-------------
-    @Column(columnDefinition="int(2) COMMENT '举止仪态'")
-    private Integer behavior;
-    //------------时间把控-------------
-    @Column(columnDefinition="int(2) COMMENT '时间把控'")
-    private Integer timeControl;
+    private Double behavior;
+    //------------语言表达-------------
+    private Double languageExpression;
+    //------------是否精准扣题-------------
+    private Double focusTopic;
+    //------------是否条理清晰-------------
+    private Double isOrganized;
+    //------------是否言之有物-------------
+    private Double haveSubstance;
+
+
+
     //------------评价-------------
-    @Column(columnDefinition="varchar(50) COMMENT '评价呀评价'")
     private String remark;
 }

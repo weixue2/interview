@@ -8,10 +8,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * @Author jbzm
- * @Date Create on 2018/1/17 18:44
- */
 @Data
 @NoArgsConstructor
 @MappedSuperclass
@@ -37,4 +33,3 @@ public class BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date gmtModify;
 }
-

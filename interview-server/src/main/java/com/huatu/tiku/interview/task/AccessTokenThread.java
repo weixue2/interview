@@ -2,16 +2,24 @@ package com.huatu.tiku.interview.task;
 
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.AccessToken;
+import com.huatu.tiku.interview.entity.dto.ReadingTemp;
+import com.huatu.tiku.interview.entity.po.MorningReading;
+import com.huatu.tiku.interview.repository.MorningReadingRepository;
+import com.huatu.tiku.interview.service.MorningReadingService;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,7 +32,10 @@ import java.util.concurrent.TimeUnit;
 public class AccessTokenThread {
 
     @Autowired
-    StringRedisTemplate redisTemplate;
+    StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Autowired
     WeiXinAccessTokenUtil weiXinAccessTokenUtil;
@@ -32,9 +43,35 @@ public class AccessTokenThread {
     @Autowired
     ServletContext servletContext;
 
+    @Autowired
+    HttpSession httpSession;
+
+    @Autowired
+    MorningReadingRepository readingRepository;
+
+    // 第三方用户唯一凭证
+//    public static AccessToken accessToken = null;
+
     public static String accessToken = "";
     //TODO 分布式锁保证只有一台机器执行
 
+    @Scheduled(fixedDelay = 2 * 3600 * 1000)
+    public void getReading(){
+        List<MorningReading> all = readingRepository.findAll();
+        if(!all.isEmpty()){
+            List<ReadingTemp> rts = new ArrayList<>();
+            for (MorningReading mr:all){
+                rts.add(new ReadingTemp(mr.getId(),mr.getPushTime()));
+            }
+            String json = JSON.toJSONString(rts);
+            stringRedisTemplate.opsForValue().set("readings", json);
+//            redisTemplate.opsForValue().set("readings",rts);
+//            httpSession.setAttribute("test1996","tesst1996");
+            redisTemplate.opsForValue().set("test1996","tesst1996");
+        }
+    }
+
+    //7200秒执行一次
     /**
      * token存入redis
      */
@@ -50,4 +87,21 @@ public class AccessTokenThread {
         }
     }
 
+
+    //        String token = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+//        if (StringUtils.isEmpty(token)) {
+//            log.info("getToken");
+//            accessToken = weiXinAccessTokenUtil.getAccessToken();
+//            //accessToken 不可能为空 不用判断
+//            if (accessToken != null) {
+//                redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
+//                redisTemplate.expire(WeChatUrlConstant.ACCESS_TOKEN_KEY, 7100, TimeUnit.SECONDS);
+//
+//                log.info("获取成功，accessToken:" + accessToken);
+//            } else {
+//                log.error("获取token失败");
+//            }
+//        } else {
+//            log.info("已有accessToken");
+//        }
 }

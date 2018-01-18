@@ -1,10 +1,12 @@
 package com.huatu.tiku.interview.controller.api;
 
+import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.LearningSituation;
 import com.huatu.tiku.interview.entity.result.Result;
-import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.service.LearningSituationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date: Created in 2018/1/11 14:34
  * @Modefied By: 学习情况
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/ls")
 public class LearningSituationController {
@@ -19,19 +22,25 @@ public class LearningSituationController {
     @Autowired
     private LearningSituationService learningSituationService;
 
-    @PostMapping //@RequestBody 用这个测试的话没法传进来日期，先用Form吧
-    public Result addLearningSituation(@RequestBody LearningSituation learningSituation){
-        System.out.println(learningSituation);
+    /**
+     * 新增学员学习情况
+     * @param learningSituation
+     * @return
+     */
+    @PostMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result add(@RequestBody LearningSituation learningSituation){
+        log.info("请求参数learningSituation：{}",learningSituation);
         return learningSituationService.save(learningSituation)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }
 
-    @DeleteMapping
+
+    @PutMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result del(Long id){
         learningSituationService.del(id);
         return Result.ok();
     }
 
-    @PutMapping
+    @PutMapping(value="learnSituation",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result update(LearningSituation learningSituation){
         learningSituation = learningSituationService.findOne(learningSituation.getId());
         if (learningSituation == null){
