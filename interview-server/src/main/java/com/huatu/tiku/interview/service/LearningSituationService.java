@@ -1,6 +1,9 @@
 package com.huatu.tiku.interview.service;
 
 import com.huatu.tiku.interview.entity.po.LearningSituation;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * @Author: ZhenYang
@@ -17,4 +20,7 @@ public interface LearningSituationService {
     //无验证，暂不需要，删没删除你前端心里没点数？
     void del(Long id);
 
+    List<LearningSituation> findList(String name,Pageable pageRequest);
+
+    long countByNameLikeStatus(String name);
 }

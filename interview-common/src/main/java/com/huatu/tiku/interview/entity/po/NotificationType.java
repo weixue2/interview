@@ -5,34 +5,47 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
-//@MappedSuperclass
 @DynamicInsert
 @DynamicUpdate(true)
 @Entity
-public class NotificationType implements Serializable{
-    @Id
-    @GeneratedValue
-    protected long id;
-    @Column(columnDefinition = "smallint default 0 COMMENT '。。'")
-    protected int bizStatus;
-    @Column(columnDefinition = "smallint default 1 COMMENT '。。'")
-    protected int status;
-    @Column(columnDefinition = "varchar(128) default '' COMMENT '创建者'")
-    protected String creator;
-    @Column(columnDefinition = "varchar(128) default '' COMMENT '修正者'")
-    protected String modifier;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
-    protected Date gmtCreate;
-    @org.hibernate.annotations.UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    protected Date gmtModify;
+@Table(name="t_notification_type")
+public class NotificationType   extends BaseEntity implements Serializable{
+
+        /**
+         * 通知类型  1线上课程安排  2晨读鸡汤  3 报道通知
+         */
+        private Integer type;
+
+
+
+        /**
+         * 图片url
+         */
+        private String imageUrl;
+        /**
+         * 微信认证图片id
+         */
+        private String wxImageId;
+        /**
+         * 推送时间
+         */
+        private Date pushTime;
+        /**
+         * 标题
+         */
+        private String title;
+
+        /**
+         * 推送内容
+         */
+        private String content;
+
 
 }

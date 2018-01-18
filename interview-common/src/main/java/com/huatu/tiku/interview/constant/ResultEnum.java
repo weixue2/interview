@@ -12,6 +12,7 @@ public enum ResultEnum {
     INSERT_FAIL(50001,"插入数据失败"),
     DELETE_FAIL(50002,"删除数据错误"),
     UPDATE_FAIL(50003,"更新数据错误"),
+    FIND_FAIL(50004,"查询数据错误"),
 
     IMAGE_FORMAT_ERROR(50010,"图片格式错误"),
     FILE_ERROR(50011,"文件读写错误"),

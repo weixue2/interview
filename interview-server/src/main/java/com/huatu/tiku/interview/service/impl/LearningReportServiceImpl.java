@@ -60,7 +60,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
                     saveDailyReport(userId,daySort);
                 }else if(daySort == 7){
                     //最后一天（生成每日报告+总体报告）
-                    saveDailyReport(userId,daySort);
+//                    saveDailyReport(userId,daySort);
                     saveTotalReport(userId);
                 }
             }

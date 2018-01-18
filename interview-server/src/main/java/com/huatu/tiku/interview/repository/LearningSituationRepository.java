@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.repository;
 
 import com.huatu.tiku.interview.entity.po.LearningSituation;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -46,5 +47,7 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
     List<List<Integer>> countTotalAnswerCount(long userId);
 
 
+    List<LearningSituation> findByNameLikeStatus(String name,int status, Pageable pageRequest);
 
+    void countByNameLikeStatus(String name, int status);
 }
