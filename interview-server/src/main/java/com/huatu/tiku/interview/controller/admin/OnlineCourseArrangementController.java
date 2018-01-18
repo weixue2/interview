@@ -1,6 +1,8 @@
 package com.huatu.tiku.interview.controller.admin;
 
+import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.ResultEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
@@ -13,6 +15,7 @@ import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,16 +38,18 @@ public class OnlineCourseArrangementController {
 
     @Autowired
     private FileUtil fileUtil;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
-
-    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    @PostMapping("/CourseArrangement")
     public Result add(NotificationType notificationType, @RequestParam("file") MultipartFile file, @RequestParam("title") String title) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
         //TODO 有时间再改
         // 设置微信公众号的appid
-        config.setAppId("wx53505056175d5968");
+        config.setAppId(BasicParameters.appID);
         // 设置微信公众号的app corpSecret
-        config.setSecret("739040d83f6d5c73fa961e3b1a48540f");
+        config.setSecret(BasicParameters.appsecret);
+        config.setAccessToken((String)redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY));
 
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(config);
