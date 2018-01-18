@@ -21,14 +21,6 @@ public class LearningReportController {
     @Autowired
     private LearningReportService learningReportService;
 
-//    /**
-//     * 生成每日学习报告（定时任务20:00）
-//     */
-//    @PostMapping(value="daily",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public Result dailyReport(){
-//
-//        return learningReportService.dailyReport();
-//    }
 
     /**
      * 查询用户学习报告
