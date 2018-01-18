@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -27,6 +26,7 @@ public class MaterialServiceImpl implements MaterialService {
 
 
 
+    @Override
     public String getlist(MaterialList materialList, String accessToken){
         String url=material_getlist_url.replace("ACCESS_TOKEN",accessToken);
         String json=JSONObject.fromObject(materialList).toString();
@@ -41,6 +41,7 @@ public class MaterialServiceImpl implements MaterialService {
      * @param title  上传类型为video的参数
      * @param introduction 上传类型为video的参数
      */
+    @Override
     public String uploadPermanentMedia1(String accessToken, String title, String introduction) {
         try {
             File file = new File("D:/1.jpeg");
@@ -165,6 +166,7 @@ public class MaterialServiceImpl implements MaterialService {
      * @param title  上传类型为video的参数
      * @param introduction 上传类型为video的参数
      */
+    @Override
     public String uploadPermanentMedia2(String accessToken, String title, String introduction) {
         try {
             File file = new File("D:/1.jpeg");

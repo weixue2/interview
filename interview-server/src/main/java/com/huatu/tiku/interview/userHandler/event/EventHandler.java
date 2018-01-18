@@ -12,7 +12,7 @@ public interface EventHandler {
     public String subscribeHandler(Map<String, String> requestMap);
     public String unsubscribeHandler(Map<String, String> requestMap);
 
-    String signIn(Map<String, String> requestMap);
+    String signInHandler(Map<String, String> requestMap);
 
 
     String eventClick(Map<String, String> requestMap);

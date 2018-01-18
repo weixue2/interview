@@ -136,6 +136,13 @@ htonline:
     prefix:
       redis: "${spring.application.name}"
 
+  ## 空值文件上传大小
+  http:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 10MB
+      resolve-lazily: true
+
 
 
 # 不同环境的不同配置，也可以放在apollo，除了开发使用的特殊debug等配置，一般不建议放在这里
@@ -164,7 +171,3 @@ spring:
   profiles: product
 
 
-  http:
-    multipart:
-      max-file-size: 2MB
-      resolve-lazily: true

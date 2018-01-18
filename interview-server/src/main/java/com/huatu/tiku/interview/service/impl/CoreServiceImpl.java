@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 @Service
 @Slf4j
 //@PropertySource(value = {"classpath:application.yml"},
-//        ignoreResourceNotFound = true,encoding = "utf-8")
+//ignoreResourceNotFound = true,encoding = "utf-8")
 public class CoreServiceImpl implements CoreService {
 
     private static final JsonParser JSON_PARSER = new JsonParser();
@@ -79,7 +79,7 @@ public class CoreServiceImpl implements CoreService {
                     switch (requestMap.get("Event")) {
                         //自定义菜单点击事件
                         case MessageUtil.EVENT_TYPE_CLICK: {
-                            result=eventHandler.eventClick(requestMap);
+                            result = eventHandler.eventClick(requestMap);
                             break;
                         }   // 订阅时的处理
                         case MessageUtil.EVENT_TYPE_SUBSCRIBE: {
@@ -93,9 +93,13 @@ public class CoreServiceImpl implements CoreService {
                         case MessageUtil.TEMPLATESENDJOBFINISH: {
                             // 模板验证消息
                             break;
-                        }
+                        }//扫一扫签到
                         case MessageUtil.SCANCODE_WAITMSG: {
-                            result=eventHandler.signIn(requestMap);
+                            result = eventHandler.signInHandler(requestMap);
+                            break;
+                        }
+                        default: {
+                            break;
                         }
                     }
                     break;

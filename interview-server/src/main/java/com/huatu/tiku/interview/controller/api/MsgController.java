@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.api;
 
 import com.google.gson.Gson;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
