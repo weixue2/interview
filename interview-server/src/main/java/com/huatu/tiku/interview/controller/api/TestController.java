@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.api;
 
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -108,7 +109,8 @@ public class TestController {
     }
 
     @GetMapping("test2")
-    public Result test2(){
+    public Result test2(HttpSession session){
+        System.out.println(session.getAttribute("test1996"));
         return Result.ok("xx");
     }
 }

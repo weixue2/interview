@@ -75,7 +75,7 @@ public class EventHandlerImpl implements EventHandler {
      * @return
      */
     @Override
-    public String signIn(Map<String, String> requestMap) {
+    public String signInHandler(Map<String, String> requestMap) {
         String h = new SimpleDateFormat("HH").format(new Date());
         String str;
         //if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {

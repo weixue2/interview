@@ -2,6 +2,8 @@ package com.huatu.tiku.interview;
 
 import com.huatu.tiku.interview.entity.ClickButton;
 import com.huatu.tiku.interview.entity.ViewButton;
+import com.huatu.tiku.interview.task.GetReadingTableRunner;
+import com.huatu.tiku.interview.task.MorningReadingPushRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,5 +26,13 @@ public class InterviewApplication {
 		SpringApplication.run(InterviewApplication.class, args);
 	}
 
+//	@Bean
+//	public MorningReadingPushRunner startupRunner(){
+//		return new MorningReadingPushRunner();
+//	}
+	@Bean
+	public GetReadingTableRunner getReading(){
+		return new GetReadingTableRunner();
+	}
 
 }

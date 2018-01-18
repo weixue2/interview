@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.material.MaterialList;

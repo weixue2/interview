@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.service.CoreService;
 import com.huatu.tiku.interview.util.MessageUtil;
@@ -29,15 +29,7 @@ import java.io.PrintWriter;
 public class CoreController {
     @Autowired
     private CoreService coreService;
-//    @Autowired
-//    StringRedisTemplate redisTemplate;
 
-
-//    @Autowired
-//    WeiXinAccessTokenUtil weiXinAccessTokenUtil;
-
-
-    // @PostMapping(value = "", produces = "application/xml; charset=UTF-8")
     @PostMapping("process")
     public String post(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 调用核心业务类接收消息、处理消息跟推送消息
@@ -58,19 +50,13 @@ public class CoreController {
             if (SignUtil.checkSignature(signature, timestamp, nonce)) {
                 log.info("接入成功");
                 //  return echostr;
-
                 out.print(echostr);
                 return;
-
             }
             log.error("接入失败");
             out.print(echostr);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //  return echostr;
     }
-
-
 }
