@@ -47,8 +47,7 @@ public class AccessTokenThread {
     @Autowired
     HttpSession httpSession;
 
-    @Autowired
-    MorningReadingRepository readingRepository;
+
 
     // 第三方用户唯一凭证
 //    public static AccessToken accessToken = null;
@@ -56,21 +55,7 @@ public class AccessTokenThread {
     public static String accessToken = "";
     //TODO 分布式锁保证只有一台机器执行
 
-    @Scheduled(fixedDelay = 2 * 3600 * 1000)
-    public void getReading(){
-        List<MorningReading> all = readingRepository.findAll();
-        if(!all.isEmpty()){
-            List<ReadingTemp> rts = new ArrayList<>();
-            for (MorningReading mr:all){
-                rts.add(new ReadingTemp(mr.getId(),mr.getPushTime()));
-            }
-            String json = JSON.toJSONString(rts);
-            stringRedisTemplate.opsForValue().set("readings", json);
-//            redisTemplate.opsForValue().set("readings",rts);
-//            httpSession.setAttribute("test1996","tesst1996");
-            redisTemplate.opsForValue().set("test1996","tesst1996");
-        }
-    }
+
 
     //7200秒执行一次
     @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
