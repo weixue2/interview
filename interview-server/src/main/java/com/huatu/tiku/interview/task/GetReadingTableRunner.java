@@ -38,7 +38,7 @@ public class GetReadingTableRunner{
         if(!all.isEmpty()){
             List<ReadingTemp> rts = new ArrayList<>();
             for (MorningReading mr:all){
-                rts.add(new ReadingTemp(mr.getId(),mr.getPushTime()));
+                rts.add(new ReadingTemp(mr.getId(),mr.getPushTime(),true));
             }
             String json = JSON.toJSONString(rts);
             stringRedisTemplate.opsForValue().set("readings", json);

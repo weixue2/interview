@@ -27,7 +27,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        new Timer().schedule(new RemindTask(), 0, 1000);
+        new Timer().schedule(new RemindTask(), 0, 30000);
     }
 
     class RemindTask extends TimerTask {
@@ -47,15 +47,21 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                                 if (cal_a.get(Calendar.DAY_OF_MONTH) == cal_b.get(Calendar.DAY_OF_MONTH)) {
                                     if (cal_a.get(Calendar.HOUR_OF_DAY) == cal_b.get(Calendar.HOUR_OF_DAY)) {
                                         if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
-                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
-                                                System.out.println("可以");
-                                            }
+//                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
+                                                if(rt.getStatus()){
+                                                    System.out.println("可以");
+                                                    rt.setStatus(false);
+                                                }
+
+//                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                    String json = JSON.toJSONString(rts);
+                    redisTemplate.opsForValue().set("readings", json);
                 }
             } catch (Exception e) {
                 System.out.println("获取时间表出错");
