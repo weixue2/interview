@@ -27,30 +27,39 @@ public class MorningReadingPushRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        new Timer().schedule(new RemindTask(), 0,1000);
+        new Timer().schedule(new RemindTask(), 0, 1000);
     }
+
     class RemindTask extends TimerTask {
         @Override
         public void run() {
-            try{
-
-            }catch (Exception e){
+            try {
+                // TODO 获取时间表
+                Object o = redisTemplate.opsForValue().get("readings");
+                if (o != null) {
+                    List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
+                    Calendar cal_a = Calendar.getInstance();
+                    Calendar cal_b = Calendar.getInstance();
+                    for (ReadingTemp rt : rts) {
+                        cal_a.setTime(rt.getDate());
+                        if (cal_a.get(Calendar.YEAR) == cal_b.get(Calendar.YEAR)) {
+                            if (cal_a.get(Calendar.MONTH) == cal_b.get(Calendar.MONTH)) {
+                                if (cal_a.get(Calendar.DAY_OF_MONTH) == cal_b.get(Calendar.DAY_OF_MONTH)) {
+                                    if (cal_a.get(Calendar.HOUR_OF_DAY) == cal_b.get(Calendar.HOUR_OF_DAY)) {
+                                        if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
+                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
+                                                System.out.println("可以");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
                 System.out.println("获取时间表出错");
             }
-            // TODO 获取时间表
-//            System.out.println("获取时间表");
-            Object o = redisTemplate.opsForValue().get("readings");
-            if(o != null){
-//                List<ReadingTemp> rts =  JSON.parseArray(o.toString(),ReadingTemp.class);
-//                Date date1 = rts.get(0).getDate();
-//                Date date2 = new Date();
-//                Date date3 = new Date();
-//                Calendar cal = Calendar.getInstance();
-//                cal.setTime(date1);
-//                System.out.println(cal.getTime());
-//                System.out.println(cal.get(Calendar.MONTH) + cal.get(Calendar.YEAR));
-            }
-
         }
 
     }
