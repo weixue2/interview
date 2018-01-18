@@ -32,5 +32,4 @@ public class BaseEntity {
     @org.hibernate.annotations.UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     protected Date gmtModify;
-
 }

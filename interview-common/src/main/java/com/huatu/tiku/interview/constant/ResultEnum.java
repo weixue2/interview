@@ -27,6 +27,8 @@ public enum ResultEnum {
     CAPTCHA_PASS(20000,"验证通过"),
 
     PARAMETER_NULL_ERROR(50040,"验证通过"),
+
+    OPENID_ERROR(50041,"OpenID错误"),
         ;
     private Integer code;
 

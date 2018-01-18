@@ -33,16 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //前端开发完成，放开下面的注释
-        http.csrf().disable()
-                .authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+     //   http.csrf().disable()
+        http.authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 //                .antMatchers("/end/**")
 //                .authenticated()
 //                .anyRequest()
 //                .permitAll()
-                .and()
-                .cors();
+//                .and()
+//                .cors()
 //                .and()
 //                .formLogin()
 //                .loginPage("/auth/tologin")
@@ -54,16 +53,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .logoutUrl("/auth/logout")
 //                .logoutSuccessUrl("/auth/success?logout")
 //                .and()
-//                .rememberMe()
-//                .rememberMeCookieName(WebParamConsts.REMEMBER_ME_COOKIE)
-//                .rememberMeParameter(WebParamConsts.REMEMBER_ME_PARAM)
-//                .key(applicationName)
-//                .tokenRepository(new InMemoryTokenRepositoryImpl())
-//                .and()
-//                .exceptionHandling();
-//                .accessDeniedPage("/auth/denied")
-//                .and()
-//                .addFilterBefore(new CaptchaFilter("/auth/login"), UsernamePasswordAuthenticationFilter.class);
+               // .rememberMe()
+                //.rememberMeCookieName(WebParamConsts.REMEMBER_ME_COOKIE)
+                //.rememberMeParameter(WebParamConsts.REMEMBER_ME_PARAM)
+             //   .key(applicationName)
+             //   .tokenRepository(new InMemoryTokenRepositoryImpl())
+            //    .and()
+              //  .exceptionHandling();
     }
 
     @Override
@@ -76,10 +72,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password("admin").roles("admin")
-                .and()
-                .withUser("guest").password("guest").roles("guest");
+//        auth.inMemoryAuthentication()
+//                .withUser("admin").password("admin").roles("admin")
+//                .and()
+//                .withUser("guest").password("guest").roles("guest");
     }
 
     /**

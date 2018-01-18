@@ -4,6 +4,7 @@ import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.AccessToken;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.api.WxConsts;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -51,23 +52,33 @@ public class AccessTokenThread {
 //        }
 //    }
     //7200秒执行一次
-    @Scheduled(fixedDelay = 2 * 3600 * 1000)
+    @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
     public void getToken() {
-        String token = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
-        if(StringUtils.isEmpty(token)){
-            log.info("getToken");
-            accessToken = weiXinAccessTokenUtil.getAccessToken();
-            //accessToken 不可能为空 不用判断
-            if (accessToken != null) {
-                redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN, accessToken);
-                redisTemplate.expire(WeChatUrlConstant.ACCESS_TOKEN,7100, TimeUnit.SECONDS);
-                log.info("获取成功，accessToken:" + accessToken);
-            } else {
-                log.error("获取token失败");
-            }
-        }else{
-            log.info("已有accessToken");
+        log.info("getToken");
+        accessToken = WeiXinAccessTokenUtil.getAccessToken();
+        if (StringUtils.isNotEmpty(accessToken)) {
+            redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
+            log.info("获取成功,accessToken:" + accessToken);
+        } else {
+            log.info("获取token失败");
         }
-
     }
+
+
+    //        String token = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+//        if (StringUtils.isEmpty(token)) {
+//            log.info("getToken");
+//            accessToken = weiXinAccessTokenUtil.getAccessToken();
+//            //accessToken 不可能为空 不用判断
+//            if (accessToken != null) {
+//                redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
+//                redisTemplate.expire(WeChatUrlConstant.ACCESS_TOKEN_KEY, 7100, TimeUnit.SECONDS);
+//
+//                log.info("获取成功，accessToken:" + accessToken);
+//            } else {
+//                log.error("获取token失败");
+//            }
+//        } else {
+//            log.info("已有accessToken");
+//        }
 }

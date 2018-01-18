@@ -5,17 +5,20 @@ import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.file.FileUtil;
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.util.fs.FileUtils;
+import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.util.UUID;
 
 /**
  * @Author ZhenYang
@@ -32,10 +35,24 @@ public class OnlineCourseArrangementController {
     @Autowired
     private FileUtil fileUtil;
 
-    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
-    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws Exception {
 
+    @PostMapping("CourseArrangement") //@requestBody --> Json 不行，这个因为有个文件，就用
+    public Result add(OnlineCourseArrangement onlineCourseArrangement, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+        WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+        config.setAppId("wx53505056175d5968"); // 设置微信公众号的appid
+        config.setSecret("739040d83f6d5c73fa961e3b1a48540f"); // 设置微信公众号的app corpSecret
+
+        WxMpService wxMpService = new WxMpServiceImpl();
+        wxMpService.setWxMpConfigStorage(config);
         String fileUrl = fileUtil.ftpUploadArrangement(file);
+
+        File tempFile = FileUtils.createTmpFile(file.getInputStream(),
+                UUID.randomUUID().toString(), file.getContentType().split("/")[1]);
+        WxMpMaterial wxMpMaterial = new WxMpMaterial();
+        wxMpMaterial.setFile(tempFile);
+        wxMpMaterial.setName(WxConsts.MediaFileType.IMAGE);
+        WxMpMaterialUploadResult res = wxMpService.getMaterialService().materialFileUpload(WxConsts.MediaFileType.IMAGE, wxMpMaterial);
+        onlineCourseArrangement.setWxImageId(res.getMediaId());
         onlineCourseArrangement.setImageUrl(fileUrl);
         return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
     }
