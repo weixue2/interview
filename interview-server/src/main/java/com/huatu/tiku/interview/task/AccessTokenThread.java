@@ -1,5 +1,6 @@
 package com.huatu.tiku.interview.task;
 
+import com.alibaba.fastjson.JSON;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.AccessToken;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
@@ -71,9 +72,10 @@ public class AccessTokenThread {
         }
     }
 
-    //7200秒执行一次
+
     /**
      * token存入redis
+     * 7100秒执行一次
      */
     @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
     public void getToken() {
@@ -87,21 +89,4 @@ public class AccessTokenThread {
         }
     }
 
-
-    //        String token = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
-//        if (StringUtils.isEmpty(token)) {
-//            log.info("getToken");
-//            accessToken = weiXinAccessTokenUtil.getAccessToken();
-//            //accessToken 不可能为空 不用判断
-//            if (accessToken != null) {
-//                redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
-//                redisTemplate.expire(WeChatUrlConstant.ACCESS_TOKEN_KEY, 7100, TimeUnit.SECONDS);
-//
-//                log.info("获取成功，accessToken:" + accessToken);
-//            } else {
-//                log.error("获取token失败");
-//            }
-//        } else {
-//            log.info("已有accessToken");
-//        }
 }
