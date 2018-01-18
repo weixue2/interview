@@ -4,16 +4,17 @@ import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
-import com.huatu.tiku.interview.entity.po.OnlineCourseArrangement;
+import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.SignIn;
 import com.huatu.tiku.interview.entity.po.User;
-import com.huatu.tiku.interview.repository.OnlineCourseArrangementRepository;
+import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.repository.SignInRepository;
-import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.service.UserService;
+import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import org.aspectj.weaver.patterns.NotTypePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -38,7 +39,7 @@ public class EventHandlerImpl implements EventHandler {
     @Autowired
     private SignInRepository signInRepository;
     @Autowired
-    private OnlineCourseArrangementRepository onlineCourseArrangementRepository;
+    private NotificationTypeRepository notificationTypeRepository;
 
 
     @Override
@@ -78,6 +79,7 @@ public class EventHandlerImpl implements EventHandler {
     public String signInHandler(Map<String, String> requestMap) {
         String h = new SimpleDateFormat("HH").format(new Date());
         String str;
+        //设置签到时间
         //if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {
         if (System.currentTimeMillis() % 2 == 1) {
             log.info("开始签到");
@@ -116,10 +118,10 @@ public class EventHandlerImpl implements EventHandler {
     public String eventClick(Map<String, String> requestMap) {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
-            List<OnlineCourseArrangement> onlineCourseArrangements = onlineCourseArrangementRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.NORMAL.getBizSatus(), WXStatusEnum.Status.ONLINE.getStatus());
+            List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.NORMAL.getBizSatus(), WXStatusEnum.Status.ONLINE.getStatus());
             str = WxMpXmlOutMessage
                     .IMAGE()
-                    .mediaId(onlineCourseArrangements.get(0).getWxImageId())
+                    .mediaId(notTypePatterns.get(0).getWxImageId())
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build()
