@@ -47,7 +47,7 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
     List<List<Integer>> countTotalAnswerCount(long userId);
 
 
-    List<LearningSituation> findByNameLikeStatus(String name,int status, Pageable pageRequest);
+    List<LearningSituation> findByStatusAndNameLike(int status,String name, Pageable pageRequest);
 
-    void countByNameLikeStatus(String name, int status);
+    long countByStatusAndNameLike( int status,String name);
 }

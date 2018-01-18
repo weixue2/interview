@@ -4,7 +4,6 @@ import com.huatu.tiku.interview.constant.StatusConstant;
 import com.huatu.tiku.interview.entity.po.LearningSituation;
 import com.huatu.tiku.interview.repository.LearningSituationRepository;
 import com.huatu.tiku.interview.service.LearningSituationService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -41,17 +40,13 @@ public class LearningSituationServiceImpl implements LearningSituationService {
     @Override
     public List<LearningSituation> findList(String name,Pageable pageRequest) {
 
-        List<LearningSituation> list = learningSituationRepository.findByNameLikeStatus(name,StatusConstant.StatusEnum.NORMAL.getStatus(), pageRequest);
+        List<LearningSituation> list = learningSituationRepository.findByStatusAndNameLike(StatusConstant.StatusEnum.NORMAL.getStatus(),name, pageRequest);
 
         return list;
     }
 
     @Override
     public long countByNameLikeStatus(String name) {
-        learningSituationRepository.countByNameLikeStatus(name,StatusConstant.StatusEnum.NORMAL.getStatus());
-
-
-
-        return 0;
+        return learningSituationRepository.countByStatusAndNameLike(StatusConstant.StatusEnum.NORMAL.getStatus(),name);
     }
 }
