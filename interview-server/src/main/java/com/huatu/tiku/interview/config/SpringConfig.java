@@ -5,13 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 /**
  * @Author ZhenYang
  * @Date Created in 2018/1/15 11:24
  * @Description
  */
 @Configuration
-public class SpringConfig {
+public class SpringConfig extends WebMvcConfigurerAdapter{
     //显示声明CommonsMultipartResolver为mutipartResolver
     @Bean(name = "multipartResolver")
     public MultipartResolver multipartResolver(){
@@ -21,4 +24,12 @@ public class SpringConfig {
         resolver.setMaxInMemorySize(40960);
         resolver.setMaxUploadSize(50*1024*1024);//上传文件大小 50M 50*1024*1024
         return resolver;
-    }}
+    }
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "DELETE", "PUT","INCLUDE")
+                .maxAge(3600);
+    }
+}
