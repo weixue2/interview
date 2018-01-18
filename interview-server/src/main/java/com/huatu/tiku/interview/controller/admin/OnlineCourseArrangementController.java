@@ -59,7 +59,6 @@ public class OnlineCourseArrangementController {
         onlineCourseArrangement.setWxImageId(res.getMediaId());
         onlineCourseArrangement.setImageUrl(fileUrl);
         onlineCourseArrangement.setTitle(title);
-        //
         return arrangementService.add(onlineCourseArrangement) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
     }
 

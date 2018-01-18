@@ -26,12 +26,4 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//                .allowedOrigins("*")
-//                .allowCredentials(true)
-//                .allowedMethods("GET", "POST", "DELETE", "PUT", "INCLUDE")
-//                .maxAge(3600);
-//    }
 }
