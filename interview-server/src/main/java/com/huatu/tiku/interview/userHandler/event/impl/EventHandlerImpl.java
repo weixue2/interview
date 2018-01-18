@@ -41,7 +41,6 @@ public class EventHandlerImpl implements EventHandler {
     @Autowired
     private NotificationTypeRepository notificationTypeRepository;
 
-
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
         // TODO 因为可以验证取关的事件，所以这里的逻辑可以删掉
@@ -56,7 +55,8 @@ public class EventHandlerImpl implements EventHandler {
         a.setTitle("谢谢您的关注！!");
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
-        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001);
+        //这里跳转前端验证
+        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001+fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
