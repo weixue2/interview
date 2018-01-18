@@ -2,8 +2,8 @@ package com.huatu.tiku.interview.task;
 
 import com.alibaba.fastjson.JSON;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
-import com.huatu.tiku.interview.entity.po.MorningReading;
-import com.huatu.tiku.interview.repository.MorningReadingRepository;
+import com.huatu.tiku.interview.entity.po.NotificationType;
+import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.List;
 public class GetReadingTableRunner{
 
     @Autowired
-    MorningReadingRepository readingRepository;
+    NotificationTypeRepository readingRepository;
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
@@ -34,10 +34,15 @@ public class GetReadingTableRunner{
     //获取晨读。。
     @Scheduled(fixedDelay = 2 * 3600 * 1000)
     public void getReading(){
-        List<MorningReading> all = readingRepository.findAll();
+        List<NotificationType> all = readingRepository.findAll();
+
+        for (NotificationType nt : all){
+
+        }
+
         if(!all.isEmpty()){
             List<ReadingTemp> rts = new ArrayList<>();
-            for (MorningReading mr:all){
+            for (NotificationType mr:all){
                 rts.add(new ReadingTemp(mr.getId(),mr.getPushTime(),true));
             }
             String json = JSON.toJSONString(rts);
