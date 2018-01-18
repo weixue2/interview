@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller;
+package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.entity.vo.request.ReportRequestVO;
 import com.huatu.tiku.interview.entity.result.Result;
