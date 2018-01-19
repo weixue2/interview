@@ -35,7 +35,12 @@ public class WechatTemplateMsg {
         this.touser = requestMap.get("FromUserName");
     }
 
-
+    public WechatTemplateMsg(String touser,TemplateEnum templateEnum) {
+        this.url = templateEnum.getUrl();
+        this.data = templateEnum.getData();
+        this.touser = touser;
+        this.template_id = templateEnum.getTemplateId();
+    }
 
     public WechatTemplateMsg() {
     }

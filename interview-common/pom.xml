@@ -15,6 +15,10 @@
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
 		<!--数据库-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

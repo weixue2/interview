@@ -9,5 +9,5 @@ import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
  * @Description
  */
 public interface WechatTemplateMsgService {
-    public TemplateMsgResult sendTemplate(String accessToken, String data);
+    TemplateMsgResult sendTemplate(String accessToken, String data);
 }

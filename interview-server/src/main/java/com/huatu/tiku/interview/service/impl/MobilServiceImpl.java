@@ -143,8 +143,10 @@ public class MobilServiceImpl implements MobileService {
      * @throws BizException
      */
     public void sendCaptcha(String mobile, String clientIp, boolean isZtk) throws BizException {
+//        System.out.println("进入方法");
         mobile = StringUtils.trimToEmpty(mobile);
-
+//        SmsUtil.sendCaptcha(mobile, "123456");
+//        System.out.println("出来了");
         final SetOperations operations = redisTemplate.opsForSet();
 
         /**

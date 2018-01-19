@@ -24,4 +24,9 @@ public class NewsMessage extends BaseMessage {
         super(requestMap);
         this.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
     }
+
+    public NewsMessage(String toUserName, String fromUserName, long createTime, int funcFlag, long msgId) {
+        super(toUserName, fromUserName, createTime, funcFlag, msgId);
+        this.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+    }
 }
