@@ -26,7 +26,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     StringRedisTemplate redisTemplate;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         new Timer().schedule(new RemindTask(), 0, 30000);
     }
 
@@ -35,12 +35,22 @@ public class MorningReadingPushRunner implements CommandLineRunner {
         public void run() {
             try {
                 // TODO 获取时间表
+                System.out.println("dtdt");
                 Object o = redisTemplate.opsForValue().get("readings");
                 if (o != null) {
                     List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
                     Calendar cal_a = Calendar.getInstance();
                     Calendar cal_b = Calendar.getInstance();
+                    cal_b.setTime(new Date());
                     for (ReadingTemp rt : rts) {
+//                        System.out.println(rt);
+//                        System.out.println(cal_a.get(Calendar.HOUR_OF_DAY));
+//                        System.out.println(cal_b.get(Calendar.HOUR_OF_DAY));
+//                        System.out.println(cal_a.get(Calendar.HOUR));
+//                        System.out.println(cal_b.get(Calendar.HOUR));
+                        if (rt.getDate() == null){
+                            continue;
+                        }
                         cal_a.setTime(rt.getDate());
                         if (cal_a.get(Calendar.YEAR) == cal_b.get(Calendar.YEAR)) {
                             if (cal_a.get(Calendar.MONTH) == cal_b.get(Calendar.MONTH)) {
@@ -49,7 +59,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                                         if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
 //                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
                                                 if(rt.getStatus()){
-                                                    System.out.println("可以");
+                                                    System.out.println("可以"+rt.getId());
                                                     rt.setStatus(false);
                                                 }
 

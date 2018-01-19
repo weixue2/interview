@@ -1,6 +1,6 @@
 package com.huatu.tiku.interview.service;
 
-import com.huatu.tiku.interview.entity.po.MorningReading;
+import com.huatu.tiku.interview.entity.po.NotificationType;
 
 import java.util.List;
 
@@ -10,10 +10,9 @@ import java.util.List;
  * @Description 晨读
  */
 public interface MorningReadingService {
-    Boolean add(MorningReading reading);
+    Boolean add(NotificationType reading);
     // 这个其实是多余的，我跟你讲
-    Boolean update(MorningReading reading);
+    Boolean update(NotificationType reading);
     void del(Long id);
-    List<MorningReading> findAll();
-    public void  push();
+    List<NotificationType> findAll();
 }

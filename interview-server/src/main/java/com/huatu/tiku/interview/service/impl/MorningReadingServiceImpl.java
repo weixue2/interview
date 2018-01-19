@@ -1,7 +1,7 @@
 package com.huatu.tiku.interview.service.impl;
 
-import com.huatu.tiku.interview.entity.po.MorningReading;
-import com.huatu.tiku.interview.repository.MorningReadingRepository;
+import com.huatu.tiku.interview.entity.po.NotificationType;
+import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,15 +22,16 @@ public class MorningReadingServiceImpl implements MorningReadingService {
     private HttpSession httpSession;
 
     @Autowired
-    private MorningReadingRepository morningReadingRepository;
+    private NotificationTypeRepository notificationTypeRepository;
 
     @Override
-    public Boolean add(MorningReading data) {
-        return morningReadingRepository.save(data)==null?false:true;
+    public Boolean add(NotificationType data) {
+        System.out.println(data);
+        return notificationTypeRepository.save(data)==null?false:true;
     }
 
     @Override
-    public Boolean update(MorningReading reading) {
+    public Boolean update(NotificationType reading) {
         return null;
     }
 
@@ -39,14 +40,10 @@ public class MorningReadingServiceImpl implements MorningReadingService {
     }
 
     @Override
-    public List<MorningReading> findAll() {
+    public List<NotificationType> findAll() {
         Sort sort = new Sort("pushTime","desc");
-        return morningReadingRepository.findAll(sort);
+        return notificationTypeRepository.findAll(sort);
     }
 
-    public void  push(){
-        Sort sort = new Sort("pushTime","desc");
-        List<MorningReading> readings =  morningReadingRepository.findAll(sort);
-        System.out.println(readings.size());
-    }
+
 }

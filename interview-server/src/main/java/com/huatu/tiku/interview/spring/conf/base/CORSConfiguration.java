@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @Author jbzm
  * @Date Create on 2018/1/18 14:47
  */
-@Configuration
+//@Configuration
 public class CORSConfiguration {
-    @Bean
+    //@Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override
