@@ -91,8 +91,8 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public NotificationType saveRegisterReport(NotificationType registerReport) {
 
-        registerReport.setStatus(WXStatusEnum.Status.ONLINE.getStatus());
-        registerReport.setBizStatus(WXStatusEnum.BizStatus.NORMAL.getBizSatus());
+        registerReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
+        registerReport.setBizStatus(WXStatusEnum.BizStatus.ONLINE.getBizSatus());
         return notificationTypeRepository.save(registerReport);
     }
 }
