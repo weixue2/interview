@@ -118,7 +118,8 @@ public class EventHandlerImpl implements EventHandler {
     public String eventClick(Map<String, String> requestMap) {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
-            List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
+            List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
+                    (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
             str = WxMpXmlOutMessage
                     .IMAGE()
                     .mediaId(notTypePatterns.get(0).getWxImageId())

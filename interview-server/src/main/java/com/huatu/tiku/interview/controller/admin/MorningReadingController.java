@@ -21,7 +21,8 @@ public class MorningReadingController {
     @PostMapping //@requestBody --> Json
     public Result add(@RequestBody NotificationType morningReading){
         morningReading.setType(2);
-        return readingService.add(morningReading)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
+        Long id = readingService.add(morningReading);
+        return  Result.ok(id);
     }
 
     @GetMapping

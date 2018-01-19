@@ -55,7 +55,7 @@ public class RegisterReportTask {
             log.info("getServerIp:"+getServerIp());
 
             //处理业务（发送报道的图文通知）
-
+//            pushRegisterReport();
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -74,6 +74,9 @@ public class RegisterReportTask {
 
     //TODO  图文类型的推送消息
     private String pushRegisterReport()  {
+
+
+
         String msg = "{\"touser\":\"o4gqK1rOtTxZ-cGlmHF5oyx6he58\", \"msgtype\":\"text\",\"text\":{ \"content\": \"谁让你这么早下班的？？？."+ UUID.randomUUID()+"\"} }";
         String jsonString = new Gson().toJson(msg).toString();
         // 调用接口获取access_token
