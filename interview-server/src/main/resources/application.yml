@@ -2,7 +2,7 @@
 
 server:
   context-path: /wx
-  port: 80
+  port: 11133
   compression:
       enabled: true
       mime-types: application/json,application/xml,text/html,text/xml,text/plain
