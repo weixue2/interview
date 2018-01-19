@@ -7,6 +7,7 @@ import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
 import com.huatu.tiku.interview.util.file.FileUtil;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.util.fs.FileUtils;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
@@ -16,6 +17,7 @@ import me.chanjar.weixin.mp.bean.material.WxMpMaterial;
 import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,8 @@ import java.util.UUID;
  * @Date Create on 2018/1/17 17:21
  */
 @RestController
-@RequestMapping("/end/oca")
+@Slf4j
+@RequestMapping(value = "/end/oca",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class OnlineCourseArrangementController {
 
     @Autowired
@@ -49,11 +52,12 @@ public class OnlineCourseArrangementController {
         config.setAppId(BasicParameters.appID);
         // 设置微信公众号的app corpSecret
         config.setSecret(BasicParameters.appsecret);
-        config.setAccessToken((String)redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY));
-
+        config.setAccessToken((String) redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY));
+        log.info("获取accesstoken:" + config.getAccessToken());
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(config);
         String fileUrl = fileUtil.ftpUploadArrangement(file);
+        log.info("文件地址:" + fileUrl);
         //转换为文件---坑死了
         File tempFile = FileUtils.createTmpFile(file.getInputStream(), UUID.randomUUID().toString(), file.getContentType().split("/")[1]);
         WxMpMaterial wxMpMaterial = new WxMpMaterial();
@@ -61,6 +65,7 @@ public class OnlineCourseArrangementController {
         wxMpMaterial.setName(WxConsts.MediaFileType.IMAGE);
         //通过微信服务器获取图片官方id
         WxMpMaterialUploadResult res = wxMpService.getMaterialService().materialFileUpload(WxConsts.MediaFileType.IMAGE, wxMpMaterial);
+        log.info("获取官方imageId:" + res.getMediaId());
         //装入对象
         notificationType.setWxImageId(res.getMediaId());
         notificationType.setImageUrl(fileUrl);
