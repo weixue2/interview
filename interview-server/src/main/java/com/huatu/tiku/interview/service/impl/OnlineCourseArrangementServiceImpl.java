@@ -25,4 +25,9 @@ public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangeme
         notificationTypeRepository.save(notificationType);
         return true;
     }
+
+    @Override
+    public Object findById(Long id) {
+        return notificationTypeRepository.findOne(id);
+    }
 }

@@ -9,4 +9,6 @@ import com.huatu.tiku.interview.entity.po.NotificationType;
  */
 public interface OnlineCourseArrangementService {
     Boolean add(NotificationType notificationType);
+
+    Object findById(Long id);
 }
