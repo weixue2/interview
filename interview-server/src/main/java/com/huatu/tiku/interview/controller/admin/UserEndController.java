@@ -21,14 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 public class UserEndController {
     @Autowired
     private UserService userService;
+
     @GetMapping
-    public Result findUser() {
-        return Result.ok(userService.findAllUser());
+    public Result findUser(@RequestParam String content) {
+        return Result.ok(userService.findAllUser(content));
     }
 
     @PostMapping
-    public Result updateUser(@RequestBody User user, HttpServletRequest request){
+    public Result updateUser(@RequestBody User user, HttpServletRequest request) {
         user.setStatus(1);
-        return userService.updateUser(user,request)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
+        return userService.updateUser(user, request) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
     }
 }

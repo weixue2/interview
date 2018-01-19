@@ -120,4 +120,16 @@ public class NotificationServiceImpl implements NotificationService {
         registerReport.setBizStatus(WXStatusEnum.BizStatus.ONLINE.getBizSatus());
         return notificationTypeRepository.save(registerReport);
     }
+
+
+
+    @Override
+    public int del(Long id) {
+       return  notificationTypeRepository.updateToDel(id);
+    }
+
+    @Override
+    public NotificationType findOne(Long id) {
+        return notificationTypeRepository.findOne(id);
+    }
 }

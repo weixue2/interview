@@ -6,6 +6,7 @@ import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.util.common.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,19 +19,19 @@ import static com.huatu.tiku.interview.constant.NotificationTypeConstant.REGISTE
  * @Description
  */
 @RestController
-@RequestMapping("notify")
+@RequestMapping("/end/notify")
 public class NotificationController {
     @Autowired
     private NotificationService notificationService;
     @GetMapping
-    public Result getPage(@RequestParam(name = "size", defaultValue = "10") Integer size, @RequestParam(name = "page", defaultValue = "1") Integer page){
-        PageUtil<List<NotificationType>> all = notificationService.findAll(size,page);
+    public Result getPage(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page){
+        PageUtil<List<NotificationType>> all = notificationService.findAll(pageSize,page);
         return all.getResult().isEmpty()?Result.build(ResultEnum.ERROR):Result.ok(all);
     }
 
     @GetMapping("fuzzy")
-    public Result fuzzy(@RequestParam(name = "size", defaultValue = "10") Integer size, @RequestParam(name = "page", defaultValue = "1") Integer page,String title){
-        PageUtil<List<NotificationType>> all = notificationService.findByTitleLimit(size,page,title);
+    public Result fuzzy(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page,String title){
+        PageUtil<List<NotificationType>> all = notificationService.findByTitleLimit(pageSize,page,title);
         System.out.println();
         return all.getResult().isEmpty()?Result.ok():Result.ok(all);
     }
@@ -50,6 +51,28 @@ public class NotificationController {
         if(null == registerReport.getPushTime()){
             return  Result.build(ResultEnum.PUSH_TIME_ERROR);
         }
-        return notificationService.saveRegisterReport(registerReport) == null ?Result.ok():Result.build(ResultEnum.INSERT_FAIL);
+        return notificationService.saveRegisterReport(registerReport) != null ?Result.ok():Result.build(ResultEnum.INSERT_FAIL);
     }
+
+    /**
+     * 删除学员学习情况
+     * @param id
+     * @return
+     */
+    @DeleteMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result del(@PathVariable  Long id){
+
+        return notificationService.del(id) != 0 ?Result.ok():Result.build(ResultEnum.DELETE_FAIL);
+    }
+
+
+    /**
+     * 查询报道通知详情
+     */
+    @GetMapping("/registerReport/{id}")
+    public Result detail(@PathVariable  Long id){
+        NotificationType notificationType = notificationService.findOne(id);
+        return notificationType != null ? Result.ok(notificationType):Result.build(ResultEnum.INSERT_FAIL);
+    }
+
 }

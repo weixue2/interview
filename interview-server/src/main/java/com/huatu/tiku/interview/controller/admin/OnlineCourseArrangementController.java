@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -42,7 +43,7 @@ public class OnlineCourseArrangementController {
     private RedisTemplate redisTemplate;
 
     @PostMapping("/CourseArrangement")
-    public Result add(NotificationType notificationType, @RequestParam("file") MultipartFile file, @RequestParam("title") String title) throws Exception {
+    public Result add(NotificationType notificationType, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
         //TODO 有时间再改
         // 设置微信公众号的appid
@@ -67,7 +68,9 @@ public class OnlineCourseArrangementController {
         notificationType.setWxImageId(res.getMediaId());
         notificationType.setImageUrl(fileUrl);
         notificationType.setTitle(title);
-        return arrangementService.add(notificationType) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
+        notificationType.setId(id);
+        arrangementService.add(notificationType);
+        return Result.ok(notificationType);
     }
 
     @GetMapping("/CourseArrangement")
