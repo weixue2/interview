@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface NotificationService {
     PageUtil<List<NotificationType>> findAll(Integer size, Integer page);
+    PageUtil<List<NotificationType>> findByTitleLimit( Integer size,Integer page,String title);
 }

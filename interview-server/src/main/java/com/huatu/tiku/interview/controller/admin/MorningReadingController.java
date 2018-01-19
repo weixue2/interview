@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description
  */
 @RestController
-@RequestMapping("/mr")
+@RequestMapping("/end/mr")
 public class MorningReadingController {
     @Autowired
     private MorningReadingService readingService;
