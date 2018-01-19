@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,4 +28,9 @@ public interface NotificationTypeRepository extends JpaRepository<NotificationTy
     @Modifying
     @Query("update NotificationType ls set ls.status=-1 where ls.id=?1")
     int updateToDel(Long id);
+
+    @Query("select n from NotificationType n where n.pushTime > ?1 and n.status = 1")
+    List<NotificationType> findByPushTime(Date date);
+
+
 }

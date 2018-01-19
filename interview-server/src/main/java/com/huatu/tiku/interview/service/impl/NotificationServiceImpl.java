@@ -15,10 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,6 +69,12 @@ public class NotificationServiceImpl implements NotificationService {
         Specification<NotificationType> specification = selectRules(id);
         return notificationTypeRepository.findOne(specification);
     }
+
+    @Override
+    public List<NotificationType> findByPushTime() {
+        return notificationTypeRepository.findByPushTime(new Date());
+    }
+
 
     private <T> Specification<T> selectRules(Long id) {
         Specification specification = new Specification<T>() {
