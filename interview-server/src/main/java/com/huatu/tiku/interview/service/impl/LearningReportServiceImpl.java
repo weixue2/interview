@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.huatu.tiku.interview.constant.ReportTypeConstant.DAILY_REPORT;
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.TOTAL_REPORT;
 import static com.huatu.tiku.interview.constant.ResultEnum.PARAMETER_NULL_ERROR;
 
@@ -82,7 +83,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         LearningReport learningReport = buildReport(avgList, answerCountList);
         learningReport.setDaySort(daySort);
         learningReport.setReportDate(new Date());
-        learningReport.setType(ReportTypeConstant.DAILY_REPORT.getCode());
+        learningReport.setType(DAILY_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport = learningReportRepository.save(learningReport);
 
@@ -199,11 +200,14 @@ public class LearningReportServiceImpl  implements LearningReportService {
 
                 Double haveSubstance = report.getHaveSubstance();
                 reportResponseVO.setHaveSubstanceAdvice(getAdvice(haveSubstance,5));
+            }else if( DAILY_REPORT.getCode() == report.getType()){
+                //老师评语(查询当天学员所有的学习记录)
+                Date reportDate = report.getReportDate();
+                List<String> remarkList = learningSituationRepository.findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(reportDate);
+                reportResponseVO.setRemarkList(remarkList);
             }
             resultList.add(reportResponseVO);
-
         }
-
         return Result.build(100,"查询成功",resultList);
     }
 

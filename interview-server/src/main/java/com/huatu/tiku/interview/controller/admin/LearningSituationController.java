@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller.api;
+package com.huatu.tiku.interview.controller.admin;
 
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.LearningSituation;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/ls")
+@RequestMapping("/end/ls")
 public class LearningSituationController {
 
     @Autowired

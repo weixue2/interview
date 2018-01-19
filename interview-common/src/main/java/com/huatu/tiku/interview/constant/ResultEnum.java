@@ -30,6 +30,10 @@ public enum ResultEnum {
     PARAMETER_NULL_ERROR(50040,"验证通过"),
 
     OPENID_ERROR(50041,"OpenID错误"),
+
+    NOTIFICATION_TYPE_ERROR(50042,"推送通知类型错误"),
+    PUSH_TIME_ERROR(50043,"推送通知类型错误"),
+
         ;
     private Integer code;
 

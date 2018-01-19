@@ -6,13 +6,11 @@ import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.util.common.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.huatu.tiku.interview.constant.NotificationTypeConstant.REGISTER_REPORT;
 
 /**
  * @Author ZhenYang
@@ -20,7 +18,7 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("/end/notify")
+@RequestMapping("notify")
 public class NotificationController {
     @Autowired
     private NotificationService notificationService;
@@ -35,5 +33,23 @@ public class NotificationController {
         PageUtil<List<NotificationType>> all = notificationService.findByTitleLimit(size,page,title);
         System.out.println();
         return all.getResult().isEmpty()?Result.ok():Result.ok(all);
+    }
+
+
+    /**
+     * 新增修改报道通知
+     */
+    @PostMapping("/registerReport")
+    public Result saveRegisterReport(@RequestBody NotificationType registerReport){
+
+        //校验通知类型
+        if( REGISTER_REPORT.getCode()  != registerReport.getType()){
+            return  Result.build(ResultEnum.NOTIFICATION_TYPE_ERROR);
+        }
+        //校验推送时间
+        if(null == registerReport.getPushTime()){
+            return  Result.build(ResultEnum.PUSH_TIME_ERROR);
+        }
+        return notificationService.saveRegisterReport(registerReport) == null ?Result.ok():Result.build(ResultEnum.INSERT_FAIL);
     }
 }

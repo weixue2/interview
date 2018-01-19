@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by x6 on 2018/1/17.
@@ -67,5 +68,9 @@ public class ReportResponseVO {
     private String isOrganizedAdvice;
     //------------是否言之有物-------------
     private String haveSubstanceAdvice;
+
+
+    //------------老师评语-------------
+    private List<String> remarkList;
 
 }

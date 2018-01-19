@@ -1,6 +1,5 @@
 package com.huatu.tiku.interview.service.impl;
 
-import com.huatu.tiku.interview.constant.StatusConstant;
 import com.huatu.tiku.interview.entity.po.LearningSituation;
 import com.huatu.tiku.interview.repository.LearningSituationRepository;
 import com.huatu.tiku.interview.service.LearningSituationService;
@@ -28,6 +27,7 @@ public class LearningSituationServiceImpl implements LearningSituationService {
 
     @Override
     public Boolean save(LearningSituation data) {
+        data.setCreator("admin");
         LearningSituation save = learningSituationRepository.save(data);
         return  save == null ?false:true;
     }
@@ -40,13 +40,14 @@ public class LearningSituationServiceImpl implements LearningSituationService {
     @Override
     public List<LearningSituation> findList(String name,Pageable pageRequest) {
 
-        List<LearningSituation> list = learningSituationRepository.findByStatusAndNameLike(StatusConstant.StatusEnum.NORMAL.getStatus(),name, pageRequest);
+        List<LearningSituation> list = learningSituationRepository.findByStatusAndNameLike(1,name, pageRequest);
 
         return list;
     }
 
+//    WXStatusEnum.Status.NORMAL.getStatus()
     @Override
     public long countByNameLikeStatus(String name) {
-        return learningSituationRepository.countByStatusAndNameLike(StatusConstant.StatusEnum.NORMAL.getStatus(),name);
+        return learningSituationRepository.countByStatusAndNameLike(1,name);
     }
 }

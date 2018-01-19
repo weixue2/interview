@@ -2,9 +2,14 @@ package com.huatu.tiku.interview.service.impl;
 
 import com.google.common.collect.Lists;
 import com.huatu.tiku.interview.entity.dto.NotificationVO;
+import com.google.common.collect.Lists;
+import com.huatu.tiku.interview.constant.WXStatusEnum;
+import com.huatu.tiku.interview.entity.dto.NotificationVO;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.service.NotificationService;
+import com.huatu.tiku.interview.util.GetAllParameter;
+import com.huatu.tiku.interview.util.common.PageUtil;
 import com.huatu.tiku.interview.util.GetAllParameter;
 import com.huatu.tiku.interview.util.common.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +17,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -48,7 +59,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public PageUtil<List<NotificationType>> findByTitleLimit(Integer size,Integer page,String title) {
+    public PageUtil<List<NotificationType>> findByTitleLimit(Integer size, Integer page, String title) {
         PageRequest pageable = new PageRequest(page-1,size,new Sort("gmtCreate"));
         Specification<NotificationType> specification = selectRules(title);
         Page<NotificationType> all = notificationTypeRepository.findAll(specification, pageable);
@@ -75,5 +86,13 @@ public class NotificationServiceImpl implements NotificationService {
             }
         };
         return specification;
+    }
+
+    @Override
+    public NotificationType saveRegisterReport(NotificationType registerReport) {
+
+        registerReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
+        registerReport.setBizStatus(WXStatusEnum.BizStatus.ONLINE.getBizSatus());
+        return notificationTypeRepository.save(registerReport);
     }
 }

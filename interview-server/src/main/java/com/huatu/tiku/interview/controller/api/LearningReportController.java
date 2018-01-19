@@ -22,6 +22,20 @@ public class LearningReportController {
     private LearningReportService learningReportService;
 
 
+
+
+    /**
+     * 查询用户学习报告
+     */
+
+    @PostMapping(value="daily",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result learningReport(){
+
+        return learningReportService.dailyReport();
+    }
+
+
+
     /**
      * 查询用户学习报告
      */
