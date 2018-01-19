@@ -63,31 +63,16 @@ public class MorningReadingPushRunner implements CommandLineRunner {
         @Override
         public void run() {
             String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
-                accessToken = "6_dManrga9mWRDkUKpQ-CwEAZoeWAVwyADcAYeioamkJ5vGNoARR4bRrWq61HfTNOy9-IyAQLsTQEE8dfJKCoftzlyksdnWSvoCpALxMEwVaswkdCJKssmM-DmMvjU1bCao8RCcg5ldNh8RMCTPVXdAFAGMO";
-//            WechatTemplateMsg templateMsg = new WechatTemplateMsg("omsLn0dOlKTbFpGPkCDiqWy79oJY",TemplateEnum.No_2);
-//
-//            String templateMsgJson = JsonUtil.toJson(templateMsg);
-//            TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-//                    accessToken,
-//                    templateMsgJson);
-//            System.out.println(msgResult);
             try {
                 // TODO 获取时间表
-                System.out.println("dtdt");
                 Object o = stringRedisTemplate.opsForValue().get("readings");
                 if (o != null) {
 
                     List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
-                    System.out.println(o.toString());
                     Calendar cal_a = Calendar.getInstance();
                     Calendar cal_b = Calendar.getInstance();
                     cal_b.setTime(new Date());
                     for (ReadingTemp rt : rts) {
-//                        System.out.println(rt);
-//                        System.out.println(cal_a.get(Calendar.HOUR_OF_DAY));
-//                        System.out.println(cal_b.get(Calendar.HOUR_OF_DAY));
-//                        System.out.println(cal_a.get(Calendar.HOUR));
-//                        System.out.println(cal_b.get(Calendar.HOUR));
                         if (rt.getDate() == null){
                             continue;
                         }
@@ -128,16 +113,10 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                                                                 accessToken,
                                                                 templateMsgJson);
                                                     }
-
                                                     rt.setStatus(false);
                                                 }
-
 //                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                                        } } } } }
                     }
                     String json = JSON.toJSONString(rts);
                     stringRedisTemplate.opsForValue().set("readings", json);
@@ -145,6 +124,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+
                 System.out.println("获取时间表出错");
             }
         }

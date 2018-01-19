@@ -8,6 +8,6 @@ import java.util.Map;
  * @Modefied By:
  */
 public interface MessageHandler {
-    public String TextMessageHandler(Map<String, String> requestMap);
-    public String ImageMessageHandler(Map<String, String> requestMap);
+    String TextMessageHandler(Map<String, String> requestMap);
+    String ImageMessageHandler(Map<String, String> requestMap);
 }
