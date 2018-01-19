@@ -10,7 +10,7 @@ import java.util.List;
  * @Description 晨读
  */
 public interface MorningReadingService {
-    Boolean add(NotificationType reading);
+    Long add(NotificationType reading);
     // 这个其实是多余的，我跟你讲
     Boolean update(NotificationType reading);
     void del(Long id);
