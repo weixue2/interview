@@ -1,14 +1,18 @@
 package com.huatu.tiku.interview.service.impl;
 
-import com.huatu.tiku.interview.constant.ResultEnum;
+import com.google.common.collect.Lists;
 import com.huatu.tiku.interview.entity.po.User;
-import com.huatu.tiku.interview.exception.ReqException;
 import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -21,8 +25,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
+
     @Override
-    public Boolean updateUser(User user,HttpServletRequest request) {
+    public Boolean updateUser(User user, HttpServletRequest request) {
 //        Object o = request.getSession().getAttribute("openId");
 //        if(o == null){
 //            throw new ReqException(ResultEnum.OPENID_ERROR);
@@ -31,7 +36,7 @@ public class UserServiceImpl implements UserService {
 //        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
 
         User user_ = userRepository.findByOpenId(user.getOpenId());
-        if(user_ != null){
+        if (user_ != null) {
             user_.setPhone(user.getPhone());
             user_.setSex(user.getSex());
             user_.setName(user.getName());
@@ -41,7 +46,7 @@ public class UserServiceImpl implements UserService {
             user.setKeyContact(user.getKeyContact());
         }
         System.out.println(user);
-        return userRepository.save(user_)==null ? false:true;
+        return userRepository.save(user_) == null ? false : true;
     }
 
     @Override
@@ -53,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String openId) {
-        return userRepository.getUserByOpenIdAndStatus(openId,1);
+        return userRepository.getUserByOpenIdAndStatus(openId, 1);
     }
 
     @Override
@@ -62,7 +67,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUser() {
-        return userRepository.findAll();
+    public List<User> findAllUser(String content) {
+        Specification<User> specification = new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                List<Predicate> predicates = Lists.newArrayList();
+                if (StringUtils.isNotEmpty(content)) {
+                    predicates.add(cb.like(root.get("name"), "%" + content + "%"));
+                }
+                return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        return userRepository.findAll(specification);
     }
 }
