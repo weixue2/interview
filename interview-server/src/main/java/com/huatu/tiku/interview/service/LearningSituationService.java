@@ -18,7 +18,7 @@ public interface LearningSituationService {
     // 这个其实是多余的，我跟你讲
 //    Boolean update(LearningSituation data);
     //无验证，暂不需要，删没删除你前端心里没点数？
-    void del(Long id);
+    int del(Long id);
 
     List<LearningSituation> findList(String name,Pageable pageRequest);
 

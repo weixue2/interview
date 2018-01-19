@@ -36,8 +36,8 @@ public class LearningSituationServiceImpl implements LearningSituationService {
     }
 
     @Override
-    public void del(Long id) {
-        learningSituationRepository.updateToDel(id);
+    public int  del(Long id) {
+        return learningSituationRepository.updateToDel(id);
     }
 
     @Override
