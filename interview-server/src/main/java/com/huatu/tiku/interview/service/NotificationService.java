@@ -17,4 +17,6 @@ public interface NotificationService {
     PageUtil<List<NotificationType>> findByTitleLimit( Integer size,Integer page,String title);
 
     int del(Long id);
+
+    NotificationType findOne(Long id);
 }

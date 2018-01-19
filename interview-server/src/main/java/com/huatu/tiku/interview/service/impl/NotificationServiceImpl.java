@@ -92,4 +92,9 @@ public class NotificationServiceImpl implements NotificationService {
     public int del(Long id) {
        return  notificationTypeRepository.updateToDel(id);
     }
+
+    @Override
+    public NotificationType findOne(Long id) {
+        return notificationTypeRepository.findOne(id);
+    }
 }
