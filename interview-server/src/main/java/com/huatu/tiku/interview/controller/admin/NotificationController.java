@@ -20,13 +20,20 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("notify")
+@RequestMapping("/end/notify")
 public class NotificationController {
     @Autowired
     private NotificationService notificationService;
     @GetMapping
     public Result getPage(@RequestParam(name = "size", defaultValue = "10") Integer size, @RequestParam(name = "page", defaultValue = "1") Integer page){
         PageUtil<List<NotificationType>> all = notificationService.findAll(size,page);
+        return all.getResult().isEmpty()?Result.build(ResultEnum.ERROR):Result.ok(all);
+    }
+
+    @GetMapping("fuzzy")
+    public Result fuzzy(@RequestParam(name = "size", defaultValue = "10") Integer size, @RequestParam(name = "page", defaultValue = "1") Integer page,String title){
+        PageUtil<List<NotificationType>> all = notificationService.findByTitleLimit(size,page,title);
+        System.out.println();
         return all.getResult().isEmpty()?Result.build(ResultEnum.ERROR):Result.ok(all);
     }
 }

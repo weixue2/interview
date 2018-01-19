@@ -1,5 +1,7 @@
 package com.huatu.tiku.interview.entity.dto;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -7,6 +9,7 @@ import java.util.Date;
  * @Date Created in 2018/1/19 11:09
  * @Description
  */
+@Data
 public class NotificationVO {
     private Integer type;
     private Long id;
