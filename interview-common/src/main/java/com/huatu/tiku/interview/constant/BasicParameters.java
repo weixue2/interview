@@ -29,6 +29,6 @@ public class BasicParameters {
     public static String FOR_VER_QR_CODE="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGt8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQVFuQ2MweWFlYW0xMDAwMGcwN0cAAgSGVF9aAwQAAAAA";
 
     //晨读
-    public static String xxx = "http://192.168.10.93:8080/#/test_template";
+    public static String MorningReadingURL = "http://192.168.10.93:8080/#/test_template?id=";
 
 }

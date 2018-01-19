@@ -7,10 +7,14 @@ import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
+import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.User;
+import com.huatu.tiku.interview.entity.template.MyTreeMap;
+import com.huatu.tiku.interview.entity.template.TemplateMap;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.MessageService;
+import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
@@ -35,7 +39,7 @@ import java.util.*;
 public class MorningReadingPushRunner implements CommandLineRunner {
 
     @Autowired
-    StringRedisTemplate redisTemplate;
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
     MessageService messageService;
@@ -46,6 +50,9 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     @Autowired
     UserService userService;
 
+    @Autowired
+    NotificationService notificationService;
+
     @Override
     public void run(String... args) {
         new Timer().schedule(new RemindTask(), 0, 30000);
@@ -54,8 +61,8 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     class RemindTask extends TimerTask {
         @Override
         public void run() {
-            String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
-//                accessToken = "6_xsXvmd5iX-22XaVXgCmlUzJ8V6YKssh7XfaVtZXe6GdzSydUPcKT8i4G2ULClF9Th9wmQQ9LUOGrZI8kxj330SApNk9HcEYSei1sD9F7daYj7Q3IryQQffHC9IMLIYgAGASPF";
+            String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+                accessToken = "6_dManrga9mWRDkUKpQ-CwEAZoeWAVwyADcAYeioamkJ5vGNoARR4bRrWq61HfTNOy9-IyAQLsTQEE8dfJKCoftzlyksdnWSvoCpALxMEwVaswkdCJKssmM-DmMvjU1bCao8RCcg5ldNh8RMCTPVXdAFAGMO";
 //            WechatTemplateMsg templateMsg = new WechatTemplateMsg("omsLn0dOlKTbFpGPkCDiqWy79oJY",TemplateEnum.No_2);
 //
 //            String templateMsgJson = JsonUtil.toJson(templateMsg);
@@ -66,10 +73,11 @@ public class MorningReadingPushRunner implements CommandLineRunner {
             try {
                 // TODO 获取时间表
                 System.out.println("dtdt");
-                Object o = redisTemplate.opsForValue().get("readings");
+                Object o = stringRedisTemplate.opsForValue().get("readings");
                 if (o != null) {
 
                     List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
+                    System.out.println(o.toString());
                     Calendar cal_a = Calendar.getInstance();
                     Calendar cal_b = Calendar.getInstance();
                     cal_b.setTime(new Date());
@@ -87,7 +95,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                             if (cal_a.get(Calendar.MONTH) == cal_b.get(Calendar.MONTH)) {
                                 if (cal_a.get(Calendar.DAY_OF_MONTH) == cal_b.get(Calendar.DAY_OF_MONTH)) {
                                     if (cal_a.get(Calendar.HOUR_OF_DAY) == cal_b.get(Calendar.HOUR_OF_DAY)) {
-                                        if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
+//                                        if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
 //                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
                                                 if(rt.getStatus()){
                                                     List<User> allUser = userService.findAllUser();
@@ -98,7 +106,16 @@ public class MorningReadingPushRunner implements CommandLineRunner {
 
                                                             }
                                                             case 2:{
-                                                                templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.No_2);
+                                                                NotificationType notification = notificationService.get(rt.getId());
+                                                                templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.MorningReading);
+                                                                templateMsg.setData(
+                                                                        MyTreeMap.createMap(
+                                                                                new TemplateMap("first", WechatTemplateMsg.item(notification.getTitle(),"#000000")),
+                                                                                new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(),"#000000")),
+                                                                                new TemplateMap("remark", WechatTemplateMsg.item("华图教育发给你的","#000000"))
+                                                                        )
+                                                                );
+                                                                System.out.println(u.getName());
                                                             }
                                                             case 3:{
 
@@ -115,16 +132,17 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                                                 }
 
 //                                            }
-                                        }
+//                                        }
                                     }
                                 }
                             }
                         }
                     }
                     String json = JSON.toJSONString(rts);
-                    redisTemplate.opsForValue().set("readings", json);
+                    stringRedisTemplate.opsForValue().set("readings", json);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("获取时间表出错");
             }
         }

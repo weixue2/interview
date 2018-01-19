@@ -35,7 +35,12 @@ public enum TemplateEnum {
     ),
     No_3("","","",null)
     ,
-    MorningReading("Cpj93XZXzwagt_bp2QSW9iYVRkF9FCaRtHtXnoLzSHU","鸡汤晨读","",null),
+    MorningReading(
+//            "Cpj93XZXzwagt_bp2QSW9iYVRkF9FCaRtHtXnoLzSHU",
+            "dqB6dsTBx_FzoeMtflHHJwDAZdL1X2R_4o3eu4290s4", //我的
+            "鸡汤晨读",
+            BasicParameters.MorningReadingURL,
+            null),
     ;
 
     TemplateEnum(String templateId, String description,String url,TreeMap<String, TreeMap<String,String>> data) {
