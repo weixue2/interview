@@ -28,8 +28,6 @@ public class AccessTokenThread {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
-    @Autowired
-    RedisTemplate redisTemplate;
 
     @Autowired
     WeiXinAccessTokenUtil weiXinAccessTokenUtil;
@@ -60,7 +58,7 @@ public class AccessTokenThread {
         log.info("getToken");
         accessToken = WeiXinAccessTokenUtil.getAccessToken();
         if (StringUtils.isNotEmpty(accessToken)) {
-            redisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
+            stringRedisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
             log.info("获取成功,accessToken:" + accessToken);
         } else {
             log.info("获取token失败");

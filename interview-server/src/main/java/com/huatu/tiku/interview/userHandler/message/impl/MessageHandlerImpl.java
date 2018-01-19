@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.userHandler.message.impl;
 
 import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.message.TextMessage;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
@@ -10,6 +11,7 @@ import com.huatu.tiku.interview.util.MessageUtil;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletContext;
@@ -29,11 +31,16 @@ public class MessageHandlerImpl implements MessageHandler {
     private WechatTemplateMsgService templateMsgService;
 
     @Autowired
+    StringRedisTemplate redisTemplate;
+
+    @Autowired
     private ServletContext servletContext;
 
     @Override
     public String TextMessageHandler(Map<String, String> requestMap){
-
+        String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+//        accessToken = "6_xsXvmd5iX-22XaVXgCmlUzJ8V6YKssh7XfaVtZXe6GdzSydUPcKT8i4G2ULClF9Th9wmQQ9LUOGrZI8kxj330SApNk9HcEYSei1sD9F7daYj7Q3IryQQffHC9IMLIYgAGASPF";
+        System.out.println("accessToken:"+accessToken);
         if(!requestMap.get("Content").equals("get")){
             //这个是直接生成String
 //            String templateMsgJson = WechatTemplateMsg.getJson(TemplateEnum.No_2,requestMap);
@@ -41,7 +48,7 @@ public class MessageHandlerImpl implements MessageHandler {
 
             String templateMsgJson = JsonUtil.toJson(templateMsg);
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-                    "6_Ba9FmiljolWE03r5uSn3a3t92OYsN8QVy-himS6BrDO2-cOsZ_l-85rRZVcZlTM-nqYKwrmw2jCses9uLvEG2wV5z7SvcBCx_XL8OVSD0y19wJ_U11DyNSaQ8DdxwiTDr4E8vv5vAJLQiP-CJXHgAJADRB",
+                    accessToken,
                     templateMsgJson);
             return null;
         }

@@ -7,9 +7,11 @@ import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
+import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.MessageService;
+import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     @Autowired
     WechatTemplateMsgService templateMsgService;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public void run(String... args) {
         new Timer().schedule(new RemindTask(), 0, 30000);
@@ -49,20 +54,21 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     class RemindTask extends TimerTask {
         @Override
         public void run() {
-            String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
-
-            WechatTemplateMsg templateMsg = new WechatTemplateMsg("omsLn0dOlKTbFpGPkCDiqWy79oJY",TemplateEnum.No_2);
-
-            String templateMsgJson = JsonUtil.toJson(templateMsg);
-            TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-                    accessToken,
-                    templateMsgJson);
-            System.out.println(msgResult);
+            String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+//                accessToken = "6_xsXvmd5iX-22XaVXgCmlUzJ8V6YKssh7XfaVtZXe6GdzSydUPcKT8i4G2ULClF9Th9wmQQ9LUOGrZI8kxj330SApNk9HcEYSei1sD9F7daYj7Q3IryQQffHC9IMLIYgAGASPF";
+//            WechatTemplateMsg templateMsg = new WechatTemplateMsg("omsLn0dOlKTbFpGPkCDiqWy79oJY",TemplateEnum.No_2);
+//
+//            String templateMsgJson = JsonUtil.toJson(templateMsg);
+//            TemplateMsgResult msgResult = templateMsgService.sendTemplate(
+//                    accessToken,
+//                    templateMsgJson);
+//            System.out.println(msgResult);
             try {
                 // TODO 获取时间表
                 System.out.println("dtdt");
                 Object o = redisTemplate.opsForValue().get("readings");
                 if (o != null) {
+
                     List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
                     Calendar cal_a = Calendar.getInstance();
                     Calendar cal_b = Calendar.getInstance();
@@ -78,13 +84,26 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                         }
                         cal_a.setTime(rt.getDate());
                         if (cal_a.get(Calendar.YEAR) == cal_b.get(Calendar.YEAR)) {
+                            System.out.println("第一层");
                             if (cal_a.get(Calendar.MONTH) == cal_b.get(Calendar.MONTH)) {
+                                System.out.println("第2层");
                                 if (cal_a.get(Calendar.DAY_OF_MONTH) == cal_b.get(Calendar.DAY_OF_MONTH)) {
+                                    System.out.println("第3层");
                                     if (cal_a.get(Calendar.HOUR_OF_DAY) == cal_b.get(Calendar.HOUR_OF_DAY)) {
+                                        System.out.println("第4层");
                                         if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
+                                            System.out.println("第5层");
 //                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
                                                 if(rt.getStatus()){
                                                     System.out.println("可以"+rt.getId());
+                                                    List<User> allUser = userService.findAllUser();
+                                                    for(User u : allUser){
+                                                        WechatTemplateMsg templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.No_2);
+                                                        String templateMsgJson = JsonUtil.toJson(templateMsg);
+                                                        templateMsgService.sendTemplate(
+                                                                accessToken,
+                                                                templateMsgJson);
+                                                    }
 
                                                     rt.setStatus(false);
                                                 }
