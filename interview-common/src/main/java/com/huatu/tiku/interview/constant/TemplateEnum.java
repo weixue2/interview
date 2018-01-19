@@ -35,7 +35,7 @@ public enum TemplateEnum {
     ),
     No_3("","","",null)
     ,
-
+    MorningReading("Cpj93XZXzwagt_bp2QSW9iYVRkF9FCaRtHtXnoLzSHU","鸡汤晨读","",null),
     ;
 
     TemplateEnum(String templateId, String description,String url,TreeMap<String, TreeMap<String,String>> data) {
