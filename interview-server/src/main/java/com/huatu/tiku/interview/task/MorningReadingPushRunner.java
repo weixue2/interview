@@ -1,7 +1,17 @@
 package com.huatu.tiku.interview.task;
 
 import com.alibaba.fastjson.JSON;
+import com.huatu.tiku.interview.constant.BasicParameters;
+import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
+import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
+import com.huatu.tiku.interview.entity.message.NewsMessage;
+import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
+import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
+import com.huatu.tiku.interview.service.MessageService;
+import com.huatu.tiku.interview.service.WechatTemplateMsgService;
+import com.huatu.tiku.interview.util.json.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -25,6 +35,12 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     @Autowired
     StringRedisTemplate redisTemplate;
 
+    @Autowired
+    MessageService messageService;
+
+    @Autowired
+    WechatTemplateMsgService templateMsgService;
+
     @Override
     public void run(String... args) {
         new Timer().schedule(new RemindTask(), 0, 30000);
@@ -33,6 +49,15 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     class RemindTask extends TimerTask {
         @Override
         public void run() {
+            String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
+
+            WechatTemplateMsg templateMsg = new WechatTemplateMsg("omsLn0dOlKTbFpGPkCDiqWy79oJY",TemplateEnum.No_2);
+
+            String templateMsgJson = JsonUtil.toJson(templateMsg);
+            TemplateMsgResult msgResult = templateMsgService.sendTemplate(
+                    accessToken,
+                    templateMsgJson);
+            System.out.println(msgResult);
             try {
                 // TODO 获取时间表
                 System.out.println("dtdt");
@@ -60,6 +85,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
 //                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
                                                 if(rt.getStatus()){
                                                     System.out.println("可以"+rt.getId());
+
                                                     rt.setStatus(false);
                                                 }
 

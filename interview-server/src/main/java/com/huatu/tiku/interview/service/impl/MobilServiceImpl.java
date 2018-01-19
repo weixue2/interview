@@ -11,6 +11,7 @@ import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.PhpResult;
 import com.huatu.tiku.interview.exception.ReqException;
+import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.MobileService;
 import com.huatu.tiku.interview.util.Crypt3Des;
 import com.huatu.tiku.interview.util.common.RegexConfig;
@@ -50,10 +51,18 @@ public class MobilServiceImpl implements MobileService {
     @Autowired
     StringRedisTemplate redisTemplate;
 
+    @Autowired
+    UserRepository userRepository;
+
+
     @Override
     public User checkPHP(String mobile,String openId,HttpServletRequest request) {
         // TODO 这里固定使用了一个openID
-        openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
+//        openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
+        User user = userRepository.findByOpenId(openId);
+        if(user == null){
+            throw new ReqException(ResultEnum.OPENID_ERROR);
+        }
         String token = Crypt3Des.encryptMode("phone="+mobile+"&timeStamp="+System.currentTimeMillis());
         System.out.println("token:"+token);
         // 请求php
@@ -69,7 +78,7 @@ public class MobilServiceImpl implements MobileService {
         JSONObject jsonObject2 = JSONObject.fromObject(userInfo);
         String sex = jsonObject2.get("sex").toString();
         String phone = jsonObject2.get("phone").toString();
-        User user = new User();
+//        User user = new User();
         user.setSex(Integer.valueOf(sex));
         user.setPhone(phone);
         user.setOpenId(openId);
@@ -143,8 +152,10 @@ public class MobilServiceImpl implements MobileService {
      * @throws BizException
      */
     public void sendCaptcha(String mobile, String clientIp, boolean isZtk) throws BizException {
+//        System.out.println("进入方法");
         mobile = StringUtils.trimToEmpty(mobile);
-
+//        SmsUtil.sendCaptcha(mobile, "123456");
+//        System.out.println("出来了");
         final SetOperations operations = redisTemplate.opsForSet();
 
         /**

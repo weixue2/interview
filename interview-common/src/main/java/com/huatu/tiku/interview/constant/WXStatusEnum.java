@@ -10,9 +10,35 @@ import lombok.AllArgsConstructor;
 public class WXStatusEnum {
 
     @AllArgsConstructor
-    public enum Status {
+    public enum BizStatus {
         ONLINE(1, "上线"), OFFLINE(0, "下线");
 
+
+        private int bizSatus;
+        private String description;
+
+        public int getBizSatus() {
+            return bizSatus;
+        }
+
+        public void setBizSatus(int bizSatus) {
+            this.bizSatus = bizSatus;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+
+    }
+
+    @AllArgsConstructor
+    public enum Status {
+        NORMAL(1, "正常"), DELETE(0, "删除");
         private int status;
         private String description;
 
@@ -33,26 +59,4 @@ public class WXStatusEnum {
         }
     }
 
-    @AllArgsConstructor
-    public enum BizStatus {
-        NORMAL(1, "正常"), DELETE(0, "删除");
-        private int bizSatus;
-        private String description;
-
-        public int getBizSatus() {
-            return bizSatus;
-        }
-
-        public void setBizSatus(int bizSatus) {
-            this.bizSatus = bizSatus;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-    }
 }

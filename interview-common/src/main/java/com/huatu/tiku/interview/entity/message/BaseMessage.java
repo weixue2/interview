@@ -28,11 +28,10 @@ public class BaseMessage {
     // 消息id，64位整型
     private long MsgId;
 
-    public BaseMessage(String toUserName, String fromUserName, long createTime, String msgType, int funcFlag, long msgId) {
+    public BaseMessage(String toUserName, String fromUserName, long createTime, int funcFlag, long msgId) {
         ToUserName = toUserName;
         FromUserName = fromUserName;
         CreateTime = createTime;
-        MsgType = msgType;
         FuncFlag = funcFlag;
         MsgId = msgId;
     }

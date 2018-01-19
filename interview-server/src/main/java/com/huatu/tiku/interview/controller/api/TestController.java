@@ -9,6 +9,7 @@ import com.huatu.tiku.interview.entity.template.TemplateData;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -103,6 +104,9 @@ public class TestController {
     }
     @GetMapping("test1")
     public String test1(){
+        JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)redisTemplate.getConnectionFactory();
+        jedisConnectionFactory.setDatabase(1);
+        redisTemplate.setConnectionFactory(jedisConnectionFactory);
         String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         System.out.println(accessToken);
         return accessToken;

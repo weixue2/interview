@@ -1,6 +1,8 @@
 package com.huatu.tiku.interview.service.impl;
 
+import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.NotificationType;
+import com.huatu.tiku.interview.exception.ReqException;
 import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.service.MorningReadingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,16 @@ public class MorningReadingServiceImpl implements MorningReadingService {
     public List<NotificationType> findAll() {
         Sort sort = new Sort("pushTime","desc");
         return notificationTypeRepository.findAll(sort);
+    }
+
+    @Override
+    public NotificationType get(Long id) {
+
+        NotificationType one = notificationTypeRepository.findOne(id);
+        if(one == null){
+            throw new ReqException(ResultEnum.FIND_FAIL);
+        }
+        return one;
     }
 
 

@@ -41,7 +41,7 @@ public class MessageHandlerImpl implements MessageHandler {
 
             String templateMsgJson = JsonUtil.toJson(templateMsg);
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-                    "6_Du950DMB6FT-VeZGW8Pvftu9nc6kTk8WhHy_CAWJ12htL_x5ETtxUz270aZ1Ww8BbSy0uLQt5a8NwgKQOAwBS4b2JXBxhm3EzxcW6usp6lcOxxCLPJF0t_WOvBjiphdl8x8wGwzdfZx5o9MCTMWgAGAATD",
+                    "6_Ba9FmiljolWE03r5uSn3a3t92OYsN8QVy-himS6BrDO2-cOsZ_l-85rRZVcZlTM-nqYKwrmw2jCses9uLvEG2wV5z7SvcBCx_XL8OVSD0y19wJ_U11DyNSaQ8DdxwiTDr4E8vv5vAJLQiP-CJXHgAJADRB",
                     templateMsgJson);
             return null;
         }

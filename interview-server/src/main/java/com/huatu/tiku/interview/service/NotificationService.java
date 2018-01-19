@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.service;
 
 import com.huatu.tiku.interview.entity.po.NotificationType;
+import com.huatu.tiku.interview.util.common.PageUtil;
 
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
  * @Description
  */
 public interface NotificationService {
-    List<NotificationType> findAll();
 
     NotificationType saveRegisterReport(NotificationType registerReport);
+    PageUtil<List<NotificationType>> findAll(Integer size, Integer page);
+    PageUtil<List<NotificationType>> findByTitleLimit( Integer size,Integer page,String title);
 }

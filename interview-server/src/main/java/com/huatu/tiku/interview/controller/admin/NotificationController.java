@@ -4,6 +4,7 @@ import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.NotificationService;
+import com.huatu.tiku.interview.util.common.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,16 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
     @GetMapping
-    public Result getAll(){
-        List<NotificationType> all = notificationService.findAll();
-        return all.isEmpty()?Result.build(ResultEnum.ERROR):Result.ok();
+    public Result getPage(@RequestParam(name = "size", defaultValue = "10") Integer size, @RequestParam(name = "page", defaultValue = "1") Integer page){
+        PageUtil<List<NotificationType>> all = notificationService.findAll(size,page);
+        return all.getResult().isEmpty()?Result.build(ResultEnum.ERROR):Result.ok(all);
+    }
+
+    @GetMapping("fuzzy")
+    public Result fuzzy(@RequestParam(name = "size", defaultValue = "10") Integer size, @RequestParam(name = "page", defaultValue = "1") Integer page,String title){
+        PageUtil<List<NotificationType>> all = notificationService.findByTitleLimit(size,page,title);
+        System.out.println();
+        return all.getResult().isEmpty()?Result.build(ResultEnum.ERROR):Result.ok(all);
     }
 
 

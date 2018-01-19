@@ -50,4 +50,5 @@ public class WechatConfig {
     public static final String QRCONNECT_PATH = "https://open.weixin.qq.com/connect/qrconnect";
 
     public static final String SEND_TEMPLATE_MESSAGE = "https://api.weixin.qq.com/cgi-bin/message/template/send";
+    public static final String SEND_MESSAGE = "https://api.weixin.qq.com/cgi-bin/message/send";
 }

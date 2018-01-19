@@ -27,9 +27,9 @@ public class UserServiceImpl implements UserService {
 //            throw new ReqException(ResultEnum.OPENID_ERROR);
 //        }
 //        String openId = o.toString();
-        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
+//        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
 
-        User user_ = userRepository.findByOpenId(openId);
+        User user_ = userRepository.findByOpenId(user.getOpenId());
         if(user_ != null){
             user_.setPhone(user.getPhone());
             user_.setSex(user.getSex());
@@ -55,7 +55,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.getUserByOpenIdAndStatus(openId,1);
     }
 
-    public User getUserByOpenId(String openId){
+    @Override
+    public User getUserByOpenId(String openId) {
         return userRepository.findByOpenId(openId);
+    }
+
+    @Override
+    public Object findAllUser() {
+        return userRepository.findAll();
     }
 }
