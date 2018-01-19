@@ -18,10 +18,7 @@ import me.chanjar.weixin.mp.bean.material.WxMpMaterialUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -33,7 +30,7 @@ import java.util.UUID;
  */
 @RestController
 @Slf4j
-@RequestMapping(value = "/end/oca",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/end/oca", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class OnlineCourseArrangementController {
 
     @Autowired
@@ -71,5 +68,10 @@ public class OnlineCourseArrangementController {
         notificationType.setImageUrl(fileUrl);
         notificationType.setTitle(title);
         return arrangementService.add(notificationType) ? Result.ok(fileUrl) : Result.build(ResultEnum.INSERT_FAIL);
+    }
+
+    @GetMapping("/CourseArrangement")
+    public Result findById(@RequestParam Long id) {
+        return Result.ok(arrangementService.findById(id));
     }
 }

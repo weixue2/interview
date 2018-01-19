@@ -43,10 +43,10 @@ public class GetReadingTableRunner{
         if(!all.isEmpty()){
             List<ReadingTemp> rts = new ArrayList<>();
             for (NotificationType mr:all){
-                rts.add(new ReadingTemp(mr.getId(),mr.getPushTime(),true));
+                rts.add(new ReadingTemp(mr.getId(),mr.getPushTime(),true,mr.getType()));
             }
             String json = JSON.toJSONString(rts);
-//            Thread.sleep(1000*60);
+            Thread.sleep(1000*60);
             stringRedisTemplate.opsForValue().set("readings", json);
         }
     }

@@ -27,9 +27,12 @@ public class MorningReadingServiceImpl implements MorningReadingService {
     private NotificationTypeRepository notificationTypeRepository;
 
     @Override
-    public Boolean add(NotificationType data) {
-        System.out.println(data);
-        return notificationTypeRepository.save(data)==null?false:true;
+    public Long add(NotificationType data) {
+        NotificationType nt = notificationTypeRepository.save(data);
+        if(nt == null){
+            throw new ReqException(ResultEnum.INSERT_FAIL);
+        }
+        return nt.getId();
     }
 
     @Override

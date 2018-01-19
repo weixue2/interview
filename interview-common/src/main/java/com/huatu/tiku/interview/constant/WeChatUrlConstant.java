@@ -36,7 +36,7 @@ public class WeChatUrlConstant {
     //根据OpenID列表群发
     public static String MESSAGE_MANY_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
 
-    public static String MENU_CONTENT = "{\"button\":[{\"type\":\"scancode_waitmsg\",\"name\":\"扫码签到\",\"key\":\"m_duanzi\"},{\"type\":\"click\",\"name\":\"课程安排\",\"key\":\"course\"},{\"name\":\"我的\",\"sub_button\":[{\"type\":\"view\",\"name\":\"关于华图\",\"key\":\"huatu\",\"url\":\"http://v.huatu.com\"},{\"type\":\"click\",\"name\":\"我的信息\",\"key\":\"m_imgmsg\"}]}]}";
+    public static String MENU_CONTENT = "{\"button\":[{\"type\":\"scancode_waitmsg\",\"name\":\"扫码签到\",\"key\":\"m_duanzi\"},{\"type\":\"click\",\"name\":\"课程安排\",\"key\":\"course\"},{\"name\":\"我的\",\"sub_button\":[{\"type\":\"view\",\"name\":\"学习效果\",\"key\":\"huatu\",\"url\":\"http://v.huatu.com\"},{\"type\":\"click\",\"name\":\"联系客服\",\"key\":\"conn_service\"}]}]}";
 
 
 }

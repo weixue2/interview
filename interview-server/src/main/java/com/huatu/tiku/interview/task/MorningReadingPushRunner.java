@@ -84,21 +84,27 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                         }
                         cal_a.setTime(rt.getDate());
                         if (cal_a.get(Calendar.YEAR) == cal_b.get(Calendar.YEAR)) {
-                            System.out.println("第一层");
                             if (cal_a.get(Calendar.MONTH) == cal_b.get(Calendar.MONTH)) {
-                                System.out.println("第2层");
                                 if (cal_a.get(Calendar.DAY_OF_MONTH) == cal_b.get(Calendar.DAY_OF_MONTH)) {
-                                    System.out.println("第3层");
                                     if (cal_a.get(Calendar.HOUR_OF_DAY) == cal_b.get(Calendar.HOUR_OF_DAY)) {
-                                        System.out.println("第4层");
                                         if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
-                                            System.out.println("第5层");
 //                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
                                                 if(rt.getStatus()){
-                                                    System.out.println("可以"+rt.getId());
                                                     List<User> allUser = userService.findAllUser();
                                                     for(User u : allUser){
-                                                        WechatTemplateMsg templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.No_2);
+                                                        WechatTemplateMsg templateMsg = null;
+                                                        switch (rt.getType()){
+                                                            case 1:{
+
+                                                            }
+                                                            case 2:{
+                                                                templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.No_2);
+                                                            }
+                                                            case 3:{
+
+                                                            }
+                                                        }
+
                                                         String templateMsgJson = JsonUtil.toJson(templateMsg);
                                                         templateMsgService.sendTemplate(
                                                                 accessToken,
