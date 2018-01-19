@@ -12,37 +12,37 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@DynamicInsert
+//@DynamicInsert
 @DynamicUpdate(true)
 @Entity
-@Table(name="t_notification_type")
-public class NotificationType   extends BaseEntity implements Serializable{
+@Table(name = "t_notification_type")
+public class NotificationType extends BaseEntity implements Serializable {
 
-        /**
-         * 通知类型  1线上课程安排  2晨读鸡汤  3 报道通知
-         */
-        private Integer type;
-        /**
-         * 图片url
-         */
-        private String imageUrl;
-        /**
-         * 微信认证图片id
-         */
-        private String wxImageId;
-        /**
-         * 推送时间
-         */
-        private Date pushTime;
-        /**
-         * 标题
-         */
-        private String title;
+    /**
+     * 通知类型  1线上课程安排  2晨读鸡汤  3 报道通知
+     */
+    private Integer type;
+    /**
+     * 图片url
+     */
+    private String imageUrl;
+    /**
+     * 微信认证图片id
+     */
+    private String wxImageId;
+    /**
+     * 推送时间
+     */
+    private Date pushTime;
+    /**
+     * 标题
+     */
+    private String title;
 
-        /**
-         * 推送内容
-         */
-        private String content;
+    /**
+     * 推送内容
+     */
+    private String content;
 
 
 }

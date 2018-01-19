@@ -22,6 +22,7 @@ public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangeme
         notificationType.setBizStatus(WXStatusEnum.BizStatus.NORMAL.getBizSatus());
         notificationType.setStatus(WXStatusEnum.Status.ONLINE.getStatus());
         notificationType.setType(1);
-        return notificationTypeRepository.save(notificationType) != null;
+        notificationTypeRepository.save(notificationType);
+        return true;
     }
 }

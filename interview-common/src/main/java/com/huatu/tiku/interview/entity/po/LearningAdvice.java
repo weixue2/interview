@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="t_learning_report")
+@Table(name="t_learning_advice")
 public class LearningAdvice  extends BaseEntity  implements Serializable {
 
     //类型
