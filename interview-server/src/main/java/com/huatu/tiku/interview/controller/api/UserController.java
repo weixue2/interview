@@ -42,11 +42,7 @@ public class UserController {
         userService.updateUser(user,request);
     }
 
-    @PostMapping
-    public Result updateUser(@RequestBody User user,HttpServletRequest request){
 
-        return userService.updateUser(user,request)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
-    }
 
 
 //    @PostMapping

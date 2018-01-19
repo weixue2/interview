@@ -1,13 +1,15 @@
 package com.huatu.tiku.interview.controller.admin;
 
+import com.huatu.tiku.interview.constant.ResultEnum;
+import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author jbzm
@@ -22,5 +24,11 @@ public class UserEndController {
     @GetMapping
     public Result findUser() {
         return Result.ok(userService.findAllUser());
+    }
+
+    @PostMapping
+    public Result updateUser(@RequestBody User user, HttpServletRequest request){
+        user.setStatus(1);
+        return userService.updateUser(user,request)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }
 }
