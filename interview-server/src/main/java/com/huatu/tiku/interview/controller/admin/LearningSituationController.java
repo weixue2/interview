@@ -45,7 +45,7 @@ public class LearningSituationController {
      * @param id
      * @return
      */
-    @PutMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @DeleteMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result del(@PathVariable  Long id){
 
         return learningSituationService.del(id) == 0 ?Result.ok():Result.build(ResultEnum.DELETE_FAIL);
@@ -79,7 +79,7 @@ public class LearningSituationController {
 
 
     /**
-     * 查询某条学习情况记录
+     * 查询学习情况记录列表
      */
     @GetMapping(value="list",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result list(@RequestParam(name = "name") String name,
