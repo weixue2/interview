@@ -15,4 +15,5 @@ public interface MorningReadingService {
     Boolean update(NotificationType reading);
     void del(Long id);
     List<NotificationType> findAll();
+    NotificationType get(Long id);
 }

@@ -20,18 +20,17 @@ import javax.servlet.http.HttpServletRequest;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
-
     @Override
-    public Boolean updateUser(User user, HttpServletRequest request) {
+    public Boolean updateUser(User user,HttpServletRequest request) {
 //        Object o = request.getSession().getAttribute("openId");
 //        if(o == null){
 //            throw new ReqException(ResultEnum.OPENID_ERROR);
 //        }
 //        String openId = o.toString();
-        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
+//        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
 
-        User user_ = userRepository.findByOpenId(openId);
-        if (user_ != null) {
+        User user_ = userRepository.findByOpenId(user.getOpenId());
+        if(user_ != null){
             user_.setPhone(user.getPhone());
             user_.setSex(user.getSex());
             user_.setName(user.getName());
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
             user.setKeyContact(user.getKeyContact());
         }
         System.out.println(user);
-        return userRepository.save(user_) == null ? false : true;
+        return userRepository.save(user_)==null ? false:true;
     }
 
     @Override
@@ -53,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String openId) {
-        return userRepository.getUserByOpenIdAndStatus(openId, 1);
+        return userRepository.getUserByOpenIdAndStatus(openId,1);
     }
 
     @Override
