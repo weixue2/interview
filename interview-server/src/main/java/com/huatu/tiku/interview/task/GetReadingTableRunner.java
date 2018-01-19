@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.task;
 
 import com.alibaba.fastjson.JSON;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.repository.NotificationTypeRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author ZhenYang
@@ -51,6 +53,7 @@ public class GetReadingTableRunner{
             System.out.println("这森"+json);
 //            Thread.sleep(1000*31);
             stringRedisTemplate.opsForValue().set("readings",json);
+            stringRedisTemplate.expire("readings",2 * 3600 * 1000, TimeUnit.SECONDS);
 //            Object o = stringRedisTemplate.opsForValue().get("readings");
 //            System.out.println("过去"+o.toString());
 //            List<ReadingTemp> list = (List<ReadingTemp>)o;

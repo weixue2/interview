@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author ZhenYang
@@ -95,7 +96,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                             if (cal_a.get(Calendar.MONTH) == cal_b.get(Calendar.MONTH)) {
                                 if (cal_a.get(Calendar.DAY_OF_MONTH) == cal_b.get(Calendar.DAY_OF_MONTH)) {
                                     if (cal_a.get(Calendar.HOUR_OF_DAY) == cal_b.get(Calendar.HOUR_OF_DAY)) {
-//                                        if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
+                                        if (cal_a.get(Calendar.MINUTE) == cal_b.get(Calendar.MINUTE)) {
 //                                            if (cal_a.get(Calendar.SECOND) == cal_b.get(Calendar.SECOND)) {
                                                 if(rt.getStatus()){
                                                     List<User> allUser = userService.findAllUser();
@@ -132,7 +133,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                                                 }
 
 //                                            }
-//                                        }
+                                        }
                                     }
                                 }
                             }
@@ -140,6 +141,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
                     }
                     String json = JSON.toJSONString(rts);
                     stringRedisTemplate.opsForValue().set("readings", json);
+                    stringRedisTemplate.expire("readings",2 * 3600 * 1000, TimeUnit.SECONDS);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
