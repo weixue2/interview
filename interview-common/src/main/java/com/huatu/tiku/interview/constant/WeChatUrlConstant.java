@@ -12,7 +12,7 @@ public class WeChatUrlConstant {
     public static String PHP_GET_USER_INFO = "http://testapi.huatu.com/app_ztk/getGdmsinfo.php?p=";
 
     public static String ACCESS_TOKEN = "ACCESS_TOKEN";
-    public static String ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
+    public static String ACCESS_TOKEN_KEY = "we_a_t_201801119";
     /*发送模板消息接口*/
     public static String TEMPLATE_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=";
     /*  秘钥  */

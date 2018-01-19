@@ -14,6 +14,7 @@ import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import org.aspectj.weaver.patterns.NotTypePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;

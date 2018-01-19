@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.service;
 import com.huatu.tiku.interview.entity.po.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author zhouwei
@@ -18,5 +19,5 @@ public interface UserService {
 
     User getUserByOpenId(String openId);
 
-    Object findAllUser();
+    List<User> findAllUser();
 }

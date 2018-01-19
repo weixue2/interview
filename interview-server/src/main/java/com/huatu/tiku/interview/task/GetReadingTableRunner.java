@@ -46,7 +46,7 @@ public class GetReadingTableRunner{
                 rts.add(new ReadingTemp(mr.getId(),mr.getPushTime(),true));
             }
             String json = JSON.toJSONString(rts);
-            Thread.sleep(1000*60);
+//            Thread.sleep(1000*60);
             stringRedisTemplate.opsForValue().set("readings", json);
         }
     }
