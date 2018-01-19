@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.task;
 import com.alibaba.fastjson.JSON;
 import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
@@ -48,13 +49,13 @@ public class MorningReadingPushRunner implements CommandLineRunner {
     class RemindTask extends TimerTask {
         @Override
         public void run() {
-
+            String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
 
             WechatTemplateMsg templateMsg = new WechatTemplateMsg("omsLn0dOlKTbFpGPkCDiqWy79oJY",TemplateEnum.No_2);
 
             String templateMsgJson = JsonUtil.toJson(templateMsg);
             TemplateMsgResult msgResult = templateMsgService.sendTemplate(
-                    "6_Ba9FmiljolWE03r5uSn3a3t92OYsN8QVy-himS6BrDO2-cOsZ_l-85rRZVcZlTM-nqYKwrmw2jCses9uLvEG2wV5z7SvcBCx_XL8OVSD0y19wJ_U11DyNSaQ8DdxwiTDr4E8vv5vAJLQiP-CJXHgAJADRB",
+                    accessToken,
                     templateMsgJson);
             System.out.println(msgResult);
             try {
