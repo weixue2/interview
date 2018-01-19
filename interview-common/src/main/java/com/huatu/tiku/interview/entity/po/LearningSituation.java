@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Author: ZhenYang
@@ -21,8 +20,8 @@ import java.util.Date;
 @Table(name="t_learning_situation")
 public class LearningSituation extends BaseEntity  implements Serializable {
     //---------答题日期---------
-    private Date answerDate;
-    //---------姓名---------
+    private String answerDate;
+    // -----姓名---------
     private String name;
     //---------用户ID---------
     private Long userId;

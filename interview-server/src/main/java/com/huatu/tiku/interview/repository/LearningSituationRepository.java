@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,4 +51,9 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
     List<LearningSituation> findByStatusAndNameLike(int status,String name, Pageable pageRequest);
 
     long countByStatusAndNameLike( int status,String name);
+
+
+    @Query("select ls.remark from  LearningSituation ls where ls.answerDate = ?1 and ls.status = 1 order by ls.gmtCreate asc")
+    List<String> findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(Date date);
+
 }

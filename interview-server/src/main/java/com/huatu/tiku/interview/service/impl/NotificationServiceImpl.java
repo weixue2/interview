@@ -1,5 +1,6 @@
 package com.huatu.tiku.interview.service.impl;
 
+import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.service.NotificationService;
@@ -21,5 +22,13 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public List<NotificationType> findAll() {
         return notificationTypeRepository.findAll();
+    }
+
+    @Override
+    public NotificationType saveRegisterReport(NotificationType registerReport) {
+
+        registerReport.setStatus(WXStatusEnum.Status.ONLINE.getStatus());
+        registerReport.setBizStatus(WXStatusEnum.BizStatus.NORMAL.getBizSatus());
+        return notificationTypeRepository.save(registerReport);
     }
 }
