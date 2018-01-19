@@ -21,7 +21,7 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
 
     @Transactional
     @Modifying
-    @Query("update LearningSituation ls set ls.status=-1 where ls.id=?5")
+    @Query("update LearningSituation ls set ls.status=-1 where ls.id=?1")
     int updateToDel(Long id);
 
 

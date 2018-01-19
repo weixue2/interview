@@ -45,7 +45,7 @@ public class LearningSituationController {
      * @param id
      * @return
      */
-    @PutMapping(value="{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PutMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result del(@PathVariable  Long id){
         learningSituationService.del(id);
         return Result.ok();
@@ -73,7 +73,8 @@ public class LearningSituationController {
     @GetMapping(value="detail/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result detail(@PathVariable  Long id){
         log.info("id：{}",id);
-        return learningSituationService.findOne(id) == null? Result.ok(): Result.build(ResultEnum.FIND_FAIL);
+        LearningSituation learningSituation = learningSituationService.findOne(id);
+        return learningSituation != null? Result.ok(learningSituation): Result.build(ResultEnum.FIND_FAIL);
     }
 
 
@@ -81,9 +82,9 @@ public class LearningSituationController {
      * 查询某条学习情况记录
      */
     @GetMapping(value="list",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result list(@PathVariable(name = "name") String name,
+    public Result list(@RequestParam(name = "name") String name,
                        @RequestParam(name = "page", defaultValue = "1") int page,
-                       @RequestParam(name = "pageSize", defaultValue = "20") int pageSize){
+                       @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
 
         Pageable pageRequest = new PageRequest(page - 1, pageSize, Sort.Direction.DESC, "gmtCreate");
         log.info("name: {},pageRequest: {}", name, pageRequest);
