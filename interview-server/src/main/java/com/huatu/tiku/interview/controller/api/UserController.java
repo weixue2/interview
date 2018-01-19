@@ -33,14 +33,14 @@ public class UserController {
 
     @Autowired
     private MobileService mobileService;
-    @PutMapping
-    public void updateUserInfo(@RequestBody User user,HttpServletRequest request){
-        log.info("id:{}",user.getId());
-        if(user==null || user.getId()==0){
-            throw new BizException(ErrorResult.create(403,"参数有误"));
-        }
-        userService.updateUser(user,request);
-    }
+//    @PutMapping
+//    public void updateUserInfo(@RequestBody User user,HttpServletRequest request){
+//        log.info("id:{}",user.getId());
+//        if(user==null || user.getId()==0){
+//            throw new BizException(ErrorResult.create(403,"参数有误"));
+//        }
+//        userService.updateUser(user,request);
+//    }
 
 
 
