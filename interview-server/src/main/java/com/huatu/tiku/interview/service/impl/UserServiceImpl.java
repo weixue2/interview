@@ -80,4 +80,10 @@ public class UserServiceImpl implements UserService {
         };
         return userRepository.findAll(specification);
     }
+
+    @Override
+    public List<User> findAllUser() {
+        return userRepository.findAll();
+    }
+
 }

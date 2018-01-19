@@ -20,4 +20,5 @@ public interface UserService {
     User getUserByOpenId(String openId);
 
     List<User> findAllUser(String content);
+    List<User> findAllUser();
 }
