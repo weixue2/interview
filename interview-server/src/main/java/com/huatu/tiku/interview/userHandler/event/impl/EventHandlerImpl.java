@@ -14,7 +14,6 @@ import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.aspectj.weaver.patterns.NotTypePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -118,7 +117,8 @@ public class EventHandlerImpl implements EventHandler {
     public String eventClick(Map<String, String> requestMap) {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
-            List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus(new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.NORMAL.getBizSatus(), WXStatusEnum.Status.ONLINE.getStatus());
+            List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
+                    (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
             str = WxMpXmlOutMessage
                     .IMAGE()
                     .mediaId(notTypePatterns.get(0).getWxImageId())

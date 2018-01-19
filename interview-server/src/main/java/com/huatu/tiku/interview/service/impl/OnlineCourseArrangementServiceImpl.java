@@ -19,8 +19,8 @@ public class OnlineCourseArrangementServiceImpl implements OnlineCourseArrangeme
 
     @Override
     public Boolean add(NotificationType notificationType) {
-        notificationType.setBizStatus(WXStatusEnum.BizStatus.NORMAL.getBizSatus());
-        notificationType.setStatus(WXStatusEnum.Status.ONLINE.getStatus());
+        notificationType.setBizStatus(WXStatusEnum.BizStatus.ONLINE.getBizSatus());
+        notificationType.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
         notificationType.setType(1);
         notificationTypeRepository.save(notificationType);
         return true;
