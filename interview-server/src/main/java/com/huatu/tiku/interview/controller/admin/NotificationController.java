@@ -66,4 +66,13 @@ public class NotificationController {
     }
 
 
+    /**
+     * 查询报道通知详情
+     */
+    @GetMapping("/registerReport/{id}")
+    public Result detail(@PathVariable  Long id){
+        NotificationType notificationType = notificationService.findOne(id);
+        return notificationType != null ? Result.ok(notificationType):Result.build(ResultEnum.INSERT_FAIL);
+    }
+
 }
