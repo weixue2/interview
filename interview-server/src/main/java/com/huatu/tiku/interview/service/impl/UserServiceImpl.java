@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
     public void createUser(String openId) {
         User user = new User();
         user.setOpenId(openId);
+        user.setStatus(1);
         userRepository.save(user);
     }
 

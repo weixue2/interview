@@ -51,7 +51,6 @@ public class NotificationRunner {
     @Scheduled(fixedDelay = 2 * 3600 * 1000)
     public void GetNotification() {
         List<NotificationType> list = notifyService.findByPushTime();
-        System.out.println(list.size());
         if (!list.isEmpty()) {
             List<ReadingTemp> rts = new ArrayList<>();
             for (NotificationType mr : list) {
@@ -71,6 +70,7 @@ public class NotificationRunner {
             if (rts != null) {
                 for (ReadingTemp rt : rts) {
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
+
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
                         PushNotification(rt, notifyService.get(rt.getId()));
@@ -82,6 +82,7 @@ public class NotificationRunner {
     }
 
     private void PushNotification(ReadingTemp rt, NotificationType notification) {
+
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         for (User u : userService.findAllUser()) {
             WechatTemplateMsg templateMsg = null;
@@ -91,13 +92,14 @@ public class NotificationRunner {
                     break;
                 }
                 case 2: {
-
+                    System.out.println("diojge1");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
                     templateMsg.setData(
                             MyTreeMap.createMap(
-                                    new TemplateMap("first", WechatTemplateMsg.item(notification.getTitle(), "#000000")),
+                                    new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
                                     new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
-                                    new TemplateMap("remark", WechatTemplateMsg.item("华图教育发给你的", "#000000"))
+                                    new TemplateMap("keyword2", WechatTemplateMsg.item(notification.getTitle(), "#000000")),
+                                    new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
                             )
                     );
                     break;
