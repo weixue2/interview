@@ -51,14 +51,14 @@ public class AccessTokenThread {
      */
     @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
     public void getToken() {
-        log.info("getToken");
-        accessToken = WeiXinAccessTokenUtil.getAccessToken();
-        if (StringUtils.isNotEmpty(accessToken)) {
-            stringRedisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
-            log.info("获取成功,accessToken:" + accessToken);
-        } else {
-            log.info("获取token失败");
-        }
+//        log.info("getToken");
+//        accessToken = WeiXinAccessTokenUtil.getAccessToken();
+//        if (StringUtils.isNotEmpty(accessToken)) {
+//            stringRedisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
+//            log.info("获取成功,accessToken:" + accessToken);
+//        } else {
+//            log.info("获取token失败");
+//        }
     }
 
 }

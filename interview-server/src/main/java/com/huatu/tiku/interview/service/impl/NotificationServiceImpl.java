@@ -15,10 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +32,8 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public PageUtil<List<NotificationType>> findAll(Integer size,Integer page) {
         PageRequest pageable = new PageRequest(page-1,size,new Sort("gmtCreate"));
-        Page<NotificationType> all = notificationTypeRepository.findAll(pageable);
+        Specification<NotificationType> specification = selectRules();
+        Page<NotificationType> all = notificationTypeRepository.findAll(specification,pageable);
         List<NotificationVO> notificationVOs = GetAllParameter.test(all.getContent(), NotificationVO.class);
         int pageNumber = pageable.getPageNumber();
         int pageSize = pageable.getPageSize();
@@ -64,6 +63,45 @@ public class NotificationServiceImpl implements NotificationService {
                 .build();
         return resultPageUtil;
     }
+
+    @Override
+    public NotificationType get(Long id) {
+        Specification<NotificationType> specification = selectRules(id);
+        return notificationTypeRepository.findOne(specification);
+    }
+
+    @Override
+    public List<NotificationType> findByPushTime() {
+        return notificationTypeRepository.findByPushTime(new Date());
+    }
+
+
+    private <T> Specification<T> selectRules(Long id) {
+        Specification specification = new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                List<Predicate> predicates = Lists.newArrayList();
+                if (id != null) {
+                    predicates.add(cb.equal(root.get("id"), id));
+                    predicates.add(cb.equal(root.get("status"),"1"));
+                }
+                return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        return specification;
+    }
+    private <T> Specification<T> selectRules() {
+        Specification specification = new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                List<Predicate> predicates = Lists.newArrayList();
+                    predicates.add(cb.equal(root.get("status"),"1"));
+                return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        return specification;
+    }
+
     private <T> Specification<T> selectRules(String title) {
         Specification specification = new Specification<T>() {
             @Override
@@ -71,6 +109,7 @@ public class NotificationServiceImpl implements NotificationService {
                 List<Predicate> predicates = Lists.newArrayList();
                 if (title != null) {
                     predicates.add(cb.like(root.get("title"), "%"+title+"%"));
+                    predicates.add(cb.equal(root.get("status"),"1"));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }

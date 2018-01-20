@@ -7,12 +7,12 @@ package com.huatu.tiku.interview.constant;
  */
 public class BasicParameters {
 
-         //public static String appID = "wx93c4c72c6552b69b";
-   public static String appID = "wx53505056175d5968";       //华图的公众号
+         public static String appID = "wx93c4c72c6552b69b";
+//   public static String appID = "wx53505056175d5968";       //华图的公众号
     // public static String appID = "wx595215755b7fa959";  //郑毅的测试后
 
-          //public static String appsecret = "7886b1d7309c411fdaa63f420b313231";
-    public static String appsecret = "739040d83f6d5c73fa961e3b1a48540f";    //华图的公众号
+          public static String appsecret = "7886b1d7309c411fdaa63f420b313231";
+//    public static String appsecret = "739040d83f6d5c73fa961e3b1a48540f";    //华图的公众号
     // public static String appsecret = "b5894205322a1f814162670435ca0aa3";    //郑毅的测试号
 
     public static String RegExForImageUpload = ".+(.JPEG|.jpeg|.JPG|.jpg|.bmp|.BMP)$";
@@ -29,6 +29,6 @@ public class BasicParameters {
     public static String FOR_VER_QR_CODE="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGt8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQVFuQ2MweWFlYW0xMDAwMGcwN0cAAgSGVF9aAwQAAAAA";
 
     //晨读
-    public static String xxx = "http://192.168.10.93:8080/#/test_template";
+    public static String MorningReadingURL = "http://192.168.10.93:8080/#/test_template?id=";
 
 }

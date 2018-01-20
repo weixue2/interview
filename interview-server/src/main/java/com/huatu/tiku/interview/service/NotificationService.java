@@ -19,4 +19,6 @@ public interface NotificationService {
     int del(Long id);
 
     NotificationType findOne(Long id);
+    NotificationType get(Long id);
+    List<NotificationType> findByPushTime();
 }

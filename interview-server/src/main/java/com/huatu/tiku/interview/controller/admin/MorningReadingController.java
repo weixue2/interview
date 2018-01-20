@@ -20,6 +20,7 @@ public class MorningReadingController {
 
     @PostMapping //@requestBody --> Json
     public Result add(@RequestBody NotificationType morningReading){
+        morningReading.setStatus(1);
         morningReading.setType(2);
         Long id = readingService.add(morningReading);
         return  Result.ok(id);
