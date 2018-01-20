@@ -82,7 +82,7 @@ public enum TemplateEnum {
                     new TemplateMap("first", WechatTemplateMsg.item("first111","#000000")),
                     new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
                     new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
-                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+//                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
                     new TemplateMap("remark", WechatTemplateMsg.item("remark","#000000"))
             )
     ),
