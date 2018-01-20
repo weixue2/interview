@@ -41,6 +41,26 @@ public enum TemplateEnum {
             "鸡汤晨读",
             BasicParameters.MorningReadingURL,
             null),
+
+    /*每日学习统计*/
+    DailyReport("krkjVlxdeNqhIsd2VH_4FukKinQAJXs3cqiR9XsAFPs","每日学习统计","",MyTreeMap.createMap(
+            new TemplateMap("first", WechatTemplateMsg.item("今日学习报告已经生成","#000000")),
+            new TemplateMap("remark", WechatTemplateMsg.item("好好学习，天天向上","#000000"))
+//            new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
+//            new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
+//            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+//            new TemplateMap("keyword4", WechatTemplateMsg.item("keyword42222","#000000"))
+    )),
+
+    /*线下学习统计*/
+    TotalReport("Bk7qZ79sMZoMivyBlDbJwnN4o0oxGJ3AwiN0YCfSK20","线下学习历程","",MyTreeMap.createMap(
+            new TemplateMap("first", WechatTemplateMsg.item("线下学习历程已经生成","#000000")),
+            new TemplateMap("remark", WechatTemplateMsg.item("好好学习，天天向上","#000000"))
+//            new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
+//            new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
+//            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+//            new TemplateMap("keyword4", WechatTemplateMsg.item("keyword42222","#000000"))
+    )),
     ;
 
     TemplateEnum(String templateId, String description,String url,TreeMap<String, TreeMap<String,String>> data) {
