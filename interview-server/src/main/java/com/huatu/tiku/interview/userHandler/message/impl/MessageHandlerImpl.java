@@ -56,7 +56,7 @@ public class MessageHandlerImpl implements MessageHandler {
                     templateMsgJson);
             return null;
         }
-        if(requestMap.get("Content").equals("?")){
+        if(requestMap.get("Content").equals("get")){
 //            //这个是直接生成String
 ////            String templateMsgJson = WechatTemplateMsg.getJson(TemplateEnum.No_2,requestMap);
 //            WechatTemplateMsg templateMsg = new WechatTemplateMsg(TemplateEnum.No_2,requestMap);
