@@ -25,27 +25,27 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
     int updateToDel(Long id);
 
 
-    @Query(value = "SELECT ifnull(avg(behavior),0) ,ifnull(avg(language_expression),0) ,ifnull(avg(focus_topic),0) ,ifnull(avg(is_organized),0) ,ifnull(avg(have_substance),0) " +
+    @Query(value = "SELECT avg(behavior) ,avg(language_expression) ,avg(focus_topic) ,avg(is_organized) ,avg(have_substance) " +
             "FROM t_learning_situation WHERE user_id = ?1 AND answer_date = curdate()", nativeQuery = true)
-    List<Object[]> countTodayAvg(long userId);
+    List<Double> countTodayAvg(long userId);
 
 
-    @Query(value = "SELECT practice_content , ifnull(count(1),0) FROM t_learning_situation WHERE user_id = ?1 " +
+    @Query(value = "SELECT practice_content ,count(1)  FROM t_learning_situation WHERE user_id = ?1 " +
             "AND answer_date = curdate() GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
-    List<Object[]> countTodayAnswerCount(long userId);
+    List<List<Integer>> countTodayAnswerCount(long userId);
 
 
 
 
 
-    @Query(value = "SELECT ifnull(avg(behavior),0) ,ifnull(avg(language_expression),0) ,ifnull(avg(focus_topic),0) ,ifnull(avg(is_organized),0) ,ifnull(avg(have_substance),0)  " +
+    @Query(value = "SELECT avg(behavior) ,avg(language_expression) ,avg(focus_topic) ,avg(is_organized) ,avg(have_substance) " +
             "FROM t_learning_situation WHERE user_id = ?1 ", nativeQuery = true)
-    List<Object[] > countTotalAvg(long userId);
+    List<Double> countTotalAvg(long userId);
 
 
-    @Query(value = "SELECT practice_content ,ifnull(count(1),0)  FROM t_learning_situation WHERE user_id = ?1 " +
+    @Query(value = "SELECT practice_content ,count(1)  FROM t_learning_situation WHERE user_id = ?1 " +
             " GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
-    List<Object[]> countTotalAnswerCount(long userId);
+    List<List<Integer>> countTotalAnswerCount(long userId);
 
 
     List<LearningSituation> findByStatusAndNameLike(int status,String name, Pageable pageRequest);
@@ -54,6 +54,6 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
 
 
     @Query("select ls.remark from  LearningSituation ls where ls.answerDate = ?1 and ls.status = 1 order by ls.gmtCreate asc")
-    List<String> findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(String date);
+    List<String> findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(Date date);
 
 }

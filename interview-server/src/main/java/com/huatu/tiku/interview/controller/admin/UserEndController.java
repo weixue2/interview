@@ -27,5 +27,9 @@ public class UserEndController {
         return Result.ok(userService.findAllUser(content));
     }
 
-
+    @PostMapping
+    public Result updateUser(@RequestBody User user, HttpServletRequest request) {
+        user.setStatus(1);
+        return userService.updateUser(user, request) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
+    }
 }

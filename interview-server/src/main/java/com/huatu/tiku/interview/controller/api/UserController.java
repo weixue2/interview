@@ -26,10 +26,10 @@ import java.util.Map;
 //@CrossOrigin
 @Slf4j
 @RestController
-@RequestMapping(value = "/api/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/user",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserController {
     @Autowired
-    private UserService userService;
+    private  UserService userService;
 
     @Autowired
     private MobileService mobileService;
@@ -43,7 +43,9 @@ public class UserController {
 //    }
 
 
-    //    @PostMapping
+
+
+//    @PostMapping
 //    public void createUser(@RequestBody String openId){
 //        log.info("id:{}",openId);
 //        if(StringUtils.isBlank(openId)){
@@ -51,31 +53,26 @@ public class UserController {
 //        }
 //        userService.createUser(openId);
 //    }
-    @PostMapping
-    public Result updateUser(@RequestBody User user, HttpServletRequest request) {
-        user.setStatus(1);
-        return userService.updateUser(user, request) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
-    }
+
 
     @GetMapping
-    public Result getUserInfo(String openId) {
+    public Result getUserInfo(String openId){
 //        System.out.println("你知道吗 openId:"+openId);
-        User user = userService.getUser(openId);
-        Map<String, User> map = Maps.newHashMapWithExpectedSize(4);
-        map.put("user", user);
-        return Result.ok(map);
+        User user  =userService.getUser(openId);
+        Map<String,User> map = Maps.newHashMapWithExpectedSize(4);
+        map.put("user",user);
+        return  Result.ok(map);
     }
 
     @GetMapping("getMobile")
-    public Result getMobile(String mobile, String openId, HttpServletRequest req) {
+    public Result getMobile(String mobile,String openId,HttpServletRequest req){
         // xml请求解析
 //        Map<String, String> requestMap = MessageUtil.parseXml(req);
 //        String openId = requestMap.get("FromUserName");
 //        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
 //        mobileService.checkPHP(mobile,openId);
-        return Result.ok(mobileService.checkPHP(mobile, openId, req));
+        return Result.ok(mobileService.checkPHP(mobile,openId,req));
     }
-
     @GetMapping(value = "getNext")
     public Result userCaptcha(String mobile, String captcha) {
         mobileService.userCaptcha(mobile, captcha);
