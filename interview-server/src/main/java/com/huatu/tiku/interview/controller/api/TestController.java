@@ -104,9 +104,9 @@ public class TestController {
     }
     @GetMapping("test1")
     public String test1(){
-        JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)redisTemplate.getConnectionFactory();
-        jedisConnectionFactory.setDatabase(1);
-        redisTemplate.setConnectionFactory(jedisConnectionFactory);
+//        JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)redisTemplate.getConnectionFactory();
+//        jedisConnectionFactory.setDatabase(1);
+//        redisTemplate.setConnectionFactory(jedisConnectionFactory);
         String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
         System.out.println(accessToken);
         return accessToken;

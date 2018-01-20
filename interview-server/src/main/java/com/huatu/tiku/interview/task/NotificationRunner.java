@@ -9,6 +9,7 @@ import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.template.MyTreeMap;
 import com.huatu.tiku.interview.entity.template.TemplateMap;
+import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
@@ -106,6 +107,10 @@ public class NotificationRunner {
 //                    );
                     templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.HuaTu01);
 
+//                    String templateMsgJson = JsonUtil.toJson(templateMsg);
+//                    TemplateMsgResult msgResult = templateMsgService.sendTemplate(
+//                            accessToken,
+//                            templateMsgJson);
                     break;
                 }
                 case 3: {

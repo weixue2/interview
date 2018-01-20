@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,8 +19,7 @@ public class ReportResponseVO {
     private Integer daySort;
 
     //统计日期
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date reportDate;
+    private String reportDate;
 
     //总作答题目数
     private Integer totalAnswerCount;

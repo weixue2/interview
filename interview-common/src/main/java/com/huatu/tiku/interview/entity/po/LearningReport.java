@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by x6 on 2018/1/17.
@@ -31,25 +28,24 @@ public class LearningReport extends BaseEntity  implements Serializable {
     private Long userId;
 
     //统计日期
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date reportDate;
+    private String reportDate;
 
     //总作答题目数
     private Integer totalAnswerCount;
 
     // 1自我认知  2工作实务   3策划组织  4综合分析   5材料题与特殊题型   6套题演练
     // 1自我认知  作答题目数
-    private Integer oneAnswerCount;
+    private int oneAnswerCount;
     //2工作实务  作答题目数
-    private Integer twoAnswerCount;
+    private int twoAnswerCount;
     //3策划组织  作答题目数
-    private Integer threeAnswerCount;
+    private int threeAnswerCount;
     //4综合分析  作答题目数
-    private Integer fourAnswerCount;
+    private int fourAnswerCount;
     //5材料题与特殊题型  作答题目数
-    private Integer fiveAnswerCount;
+    private int fiveAnswerCount;
     //6套题演练  作答题目数
-    private Integer sixAnswerCount;
+    private int sixAnswerCount;
 
     //------------举止仪态-------------
     private Double behavior;

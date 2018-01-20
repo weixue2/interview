@@ -53,6 +53,7 @@ public class UserServiceImpl implements UserService {
     public void createUser(String openId) {
         User user = new User();
         user.setOpenId(openId);
+        user.setStatus(-1);
         userRepository.save(user);
     }
 
@@ -83,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUser() {
-        return userRepository.findAll();
+        return userRepository.findByStatus(1);
     }
 
 }
