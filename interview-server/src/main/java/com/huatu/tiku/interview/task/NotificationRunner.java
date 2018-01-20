@@ -14,13 +14,16 @@ import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author ZhenYang
@@ -30,6 +33,8 @@ import java.util.List;
 @Component
 @Slf4j
 public class NotificationRunner {
+
+    private final String key = "readings";
 
     @Autowired
     StringRedisTemplate redis;
@@ -43,34 +48,38 @@ public class NotificationRunner {
     @Autowired
     WechatTemplateMsgService templateMsgService;
 
-
-//    @Scheduled(fixedDelay = 2 * 3600 * 1000)
+    @Scheduled(fixedDelay = 2 * 3600 * 1000)
     public void GetNotification() {
         List<NotificationType> list = notifyService.findByPushTime();
+        System.out.println(list.size());
         if (!list.isEmpty()) {
             List<ReadingTemp> rts = new ArrayList<>();
             for (NotificationType mr : list) {
                 rts.add(new ReadingTemp(mr.getId(), mr.getPushTime(), true, mr.getType()));
             }
-            redis.opsForValue().set("readings", JSON.toJSONString(rts));
-//                redis.expire("readings",2 * 3600 * 1000, TimeUnit.SECONDS);
+            insertRedis(rts);
+        } else {
+            insertRedis("");
         }
     }
 
-
-//    @Scheduled(fixedDelay = 10 * 1000)
+    @Scheduled(fixedDelay = 10 * 1000)
     public void CheckNotification() {
-        Object o = redis.opsForValue().get("readings");
-        List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
-        for (ReadingTemp rt : rts) {
-            if (rt.getStatus() && rt.getDate().before(new Date())) {
-                rt.setStatus(false);
-                PushNotification(rt,notifyService.get(rt.getId()));
+        String  json = redis.opsForValue().get(key);
+        if(json.length()>2){
+            List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
+            if (rts != null) {
+                for (ReadingTemp rt : rts) {
+                    if (rt.getStatus() && rt.getDate().before(new Date())) {
+                        System.out.println(rt.getDate());
+                        rt.setStatus(false);
+                        PushNotification(rt, notifyService.get(rt.getId()));
+                    }
+                }
             }
+            insertRedis(rts);
         }
-        redis.opsForValue().set("readings", JSON.toJSONString(rts));
     }
-
 
     private void PushNotification(ReadingTemp rt, NotificationType notification) {
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
@@ -79,6 +88,7 @@ public class NotificationRunner {
             switch (rt.getType()) {
                 case 1: {
                     System.out.println("发送消息。");
+                    break;
                 }
                 case 2: {
 
@@ -90,12 +100,18 @@ public class NotificationRunner {
                                     new TemplateMap("remark", WechatTemplateMsg.item("华图教育发给你的", "#000000"))
                             )
                     );
+                    break;
                 }
                 case 3: {
-
+                    break;
                 }
             }
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
         }
+    }
+
+    private void insertRedis(Object o) {
+        redis.opsForValue().set(key, JSON.toJSONString(o));
+        redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
     }
 }
