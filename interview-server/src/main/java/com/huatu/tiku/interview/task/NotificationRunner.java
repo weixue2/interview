@@ -65,14 +65,14 @@ public class NotificationRunner {
         for (ReadingTemp rt : rts) {
             if (rt.getStatus() && rt.getDate().before(new Date())) {
                 rt.setStatus(false);
-                PushNotification(rt);
+                PushNotification(rt,notifyService.get(rt.getId()));
             }
         }
         redis.opsForValue().set("readings", JSON.toJSONString(rts));
     }
 
 
-    private void PushNotification(ReadingTemp rt) {
+    private void PushNotification(ReadingTemp rt, NotificationType notification) {
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         for (User u : userService.findAllUser()) {
             WechatTemplateMsg templateMsg = null;
@@ -81,7 +81,7 @@ public class NotificationRunner {
                     System.out.println("发送消息。");
                 }
                 case 2: {
-                    NotificationType notification = notifyService.get(rt.getId());
+
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
                     templateMsg.setData(
                             MyTreeMap.createMap(
