@@ -56,7 +56,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001+fromUserName);
+        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
@@ -123,6 +123,14 @@ public class EventHandlerImpl implements EventHandler {
             str = WxMpXmlOutMessage
                     .IMAGE()
                     .mediaId(notTypePatterns.get(0).getWxImageId())
+                    .fromUser(requestMap.get("ToUserName"))
+                    .toUser(requestMap.get("FromUserName"))
+                    .build()
+                    .toXml();
+        } else if ("user_info".equals(requestMap.get("EventKey"))) {
+            str = WxMpXmlOutMessage
+                    .TEXT()
+                    .content("正在开发")
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build()
