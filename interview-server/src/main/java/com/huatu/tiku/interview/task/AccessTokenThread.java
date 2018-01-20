@@ -49,7 +49,7 @@ public class AccessTokenThread {
      * token存入redis
      * 7100秒执行一次
      */
-    @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
+//    @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
     public void getToken() {
         log.info("getToken");
         accessToken = WeiXinAccessTokenUtil.getAccessToken();
