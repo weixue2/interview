@@ -68,7 +68,7 @@ public enum TemplateEnum {
     /*线下学习统计*/
     TotalReport("Bk7qZ79sMZoMivyBlDbJwnN4o0oxGJ3AwiN0YCfSK20","您的线下学习报告已生成。","",MyTreeMap.createMap(
             new TemplateMap("first", WechatTemplateMsg.item("学员姓名","#000000")),
-            new TemplateMap("keyword1", WechatTemplateMsg.item("2018年2月2日-2018年2月9日","#000000")),
+            new TemplateMap("keyword1", WechatTemplateMsg.item("时间：2018年2月2日-2018年2月9日","#000000")),
             new TemplateMap("remark", WechatTemplateMsg.item("请点击“详情”查看报告完整信息","#000000"))
 //
 //            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
