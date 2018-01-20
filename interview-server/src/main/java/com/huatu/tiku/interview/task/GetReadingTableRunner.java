@@ -1,32 +1,17 @@
-//package com.huatu.tiku.interview.task;
-//
-//import com.alibaba.fastjson.JSON;
-//import com.huatu.tiku.interview.constant.WeChatUrlConstant;
-//import com.huatu.tiku.interview.entity.dto.ReadingTemp;
-//import com.huatu.tiku.interview.entity.po.NotificationType;
-//import com.huatu.tiku.interview.repository.NotificationTypeRepository;
-//import com.huatu.tiku.interview.service.MorningReadingService;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.core.annotation.Order;
-//import org.springframework.data.redis.core.StringRedisTemplate;
-//import org.springframework.scheduling.annotation.Scheduled;
-//import org.springframework.stereotype.Component;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.concurrent.TimeUnit;
-//
-///**
-// * @Author ZhenYang
-// * @Date Created in 2018/1/18 10:57
-// * @Description
-// */
-//@Component
-//@Slf4j
-//public class GetReadingTableRunner{
-//
+package com.huatu.tiku.interview.task;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+/**
+ * @Author ZhenYang
+ * @Date Created in 2018/1/18 10:57
+ * @Description
+ */
+@Component
+@Slf4j
+public class GetReadingTableRunner{
+
 //    @Autowired
 //    NotificationTypeRepository readingRepository;
 //
@@ -53,4 +38,4 @@
 //            stringRedisTemplate.expire("readings",2 * 3600 * 1000, TimeUnit.SECONDS);
 //        }
 //    }
-//}
+}

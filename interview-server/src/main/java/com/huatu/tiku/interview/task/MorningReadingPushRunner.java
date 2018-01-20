@@ -1,44 +1,18 @@
-//package com.huatu.tiku.interview.task;
-//
-//import com.alibaba.fastjson.JSON;
-//import com.huatu.tiku.interview.constant.BasicParameters;
-//import com.huatu.tiku.interview.constant.TemplateEnum;
-//import com.huatu.tiku.interview.constant.WeChatUrlConstant;
-//import com.huatu.tiku.interview.entity.Article;
-//import com.huatu.tiku.interview.entity.dto.ReadingTemp;
-//import com.huatu.tiku.interview.entity.message.NewsMessage;
-//import com.huatu.tiku.interview.entity.po.NotificationType;
-//import com.huatu.tiku.interview.entity.po.User;
-//import com.huatu.tiku.interview.entity.template.MyTreeMap;
-//import com.huatu.tiku.interview.entity.template.TemplateMap;
-//import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
-//import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
-//import com.huatu.tiku.interview.service.MessageService;
-//import com.huatu.tiku.interview.service.NotificationService;
-//import com.huatu.tiku.interview.service.UserService;
-//import com.huatu.tiku.interview.service.WechatTemplateMsgService;
-//import com.huatu.tiku.interview.util.json.JsonUtil;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.core.annotation.Order;
-//import org.springframework.data.redis.core.RedisTemplate;
-//import org.springframework.data.redis.core.StringRedisTemplate;
-//import org.springframework.stereotype.Component;
-//
-//import java.text.DateFormat;
-//import java.text.SimpleDateFormat;
-//import java.util.*;
-//import java.util.concurrent.TimeUnit;
-//
-///**
-// * @Author ZhenYang
-// * @Date Created in 2018/1/18 10:52
-// * @Description
-// */
-//@Component
-//@Order
+package com.huatu.tiku.interview.task;
+
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+/**
+ * @Author ZhenYang
+ * @Date Created in 2018/1/18 10:52
+ * @Description
+ */
+@Component
+@Order
+public class MorningReadingPushRunner{
 //public class MorningReadingPushRunner implements CommandLineRunner {
-//
+
 //    @Autowired
 //    StringRedisTemplate stringRedisTemplate;
 //
@@ -130,6 +104,6 @@
 //        }
 //
 //    }
-//
-//
-//}
+
+
+}
