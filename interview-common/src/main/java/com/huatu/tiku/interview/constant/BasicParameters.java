@@ -31,4 +31,11 @@ public class BasicParameters {
     //晨读
     public static String MorningReadingURL = "http://192.168.10.93:8080/#/test_template?id=";
 
+
+    //TODO 每日学习效果反馈
+    public static String DailyReportURL = "http://192.168.10.93:8080/#/test_template?openId=";
+
+//    //TODO 线下学习历程
+//    public static String TotalReportURL = "http://192.168.10.93:8080/#/test_template?id=";
+
 }
