@@ -1,10 +1,14 @@
 package com.huatu.tiku.interview.service.impl;
 
 import com.huatu.tiku.interview.constant.ReportTypeConstant;
+import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.LearningAdvice;
 import com.huatu.tiku.interview.entity.po.LearningReport;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
+import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
+import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.entity.vo.request.ReportRequestVO;
 import com.huatu.tiku.interview.entity.vo.response.ReportResponseVO;
 import com.huatu.tiku.interview.repository.LearningAdviceRepository;
@@ -12,9 +16,12 @@ import com.huatu.tiku.interview.repository.LearningReportRepository;
 import com.huatu.tiku.interview.repository.LearningSituationRepository;
 import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.LearningReportService;
+import com.huatu.tiku.interview.service.WechatTemplateMsgService;
+import com.huatu.tiku.interview.util.json.JsonUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -38,8 +45,13 @@ public class LearningReportServiceImpl  implements LearningReportService {
     private LearningSituationRepository learningSituationRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    WechatTemplateMsgService templateMsgService;
+
     /**
-     * TODO 生成每日学习报告
+     *  生成每日学习报告
      * @return
      */
     @Override
@@ -59,15 +71,40 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 if(daySort <= 6){
                     //不是最后一天（只生成每日报告）
                     saveDailyReport(userId,daySort);
+                    pushDailyReport(user.getOpenId());
                 }else if(daySort == 7){
                     //最后一天（生成每日报告+总体报告）
-//                    saveDailyReport(userId,daySort);
                     saveTotalReport(userId);
+                    pushTotalReport(user.getOpenId());
                 }
             }
         }
         return Result.ok();
     }
+
+
+    //推送每日学习报告消息
+    private TemplateMsgResult pushDailyReport(String openId)  {
+        String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+        WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.DailyReport);
+        String templateMsgJson = JsonUtil.toJson(templateMsg);
+        TemplateMsgResult result = templateMsgService.sendTemplate(
+                accessToken,
+                templateMsgJson);
+        return result;
+    }
+
+    //推送每日学习报告消息
+    private TemplateMsgResult pushTotalReport(String openId)  {
+        String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+        WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.TotalReport);
+        String templateMsgJson = JsonUtil.toJson(templateMsg);
+        TemplateMsgResult result = templateMsgService.sendTemplate(
+                accessToken,
+                templateMsgJson);
+        return result;
+    }
+
 
     /**
      * 生成每日报告

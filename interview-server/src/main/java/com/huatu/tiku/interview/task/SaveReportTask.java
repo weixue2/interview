@@ -1,8 +1,6 @@
 package com.huatu.tiku.interview.task;
 
-import com.google.gson.Gson;
 import com.huatu.common.exception.BizException;
-import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.constant.cache.RedisKeyConstant;
 import com.huatu.tiku.interview.service.LearningReportService;
 import lombok.extern.slf4j.Slf4j;
@@ -10,9 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -20,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.UUID;
 
 /**
  * Created by x6 on 2018/1/18.
@@ -32,11 +26,11 @@ public class SaveReportTask {
     @Autowired
     private LearningReportService learningReportService;
 
-//    0 0 20 * * ?
-    @Autowired
-    private RedisTemplate redisTemplate;
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
 
     @PostConstruct
@@ -57,10 +51,8 @@ public class SaveReportTask {
             log.info("getServerIp:"+getServerIp());
 
             //处理业务
-            //生成学习报告
+            //生成学习报告并推送
             learningReportService.dailyReport();
-            //TODO 向学员推送学习报告
-
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -79,31 +71,7 @@ public class SaveReportTask {
     }
 
 
-    //TODO  图文类型的推送消息
-    private String pushRegisterReport()  {
 
-
-
-        String msg = "{\"touser\":\"o4gqK1rOtTxZ-cGlmHF5oyx6he58\", \"msgtype\":\"text\",\"text\":{ \"content\": \"谁让你这么早下班的？？？."+ UUID.randomUUID()+"\"} }";
-        String jsonString = new Gson().toJson(msg).toString();
-        // 调用接口获取access_token
-
-        String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN).toString();
-        String requestUrl = WeChatUrlConstant.MESSAGE_MANY_URL.replace(WeChatUrlConstant.ACCESS_TOKEN, accessToken);
-
-
-
-        HttpHeaders headers = new HttpHeaders();
-        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
-        headers.setContentType(type);
-        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
-        HttpEntity<String> formEntity = new HttpEntity<>(msg, headers);
-
-        String result =  restTemplate.postForObject(requestUrl,formEntity,String.class);
-        log.info("result:"+result);
-
-        return null;
-    }
 
 
 
