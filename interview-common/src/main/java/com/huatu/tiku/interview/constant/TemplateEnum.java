@@ -74,6 +74,18 @@ public enum TemplateEnum {
 //            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
 //            new TemplateMap("keyword4", WechatTemplateMsg.item("keyword42222","#000000"))
     )),
+    HuaTu01(
+            "x1DZtR_6zUzFWsDy-bRCDbLUBSH3JlyDjRSGb3jGzZ0",
+            "登录提醒",
+            "http://music.163.com/song?id=498040743&userid=84550482",
+            MyTreeMap.createMap(
+                    new TemplateMap("first", WechatTemplateMsg.item("first111","#000000")),
+                    new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
+                    new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
+                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+                    new TemplateMap("remark", WechatTemplateMsg.item("remark","#000000"))
+            )
+    ),
     ;
 
     TemplateEnum(String templateId, String description,String url,TreeMap<String, TreeMap<String,String>> data) {
