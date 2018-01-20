@@ -1,7 +1,9 @@
 package com.huatu.tiku.interview.task;
 
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -49,14 +51,14 @@ public class AccessTokenThread {
      */
     @Scheduled(fixedDelay = 2 * 3600 * 1000 - 100)
     public void getToken() {
-//        log.info("getToken");
-//        accessToken = WeiXinAccessTokenUtil.getAccessToken();
-//        if (StringUtils.isNotEmpty(accessToken)) {
-//            stringRedisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
-//            log.info("获取成功,accessToken:" + accessToken);
-//        } else {
-//            log.info("获取token失败");
-//        }
+        log.info("getToken");
+        accessToken = WeiXinAccessTokenUtil.getAccessToken();
+        if (StringUtils.isNotEmpty(accessToken)) {
+            stringRedisTemplate.opsForValue().set(WeChatUrlConstant.ACCESS_TOKEN_KEY, accessToken);
+            log.info("获取成功,accessToken:" + accessToken);
+        } else {
+            log.info("获取token失败");
+        }
     }
 
 }

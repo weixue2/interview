@@ -14,6 +14,7 @@ import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -64,18 +65,20 @@ public class NotificationRunner {
 
     @Scheduled(fixedDelay = 10 * 1000)
     public void CheckNotification() {
-        Object o = redis.opsForValue().get(key);
-        List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
-        if (rts != null) {
-            for (ReadingTemp rt : rts) {
-                if (rt.getStatus() && rt.getDate().before(new Date())) {
-                    System.out.println(rt.getDate());
-                    rt.setStatus(false);
-                    PushNotification(rt, notifyService.get(rt.getId()));
+        String  json = redis.opsForValue().get(key);
+        if(json.length()>2){
+            List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
+            if (rts != null) {
+                for (ReadingTemp rt : rts) {
+                    if (rt.getStatus() && rt.getDate().before(new Date())) {
+                        System.out.println(rt.getDate());
+                        rt.setStatus(false);
+                        PushNotification(rt, notifyService.get(rt.getId()));
+                    }
                 }
             }
+            insertRedis(rts);
         }
-        insertRedis(rts);
     }
 
     private void PushNotification(ReadingTemp rt, NotificationType notification) {
