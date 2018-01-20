@@ -93,8 +93,13 @@ public class LearningSituationController {
         }
         List<LearningSituation> list = learningSituationService.findList(name,pageRequest);
         long c = learningSituationService.countByNameLikeStatus(name);
-//
-        PageUtil p = PageUtil.builder().result(list).next(c > page * pageSize ? 1 : 0).build();
+
+        PageUtil p = PageUtil.builder()
+                .result(list)
+                .next(c > page * pageSize ? 1 : 0)
+                .total(c)
+                .totalPage((0 == c % pageSize) ? (c / pageSize) : (c / pageSize + 1))
+                .build();
         return  Result.ok(p);
     }
 
