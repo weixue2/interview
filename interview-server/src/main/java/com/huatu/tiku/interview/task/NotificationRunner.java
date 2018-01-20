@@ -50,7 +50,7 @@ public class NotificationRunner {
     @Autowired
     WechatTemplateMsgService templateMsgService;
 
-    @Scheduled(fixedDelay = 2 * 10 * 1000)
+    @Scheduled(fixedDelay = 3 * 10 * 1000)
     public void GetNotification() {
         List<NotificationType> list = notifyService.findByPushTime();
         System.out.println(list.size());
@@ -68,6 +68,7 @@ public class NotificationRunner {
     @Scheduled(fixedDelay = 10 * 1000)
     public void CheckNotification() {
         String  json = redis.opsForValue().get(key);
+        System.out.println("???");
         if(json.length()>2){
             List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
             if (rts != null) {
@@ -105,6 +106,7 @@ public class NotificationRunner {
 //                                    new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
 //                            )
 //                    );
+                    System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.HuaTu01);
 
 //                    String templateMsgJson = JsonUtil.toJson(templateMsg);
