@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.task;
 
 import com.alibaba.fastjson.JSON;
+import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.TemplateEnum;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
@@ -48,7 +49,7 @@ public class NotificationRunner {
     @Autowired
     WechatTemplateMsgService templateMsgService;
 
-    @Scheduled(fixedDelay = 2 * 3600 * 1000)
+    @Scheduled(fixedDelay = 2 * 60 * 1000)
     public void GetNotification() {
         List<NotificationType> list = notifyService.findByPushTime();
         if (!list.isEmpty()) {
@@ -92,8 +93,8 @@ public class NotificationRunner {
                     break;
                 }
                 case 2: {
-                    System.out.println("diojge1");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
+                    templateMsg.setUrl(BasicParameters.MorningReadingURL+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
