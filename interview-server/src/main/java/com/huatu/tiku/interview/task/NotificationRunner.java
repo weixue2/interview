@@ -109,6 +109,7 @@ public class NotificationRunner {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.HuaTu01);
 
+
 //                    String templateMsgJson = JsonUtil.toJson(templateMsg);
 //                    TemplateMsgResult msgResult = templateMsgService.sendTemplate(
 //                            accessToken,
