@@ -1,7 +1,9 @@
 package com.huatu.tiku.interview.service.impl;
 
+import com.huatu.common.utils.date.DateFormatUtil;
 import com.huatu.tiku.interview.constant.ReportTypeConstant;
 import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.LearningAdvice;
 import com.huatu.tiku.interview.entity.po.LearningReport;
@@ -57,7 +59,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
     @Override
     public Result dailyReport() {
 
-        List<User> userList = userRepository.findAll();
+        List<User> userList = userRepository.findByStatus(WXStatusEnum.Status.NORMAL.getStatus());
 
         if(CollectionUtils.isNotEmpty(userList)){
             for(User user:userList){
@@ -71,11 +73,11 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 if(daySort <= 6){
                     //不是最后一天（只生成每日报告）
                     saveDailyReport(userId,daySort);
-                    pushDailyReport(user.getOpenId());
+//                    pushDailyReport(user.getOpenId());
                 }else if(daySort == 7){
                     //最后一天（生成每日报告+总体报告）
                     saveTotalReport(userId);
-                    pushTotalReport(user.getOpenId());
+//                    pushTotalReport(user.getOpenId());
                 }
             }
         }
@@ -113,13 +115,16 @@ public class LearningReportServiceImpl  implements LearningReportService {
     private LearningReport saveDailyReport(long userId,int daySort) {
 
         //平均分统计
-        List<Double> avgList = learningSituationRepository.countTodayAvg(userId);
+        List<Object[]> avgList = learningSituationRepository.countTodayAvg(userId);
 
-       //答题数量统计
-        List<List<Integer>> answerCountList = learningSituationRepository.countTodayAnswerCount(userId);
-        LearningReport learningReport = buildReport(avgList, answerCountList);
+        //答题数量统计
+        List<Object[]> answerCountList = learningSituationRepository.countTodayAnswerCount(userId);
+        LearningReport learningReport = buildReport(avgList.get(0), answerCountList);
         learningReport.setDaySort(daySort);
-        learningReport.setReportDate(new Date());
+
+        String format = DateFormatUtil.NORMAL_DAY_FORMAT.format(new Date());
+
+        learningReport.setReportDate(format);
         learningReport.setType(DAILY_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport = learningReportRepository.save(learningReport);
@@ -134,17 +139,18 @@ public class LearningReportServiceImpl  implements LearningReportService {
     private LearningReport saveTotalReport(long userId) {
 
         //平均分统计
-        List<Double> avgList = learningSituationRepository.countTotalAvg(userId);
+        List<Object[]> avgList = learningSituationRepository.countTotalAvg(userId);
         //答题数量统计
-        List<List<Integer>> answerCountList = learningSituationRepository.countTotalAnswerCount(userId);
-        LearningReport learningReport = buildReport(avgList, answerCountList);
+        List<Object[]> answerCountList = learningSituationRepository.countTotalAnswerCount(userId);
+        LearningReport learningReport = buildReport(avgList.get(0), answerCountList);
+        String format = DateFormatUtil.NORMAL_DAY_FORMAT.format(new Date());
 
+        learningReport.setReportDate(format);
         learningReport.setDaySort(8);
-        learningReport.setReportDate(new Date());
         learningReport.setType(ReportTypeConstant.TOTAL_REPORT.getCode());
         learningReport.setUserId(userId);
-
         learningReport = learningReportRepository.save(learningReport);
+
         return learningReport;
     }
 
@@ -155,51 +161,51 @@ public class LearningReportServiceImpl  implements LearningReportService {
      * @param answerCountList
      * @return
      */
-    private LearningReport  buildReport(List<Double> avgList,List<List<Integer>> answerCountList){
+    private LearningReport  buildReport(Object[] avgList,List<Object[]> answerCountList){
         LearningReport.LearningReportBuilder builder = LearningReport.builder();
-        Double avgBehavior = avgList.get(0);
-        Double avgLanguageExpression = avgList.get(1);
-        Double avgFocusTopic = avgList.get(2);
-        Double avgIsOrganized = avgList.get(3);
-        Double avgHaveSubstance = avgList.get(4);
+        Double avgBehavior = (Double)avgList[0];
+        Double avgLanguageExpression = (Double)avgList[1];
+        Double avgFocusTopic = (Double)avgList[2];
+        Double avgIsOrganized = (Double)avgList[3];
+        Double avgHaveSubstance = (Double)avgList[4];
         builder.behavior(avgBehavior)
                 .languageExpression(avgLanguageExpression)
                 .focusTopic(avgFocusTopic)
                 .isOrganized(avgIsOrganized)
                 .haveSubstance(avgHaveSubstance);
 
-        if(CollectionUtils.isNotEmpty(answerCountList)){
-            for(List<Integer> answerCount:answerCountList){
-                Integer practiceType = answerCount.get(0);
-                Integer count = answerCount.get(1);
-                switch (practiceType) {
+
+            for(Object[] answerCount:answerCountList){
+                Object practiceType = answerCount[0];
+                Object count = answerCount[1];
+                switch (Integer.parseInt(practiceType.toString())) {
                     case 1: {
-                        builder.oneAnswerCount(count);
+                        builder.oneAnswerCount(Integer.parseInt(count.toString()));
                         break;
                     }
                     case 2: {
-                        builder.twoAnswerCount(count);
+                        builder.twoAnswerCount(Integer.parseInt(count.toString()));
                         break;
                     }
                     case 3: {
-                        builder.threeAnswerCount(count);
+                        builder.threeAnswerCount(Integer.parseInt(count.toString()));
                         break;
                     }
                     case 4: {
-                        builder.fourAnswerCount(count);
+                        builder.fourAnswerCount(Integer.parseInt(count.toString()));
                         break;
                     }
                     case 5: {
-                        builder.fiveAnswerCount(count);
+                        builder.fiveAnswerCount(Integer.parseInt(count.toString()));
                         break;
                     }
                     case 6: {
-                        builder.sixAnswerCount(count);
+                        builder.sixAnswerCount(Integer.parseInt(count.toString()));
                         break;
                     }
                 };
             }
-        }
+
         LearningReport report = builder.build();
         return report;
     }
@@ -239,7 +245,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 reportResponseVO.setHaveSubstanceAdvice(getAdvice(haveSubstance,5));
             }else if( DAILY_REPORT.getCode() == report.getType()){
                 //老师评语(查询当天学员所有的学习记录)
-                Date reportDate = report.getReportDate();
+                String reportDate = report.getReportDate();
                 List<String> remarkList = learningSituationRepository.findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(reportDate);
                 reportResponseVO.setRemarkList(remarkList);
             }

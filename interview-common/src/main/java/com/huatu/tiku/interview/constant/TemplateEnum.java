@@ -43,21 +43,27 @@ public enum TemplateEnum {
             null),
 
     /*每日学习统计*/
-    DailyReport("krkjVlxdeNqhIsd2VH_4FukKinQAJXs3cqiR9XsAFPs","每日学习统计","",MyTreeMap.createMap(
-            new TemplateMap("first", WechatTemplateMsg.item("今日学习报告已经生成","#000000")),
-            new TemplateMap("remark", WechatTemplateMsg.item("好好学习，天天向上","#000000"))
-//            new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
-//            new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
-//            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
-//            new TemplateMap("keyword4", WechatTemplateMsg.item("keyword42222","#000000"))
+//    今日学习报告已更新。
+//    课程名称：2018国考封闭特训班
+//    课程状态：线下阶段
+//    今天表现不错，明天继续努力哦~
+    DailyReport("krkjVlxdeNqhIsd2VH_4FukKinQAJXs3cqiR9XsAFPs","今日学习报告已更新。","",MyTreeMap.createMap(
+            new TemplateMap("first", WechatTemplateMsg.item("2018国考封闭特训班","#000000")),
+            new TemplateMap("keyword1", WechatTemplateMsg.item("线下阶段","#000000")),
+            new TemplateMap("remark", WechatTemplateMsg.item("今天表现不错，明天继续努力哦","#000000"))
     )),
 
+
+//    您的线下学习报告已生成。
+//    学生：[学员姓名]
+//    时间：2018年2月2日-2018年2月9日
+//    请点击“详情”查看报告完整信息
     /*线下学习统计*/
-    TotalReport("Bk7qZ79sMZoMivyBlDbJwnN4o0oxGJ3AwiN0YCfSK20","线下学习历程","",MyTreeMap.createMap(
-            new TemplateMap("first", WechatTemplateMsg.item("线下学习历程已经生成","#000000")),
-            new TemplateMap("remark", WechatTemplateMsg.item("好好学习，天天向上","#000000"))
-//            new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
-//            new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
+    TotalReport("Bk7qZ79sMZoMivyBlDbJwnN4o0oxGJ3AwiN0YCfSK20","您的线下学习报告已生成。","",MyTreeMap.createMap(
+            new TemplateMap("first", WechatTemplateMsg.item("学员姓名","#000000")),
+            new TemplateMap("keyword1", WechatTemplateMsg.item("2018年2月2日-2018年2月9日","#000000")),
+            new TemplateMap("remark", WechatTemplateMsg.item("请点击“详情”查看报告完整信息","#000000"))
+//
 //            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
 //            new TemplateMap("keyword4", WechatTemplateMsg.item("keyword42222","#000000"))
     )),
