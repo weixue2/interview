@@ -9,20 +9,18 @@ import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.template.MyTreeMap;
 import com.huatu.tiku.interview.entity.template.TemplateMap;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
-import com.huatu.tiku.interview.repository.NotificationTypeRepository;
 import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Author ZhenYang
@@ -46,7 +44,7 @@ public class NotificationRunner {
     WechatTemplateMsgService templateMsgService;
 
 
-    @Scheduled(fixedDelay = 2 * 3600 * 1000)
+//    @Scheduled(fixedDelay = 2 * 3600 * 1000)
     public void GetNotification() {
         List<NotificationType> list = notifyService.findByPushTime();
         if (!list.isEmpty()) {
@@ -60,7 +58,7 @@ public class NotificationRunner {
     }
 
 
-    @Scheduled(fixedDelay = 10 * 1000)
+//    @Scheduled(fixedDelay = 10 * 1000)
     public void CheckNotification() {
         Object o = redis.opsForValue().get("readings");
         List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
