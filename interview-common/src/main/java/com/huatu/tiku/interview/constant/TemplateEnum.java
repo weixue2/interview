@@ -39,9 +39,16 @@ public enum TemplateEnum {
 //            "Cpj93XZXzwagt_bp2QSW9iYVRkF9FCaRtHtXnoLzSHU",
             "dqB6dsTBx_FzoeMtflHHJwDAZdL1X2R_4o3eu4290s4", //我的
             "鸡汤晨读",
-            BasicParameters.MorningReadingURL,
+//            BasicParameters.MorningReadingURL,
+            "",
             null),
 
+    ReportHint(
+//            NW9COwLjiGuv-xQpIoNpGtZ8M9zYLJxX6mo7Kt-6GbU
+            "XOnKKuTRnumeuXfZqLb1KQ6SndCO6OAMSrCB40Hp228", //wode
+            "报到提示",
+            "",null
+    ),
     /*每日学习统计*/
 //    今日学习报告已更新。
 //    课程名称：2018国考封闭特训班

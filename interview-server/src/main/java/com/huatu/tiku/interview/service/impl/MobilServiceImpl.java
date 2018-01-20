@@ -54,7 +54,6 @@ public class MobilServiceImpl implements MobileService {
     @Autowired
     UserRepository userRepository;
 
-
     @Override
     public User checkPHP(String mobile,String openId,HttpServletRequest request) {
         // TODO 这里固定使用了一个openID
@@ -76,9 +75,12 @@ public class MobilServiceImpl implements MobileService {
         }
         String userInfo = Crypt3Des.decryptMode(phpResult.getData());
         JSONObject jsonObject2 = JSONObject.fromObject(userInfo);
+        System.out.println(userInfo);
+        String id = jsonObject2.get("id").toString();
         String sex = jsonObject2.get("sex").toString();
         String phone = jsonObject2.get("phone").toString();
 //        User user = new User();
+        user.setPhp_user_id(id);
         user.setSex(Integer.valueOf(sex));
         user.setPhone(phone);
         user.setOpenId(openId);
