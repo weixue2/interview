@@ -5,10 +5,7 @@ import com.huatu.tiku.interview.service.LearningReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by x6 on 2018/1/17.
@@ -27,12 +24,10 @@ public class LearningReportController {
 
 
     /**
-     * 查询用户学习报告
+     * 生成用户学习报告
      */
-
     @PostMapping(value="daily",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result learningReport(){
-
         return learningReportService.dailyReport();
     }
 
@@ -42,7 +37,7 @@ public class LearningReportController {
      * 查询用户学习报告
      */
 
-    @PostMapping(value="report",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value="report",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result learningReport(@RequestParam String openId){
 
         log.info("请求参数openId:{}",openId);
