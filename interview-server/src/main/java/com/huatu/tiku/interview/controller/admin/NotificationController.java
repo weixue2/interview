@@ -1,5 +1,6 @@
 package com.huatu.tiku.interview.controller.admin;
 
+import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.constant.TemplateEnum;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
@@ -51,15 +52,16 @@ public class NotificationController {
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         WechatTemplateMsg templateMsg ;
         for (User u : userService.findAllUser()) {
-            templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.HuaTu01);
+            templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
+            templateMsg.setUrl(BasicParameters.MorningReadingURL+6);
             templateMsg.setData(
                     MyTreeMap.createMap(
-                            new TemplateMap("first", WechatTemplateMsg.item("缺乏思密达","#000000")),
-                            new TemplateMap("keyword1", WechatTemplateMsg.item(UUID.randomUUID().toString(),"#000000")),
-                            new TemplateMap("keyword2", WechatTemplateMsg.item(new Date().toString(),"#000000")),
-//                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
-                            new TemplateMap("remark", WechatTemplateMsg.item("by芦大爷","#000000"))
-                    ));
+                            new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
+                            new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
+                            new TemplateMap("keyword2", WechatTemplateMsg.item("我哪知道", "#000000")),
+                            new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
+                    )
+            );
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
         }
         return Result.ok();
