@@ -14,7 +14,6 @@ import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
-import org.aspectj.weaver.patterns.NotTypePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -127,6 +126,20 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
+        }else if("dailyReport".equals(requestMap.get("EventKey"))){
+            //推送学员学习报告
+            NewsMessage nm = new NewsMessage(requestMap);
+            List<Article> as = new ArrayList<>();
+            Article a = new Article();
+            a.setTitle("今日学习报告已更新。");
+            a.setDescription("请点击“详情”查看报告完整信息");
+            a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
+            //用户openID写死在链接中
+            a.setUrl(BasicParameters.DailyReportURL+requestMap.get("FromUserName"));
+            as.add(a);
+            nm.setArticleCount(as.size());
+            nm.setArticles(as);
+            return MessageUtil.MessageToXml(nm);
         } else {
             str = WxMpXmlOutMessage
                     .TEXT()

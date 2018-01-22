@@ -1,6 +1,5 @@
 package com.huatu.tiku.interview.service;
 
-import com.huatu.tiku.interview.entity.vo.request.ReportRequestVO;
 import com.huatu.tiku.interview.entity.result.Result;
 
 /**
@@ -10,5 +9,5 @@ import com.huatu.tiku.interview.entity.result.Result;
 public interface LearningReportService {
     Result dailyReport();
 
-    Result learningReport(ReportRequestVO reportRequestVO);
+    Result learningReport(String openId);
 }
