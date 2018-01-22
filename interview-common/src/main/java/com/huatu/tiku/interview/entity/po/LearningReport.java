@@ -26,8 +26,8 @@ public class LearningReport extends BaseEntity  implements Serializable {
 
     //用户id
     private Long userId;
-//    //---------openId---------
-//    private String openId;
+    //---------openId---------
+    private String openId;
 
     //统计日期
     private String reportDate;
