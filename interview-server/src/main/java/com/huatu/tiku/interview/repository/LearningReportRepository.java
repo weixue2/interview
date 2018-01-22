@@ -12,4 +12,7 @@ public interface LearningReportRepository extends JpaRepository<LearningReport, 
 
     //查询用户下的所有报告
     List<LearningReport> findByUserIdOrderByIdAsc(Long userId);
+
+    //查询用户下的所有报告
+    List<LearningReport> findByOpenIdOrderByIdAsc(String openId);
 }

@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long>,JpaSpecificati
     User findByOpenId(String openId);
 
     List<User> findByStatus(int status);
+
+    User findByOpenIdAndStatus(String openId, int status);
 }
