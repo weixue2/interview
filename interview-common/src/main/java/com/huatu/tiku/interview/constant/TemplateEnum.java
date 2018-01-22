@@ -80,9 +80,7 @@ public enum TemplateEnum {
     HuaTu01(
             "x1DZtR_6zUzFWsDy-bRCDbLUBSH3JlyDjRSGb3jGzZ0",
             "登录提醒",
-            "http://music.163.com/song?id=498040743&userid=84550482",
-            null
-
+            "http://music.163.com/song?id=498040743&userid=84550482",null
     ),
     ;
 

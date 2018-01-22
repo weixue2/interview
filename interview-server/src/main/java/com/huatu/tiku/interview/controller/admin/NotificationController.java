@@ -6,6 +6,8 @@ import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
+import com.huatu.tiku.interview.entity.template.MyTreeMap;
+import com.huatu.tiku.interview.entity.template.TemplateMap;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.NotificationService;
@@ -18,7 +20,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static com.huatu.tiku.interview.constant.NotificationTypeConstant.REGISTER_REPORT;
 
@@ -48,6 +52,14 @@ public class NotificationController {
         WechatTemplateMsg templateMsg ;
         for (User u : userService.findAllUser()) {
             templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.HuaTu01);
+            templateMsg.setData(
+                    MyTreeMap.createMap(
+                            new TemplateMap("first", WechatTemplateMsg.item("缺乏思密达","#000000")),
+                            new TemplateMap("keyword1", WechatTemplateMsg.item(UUID.randomUUID().toString(),"#000000")),
+                            new TemplateMap("keyword2", WechatTemplateMsg.item(new Date().toString(),"#000000")),
+//                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+                            new TemplateMap("remark", WechatTemplateMsg.item("by芦大爷","#000000"))
+                    ));
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
         }
         return Result.ok();
