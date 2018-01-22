@@ -153,7 +153,7 @@ public class EventHandlerImpl implements EventHandler {
                     }
                 }
             }
-        } else if("dailyReport".equals(requestMap.get("EventKey"))){
+        } else if ("dailyReport".equals(requestMap.get("EventKey"))) {
             //推送学员学习报告
             //校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~
             String openId = requestMap.get("FromUserName");
@@ -161,7 +161,7 @@ public class EventHandlerImpl implements EventHandler {
             User user = userRepository.findByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
 
 
-            if(user == null ){
+            if (user == null) {
                 log.info("校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~");
                 str = WxMpXmlOutMessage
                         .TEXT()
@@ -170,10 +170,10 @@ public class EventHandlerImpl implements EventHandler {
                         .toUser(requestMap.get("FromUserName"))
                         .build().toXml();
                 return str;
-            }else{
+            } else {
                 //判断报告是否已经生成
                 List<LearningReport> learningReports = learningReportRepository.findByOpenIdOrderByIdAsc(openId);
-                if(CollectionUtils.isEmpty(learningReports)){
+                if (CollectionUtils.isEmpty(learningReports)) {
                     log.info("学习报告尚未生成~");
                     str = WxMpXmlOutMessage
                             .TEXT()
@@ -191,14 +191,14 @@ public class EventHandlerImpl implements EventHandler {
                 a.setDescription("请点击“详情”查看报告完整信息");
                 a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
                 //用户openID写死在链接中
-                a.setUrl(BasicParameters.DailyReportURL+requestMap.get("FromUserName"));
+                a.setUrl(BasicParameters.DailyReportURL + requestMap.get("FromUserName"));
                 as.add(a);
                 nm.setArticleCount(as.size());
                 nm.setArticles(as);
                 return MessageUtil.MessageToXml(nm);
             }
 
-        }else if ("conn_service".equals(requestMap.get("EventKey"))) {
+        } else if ("conn_service".equals(requestMap.get("EventKey"))) {
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("客服电话：400-817-6111")
