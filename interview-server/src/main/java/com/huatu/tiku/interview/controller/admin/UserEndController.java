@@ -23,7 +23,7 @@ public class UserEndController {
     private UserService userService;
 
     @GetMapping
-    public Result findUser(@RequestParam String content) {
+    public Result findUser(@RequestParam(name = "content",defaultValue = "") String content) {
         return Result.ok(userService.findAllUser(content));
     }
 
