@@ -14,6 +14,7 @@ import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.bean.message.WxMpXmlOutNewsMessage;
 import org.aspectj.weaver.patterns.NotTypePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -56,7 +57,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001+fromUserName);
+        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
@@ -127,12 +128,18 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
-        } else {
-            str = WxMpXmlOutMessage
-                    .TEXT()
-                    .content("正在开发")
+        } else if ("course".equals(requestMap.get("user_info"))) {
+
+            WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
+            item.setDescription("description");
+            item.setPicUrl("https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjDpPCoyerYAhWxSd8KHSHUAOwQjRwIBw&url=%2Furl%3Fsa%3Di%26rct%3Dj%26q%3D%26esrc%3Ds%26source%3Dimages%26cd%3D%26cad%3Drja%26uact%3D8%26ved%3D%26url%3Dhttp%253A%252F%252Fwww.5011.net%252Fzt%252Flubenwei%252F%26psig%3DAOvVaw3Z6ykd4X2VISOGyhpaOpvV%26ust%3D1516676193601065&psig=AOvVaw3Z6ykd4X2VISOGyhpaOpvV&ust=1516676193601065");
+            item.setTitle("点击修改个人信息");
+            item.setUrl("www.baidu.com");
+
+            str = WxMpXmlOutMessage.NEWS()
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
+                    .addArticle(item)
                     .build()
                     .toXml();
         }
