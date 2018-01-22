@@ -86,7 +86,7 @@ public class EventHandlerImpl implements EventHandler {
         String h = new SimpleDateFormat("HH").format(new Date());
         String str;
         //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
-        if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) > 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) > 18) {
+        if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
             //if (System.currentTimeMillis() % 2 == 1) {
             log.info("开始签到");
             str = WxMpXmlOutMessage
@@ -159,7 +159,7 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
-        }else {
+        } else {
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("正在开发")
