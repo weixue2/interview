@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -111,6 +112,13 @@ public class NotificationRunner {
 //                    );
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.HuaTu01);
+                    templateMsg.setData(MyTreeMap.createMap(
+                            new TemplateMap("first", WechatTemplateMsg.item("测试模板消息","#000000")),
+                            new TemplateMap("keyword1", WechatTemplateMsg.item(UUID.randomUUID().toString(),"#000000")),
+                            new TemplateMap("keyword2", WechatTemplateMsg.item(new Date().toString(),"#000000")),
+//                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+                            new TemplateMap("remark", WechatTemplateMsg.item("by芦大爷","#000000"))
+                    ));
 
 
 //                    String templateMsgJson = JsonUtil.toJson(templateMsg);
