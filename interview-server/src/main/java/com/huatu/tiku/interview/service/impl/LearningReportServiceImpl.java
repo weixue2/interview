@@ -281,7 +281,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
             log.info("校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~");
             content = "校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~";
 //            pushText(openId,content);
-            return Result.ok(NO_INFO);
+            return Result.ok(NO_INFO.getStatus());
 
         }else{
             //判断报告是否已经生成
@@ -290,10 +290,10 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 log.info("学习报告尚未生成~");
                 content = "学习报告尚未生成~";
 //                pushText(openId,content);
-                return Result.ok(NO_REPORT);
+                return Result.ok(NO_REPORT.getStatus());
             }
         }
-        return Result.ok(EXIST_REPORT);
+        return Result.ok(EXIST_REPORT.getStatus());
     }
 
     public void pushText(String openId,String content) {
