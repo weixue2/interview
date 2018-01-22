@@ -58,7 +58,7 @@ public class JbzmTestController {
         //有了用户的opendi就可以的到用户的信息了
         //得到用户信息之后返回到一个页面
         ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:http://www.baidu.com/s?wd=" + openid);
+        view.setViewName("redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
         return view;
     }
 }
