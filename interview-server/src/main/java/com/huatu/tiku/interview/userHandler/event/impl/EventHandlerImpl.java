@@ -47,8 +47,6 @@ public class EventHandlerImpl implements EventHandler {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    UserRepository userRepository;
-    @Autowired
     private NotificationTypeRepository notificationTypeRepository;
     @Autowired
     private LearningReportRepository learningReportRepository;
