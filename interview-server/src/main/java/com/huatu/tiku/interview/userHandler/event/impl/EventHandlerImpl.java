@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutNewsMessage;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.aspectj.weaver.patterns.NotTypePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
@@ -64,7 +66,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001+fromUserName);
+        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
@@ -128,14 +130,19 @@ public class EventHandlerImpl implements EventHandler {
         if ("course".equals(requestMap.get("EventKey"))) {
             List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
                     (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
-            str = WxMpXmlOutMessage
-                    .IMAGE()
-                    .mediaId(notTypePatterns.get(0).getWxImageId())
-                    .fromUser(requestMap.get("ToUserName"))
-                    .toUser(requestMap.get("FromUserName"))
-                    .build()
-                    .toXml();
-        }else if("dailyReport".equals(requestMap.get("EventKey"))){
+            for (NotificationType notificationType : notTypePatterns) {
+                if (StringUtils.isNotEmpty(notificationType.getWxImageId())){
+                    str = WxMpXmlOutMessage
+                            .IMAGE()
+                            .mediaId(notTypePatterns.get(0).getWxImageId())
+                            .fromUser(requestMap.get("ToUserName"))
+                            .toUser(requestMap.get("FromUserName"))
+                            .build()
+                            .toXml();
+                    break;
+                }
+            }
+        } else if("dailyReport".equals(requestMap.get("EventKey"))){
             //推送学员学习报告
             //校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~
             String openId = requestMap.get("FromUserName");
@@ -180,20 +187,15 @@ public class EventHandlerImpl implements EventHandler {
                 return MessageUtil.MessageToXml(nm);
             }
 
-        }else if ("user_info".equals(requestMap.get("user_info"))) {
-
-            WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
-            item.setDescription("description");
-            item.setPicUrl("https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjDpPCoyerYAhWxSd8KHSHUAOwQjRwIBw&url=%2Furl%3Fsa%3Di%26rct%3Dj%26q%3D%26esrc%3Ds%26source%3Dimages%26cd%3D%26cad%3Drja%26uact%3D8%26ved%3D%26url%3Dhttp%253A%252F%252Fwww.5011.net%252Fzt%252Flubenwei%252F%26psig%3DAOvVaw3Z6ykd4X2VISOGyhpaOpvV%26ust%3D1516676193601065&psig=AOvVaw3Z6ykd4X2VISOGyhpaOpvV&ust=1516676193601065");
-            item.setTitle("点击修改个人信息");
-            item.setUrl("www.baidu.com");
-
-            str = WxMpXmlOutMessage.NEWS()
+        }else if ("conn_service".equals(requestMap.get("EventKey"))) {
+            str = WxMpXmlOutMessage
+                    .TEXT()
+                    .content("抱歉，经系统核实您的手机号未购买“2018国考封闭特训班”~若有疑问，请联系客服：400-817-6111")
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
-        } else {
+        }else {
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("正在开发")
