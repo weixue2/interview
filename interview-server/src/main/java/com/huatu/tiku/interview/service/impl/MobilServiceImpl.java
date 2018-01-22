@@ -77,7 +77,7 @@ public class MobilServiceImpl implements MobileService {
         String sex = jsonObject2.get("sex").toString();
         String phone = jsonObject2.get("phone").toString();
 
-        user.setPhpUserId((Long.parseLong(id) == 0)?0:Long.parseLong(id));
+        user.setPhpUserId((Long.parseLong(id) == 0 )?0:Long.parseLong(id));
         user.setSex(Integer.valueOf(sex));
         user.setPhone(phone);
         user.setOpenId(openId);
