@@ -69,16 +69,16 @@ public class NotificationRunner {
     @Scheduled(fixedDelay = 1 * 1000)
     public void CheckNotification() {
         String  json = redis.opsForValue().get(key);
-        System.out.println("???");
+//        System.out.println("???");
         if(json.length()>2){
-            System.out.println("???sfd");
+//            System.out.println("???sfd");
             List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
             if (rts != null) {
-                System.out.println("???qwe");
+                System.out.println("qwe");
 
                 for (ReadingTemp rt : rts) {
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
-                        System.out.println("???xxcv");
+                        System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
                         PushNotification(rt, notifyService.get(rt.getId()));
