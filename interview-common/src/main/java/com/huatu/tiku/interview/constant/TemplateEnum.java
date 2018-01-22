@@ -36,16 +36,16 @@ public enum TemplateEnum {
     No_3("","","",null)
     ,
     MorningReading(
-//            "Cpj93XZXzwagt_bp2QSW9iYVRkF9FCaRtHtXnoLzSHU",
-            "dqB6dsTBx_FzoeMtflHHJwDAZdL1X2R_4o3eu4290s4", //我的
+            "Cpj93XZXzwagt_bp2QSW9iYVRkF9FCaRtHtXnoLzSHU",
+//            "dqB6dsTBx_FzoeMtflHHJwDAZdL1X2R_4o3eu4290s4", //我的
             "鸡汤晨读",
 //            BasicParameters.MorningReadingURL,
             "",
             null),
 
     ReportHint(
-//            NW9COwLjiGuv-xQpIoNpGtZ8M9zYLJxX6mo7Kt-6GbU
-            "XOnKKuTRnumeuXfZqLb1KQ6SndCO6OAMSrCB40Hp228", //wode
+            "NW9COwLjiGuv-xQpIoNpGtZ8M9zYLJxX6mo7Kt-6GbU",
+//            "XOnKKuTRnumeuXfZqLb1KQ6SndCO6OAMSrCB40Hp228", //wode
             "报到提示",
             "",null
     ),
@@ -74,6 +74,18 @@ public enum TemplateEnum {
 //            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
 //            new TemplateMap("keyword4", WechatTemplateMsg.item("keyword42222","#000000"))
     )),
+    HuaTu01(
+            "x1DZtR_6zUzFWsDy-bRCDbLUBSH3JlyDjRSGb3jGzZ0",
+            "登录提醒",
+            "http://music.163.com/song?id=498040743&userid=84550482",
+            MyTreeMap.createMap(
+                    new TemplateMap("first", WechatTemplateMsg.item("测试模板消息","#000000")),
+                    new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
+                    new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
+//                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
+                    new TemplateMap("remark", WechatTemplateMsg.item("by芦大爷","#000000"))
+            )
+    ),
     ;
 
     TemplateEnum(String templateId, String description,String url,TreeMap<String, TreeMap<String,String>> data) {
