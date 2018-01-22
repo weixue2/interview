@@ -3,7 +3,10 @@ package com.huatu.tiku.interview.constant;
 import com.huatu.tiku.interview.entity.template.MyTreeMap;
 import com.huatu.tiku.interview.entity.template.TemplateMap;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
+
+import java.util.Date;
 import java.util.TreeMap;
+import java.util.UUID;
 
 /**
  * @Author ZhenYang
@@ -78,13 +81,8 @@ public enum TemplateEnum {
             "x1DZtR_6zUzFWsDy-bRCDbLUBSH3JlyDjRSGb3jGzZ0",
             "登录提醒",
             "http://music.163.com/song?id=498040743&userid=84550482",
-            MyTreeMap.createMap(
-                    new TemplateMap("first", WechatTemplateMsg.item("测试模板消息","#000000")),
-                    new TemplateMap("keyword1", WechatTemplateMsg.item("keyword12222","#000000")),
-                    new TemplateMap("keyword2", WechatTemplateMsg.item("keyword22222","#000000")),
-//                    new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
-                    new TemplateMap("remark", WechatTemplateMsg.item("by芦大爷","#000000"))
-            )
+            null
+
     ),
     ;
 
