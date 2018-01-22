@@ -61,9 +61,21 @@ public class UserController {
     public Result getUserInfo(String openId) {
 //        System.out.println("你知道吗 openId:"+openId);
         User user = userService.getUser(openId);
-        Map<String, User> map = Maps.newHashMapWithExpectedSize(4);
-        map.put("user", user);
-        return Result.ok(map);
+//        Map<String, User> map = Maps.newHashMapWithExpectedSize(4);
+//        map.put("user", user);
+        if (user == null){
+            user = new User();
+            user.setKeyContact("");
+            user.setNation("");
+            user.setIdCard("");
+            user.setName("");
+            user.setSex(-1);
+            user.setPhone("");
+            user.setPregnancy(null);
+            user.setPhpUserId(0);
+
+        }
+        return Result.ok(user);
     }
 
     @GetMapping("getMobile")

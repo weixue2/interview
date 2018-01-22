@@ -96,18 +96,18 @@ public class NotificationRunner {
                     break;
                 }
                 case 2: {
-                    templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-                    templateMsg.setUrl(BasicParameters.MorningReadingURL+notification.getId());
-                    templateMsg.setData(
-                            MyTreeMap.createMap(
-                                    new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
-                                    new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
-                                    new TemplateMap("keyword2", WechatTemplateMsg.item(notification.getTitle(), "#000000")),
-                                    new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
-                            )
-                    );
+//                    templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
+//                    templateMsg.setUrl(BasicParameters.MorningReadingURL+notification.getId());
+//                    templateMsg.setData(
+//                            MyTreeMap.createMap(
+//                                    new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
+//                                    new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
+//                                    new TemplateMap("keyword2", WechatTemplateMsg.item(notification.getTitle(), "#000000")),
+//                                    new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
+//                            )
+//                    );
 //                    System.out.println("随同了");
-//                    templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.HuaTu01);
+                    templateMsg = new WechatTemplateMsg(u.getOpenId(),TemplateEnum.HuaTu01);
 
 
 //                    String templateMsgJson = JsonUtil.toJson(templateMsg);
