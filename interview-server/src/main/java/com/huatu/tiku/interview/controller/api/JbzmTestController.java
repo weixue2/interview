@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.controller.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huatu.tiku.interview.constant.BasicParameters;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -25,13 +26,15 @@ import java.io.IOException;
  * @Date Create on 2018/1/20 16:10
  */
 @Controller
+@Slf4j
 public class JbzmTestController {
     @Autowired
     RestTemplate restTemplate;
 
     @RequestMapping(value = "/lol", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
-        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://zhengyiwoaini.top/wx/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+        log.info("--------------开始oauth跳转------------");
+        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
     }
 
 
