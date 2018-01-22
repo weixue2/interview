@@ -6,6 +6,8 @@ import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
 import com.huatu.tiku.interview.entity.message.TextMessage;
+import com.huatu.tiku.interview.entity.template.MyTreeMap;
+import com.huatu.tiku.interview.entity.template.TemplateMap;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.userHandler.message.MessageHandler;
@@ -46,7 +48,8 @@ public class MessageHandlerImpl implements MessageHandler {
         String accessToken = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
 //        accessToken = "6_xsXvmd5iX-22XaVXgCmlUzJ8V6YKssh7XfaVtZXe6GdzSydUPcKT8i4G2ULClF9Th9wmQQ9LUOGrZI8kxj330SApNk9HcEYSei1sD9F7daYj7Q3IryQQffHC9IMLIYgAGASPF";
         System.out.println("accessToken:"+accessToken);
-        if(!requestMap.get("Content").equals("get")){
+
+        if(requestMap.get("Content").equals("1")){
             //            String templateMsgJson = WechatTemplateMsg.getJson(TemplateEnum.No_2,requestMap);
             WechatTemplateMsg templateMsg = new WechatTemplateMsg(TemplateEnum.HuaTu01,requestMap);
 
@@ -56,7 +59,7 @@ public class MessageHandlerImpl implements MessageHandler {
                     templateMsgJson);
             return null;
         }
-        if(requestMap.get("Content").equals("get")){
+        if(requestMap.get("Content").equals("2")){
 //            //这个是直接生成String
 ////            String templateMsgJson = WechatTemplateMsg.getJson(TemplateEnum.No_2,requestMap);
 //            WechatTemplateMsg templateMsg = new WechatTemplateMsg(TemplateEnum.No_2,requestMap);
@@ -74,6 +77,34 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setPicUrl("http://p1.music.126.net/_mEC5ZpzngngbBioF8dm4Q==/109951162973202394.jpg");
             //这里跳转前端验证
             a.setUrl("http://music.163.com/song?id=498040743&userid=84550482");
+            as.add(a);
+            nm.setArticleCount(as.size());
+            nm.setArticles(as);
+            return MessageUtil.MessageToXml(nm);
+        }
+        if(requestMap.get("Content").equals("3")){
+            WechatTemplateMsg templateMsg = new WechatTemplateMsg(requestMap.get("FromUserName"), TemplateEnum.MorningReading);
+                    templateMsg.setUrl(BasicParameters.MorningReadingURL+6);
+                    templateMsg.setData(
+                            MyTreeMap.createMap(
+                                    new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
+                                    new TemplateMap("keyword1", WechatTemplateMsg.item("不知道", "#000000")),
+                                    new TemplateMap("keyword2", WechatTemplateMsg.item("不知道", "#000000")),
+                                    new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
+                            )
+                    );
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            return null;
+        }
+        if(!requestMap.get("Content").equals("2")){
+            NewsMessage nm = new NewsMessage(requestMap);
+            List<Article> as = new ArrayList<>();
+            Article a = new Article();
+            a.setTitle("谢谢您的关注！!");
+            a.setDescription("点击图文可以跳转到华图首页");
+            a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
+            //这里跳转前端验证
+            a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
             nm.setArticles(as);
