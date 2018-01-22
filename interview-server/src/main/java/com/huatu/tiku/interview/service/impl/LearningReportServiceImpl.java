@@ -1,5 +1,6 @@
 package com.huatu.tiku.interview.service.impl;
 
+import com.google.gson.Gson;
 import com.huatu.common.utils.date.DateFormatUtil;
 import com.huatu.tiku.interview.constant.*;
 import com.huatu.tiku.interview.entity.po.LearningAdvice;
@@ -21,7 +22,11 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -48,7 +53,10 @@ public class LearningReportServiceImpl  implements LearningReportService {
     StringRedisTemplate stringRedisTemplate;
     @Autowired
     WechatTemplateMsgService templateMsgService;
-
+    @Autowired
+    StringRedisTemplate redisTemplate;
+    @Autowired
+    RestTemplate restTemplate;
     /**
      *  生成每日学习报告
      * @return
@@ -260,6 +268,49 @@ public class LearningReportServiceImpl  implements LearningReportService {
         }
         return Result.build(100,"查询成功",resultList);
     }
+
+    @Override
+    public String check(String openId,String APPID) {
+        User user = userRepository.findByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
+
+        String content = "";
+        if(user == null ){
+            log.info("校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~");
+            content = "校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~";
+            pushText(openId,content);
+
+        }else{
+            //判断报告是否已经生成
+            List<LearningReport> learningReports = learningReportRepository.findByOpenIdOrderByIdAsc(openId);
+            if(CollectionUtils.isEmpty(learningReports)){
+                log.info("学习报告尚未生成~");
+
+                content = "学习报告尚未生成~";
+                pushText(openId,content);
+            }
+        }
+        return content;
+    }
+
+    public void pushText(String openId,String content) {
+
+        String msg = "{\"touser\":"+openId+", \"msgtype\":\"text\",\"text\":{ \"content\": "+content+"\"} }";
+        String jsonString = new Gson().toJson(msg).toString();
+        // 调用接口获取access_token
+        String at = redisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN);
+        String requestUrl = WeChatUrlConstant.MESSAGE_MANY_URL.replace(WeChatUrlConstant.ACCESS_TOKEN, at);
+
+        HttpHeaders headers = new HttpHeaders();
+        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
+        headers.setContentType(type);
+        headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+        HttpEntity<String> formEntity = new HttpEntity<>(msg, headers);
+
+        String result =  restTemplate.postForObject(requestUrl,formEntity,String.class);
+        log.info("result:"+result);
+    }
+
+
 
 
     /**

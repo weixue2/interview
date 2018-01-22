@@ -10,4 +10,6 @@ public interface LearningReportService {
     Result dailyReport();
 
     Result learningReport(String openId);
+
+    String check(String openId,String APPID);
 }

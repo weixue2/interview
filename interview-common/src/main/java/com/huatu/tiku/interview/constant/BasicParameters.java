@@ -35,7 +35,7 @@ public class BasicParameters {
 
 
     //TODO 每日学习效果反馈
-    public static String DailyReportURL = "http://tkproc.huatu.com/interview-h5/#/test_template?openId=";
+    public static String DailyReportURL = "http://tkproc.huatu.com/interview-h5/#/result_back?openId=";
 
 //    //TODO 线下学习历程
 //    public static String TotalReportURL = "http://192.168.10.93:8080/#/test_template?id=";

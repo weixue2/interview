@@ -110,7 +110,7 @@ public class EventHandlerImpl implements EventHandler {
             log.info("签到失败");
             str = WxMpXmlOutMessage
                     .TEXT()
-                    .content("签到失败")
+                    .content("签到时间已过")
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build().toXml();
@@ -129,10 +129,11 @@ public class EventHandlerImpl implements EventHandler {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
-            if (user.getStatus() != 1) {
+            if ((user == null | user.getStatus() != 1)) {
+                log.info("----查询不到用户信息----");
                 str = WxMpXmlOutMessage
                         .TEXT()
-                        .content("客服电话：400-817-6111")
+                        .content("抱歉，经系统核实您的手机号未购买“2018国考封闭特训班”~若有疑问，请联系客服：400-817-6111")
                         .fromUser(requestMap.get("ToUserName"))
                         .toUser(requestMap.get("FromUserName"))
                         .build()
@@ -142,6 +143,7 @@ public class EventHandlerImpl implements EventHandler {
                         (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
                 for (NotificationType notificationType : notTypePatterns) {
                     if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
+                        log.info("----展示图片----");
                         str = WxMpXmlOutMessage
                                 .IMAGE()
                                 .mediaId(notTypePatterns.get(0).getWxImageId())
@@ -153,51 +155,6 @@ public class EventHandlerImpl implements EventHandler {
                     }
                 }
             }
-        } else if ("dailyReport".equals(requestMap.get("EventKey"))) {
-            //推送学员学习报告
-            //校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~
-            String openId = requestMap.get("FromUserName");
-
-            User user = userRepository.findByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
-
-
-            if (user == null) {
-                log.info("校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~");
-                str = WxMpXmlOutMessage
-                        .TEXT()
-                        .content("校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~")
-                        .fromUser(requestMap.get("ToUserName"))
-                        .toUser(requestMap.get("FromUserName"))
-                        .build().toXml();
-                return str;
-            } else {
-                //判断报告是否已经生成
-                List<LearningReport> learningReports = learningReportRepository.findByOpenIdOrderByIdAsc(openId);
-                if (CollectionUtils.isEmpty(learningReports)) {
-                    log.info("学习报告尚未生成~");
-                    str = WxMpXmlOutMessage
-                            .TEXT()
-                            .content("学习报告尚未生成~")
-                            .fromUser(requestMap.get("ToUserName"))
-                            .toUser(requestMap.get("FromUserName"))
-                            .build().toXml();
-                    return str;
-                }
-
-                NewsMessage nm = new NewsMessage(requestMap);
-                List<Article> as = new ArrayList<>();
-                Article a = new Article();
-                a.setTitle("今日学习报告已更新。");
-                a.setDescription("请点击“详情”查看报告完整信息");
-                a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
-                //用户openID写死在链接中
-                a.setUrl(BasicParameters.DailyReportURL + requestMap.get("FromUserName"));
-                as.add(a);
-                nm.setArticleCount(as.size());
-                nm.setArticles(as);
-                return MessageUtil.MessageToXml(nm);
-            }
-
         } else if ("conn_service".equals(requestMap.get("EventKey"))) {
             str = WxMpXmlOutMessage
                     .TEXT()
@@ -206,7 +163,7 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
-        } else {
+        }else {
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("正在开发")

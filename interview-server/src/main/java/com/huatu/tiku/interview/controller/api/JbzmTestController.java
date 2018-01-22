@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,6 +36,7 @@ public class JbzmTestController {
     @RequestMapping(value = "/lol", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
         log.info("--------------开始oauth跳转------------");
+        log.info("----跳转链接:" + "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
     }
 
@@ -52,12 +54,14 @@ public class JbzmTestController {
         HttpGet httpGet = new HttpGet(URL);
         HttpResponse execute = httpClient.execute(httpGet);
         HttpEntity entity = execute.getEntity();
+        log.info("----完成校验,微信授权成功----");
         String jsonStr = EntityUtils.toString(entity);
         JSONObject jsonObject = (JSONObject) JSON.parse(jsonStr);
         String openid = jsonObject.get("openid").toString();
         //有了用户的opendi就可以的到用户的信息了
         //得到用户信息之后返回到一个页面
         ModelAndView view = new ModelAndView();
+        log.info("----用户跳转页面:" + "redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
         view.setViewName("redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
         return view;
     }
