@@ -146,7 +146,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         String format = DateFormatUtil.NORMAL_DAY_FORMAT.format(new Date());
 
         learningReport.setReportDate(format);
-        learningReport.setDaySort(8);
+        learningReport.setDaySort(7);
         learningReport.setType(ReportTypeConstant.TOTAL_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport = learningReportRepository.save(learningReport);
