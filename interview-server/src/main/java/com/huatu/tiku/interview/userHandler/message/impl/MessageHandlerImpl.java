@@ -76,7 +76,7 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setDescription("点击图文可以跳转到华图首页");
             a.setPicUrl("http://p1.music.126.net/_mEC5ZpzngngbBioF8dm4Q==/109951162973202394.jpg");
             //这里跳转前端验证
-            a.setUrl("http://music.163.com/song?id=498040743&userid=84550482");
+            a.setUrl("BasicParameters.LINK_SUBSCRIBE_001" + requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
             nm.setArticles(as);
