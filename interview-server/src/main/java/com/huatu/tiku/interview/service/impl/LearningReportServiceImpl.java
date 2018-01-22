@@ -61,6 +61,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         if(CollectionUtils.isNotEmpty(userList)){
             for(User user:userList){
                 long userId = user.getPhpUserId();
+                String openId = user.getOpenId();
                 //查询用户当前已存在的报告数目
                 List<LearningReport> reportList = learningReportRepository.findByUserIdOrderByIdAsc(userId);
                 int daySort = 1;
@@ -69,11 +70,11 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 }
                 if(daySort <= 6){
                     //不是最后一天（只生成每日报告）
-                    saveDailyReport(userId,daySort);
+                    saveDailyReport(userId,daySort, openId);
                     pushDailyReport(user.getOpenId());
                 }else if(daySort == 7){
                     //最后一天（生成每日报告+总体报告）
-                    saveTotalReport(userId);
+                    saveTotalReport(userId, openId);
                     pushTotalReport(user.getOpenId());
                 }
             }
@@ -109,7 +110,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
      * 生成每日报告
      * @param userId
      */
-    private LearningReport saveDailyReport(long userId,int daySort) {
+    private LearningReport saveDailyReport(long userId,int daySort,String openId) {
 
         //平均分统计
         List<Object[]> avgList = learningSituationRepository.countTodayAvg(userId);
@@ -124,6 +125,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setReportDate(format);
         learningReport.setType(DAILY_REPORT.getCode());
         learningReport.setUserId(userId);
+        learningReport.setOpenId(openId);
         learningReport = learningReportRepository.save(learningReport);
 
         return learningReport;
@@ -133,7 +135,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
      * 生成总结报告
      * @param userId
      */
-    private LearningReport saveTotalReport(long userId) {
+    private LearningReport saveTotalReport(long userId,String openId) {
 
         //平均分统计
         List<Object[]> avgList = learningSituationRepository.countTotalAvg(userId);
@@ -146,6 +148,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setDaySort(7);
         learningReport.setType(ReportTypeConstant.TOTAL_REPORT.getCode());
         learningReport.setUserId(userId);
+        learningReport.setOpenId(openId);
         learningReport = learningReportRepository.save(learningReport);
 
         return learningReport;
