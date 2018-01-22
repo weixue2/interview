@@ -1,12 +1,14 @@
 package com.huatu.tiku.interview.controller.api;
 
-import com.huatu.tiku.interview.entity.vo.request.ReportRequestVO;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.LearningReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by x6 on 2018/1/17.
@@ -41,10 +43,10 @@ public class LearningReportController {
      */
 
     @PostMapping(value="report",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result learningReport(@RequestBody ReportRequestVO reportRequestVO){
+    public Result learningReport(@RequestParam String openId){
 
-        log.info("请求参数:{}",reportRequestVO);
-        return learningReportService.learningReport(reportRequestVO);
+        log.info("请求参数openId:{}",openId);
+        return learningReportService.learningReport(openId);
     }
 
 

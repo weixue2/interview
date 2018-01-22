@@ -22,7 +22,7 @@ public class User {
     @Id @GeneratedValue
     private long id;
 
-    private String php_user_id;
+    private long phpUserId;
     @Column(columnDefinition="varchar(50) COMMENT '微信Id啊'")
     private String openId;
     @Column(columnDefinition="varchar(20) COMMENT '姓名'")

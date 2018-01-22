@@ -1,9 +1,5 @@
 package com.huatu.tiku.interview.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.google.gson.JsonObject;
-import com.huatu.common.SuccessMessage;
 import com.huatu.common.exception.BizException;
 import com.huatu.common.utils.env.IpUtils;
 import com.huatu.tiku.interview.constant.ResultEnum;
@@ -79,8 +75,8 @@ public class MobilServiceImpl implements MobileService {
         String id = jsonObject2.get("id").toString();
         String sex = jsonObject2.get("sex").toString();
         String phone = jsonObject2.get("phone").toString();
-//        User user = new User();
-        user.setPhp_user_id(id);
+
+        user.setPhpUserId(Long.parseLong(id));
         user.setSex(Integer.valueOf(sex));
         user.setPhone(phone);
         user.setOpenId(openId);

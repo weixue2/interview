@@ -25,8 +25,8 @@ public class LearningSituation extends BaseEntity  implements Serializable {
     private String name;
     //---------用户ID---------
     private Long userId;
-    //---------openId---------
-    private String openId;
+//    //---------openId---------
+//    private String openId;
     //----------练习内容(1自我认知  2工作实务   3策划组织  4综合分析   5材料题与特殊题型   6套题演练)-------------
     private Integer practiceContent;
 

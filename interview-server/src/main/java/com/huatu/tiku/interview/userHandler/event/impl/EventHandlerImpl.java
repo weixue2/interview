@@ -57,7 +57,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + fromUserName);
+        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001+fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
@@ -128,7 +128,21 @@ public class EventHandlerImpl implements EventHandler {
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
-        } else if ("course".equals(requestMap.get("user_info"))) {
+        }else if("dailyReport".equals(requestMap.get("EventKey"))){
+            //推送学员学习报告
+            NewsMessage nm = new NewsMessage(requestMap);
+            List<Article> as = new ArrayList<>();
+            Article a = new Article();
+            a.setTitle("今日学习报告已更新。");
+            a.setDescription("请点击“详情”查看报告完整信息");
+            a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
+            //用户openID写死在链接中
+            a.setUrl(BasicParameters.DailyReportURL+requestMap.get("FromUserName"));
+            as.add(a);
+            nm.setArticleCount(as.size());
+            nm.setArticles(as);
+            return MessageUtil.MessageToXml(nm);
+        }else if ("user_info".equals(requestMap.get("user_info"))) {
 
             WxMpXmlOutNewsMessage.Item item = new WxMpXmlOutNewsMessage.Item();
             item.setDescription("description");
@@ -139,7 +153,14 @@ public class EventHandlerImpl implements EventHandler {
             str = WxMpXmlOutMessage.NEWS()
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
-                    .addArticle(item)
+                    .build()
+                    .toXml();
+        } else {
+            str = WxMpXmlOutMessage
+                    .TEXT()
+                    .content("正在开发")
+                    .fromUser(requestMap.get("ToUserName"))
+                    .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
         }

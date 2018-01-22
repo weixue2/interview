@@ -1,17 +1,13 @@
 package com.huatu.tiku.interview.service.impl;
 
 import com.huatu.common.utils.date.DateFormatUtil;
-import com.huatu.tiku.interview.constant.ReportTypeConstant;
-import com.huatu.tiku.interview.constant.TemplateEnum;
-import com.huatu.tiku.interview.constant.WXStatusEnum;
-import com.huatu.tiku.interview.constant.WeChatUrlConstant;
+import com.huatu.tiku.interview.constant.*;
 import com.huatu.tiku.interview.entity.po.LearningAdvice;
 import com.huatu.tiku.interview.entity.po.LearningReport;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
-import com.huatu.tiku.interview.entity.vo.request.ReportRequestVO;
 import com.huatu.tiku.interview.entity.vo.response.ReportResponseVO;
 import com.huatu.tiku.interview.repository.LearningAdviceRepository;
 import com.huatu.tiku.interview.repository.LearningReportRepository;
@@ -20,6 +16,7 @@ import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.LearningReportService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +29,12 @@ import java.util.List;
 
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.DAILY_REPORT;
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.TOTAL_REPORT;
-import static com.huatu.tiku.interview.constant.ResultEnum.PARAMETER_NULL_ERROR;
 
 /**
  * Created by x6 on 2018/1/17.
  */
 @Service
+@Slf4j
 public class LearningReportServiceImpl  implements LearningReportService {
     @Autowired
     private LearningReportRepository learningReportRepository;
@@ -63,7 +60,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
 
         if(CollectionUtils.isNotEmpty(userList)){
             for(User user:userList){
-                long userId = user.getId();
+                long userId = user.getPhpUserId();
                 //查询用户当前已存在的报告数目
                 List<LearningReport> reportList = learningReportRepository.findByUserIdOrderByIdAsc(userId);
                 int daySort = 1;
@@ -73,11 +70,11 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 if(daySort <= 6){
                     //不是最后一天（只生成每日报告）
                     saveDailyReport(userId,daySort);
-//                    pushDailyReport(user.getOpenId());
+                    pushDailyReport(user.getOpenId());
                 }else if(daySort == 7){
                     //最后一天（生成每日报告+总体报告）
                     saveTotalReport(userId);
-//                    pushTotalReport(user.getOpenId());
+                    pushTotalReport(user.getOpenId());
                 }
             }
         }
@@ -163,17 +160,22 @@ public class LearningReportServiceImpl  implements LearningReportService {
      */
     private LearningReport  buildReport(Object[] avgList,List<Object[]> answerCountList){
         LearningReport.LearningReportBuilder builder = LearningReport.builder();
-        Double avgBehavior = (Double)avgList[0];
-        Double avgLanguageExpression = (Double)avgList[1];
-        Double avgFocusTopic = (Double)avgList[2];
-        Double avgIsOrganized = (Double)avgList[3];
-        Double avgHaveSubstance = (Double)avgList[4];
+        String avgBehaviorStr = String .format("%.2f",avgList[0]);
+        double avgBehavior = Double.parseDouble(avgBehaviorStr);
+        String avgLanguageExpressionStr = String .format("%.2f",avgList[1]);
+        double avgLanguageExpression = Double.parseDouble(avgLanguageExpressionStr);
+        String avgFocusTopicStr = String .format("%.2f",avgList[2]);
+        double avgFocusTopic = Double.parseDouble(avgFocusTopicStr);
+        String avgIsOrganizedStr = String .format("%.2f",avgList[3]);
+        double avgIsOrganized = Double.parseDouble(avgIsOrganizedStr);
+        String avgHaveSubstanceStr = String .format("%.2f",avgList[4]);
+        double avgHaveSubstance = Double.parseDouble(avgHaveSubstanceStr);
+
         builder.behavior(avgBehavior)
                 .languageExpression(avgLanguageExpression)
                 .focusTopic(avgFocusTopic)
                 .isOrganized(avgIsOrganized)
                 .haveSubstance(avgHaveSubstance);
-
 
             for(Object[] answerCount:answerCountList){
                 Object practiceType = answerCount[0];
@@ -213,14 +215,16 @@ public class LearningReportServiceImpl  implements LearningReportService {
 
 
     @Override
-    public Result learningReport(ReportRequestVO reportRequestVO) {
-        if(null == reportRequestVO){
-            return Result.build(PARAMETER_NULL_ERROR);
+    public Result learningReport(String openId) {
+
+        //根据openId查询用户id
+        User user = userRepository.getUserByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
+        if(null == user){
+            log.warn("请求参数异常，不存在对应的用户信息。OpenId:{}",openId);
+            return Result.build(ResultEnum.OPENID_ERROR);
         }
-        //用户id
-        Long userId = reportRequestVO.getUserId();
         //查询用户的所有报告，按天数序号排列
-        List<LearningReport> reportList = learningReportRepository.findByUserIdOrderByIdAsc(userId);
+        List<LearningReport> reportList = learningReportRepository.findByUserIdOrderByIdAsc(user.getPhpUserId());
 
         List<ReportResponseVO> resultList = new LinkedList<>();
         for(LearningReport report: reportList){
