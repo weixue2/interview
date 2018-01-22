@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +40,7 @@ public class JbzmTestController {
 
 
     @RequestMapping(value = "/oauth", method = RequestMethod.GET)
-    public String weixinOAuth(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    public ModelAndView weixinOAuth(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         //得到code
         String CODE = request.getParameter("code");
@@ -56,6 +57,8 @@ public class JbzmTestController {
         String openid = jsonObject.get("openid").toString();
         //有了用户的opendi就可以的到用户的信息了
         //得到用户信息之后返回到一个页面
-        return "redirect:www.baidu.com";
+        ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:http://www.baidu.com/s?wd=" + openid);
+        return view;
     }
 }
