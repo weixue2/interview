@@ -34,6 +34,9 @@ import java.util.List;
 
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.DAILY_REPORT;
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.TOTAL_REPORT;
+import static com.huatu.tiku.interview.constant.UserStatusConstant.EXIST_REPORT;
+import static com.huatu.tiku.interview.constant.UserStatusConstant.NO_INFO;
+import static com.huatu.tiku.interview.constant.UserStatusConstant.NO_REPORT;
 
 /**
  * Created by x6 on 2018/1/17.
@@ -270,26 +273,27 @@ public class LearningReportServiceImpl  implements LearningReportService {
     }
 
     @Override
-    public String check(String openId,String APPID) {
-        User user = userRepository.findByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
+    public Result check(String openId) {
+        List<User> userList = userRepository.findByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
 
         String content = "";
-        if(user == null ){
+        if(CollectionUtils.isEmpty(userList)){
             log.info("校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~");
             content = "校验用户状态 抱歉，您尚未填写个人信息，无法核实您的学员身份~";
-            pushText(openId,content);
+//            pushText(openId,content);
+            return Result.ok(NO_INFO.getStatus());
 
         }else{
             //判断报告是否已经生成
             List<LearningReport> learningReports = learningReportRepository.findByOpenIdOrderByIdAsc(openId);
             if(CollectionUtils.isEmpty(learningReports)){
                 log.info("学习报告尚未生成~");
-
                 content = "学习报告尚未生成~";
-                pushText(openId,content);
+//                pushText(openId,content);
+                return Result.ok(NO_REPORT.getStatus());
             }
         }
-        return content;
+        return Result.ok(EXIST_REPORT.getStatus());
     }
 
     public void pushText(String openId,String content) {

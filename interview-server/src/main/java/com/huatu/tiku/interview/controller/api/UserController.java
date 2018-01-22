@@ -33,6 +33,23 @@ public class UserController {
 
     @Autowired
     private MobileService mobileService;
+
+    @GetMapping("getMobile")
+    public Result getMobile(String mobile, String openId, HttpServletRequest req) {
+        // xml请求解析
+//        Map<String, String> requestMap = MessageUtil.parseXml(req);
+//        String openId = requestMap.get("FromUserName");
+//        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
+//        mobileService.checkPHP(mobile,openId);
+        return Result.ok(mobileService.checkPHP(mobile, openId, req));
+    }
+
+    @GetMapping(value = "getNext")
+    public Result userCaptcha(String mobile, String captcha) {
+        mobileService.userCaptcha(mobile, captcha);
+//        return SuccessMessage.create("验证通过");
+        return Result.build(ResultEnum.CAPTCHA_PASS);
+    }
 //    @PutMapping
 //    public void updateUserInfo(@RequestBody User user,HttpServletRequest request){
 //        log.info("id:{}",user.getId());
@@ -78,21 +95,6 @@ public class UserController {
         return Result.ok(user);
     }
 
-    @GetMapping("getMobile")
-    public Result getMobile(String mobile, String openId, HttpServletRequest req) {
-        // xml请求解析
-//        Map<String, String> requestMap = MessageUtil.parseXml(req);
-//        String openId = requestMap.get("FromUserName");
-//        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
-//        mobileService.checkPHP(mobile,openId);
-        return Result.ok(mobileService.checkPHP(mobile, openId, req));
-    }
 
-    @GetMapping(value = "getNext")
-    public Result userCaptcha(String mobile, String captcha) {
-        mobileService.userCaptcha(mobile, captcha);
-//        return SuccessMessage.create("验证通过");
-        return Result.build(ResultEnum.CAPTCHA_PASS);
-    }
 
 }
