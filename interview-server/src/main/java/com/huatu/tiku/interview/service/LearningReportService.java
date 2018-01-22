@@ -11,5 +11,5 @@ public interface LearningReportService {
 
     Result learningReport(String openId);
 
-    String check(String openId,String APPID);
+    Result check(String openId);
 }

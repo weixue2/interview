@@ -6,7 +6,6 @@ import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.LearningReportService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -71,14 +70,14 @@ public class LearningReportController {
 
 
     @RequestMapping(value = "/oauth", method = RequestMethod.GET)
-    public Object weixinOAuth(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    public ModelAndView weixinOAuth(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         //得到code
         String CODE = request.getParameter("code");
         String APPID = BasicParameters.appID;
         String SECRET = BasicParameters.appsecret;
         //换取access_token 其中包含了openid
-        String URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APPID+"&secret="+SECRET+"&code="+CODE+"&grant_type=authorization_code".replace("APPID", APPID).replace("SECRET", SECRET).replace("CODE", CODE);
+        String URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APPID+"&secret="+SECRET+"&code="+CODE+"&grant_type=authorization_code";
         //URLConnectionHelper是一个模拟发送http请求的类
         HttpGet httpGet = new HttpGet(URL);
         HttpResponse execute = httpClient.execute(httpGet);
@@ -87,17 +86,26 @@ public class LearningReportController {
         JSONObject jsonObject = (JSONObject) JSON.parse(jsonStr);
         String openId = jsonObject.get("openid").toString();
 
-        String content = learningReportService.check(openId, APPID);
-
-        if(StringUtils.isNotEmpty(content)){
             //有了用户的opendi就可以的到用户的信息了
             //得到用户信息之后返回到一个页面
             ModelAndView view = new ModelAndView();
             view.setViewName("redirect:"+DailyReportURL + openId);
             return view;
-        }
-        return null;
 
+    }
+
+
+
+
+    /**
+     * 查询用户学习报告
+     */
+
+    @GetMapping(value="check",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result checkuser(@RequestParam String openId){
+
+        log.info("请求参数openId:{}",openId);
+        return learningReportService.check(openId);
     }
 
 

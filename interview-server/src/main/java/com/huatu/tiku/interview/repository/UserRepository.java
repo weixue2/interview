@@ -19,5 +19,5 @@ public interface UserRepository extends JpaRepository<User, Long>,JpaSpecificati
 
     List<User> findByStatus(int status);
 
-    User findByOpenIdAndStatus(String openId, int status);
+    List<User> findByOpenIdAndStatus(String openId, int status);
 }
