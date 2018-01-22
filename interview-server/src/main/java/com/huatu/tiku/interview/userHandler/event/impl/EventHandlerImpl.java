@@ -132,7 +132,7 @@ public class EventHandlerImpl implements EventHandler {
             if ((user == null | user.getStatus() != 1)) {
                 str = WxMpXmlOutMessage
                         .TEXT()
-                        .content("客服电话：400-817-6111")
+                        .content("抱歉，经系统核实您的手机号未购买“2018国考封闭特训班”~若有疑问，请联系客服：400-817-6111")
                         .fromUser(requestMap.get("ToUserName"))
                         .toUser(requestMap.get("FromUserName"))
                         .build()
