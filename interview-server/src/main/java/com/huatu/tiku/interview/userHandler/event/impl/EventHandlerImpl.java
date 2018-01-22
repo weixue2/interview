@@ -129,7 +129,7 @@ public class EventHandlerImpl implements EventHandler {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
-            if (user.getStatus() != 1) {
+            if ((user == null | user.getStatus() != 1)) {
                 str = WxMpXmlOutMessage
                         .TEXT()
                         .content("客服电话：400-817-6111")
