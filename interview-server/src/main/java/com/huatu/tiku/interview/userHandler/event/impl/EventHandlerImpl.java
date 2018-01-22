@@ -45,6 +45,8 @@ public class EventHandlerImpl implements EventHandler {
     @Autowired
     private SignInRepository signInRepository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     UserRepository userRepository;
     @Autowired
     private NotificationTypeRepository notificationTypeRepository;
@@ -89,9 +91,9 @@ public class EventHandlerImpl implements EventHandler {
     public String signInHandler(Map<String, String> requestMap) {
         String h = new SimpleDateFormat("HH").format(new Date());
         String str;
-        //设置签到时间
-        //if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8) {
-        if (System.currentTimeMillis() % 2 == 1) {
+        //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
+        if (Integer.parseInt(h) < 9 && Integer.parseInt(h) > 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) > 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) > 18) {
+            //if (System.currentTimeMillis() % 2 == 1) {
             log.info("开始签到");
             str = WxMpXmlOutMessage
                     .TEXT()
@@ -128,18 +130,29 @@ public class EventHandlerImpl implements EventHandler {
     public String eventClick(Map<String, String> requestMap) {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
-            List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
-                    (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
-            for (NotificationType notificationType : notTypePatterns) {
-                if (StringUtils.isNotEmpty(notificationType.getWxImageId())){
-                    str = WxMpXmlOutMessage
-                            .IMAGE()
-                            .mediaId(notTypePatterns.get(0).getWxImageId())
-                            .fromUser(requestMap.get("ToUserName"))
-                            .toUser(requestMap.get("FromUserName"))
-                            .build()
-                            .toXml();
-                    break;
+            User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
+            if (user.getStatus() != 1) {
+                str = WxMpXmlOutMessage
+                        .TEXT()
+                        .content("客服电话：400-817-6111")
+                        .fromUser(requestMap.get("ToUserName"))
+                        .toUser(requestMap.get("FromUserName"))
+                        .build()
+                        .toXml();
+            } else {
+                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
+                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
+                for (NotificationType notificationType : notTypePatterns) {
+                    if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
+                        str = WxMpXmlOutMessage
+                                .IMAGE()
+                                .mediaId(notTypePatterns.get(0).getWxImageId())
+                                .fromUser(requestMap.get("ToUserName"))
+                                .toUser(requestMap.get("FromUserName"))
+                                .build()
+                                .toXml();
+                        break;
+                    }
                 }
             }
         } else if("dailyReport".equals(requestMap.get("EventKey"))){
@@ -190,12 +203,12 @@ public class EventHandlerImpl implements EventHandler {
         }else if ("conn_service".equals(requestMap.get("EventKey"))) {
             str = WxMpXmlOutMessage
                     .TEXT()
-                    .content("抱歉，经系统核实您的手机号未购买“2018国考封闭特训班”~若有疑问，请联系客服：400-817-6111")
+                    .content("客服电话：400-817-6111")
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build()
                     .toXml();
-        }else {
+        } else {
             str = WxMpXmlOutMessage
                     .TEXT()
                     .content("正在开发")
