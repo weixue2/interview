@@ -12,8 +12,8 @@ public class WeChatUrlConstant {
 //739040d83f6d5c73fa961e3b1a48540f     //线上环境密钥
     /* 获取用户信息  phone=xxxxx&timeStamp=xxxxxx进行3des加密传参，返回值也是3des加密的   */
     @Value("${php_get_user_info}")
-    public static String PHP_GET_USER_INFO = "http://testapi.huatu.com/app_ztk/getGdmsinfo.php?p=";
-
+    public static String PHP_GET_USER_INFO;
+// = "http://testapi.huatu.com/app_ztk/getGdmsinfo.php?p="
     public static String ACCESS_TOKEN = "ACCESS_TOKEN";
     public static String ACCESS_TOKEN_KEY = "we_a_t_201801119";
     /*发送模板消息接口*/
