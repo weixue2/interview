@@ -29,10 +29,10 @@ import java.util.Arrays;
  * @Author jbzm
  * @Date Create on 2018/1/23 11:09
  */
-@Configuration
+//@Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
-    @Bean
+   // @Bean
     public WebSecurityConfig.SecurityInterceptor getSecurityInterceptor() {
         return new WebSecurityConfig.SecurityInterceptor();
     }
@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         }
     }
 
-    @Bean
+   // @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
