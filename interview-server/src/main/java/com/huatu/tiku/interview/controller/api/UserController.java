@@ -1,10 +1,5 @@
 package com.huatu.tiku.interview.controller.api;
 
-import com.google.common.collect.Maps;
-import com.huatu.common.ErrorResult;
-import com.huatu.common.SuccessMessage;
-import com.huatu.common.exception.BizException;
-import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.constant.TemplateEnum;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
@@ -19,12 +14,12 @@ import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * @author zhouwei
@@ -48,7 +43,8 @@ public class UserController {
 
     @Autowired
     WechatTemplateMsgService templateMsgService;
-
+    @Value("${notify_view}")
+    private String notifyView;
 
 
     @GetMapping("getMobile")
@@ -121,7 +117,7 @@ public class UserController {
         WechatTemplateMsg templateMsg ;
         for (User u : userService.findAllUser()) {
             templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-            templateMsg.setUrl(BasicParameters.MorningReadingURL+6);
+            templateMsg.setUrl(notifyView+6);
             templateMsg.setData(
                     MyTreeMap.createMap(
                             new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
