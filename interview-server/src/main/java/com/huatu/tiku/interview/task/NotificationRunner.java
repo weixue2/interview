@@ -188,11 +188,11 @@ public class NotificationRunner {
         public void run() {
             System.out.println("推送了一个");
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-            try {
-                this.finalize();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+//            try {
+//                this.finalize();
+//            } catch (Throwable throwable) {
+//                throwable.printStackTrace();
+//            }
         }
     }
 }
