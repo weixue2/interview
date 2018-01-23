@@ -67,7 +67,7 @@ public class UserInfoController {
         ModelAndView view = new ModelAndView();
         log.info("----用户跳转页面:" + "redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
         User user = userRepository.findByOpenId(openid);
-        if ((user == null | user.getStatus() != 1)) {
+        if ((user == null || user.getStatus() != 1)) {
             view.setViewName("redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=1&openId=" + openid);
         } else {
             view.setViewName("redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
