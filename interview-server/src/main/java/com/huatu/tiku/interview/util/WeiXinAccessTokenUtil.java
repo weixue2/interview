@@ -47,12 +47,12 @@ public class WeiXinAccessTokenUtil {
     public static String getAccessToken() {
 
         String json = HttpDefaultExecute(HttpReqUtil.GET_METHOD, WeChatUrlConstant.TOKEN_URL, null, "");
-        log.info("11111111111111111111"+json);
+        log.info("获取accessToken，json ：{}",json);
         String result = null;
         AccessToken accessToken = JsonUtil.fromJson(json, AccessToken.class);
         if(accessToken != null){
             result = accessToken.getAccess_token();
-            log.info("2222222222222222222"+result);
+            log.info("获取accessToken ,accessToken.getAccess_token() : {}",result);
         }
         return result;
     }
