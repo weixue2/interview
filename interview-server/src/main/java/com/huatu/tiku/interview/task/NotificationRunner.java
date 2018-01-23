@@ -163,6 +163,7 @@ public class NotificationRunner {
 //            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
             RunPush runPush = new RunPush(accessToken, templateMsg);
             runPush.run();
+
 //            System.out.println("一次发送完了");
         }
     }
@@ -187,6 +188,11 @@ public class NotificationRunner {
         public void run() {
             System.out.println("推送了一个");
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            try {
+                this.finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
     }
 }
