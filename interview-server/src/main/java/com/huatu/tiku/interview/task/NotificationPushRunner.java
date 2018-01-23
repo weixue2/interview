@@ -20,6 +20,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -51,7 +52,7 @@ public class NotificationPushRunner {
     private String notifyView;
 
 
-    @Scheduled(fixedDelay = 5 * 1000)
+    @Scheduled(fixedDelay = 1 * 1000)
     public void CheckNotification() {
         String  json = redis.opsForValue().get(key);
 //        System.out.println("???");
@@ -61,24 +62,28 @@ public class NotificationPushRunner {
             if (rts != null) {
 //                System.out.println("qwe");
 
+                List<ReadingTemp> pushList = new ArrayList<>();
                 for (ReadingTemp rt : rts) {
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
                         System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
-
-                        PushNotification(rt, notifyService.get(rt.getId()));
+                        pushList.add(rt);
+//                        PushNotification(rt, notifyService.get(rt.getId()));
 //                        break;
                     }
 
                 }
+                // todo
+                redis.opsForValue().set("push_list", JSON.toJSONString(pushList));
+                redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
             }
             insertRedis(rts);
         }
     }
 
     private void PushNotification(ReadingTemp rt, NotificationType notification) {
-
+        System.out.println("普世了一轮");
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         for (User u : userService.findAllUser()) {
             System.out.println("用户名："+u.getName()+u.getOpenId());
@@ -146,9 +151,9 @@ public class NotificationPushRunner {
                     break;
                 }
             }
-//            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-            RunPush runPush = new RunPush(accessToken, templateMsg);
-            runPush.run();
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+//            RunPush runPush = new RunPush(accessToken, templateMsg);
+//            runPush.run();
 
 //            System.out.println("一次发送完了");
         }
