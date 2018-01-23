@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
  * @Date Create on 2018/1/23 10:16
  */
 @Slf4j
-@RestController
-@RequestMapping(value = "/end/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//@RestController
+//@RequestMapping(value = "/end/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class LoginController {
     @Autowired
     private AdminService adminService;
