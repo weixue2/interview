@@ -70,6 +70,7 @@ public class UserController {
 //    }
     @PostMapping
     public Result updateUser(@RequestBody User user, HttpServletRequest request) {
+        log.info(user.toString());
         user.setStatus(1);
         return userService.updateUser(user, request) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
     }
@@ -94,6 +95,8 @@ public class UserController {
         }
         return Result.ok(user);
     }
+
+
 
 
 

@@ -43,10 +43,11 @@ public class UserServiceImpl implements UserService {
             user_.setIdCard(user.getIdCard());
             user_.setPregnancy(user.getPregnancy());
             user_.setNation(user.getNation());
-            user.setKeyContact(user.getKeyContact());
+            user_.setKeyContact(user.getKeyContact());
+            user = userRepository.save(user_);
         }
-        System.out.println(user);
-        return userRepository.save(user_) == null ? false : true;
+        System.out.println("user:"+user_);
+        return  user== null ? false : true;
     }
 
     @Override
@@ -59,7 +60,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String openId) {
-        return userRepository.getUserByOpenIdAndStatus(openId, 1);
+//        return userRepository.getUserByOpenIdAndStatus(openId, 1);
+        return userRepository.findByOpenId(openId);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
     private NotificationTypeRepository notificationTypeRepository;
     @Override
     public PageUtil<List<NotificationType>> findAll(Integer size,Integer page) {
-        PageRequest pageable = new PageRequest(page-1,size,new Sort("gmtCreate"));
+        PageRequest pageable = new PageRequest(page-1,size,new Sort(Sort.Direction.DESC,"gmtCreate"));
         Specification<NotificationType> specification = selectRules();
         Page<NotificationType> all = notificationTypeRepository.findAll(specification,pageable);
         List<NotificationVO> notificationVOs = GetAllParameter.test(all.getContent(), NotificationVO.class);
@@ -49,7 +49,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public PageUtil<List<NotificationType>> findByTitleLimit(Integer size, Integer page, String title) {
-        PageRequest pageable = new PageRequest(page-1,size,new Sort("gmtCreate"));
+        PageRequest pageable = new PageRequest(page-1,size,new Sort(Sort.Direction.DESC,"gmtCreate"));
         Specification<NotificationType> specification = selectRules(title);
         Page<NotificationType> all = notificationTypeRepository.findAll(specification, pageable);
         List<NotificationVO> notificationVOs = GetAllParameter.test(all.getContent(), NotificationVO.class);
