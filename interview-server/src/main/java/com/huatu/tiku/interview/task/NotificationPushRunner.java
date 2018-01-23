@@ -20,6 +20,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -61,17 +62,21 @@ public class NotificationPushRunner {
             if (rts != null) {
 //                System.out.println("qwe");
 
+                List<ReadingTemp> pushList = new ArrayList<>();
                 for (ReadingTemp rt : rts) {
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
                         System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
-
-                        PushNotification(rt, notifyService.get(rt.getId()));
+                        pushList.add(rt);
+//                        PushNotification(rt, notifyService.get(rt.getId()));
 //                        break;
                     }
 
                 }
+                // todo
+                redis.opsForValue().set("push_list", JSON.toJSONString(pushList));
+                redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
             }
             insertRedis(rts);
         }
