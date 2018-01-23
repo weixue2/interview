@@ -1,5 +1,7 @@
 package com.huatu.tiku.interview.constant;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * @Author: ZhenYang
  * @Date: Created in 2018/1/12 9:38
