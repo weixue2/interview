@@ -127,6 +127,8 @@ public class UserController {
                     )
             );
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+
         }
         return Result.ok();
     }
