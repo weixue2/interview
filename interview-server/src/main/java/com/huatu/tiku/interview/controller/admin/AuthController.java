@@ -4,7 +4,6 @@ import com.huatu.common.BaseResult;
 import com.huatu.common.LoginResult;
 import com.huatu.common.Result;
 import com.huatu.tiku.interview.constant.WebParamConsts;
-import com.sun.xml.internal.rngom.parse.host.Base;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -31,13 +30,13 @@ public class AuthController {
     @RequestMapping("/tologin")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Result tologin() {
-        return LoginResult.UNAUTHORIZED;
+        return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage());
     }
 
     @RequestMapping("/denied")
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public Result denied() {
-        return LoginResult.FORBIDDEN;
+        return BaseResult.create(LoginResult.FORBIDDEN.getCode(), LoginResult.FORBIDDEN.getMessage());
     }
 
     /**
@@ -52,7 +51,7 @@ public class AuthController {
         if (principal instanceof User) {
             return principal;
         } else {
-            return LoginResult.UNAUTHORIZED;
+            return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage());
         }
     }
 
@@ -66,7 +65,7 @@ public class AuthController {
 
     @RequestMapping(value = "/success", params = "logout")
     public BaseResult logoutSuccess() {
-        return BaseResult.create(20000,"操作成功");
+        return BaseResult.create(1000000, "操作成功");
     }
 
     /**
