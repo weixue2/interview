@@ -72,6 +72,7 @@ public class UserController {
     public Result updateUser(@RequestBody User user, HttpServletRequest request) {
         log.info(user.toString());
         user.setStatus(1);
+        log.info(user.toString());
         return userService.updateUser(user, request) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
     }
 
