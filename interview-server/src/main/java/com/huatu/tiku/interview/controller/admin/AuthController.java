@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2017/12/27 9:56
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/end/auth")
 public class AuthController {
     /**
      * 适配session过期等的检查
