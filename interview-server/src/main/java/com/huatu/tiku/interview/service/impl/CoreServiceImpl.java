@@ -55,9 +55,9 @@ public class CoreServiceImpl implements CoreService {
     public String processRequest(Map<String, String> requestMap, HttpServletRequest request, HttpServletResponse response) {
         String result = null;
         try {
-            requestMap.forEach((k, v) -> {
-                log.info("key:{},value:{}", k, v);
-            });
+//            requestMap.forEach((k, v) -> {
+//                log.info("key:{},value:{}", k, v);
+//            });
             switch (requestMap.get("MsgType")) {
                 //文本消息
                 case MessageUtil.REQ_MESSAGE_TYPE_TEXT: {
