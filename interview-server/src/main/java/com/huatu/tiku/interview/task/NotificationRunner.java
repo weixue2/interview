@@ -103,6 +103,7 @@ public class NotificationRunner {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
                     templateMsg.setUrl(BasicParameters.MorningReadingURL+notification.getId());
+                    System.out.println(BasicParameters.MorningReadingURL+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
@@ -132,6 +133,7 @@ public class NotificationRunner {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
                     templateMsg.setUrl(BasicParameters.ReportHintURL+notification.getId());
+                    System.out.println(BasicParameters.ReportHintURL+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
