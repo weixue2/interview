@@ -51,7 +51,7 @@ public class NotificationPushRunner {
     private String notifyView;
 
 
-    @Scheduled(fixedDelay = 5 * 1000)
+    @Scheduled(fixedDelay = 1 * 1000)
     public void CheckNotification() {
         String  json = redis.opsForValue().get(key);
 //        System.out.println("???");
@@ -146,9 +146,9 @@ public class NotificationPushRunner {
                     break;
                 }
             }
-//            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-            RunPush runPush = new RunPush(accessToken, templateMsg);
-            runPush.run();
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+//            RunPush runPush = new RunPush(accessToken, templateMsg);
+//            runPush.run();
 
 //            System.out.println("一次发送完了");
         }
