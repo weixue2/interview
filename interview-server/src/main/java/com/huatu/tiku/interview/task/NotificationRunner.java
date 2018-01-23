@@ -82,11 +82,12 @@ public class NotificationRunner {
                         System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
+                        insertRedis(rts);
                         PushNotification(rt, notifyService.get(rt.getId()));
                     }
                 }
             }
-            insertRedis(rts);
+
         }
     }
 
