@@ -105,6 +105,7 @@ public class MessageUtil {
      */
     public static final String TEMPLATESENDJOBFINISH="TEMPLATESENDJOBFINISH";
     public static final String SCANCODE_WAITMSG="scancode_waitmsg";
+    public static final String SCANCODE_SCAN="SCAN";
     /**
      * 解析微信发来的请求（XML）
      *

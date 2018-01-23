@@ -36,7 +36,9 @@ public class WeChatUrlConstant {
     //根据OpenID列表群发
     public static String MESSAGE_MANY_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
 
-    public static String MENU_CONTENT = "{\"button\":[{\"type\":\"click\",\"name\":\"课程安排\",\"key\":\"course\"},{\"type\":\"scancode_waitmsg\",\"name\":\"扫码签到\",\"key\":\"signIn\"},{\"name\":\"我的\",\"sub_button\":[{\"type\":\"view\",\"name\":\"学习效果\",\"url\":\"http://weixin.htexam.com/wx/api/lr/pre\",\"sub_button\":[]},{\"type\":\"view\",\"name\":\"个人信息\",\"url\":\"http://weixin.htexam.com/wx/api/userView\",\"sub_button\":[]},{\"type\":\"click\",\"name\":\"联系客服\",\"key\":\"conn_service\"}]}]}";
+    public static String MENU_CONTENT = "{\"button\":[{\"type\":\"click\",\"name\":\"课程安排\",\"key\":\"course\"},{\"type\":\"scancode_waitmsg\",\"name\":\"扫码签到\",\"key\":\"signIn_wx\"},{\"name\":\"我的\",\"sub_button\":[{\"type\":\"view\",\"name\":\"学习效果\",\"url\":\"http://weixin.htexam.com/wx/api/lr/pre\",\"sub_button\":[]},{\"type\":\"view\",\"name\":\"个人信息\",\"url\":\"http://weixin.htexam.com/wx/api/userView\",\"sub_button\":[]},{\"type\":\"click\",\"name\":\"联系客服\",\"key\":\"conn_service\"}]}]}";
+
+    public static String SECONT_CODE_URL = "{\"action_name\":\"QR_LIMIT_STR_SCENE\",\"action_info\":{\"scene\":{\"scene_str\":\"signIn\"}}}";
 
 
 }

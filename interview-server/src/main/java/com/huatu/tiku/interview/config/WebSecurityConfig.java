@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -24,8 +25,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
     @Bean
-    public SecurityInterceptor getSecurityInterceptor() {
-        return new SecurityInterceptor();
+    public WebSecurityConfig.SecurityInterceptor getSecurityInterceptor() {
+        return new WebSecurityConfig.SecurityInterceptor();
     }
 
     @Override
@@ -58,20 +59,14 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         }
     }
 
-    /**
-     * 声明什么鬼,没他用不了  MultipartFile
-     *
-     * @return
-     */
-    @Bean(name = "multipartResolver")
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("UTF-8");
-        //resolveLazily属性启用是为了推迟文件解析，以在在UploadAction中捕获文件大小异常
-        resolver.setResolveLazily(true);
-        //上传文件大小 50M 50*1024*1024
-        resolver.setMaxInMemorySize(40960);
-        resolver.setMaxUploadSize(50 * 1024 * 1024);
-        return resolver;
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "DELETE", "PUT")
+                .exposedHeaders("Set-Cookie")
+                .maxAge(3600);
     }
+
 }
