@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +47,9 @@ public class EventHandlerImpl implements EventHandler {
     private NotificationTypeRepository notificationTypeRepository;
     @Autowired
     private LearningReportRepository learningReportRepository;
+    @Value("${phone_check}")
+    private String phoneCheck;
+
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
@@ -62,7 +66,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + fromUserName);
+        a.setUrl(phoneCheck + fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);

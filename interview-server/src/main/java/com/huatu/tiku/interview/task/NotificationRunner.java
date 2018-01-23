@@ -1,7 +1,6 @@
 package com.huatu.tiku.interview.task;
 
 import com.alibaba.fastjson.JSON;
-import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.TemplateEnum;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.dto.ReadingTemp;
@@ -9,15 +8,14 @@ import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.template.MyTreeMap;
 import com.huatu.tiku.interview.entity.template.TemplateMap;
-import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -25,7 +23,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,6 +47,8 @@ public class NotificationRunner {
 
     @Autowired
     WechatTemplateMsgService templateMsgService;
+    @Value("${notify_view}")
+    private String notifyView;
 
     @Scheduled(fixedDelay = 3 * 10 * 1000)
     public void GetNotification() {
@@ -102,8 +101,8 @@ public class NotificationRunner {
                 case 2: {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-                    templateMsg.setUrl(BasicParameters.MorningReadingURL+notification.getId());
-                    System.out.println(BasicParameters.MorningReadingURL+notification.getId());
+                    templateMsg.setUrl(notifyView+notification.getId());
+                    System.out.println(notifyView+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
@@ -132,8 +131,8 @@ public class NotificationRunner {
                 case 3: {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
-                    templateMsg.setUrl(BasicParameters.ReportHintURL+notification.getId());
-                    System.out.println(BasicParameters.ReportHintURL+notification.getId());
+                    templateMsg.setUrl(notifyView+notification.getId());
+                    System.out.println(notifyView+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),

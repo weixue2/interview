@@ -4,9 +4,7 @@ import com.huatu.tiku.interview.entity.template.MyTreeMap;
 import com.huatu.tiku.interview.entity.template.TemplateMap;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 
-import java.util.Date;
 import java.util.TreeMap;
-import java.util.UUID;
 
 /**
  * @Author ZhenYang
@@ -15,6 +13,8 @@ import java.util.UUID;
  */
 
 public enum TemplateEnum {
+
+
     No_0("templateId","description","url",null),
 
     No_1(   "5BP20zR4h-LaEfFWbiqOrw4CPXEqfCxi4v5kNBXHqAc",
@@ -58,8 +58,8 @@ public enum TemplateEnum {
 //    课程状态：线下阶段
 //    今天表现不错，明天继续努力哦~
     DailyReport("LhMOAjqz1_xqeHasMAtRLwmTl8DdlGi8w5RJKhclnlg","今日学习报告已更新。","",MyTreeMap.createMap(
-            new TemplateMap("first", WechatTemplateMsg.item("2018国考封闭特训班","#000000")),
-            new TemplateMap("keyword1", WechatTemplateMsg.item("线下阶段","#000000")),
+            new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班","#000000")),
+            new TemplateMap("keyword2", WechatTemplateMsg.item("线下阶段","#000000")),
             new TemplateMap("remark", WechatTemplateMsg.item("今天表现不错，明天继续努力哦","#000000"))
     )),
 
@@ -70,8 +70,8 @@ public enum TemplateEnum {
 //    请点击“详情”查看报告完整信息
     /*线下学习统计*/
     TotalReport("JP2AoitHJqBuj3r6ufXzNVJnWPA7JF8loqGHzfCV874","您的线下学习报告已生成。","",MyTreeMap.createMap(
-            new TemplateMap("first", WechatTemplateMsg.item("学员姓名","#000000")),
-            new TemplateMap("keyword1", WechatTemplateMsg.item("时间：2018年2月2日-2018年2月9日","#000000")),
+            new TemplateMap("keyword1", WechatTemplateMsg.item("学员姓名","#000000")),
+            new TemplateMap("keyword2", WechatTemplateMsg.item("时间：2018年2月2日-2018年2月9日","#000000")),
             new TemplateMap("remark", WechatTemplateMsg.item("请点击“详情”查看报告完整信息","#000000"))
 //
 //            new TemplateMap("keyword3", WechatTemplateMsg.item("keyword32222","#000000")),
