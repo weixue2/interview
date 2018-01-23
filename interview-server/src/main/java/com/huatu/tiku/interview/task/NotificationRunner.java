@@ -77,17 +77,17 @@ public class NotificationRunner {
 //                System.out.println("qwe");
 
                 for (ReadingTemp rt : rts) {
-                    log.info("循环");
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
                         System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
-                        insertRedis(rts);
+
                         PushNotification(rt, notifyService.get(rt.getId()));
                     }
+                    break;
                 }
             }
-
+            insertRedis(rts);
         }
     }
 
