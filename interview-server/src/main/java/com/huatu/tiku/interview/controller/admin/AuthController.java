@@ -66,7 +66,7 @@ public class AuthController {
 
     @RequestMapping(value = "/success", params = "logout")
     public BaseResult logoutSuccess() {
-        return BaseResult.create(20000,"操作成功");
+        return BaseResult.create(1000000,"操作成功");
     }
 
     /**
