@@ -26,8 +26,8 @@ public class BasicParameters {
     public static String IMAGE_SUBSCRIBE_001 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515474563395&di=7fd2315a708740c4b8ed01b68ff8d1d4&imgtype=0&src=http%3A%2F%2Fwww.zhlzw.com%2FUploadFiles%2FArticle_UploadFiles%2F201204%2F20120412123904521.jpg";
 
     //手机验证
-    @Value("${phone_check}")
-    public static String LINK_SUBSCRIBE_001;
+//    @Value("${phone_check}")
+//    public static String LINK_SUBSCRIBE_001;
 
     public static String FOR_VER_QR_CODE = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGt8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQVFuQ2MweWFlYW0xMDAwMGcwN0cAAgSGVF9aAwQAAAAA";
 //https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGd8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydnJYYmtmVENlY2kxMDAwMHcwN18AAgStt2VaAwQAAAAA
