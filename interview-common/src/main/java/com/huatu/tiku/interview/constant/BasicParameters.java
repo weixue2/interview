@@ -27,7 +27,7 @@ public class BasicParameters {
     public static String LINK_SUBSCRIBE_001 = "http://tkproc.huatu.com/interview-h5/#/fill_information?openId=";
 
     public static String FOR_VER_QR_CODE = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGt8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQVFuQ2MweWFlYW0xMDAwMGcwN0cAAgSGVF9aAwQAAAAA";
-
+//https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGd8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydnJYYmtmVENlY2kxMDAwMHcwN18AAgStt2VaAwQAAAAA
     //晨读
     public static String MorningReadingURL = "http://tkproc.huatu.com/interview-h5/#/test_template?id=";
     //报到提示

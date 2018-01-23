@@ -125,7 +125,7 @@ public class EventHandlerImpl implements EventHandler {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
-            if ((user == null | user.getStatus() != 1)) {
+            if ((user == null || user.getStatus() != 1)) {
                 log.info("----查询不到用户信息----");
                 str = WxMpXmlOutMessage
                         .TEXT()
