@@ -21,43 +21,43 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @Author jbzm
  * @Date Create on 2018/1/23 11:09
  */
-//@Configuration
+@Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
-//    @Bean
-//    public WebSecurityConfig.SecurityInterceptor getSecurityInterceptor() {
-//        return new WebSecurityConfig.SecurityInterceptor();
-//    }
-//
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
-//
-//        // 排除配置
-//        addInterceptor.excludePathPatterns("/error");
-//        addInterceptor.excludePathPatterns("/end/login**");
-//
-//        // 拦截配置
-//        addInterceptor.addPathPatterns("/end/**");
-//    }
-//
-//
-//    private class SecurityInterceptor extends HandlerInterceptorAdapter {
-//
-//        @Override
-//        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-//                throws Exception {
-//            HttpSession session = request.getSession();
-//            if (session.getAttribute(UserConstant.SESSION_KEY) != null) {
-//                return true;
-//            }
-////            // 跳转登录
-////            String url = "/wx/end/login";
-////            //后台不做跳转   由前台来做路由
-////            response.sendRedirect(url);
-//            throw new BizException(ErrorResult.create(401, "权限不足"));
-//        }
-//    }
+    @Bean
+    public WebSecurityConfig.SecurityInterceptor getSecurityInterceptor() {
+        return new WebSecurityConfig.SecurityInterceptor();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
+
+        // 排除配置
+        addInterceptor.excludePathPatterns("/error");
+        addInterceptor.excludePathPatterns("/end/auth/*");
+
+        // 拦截配置
+        addInterceptor.addPathPatterns("/end/**");
+    }
+
+
+    private class SecurityInterceptor extends HandlerInterceptorAdapter {
+
+        @Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+                throws Exception {
+            HttpSession session = request.getSession();
+            if (session.getAttribute(UserConstant.SESSION_KEY) != null) {
+                return true;
+            }
+//            // 跳转登录
+//            String url = "/wx/end/login";
+//            //后台不做跳转   由前台来做路由
+//            response.sendRedirect(url);
+            throw new BizException(ErrorResult.create(401, "权限不足"));
+        }
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

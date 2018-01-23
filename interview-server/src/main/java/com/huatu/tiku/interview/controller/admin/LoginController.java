@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
  * @Date Create on 2018/1/23 10:16
  */
 @Slf4j
-//@RestController
-//@RequestMapping(value = "/end/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RestController
+@RequestMapping(value = "/end/auth", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class LoginController {
     @Autowired
     private AdminService adminService;
@@ -31,7 +31,7 @@ public class LoginController {
      * @param request
      * @return
      */
-    @PostMapping()
+    @PostMapping("login")
     public Result login(String username, String password, HttpServletRequest request) {
         log.info("username: {}  ,password:{} ", username, password);
         Admin admin = adminService.login(username, password);
@@ -48,7 +48,7 @@ public class LoginController {
      *
      * @param request
      */
-    @GetMapping
+    @GetMapping("logout")
     public Result logout(HttpServletRequest request) {
         log.info("logout");
         request.getSession().setAttribute("user", null);
