@@ -161,7 +161,8 @@ public class NotificationRunner {
                     break;
                 }
             }
-            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+//            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            new RunPush(accessToken,templateMsg);
             System.out.println("一次发送完了");
         }
     }
@@ -169,5 +170,21 @@ public class NotificationRunner {
     private void insertRedis(Object o) {
         redis.opsForValue().set(key, JSON.toJSONString(o));
         redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
+    }
+
+    class RunPush implements Runnable{
+
+        private String accessToken;
+        private WechatTemplateMsg templateMsg;
+
+        public RunPush(String accessToken, WechatTemplateMsg templateMsg) {
+            this.accessToken = accessToken;
+            this.templateMsg = templateMsg;
+        }
+
+        @Override
+        public void run() {
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+        }
     }
 }
