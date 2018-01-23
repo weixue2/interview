@@ -66,7 +66,7 @@ public class NotificationRunner {
         }
     }
 
-    @Scheduled(fixedDelay = 5 * 1000)
+    @Scheduled(fixedDelay = 1 * 1000)
     public void CheckNotification() {
         String  json = redis.opsForValue().get(key);
 //        System.out.println("???");
