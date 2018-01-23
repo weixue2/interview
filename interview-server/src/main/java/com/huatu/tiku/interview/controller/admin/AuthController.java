@@ -61,12 +61,12 @@ public class AuthController {
     public BaseResult loginSuccess() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
-        return BaseResult.create(1000000, "", principal);
+        return BaseResult.create(20000, "", principal);
     }
 
     @RequestMapping(value = "/success", params = "logout")
     public BaseResult logoutSuccess() {
-        return BaseResult.create(1000000,"操作成功");
+        return BaseResult.create(20000,"操作成功");
     }
 
     /**
