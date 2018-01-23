@@ -1,8 +1,10 @@
 package com.huatu.tiku.interview.controller.admin;
 
+import com.huatu.common.BaseResult;
 import com.huatu.common.LoginResult;
 import com.huatu.common.Result;
 import com.huatu.tiku.interview.constant.WebParamConsts;
+import com.sun.xml.internal.rngom.parse.host.Base;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthController {
     /**
      * 适配session过期等的检查
+     *
      * @return
      */
     @RequestMapping("/tologin")
@@ -33,40 +36,42 @@ public class AuthController {
 
     @RequestMapping("/denied")
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public Result denied(){
+    public Result denied() {
         return LoginResult.FORBIDDEN;
     }
 
     /**
      * 获取账户信息的接口
+     *
      * @return
      */
     @RequestMapping("/get")
-    public Object get(){
+    public Object get() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
-        if(principal instanceof User){
+        if (principal instanceof User) {
             return principal;
-        }else{
+        } else {
             return LoginResult.UNAUTHORIZED;
         }
     }
 
 
-    @RequestMapping(value = "/success",params = "login")
-    public Object loginSuccess(){
+    @RequestMapping(value = "/success", params = "login")
+    public BaseResult loginSuccess() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
-        return principal;
+        return BaseResult.create(20000, "", principal);
     }
 
-    @RequestMapping(value = "/success",params = "logout")
-    public Result logoutSuccess(){
-        return null;
+    @RequestMapping(value = "/success", params = "logout")
+    public BaseResult logoutSuccess() {
+        return BaseResult.create(20000,"操作成功");
     }
 
     /**
      * 登陆失败返回信息
+     *
      * @param request
      * @return
      */
@@ -85,7 +90,6 @@ public class AuthController {
 //        }
         return LoginResult.LOGIN_FAILED;
     }
-
 
 
 //    @RequestMapping("/modify")
