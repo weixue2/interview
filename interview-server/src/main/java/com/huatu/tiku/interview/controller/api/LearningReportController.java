@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.entity.result.Result;
+import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.service.LearningReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,16 @@ public class LearningReportController {
 
         log.info("请求参数openId:{}",openId);
         return learningReportService.check(openId);
+    }
+
+
+
+    /**
+     * 推送用户学习报告
+     */
+    @PostMapping(value="push/{openId}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public TemplateMsgResult push(@PathVariable String openId){
+        return learningReportService. pushDailyReport(openId);
     }
 
 
