@@ -39,13 +39,6 @@ public class NotificationController {
     private NotificationService notificationService;
 
 
-
-
-
-
-
-
-
     @GetMapping
     public Result getPage(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page){
         PageUtil<List<NotificationType>> all = notificationService.findAll(pageSize,page);
