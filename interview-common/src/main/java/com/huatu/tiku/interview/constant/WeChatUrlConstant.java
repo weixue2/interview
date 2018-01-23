@@ -1,5 +1,7 @@
 package com.huatu.tiku.interview.constant;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * @author zhouwei
  * @Description: TODO
@@ -9,6 +11,7 @@ public class WeChatUrlConstant {
     //okdNOuFFsk83SU9bvABn4rJinTvs
 //739040d83f6d5c73fa961e3b1a48540f     //线上环境密钥
     /* 获取用户信息  phone=xxxxx&timeStamp=xxxxxx进行3des加密传参，返回值也是3des加密的   */
+    @Value("${php_get_user_info}")
     public static String PHP_GET_USER_INFO = "http://testapi.huatu.com/app_ztk/getGdmsinfo.php?p=";
 
     public static String ACCESS_TOKEN = "ACCESS_TOKEN";
