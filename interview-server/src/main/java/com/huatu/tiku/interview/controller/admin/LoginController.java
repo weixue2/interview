@@ -27,7 +27,7 @@ public class LoginController {
     private AdminService adminService;
 
     @GetMapping()
-    public Result login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
+    public Result  login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
         log.info("username: {}  ,password:{} ", username, password);
         Admin admin = adminService.login(username, password);
         if (admin == null) {
