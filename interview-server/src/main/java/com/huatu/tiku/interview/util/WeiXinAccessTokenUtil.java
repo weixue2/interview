@@ -2,23 +2,17 @@ package com.huatu.tiku.interview.util;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
-import com.huatu.tiku.interview.config.WechatConfig;
-import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.AccessToken;
 import com.huatu.tiku.interview.entity.WeChatTemplate;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.TreeMap;
 
 import static com.huatu.tiku.interview.util.HttpReqUtil.HttpDefaultExecute;
 
@@ -48,17 +42,17 @@ public class WeiXinAccessTokenUtil {
     }
     /**
      * 获取授权凭证token
-     * @param key  应用appid
-     * @param secret 应用密匙
      * @return json格式的字符串
      */
     public static String getAccessToken() {
 
         String json = HttpDefaultExecute(HttpReqUtil.GET_METHOD, WeChatUrlConstant.TOKEN_URL, null, "");
+        log.info("11111111111111111111"+json);
         String result = null;
         AccessToken accessToken = JsonUtil.fromJson(json, AccessToken.class);
         if(accessToken != null){
             result = accessToken.getAccess_token();
+            log.info("2222222222222222222"+result);
         }
         return result;
     }
