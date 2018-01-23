@@ -78,7 +78,7 @@ public class NotificationPushRunner {
     }
 
     private void PushNotification(ReadingTemp rt, NotificationType notification) {
-
+        System.out.println("普世了一轮");
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         for (User u : userService.findAllUser()) {
             System.out.println("用户名："+u.getName()+u.getOpenId());
