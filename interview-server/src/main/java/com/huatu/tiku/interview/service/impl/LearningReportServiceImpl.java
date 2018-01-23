@@ -100,7 +100,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
 
 
     //推送每日学习报告消息
-    private TemplateMsgResult pushDailyReport(String openId)  {
+    public TemplateMsgResult pushDailyReport(String openId)  {
         String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
 //        TemplateEnum.DailyReport.
         WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.DailyReport);
