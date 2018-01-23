@@ -18,7 +18,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @Author jbzm
  * @Date Create on 2018/1/23 11:09
  */
-@Configuration
+//@Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         addInterceptor.excludePathPatterns("/end/login**");
 
         // 拦截配置
-        addInterceptor.addPathPatterns("/**");
+        addInterceptor.addPathPatterns("/wx/end**");
     }
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
