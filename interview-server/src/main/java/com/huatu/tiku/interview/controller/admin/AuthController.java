@@ -30,13 +30,13 @@ public class AuthController {
     @RequestMapping("/tologin")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public BaseResult tologin() {
-        return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage());
+        return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage(), "");
     }
 
     @RequestMapping("/denied")
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public BaseResult denied() {
-        return BaseResult.create(LoginResult.FORBIDDEN.getCode(), LoginResult.FORBIDDEN.getMessage());
+        return BaseResult.create(LoginResult.FORBIDDEN.getCode(), LoginResult.FORBIDDEN.getMessage(), "");
     }
 
     /**
@@ -49,9 +49,9 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
         if (principal instanceof User) {
-            return principal;
+            return BaseResult.create(20000, "", principal);
         } else {
-            return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage());
+            return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage(), "");
         }
     }
 
@@ -65,7 +65,7 @@ public class AuthController {
 
     @RequestMapping(value = "/success", params = "logout")
     public BaseResult logoutSuccess() {
-        return BaseResult.create(20000, "操作成功");
+        return BaseResult.create(20000, "操作成功", "");
     }
 
     /**
@@ -75,7 +75,7 @@ public class AuthController {
      * @return
      */
     @RequestMapping("/fail")
-    public Result fail(HttpServletRequest request) {
+    public BaseResult fail(HttpServletRequest request) {
         AuthenticationException authenticationException = (AuthenticationException) request.getAttribute(WebParamConsts.SPRING_SECURITY_EX);
 //        if(authenticationException instanceof CaptchaInvalidException){
 //            return MorphlingResponse.WRONG_CAPTCHA;
@@ -87,7 +87,7 @@ public class AuthController {
 //            String message = authenticationException.getMessage();
 //            return ErrorResult.create(MorphlingResponse.LOGIN_FAILED.getCode(),message);
 //        }
-        return LoginResult.LOGIN_FAILED;
+        return BaseResult.create(LoginResult.LOGIN_FAILED.getCode(), LoginResult.LOGIN_FAILED.getMessage(), "");
     }
 
 
