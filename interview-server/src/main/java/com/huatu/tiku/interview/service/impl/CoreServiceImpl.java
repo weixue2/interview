@@ -94,7 +94,11 @@ public class CoreServiceImpl implements CoreService {
                             // 模板验证消息
                             break;
                         }//扫一扫签到
-                        case MessageUtil.SCANCODE_WAITMSG: {
+//                        case MessageUtil.SCANCODE_WAITMSG: {
+//                            result = eventHandler.signInHandler(requestMap);
+//                            break;
+//                        }
+                        case MessageUtil.SCANCODE_SCAN: {
                             result = eventHandler.signInHandler(requestMap);
                             break;
                         }
