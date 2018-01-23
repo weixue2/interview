@@ -1,5 +1,7 @@
 package com.huatu.tiku.interview.constant;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  * @Author: ZhenYang
  * @Date: Created in 2018/1/12 9:38
@@ -24,18 +26,22 @@ public class BasicParameters {
     public static String IMAGE_SUBSCRIBE_001 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515474563395&di=7fd2315a708740c4b8ed01b68ff8d1d4&imgtype=0&src=http%3A%2F%2Fwww.zhlzw.com%2FUploadFiles%2FArticle_UploadFiles%2F201204%2F20120412123904521.jpg";
 
     //手机验证
-    public static String LINK_SUBSCRIBE_001 = "http://tkproc.huatu.com/interview-h5/#/fill_information?openId=";
+    @Value("${phone_check}")
+    public static String LINK_SUBSCRIBE_001;
 
     public static String FOR_VER_QR_CODE = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGt8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyQVFuQ2MweWFlYW0xMDAwMGcwN0cAAgSGVF9aAwQAAAAA";
 //https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGd8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAydnJYYmtmVENlY2kxMDAwMHcwN18AAgStt2VaAwQAAAAA
     //晨读
-    public static String MorningReadingURL = "http://tkproc.huatu.com/interview-h5/#/test_template?id=";
+    @Value("${notify_view}")
+    public static String MorningReadingURL;
     //报到提示
-    public static String ReportHintURL = "http://tkproc.huatu.com/interview-h5/#/test_template?id=";
+    @Value("${notify_view}")
+    public static String ReportHintURL ;
 
 
     //TODO 每日学习效果反馈
-    public static String DailyReportURL = "http://tkproc.huatu.com/interview-h5/#/result_back?openId=";
+    @Value("${DailyReportURL}")
+    public static String DailyReportURL ;
 
 //    //TODO 线下学习历程
 //    public static String TotalReportURL = "http://192.168.10.93:8080/#/test_template?id=";
