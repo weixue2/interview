@@ -83,8 +83,9 @@ public class NotificationRunner {
                         rt.setStatus(false);
 
                         PushNotification(rt, notifyService.get(rt.getId()));
+//                        break;
                     }
-                    break;
+
                 }
             }
             insertRedis(rts);
