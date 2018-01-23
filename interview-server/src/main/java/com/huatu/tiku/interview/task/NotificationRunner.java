@@ -162,7 +162,8 @@ public class NotificationRunner {
                 }
             }
 //            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-            new RunPush(accessToken,templateMsg);
+            RunPush runPush = new RunPush(accessToken, templateMsg);
+            runPush.run();
 //            System.out.println("一次发送完了");
         }
     }
