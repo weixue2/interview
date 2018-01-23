@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.huatu.tiku.interview.constant.BasicParameters.DailyReportURL;
 
 /**
  * Created by x6 on 2018/1/22.
@@ -29,6 +29,10 @@ import static com.huatu.tiku.interview.constant.BasicParameters.DailyReportURL;
 @Slf4j
 @RequestMapping("/api/lr/pre")
 public class LearningReportPreController {
+
+    @Value("${DailyReportURL}")
+    public String DailyReportURL ;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
         log.info("--------------开始oauth跳转------------");

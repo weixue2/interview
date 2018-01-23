@@ -16,6 +16,7 @@ import com.huatu.tiku.interview.util.MessageUtil;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +34,12 @@ import java.util.Map;
 @Component
 @Slf4j
 public class MessageHandlerImpl implements MessageHandler {
+
+    @Value("${phone_check}")
+    public String LINK_SUBSCRIBE_001;
+
+    @Value("${notify_view}")
+    public String MorningReadingURL;
 
     @Autowired
     private WechatTemplateMsgService templateMsgService;
@@ -76,7 +83,7 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setDescription("点击图文可以跳转到华图首页");
             a.setPicUrl("http://p1.music.126.net/_mEC5ZpzngngbBioF8dm4Q==/109951162973202394.jpg");
             //这里跳转前端验证
-            a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + requestMap.get("FromUserName"));
+            a.setUrl(LINK_SUBSCRIBE_001 + requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
             nm.setArticles(as);
@@ -84,7 +91,7 @@ public class MessageHandlerImpl implements MessageHandler {
         }
         if(requestMap.get("Content").equals("3")){
             WechatTemplateMsg templateMsg = new WechatTemplateMsg(requestMap.get("FromUserName"), TemplateEnum.MorningReading);
-                    templateMsg.setUrl(BasicParameters.MorningReadingURL+6);
+                    templateMsg.setUrl(MorningReadingURL+6);
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
@@ -104,7 +111,7 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setDescription("点击图文可以跳转到华图首页");
             a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
             //这里跳转前端验证
-            a.setUrl(BasicParameters.LINK_SUBSCRIBE_001 + requestMap.get("FromUserName"));
+            a.setUrl(LINK_SUBSCRIBE_001 + requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
             nm.setArticles(as);
