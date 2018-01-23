@@ -122,11 +122,26 @@ public class UserController {
                     MyTreeMap.createMap(
                             new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
                             new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
-                            new TemplateMap("keyword2", WechatTemplateMsg.item("我哪知道", "#000000")),
+                            new TemplateMap("keyword2", WechatTemplateMsg.item("123", "#000000")),
                             new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
                     )
             );
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+
+        }
+        for (User u : userService.findAllUser()) {
+            templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
+            templateMsg.setUrl(notifyView+6);
+            templateMsg.setData(
+                    MyTreeMap.createMap(
+                            new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
+                            new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
+                            new TemplateMap("keyword2", WechatTemplateMsg.item("1233", "#000000")),
+                            new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
+                    )
+            );
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+
         }
         return Result.ok();
     }
