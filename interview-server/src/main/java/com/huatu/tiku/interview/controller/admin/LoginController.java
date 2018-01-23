@@ -25,6 +25,7 @@ public class LoginController {
 
     /**
      * 登录
+     *
      * @param username
      * @param password
      * @param request
@@ -48,10 +49,11 @@ public class LoginController {
      * @param request
      */
     @GetMapping
-    public void logout(HttpServletRequest request) {
+    public Result logout(HttpServletRequest request) {
         log.info("logout");
         request.getSession().setAttribute("user", null);
         request.getSession().removeAttribute("user");
         request.getSession().invalidate();
+        return Result.ok();
     }
 }
