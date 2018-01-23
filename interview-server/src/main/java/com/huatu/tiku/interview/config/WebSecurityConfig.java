@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
-                .allowedMethods("GET", "POST", "DELETE", "PUT")
+                .allowedMethods("GET", "POST", "DELETE", "PUT","OPTIONS")
                 .exposedHeaders("Set-Cookie")
                 .maxAge(3600);
     }
