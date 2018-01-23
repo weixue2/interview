@@ -9,6 +9,8 @@ import com.huatu.common.exception.BizException;
 import com.huatu.tiku.interview.constant.UserConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @Author jbzm
  * @Date Create on 2018/1/23 11:09
  */
-//@Configuration
+@Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -35,8 +37,10 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         addInterceptor.excludePathPatterns("/end/login**");
 
         // 拦截配置
-        addInterceptor.addPathPatterns("/wx/end**");
+        addInterceptor.addPathPatterns("/end/**");
     }
+
+
 
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
 
@@ -53,5 +57,21 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
             //response.sendRedirect(url);
             throw new BizException(ErrorResult.create(401, "权限不足"));
         }
+    }
+
+    /**
+     * 声明什么鬼,没他用不了  MultipartFile
+     * @return
+     */
+    @Bean(name = "multipartResolver")
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setDefaultEncoding("UTF-8");
+        //resolveLazily属性启用是为了推迟文件解析，以在在UploadAction中捕获文件大小异常
+        resolver.setResolveLazily(true);
+        //上传文件大小 50M 50*1024*1024
+        resolver.setMaxInMemorySize(40960);
+        resolver.setMaxUploadSize(50 * 1024 * 1024);
+        return resolver;
     }
 }
