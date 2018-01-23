@@ -83,7 +83,7 @@ public class NotificationServiceImpl implements NotificationService {
                 List<Predicate> predicates = Lists.newArrayList();
                 if (id != null) {
                     predicates.add(cb.equal(root.get("id"), id));
-                    predicates.add(cb.equal(root.get("status"),"1"));
+                    predicates.add(cb.equal(root.get("status"),WXStatusEnum.Status.NORMAL.getStatus()));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
@@ -95,7 +95,7 @@ public class NotificationServiceImpl implements NotificationService {
             @Override
             public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = Lists.newArrayList();
-                    predicates.add(cb.equal(root.get("status"),"1"));
+                    predicates.add(cb.equal(root.get("status"),WXStatusEnum.Status.NORMAL.getStatus()));
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
@@ -109,7 +109,7 @@ public class NotificationServiceImpl implements NotificationService {
                 List<Predicate> predicates = Lists.newArrayList();
                 if (title != null) {
                     predicates.add(cb.like(root.get("title"), "%"+title+"%"));
-                    predicates.add(cb.equal(root.get("status"),"1"));
+                    predicates.add(cb.equal(root.get("status"),WXStatusEnum.Status.NORMAL.getStatus()));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
@@ -134,6 +134,6 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public NotificationType findOne(Long id) {
-        return notificationTypeRepository.findOne(id);
+        return notificationTypeRepository.findByIdAndStatus(id,WXStatusEnum.Status.NORMAL.getStatus());
     }
 }
