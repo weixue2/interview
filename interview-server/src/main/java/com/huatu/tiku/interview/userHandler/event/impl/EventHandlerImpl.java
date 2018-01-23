@@ -85,7 +85,7 @@ public class EventHandlerImpl implements EventHandler {
     public String signInHandler(Map<String, String> requestMap) {
         String str;
         log.info("开始判断该二维码是否我为华图官方签到二维码:" + requestMap.get("EventKey"));
-        if ("signIn".equals(requestMap.get("EventKey"))) {
+        if ("sign_In".equals(requestMap.get("EventKey"))) {
             String h = new SimpleDateFormat("HH").format(new Date());
             //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
             if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
