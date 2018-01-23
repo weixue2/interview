@@ -29,13 +29,13 @@ public class AuthController {
      */
     @RequestMapping("/tologin")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public Result tologin() {
+    public BaseResult tologin() {
         return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage());
     }
 
     @RequestMapping("/denied")
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public Result denied() {
+    public BaseResult denied() {
         return BaseResult.create(LoginResult.FORBIDDEN.getCode(), LoginResult.FORBIDDEN.getMessage());
     }
 
@@ -65,7 +65,7 @@ public class AuthController {
 
     @RequestMapping(value = "/success", params = "logout")
     public BaseResult logoutSuccess() {
-        return BaseResult.create(1000000, "操作成功");
+        return BaseResult.create(20000, "操作成功");
     }
 
     /**
