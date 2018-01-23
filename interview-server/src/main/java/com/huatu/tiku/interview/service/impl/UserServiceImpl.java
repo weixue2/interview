@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 //        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
 
         User user_ = userRepository.findByOpenId(user.getOpenId());
+        System.out.println("讓我看看user:"+user_);
         if (user_ != null) {
             user_.setPhone(user.getPhone());
             user_.setSex(user.getSex());
