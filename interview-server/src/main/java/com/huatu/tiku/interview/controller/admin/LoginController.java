@@ -25,13 +25,14 @@ public class LoginController {
 
     /**
      * 登录
+     *
      * @param username
      * @param password
      * @param request
      * @return
      */
     @PostMapping()
-    public Result login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
+    public Result login(String username, String password, HttpServletRequest request) {
         log.info("username: {}  ,password:{} ", username, password);
         Admin admin = adminService.login(username, password);
         if (admin == null) {
@@ -48,10 +49,11 @@ public class LoginController {
      * @param request
      */
     @GetMapping
-    public void logout(HttpServletRequest request) {
+    public Result logout(HttpServletRequest request) {
         log.info("logout");
         request.getSession().setAttribute("user", null);
         request.getSession().removeAttribute("user");
         request.getSession().invalidate();
+        return Result.ok();
     }
 }
