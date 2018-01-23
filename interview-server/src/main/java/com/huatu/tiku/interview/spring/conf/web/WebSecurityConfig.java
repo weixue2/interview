@@ -25,8 +25,8 @@ import java.util.Arrays;
  * @author hanchao
  * @date 2017/12/27 17:06
  */
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.application.name:unknown}")
