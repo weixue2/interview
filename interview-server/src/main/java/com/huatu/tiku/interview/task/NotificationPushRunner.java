@@ -166,7 +166,6 @@ public class NotificationPushRunner {
 
 
     class RunPush implements Runnable{
-
         private String accessToken;
         private WechatTemplateMsg templateMsg;
 
