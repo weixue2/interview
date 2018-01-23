@@ -110,6 +110,8 @@ public class MobilServiceImpl implements MobileService {
         sendCaptcha(mobile, clientIp, true);
         request.getSession().setAttribute("openId",openId);
 //        return SuccessMessage.create("发送验证码成功");
+        userRepository.save(user);
+
         return user;
     }
 
