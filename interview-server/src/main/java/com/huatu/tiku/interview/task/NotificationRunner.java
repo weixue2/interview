@@ -80,8 +80,11 @@ public class NotificationRunner {
                         System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
+
                         PushNotification(rt, notifyService.get(rt.getId()));
+//                        break;
                     }
+
                 }
             }
             insertRedis(rts);
@@ -92,6 +95,7 @@ public class NotificationRunner {
 
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         for (User u : userService.findAllUser()) {
+            System.out.println("用户名："+u.getName()+u.getOpenId());
             WechatTemplateMsg templateMsg = null;
             switch (rt.getType()) {
                 case 1: {
@@ -130,6 +134,7 @@ public class NotificationRunner {
                 }
                 case 3: {
                     System.out.println("随同了");
+                    log.info("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
                     templateMsg.setUrl(notifyView+notification.getId());
                     System.out.println(notifyView+notification.getId());
@@ -155,13 +160,32 @@ public class NotificationRunner {
                     break;
                 }
             }
-            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-            System.out.println("一次发送完了");
+//            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            new RunPush(accessToken,templateMsg);
+//            System.out.println("一次发送完了");
         }
     }
 
     private void insertRedis(Object o) {
         redis.opsForValue().set(key, JSON.toJSONString(o));
         redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
+    }
+
+    class RunPush implements Runnable{
+
+        private String accessToken;
+        private WechatTemplateMsg templateMsg;
+
+        public RunPush(String accessToken, WechatTemplateMsg templateMsg) {
+
+            this.accessToken = accessToken;
+            this.templateMsg = templateMsg;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("推送了一个");
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+        }
     }
 }
