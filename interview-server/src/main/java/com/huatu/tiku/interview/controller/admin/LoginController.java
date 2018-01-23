@@ -35,6 +35,6 @@ public class LoginController {
         } else {
             request.getSession().setAttribute("user", admin);
         }
-        return Result.ok();
+        return Result.ok(admin);
     }
 }

@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
     }
 
 
-
     private class SecurityInterceptor extends HandlerInterceptorAdapter {
 
         @Override
@@ -51,16 +50,17 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
             if (session.getAttribute(UserConstant.SESSION_KEY) != null) {
                 return true;
             }
-            // 跳转登录
-            //String url = "/wx/end/login";
-            //后台不做跳转   由前台来做路由
-            //response.sendRedirect(url);
+//            // 跳转登录
+//            String url = "/wx/end/login";
+//            //后台不做跳转   由前台来做路由
+//            response.sendRedirect(url);
             throw new BizException(ErrorResult.create(401, "权限不足"));
         }
     }
 
     /**
      * 声明什么鬼,没他用不了  MultipartFile
+     *
      * @return
      */
     @Bean(name = "multipartResolver")
