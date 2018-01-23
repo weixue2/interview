@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
  * @Description: 登录校验
  * @create 2017-12-14 上午10:26
  **/
-@Slf4j
-@Component
+//@Slf4j
+//@Component
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse response, Object o) throws Exception {
-        log.info("---------------preHandle-------------------");
+      //  log.info("---------------preHandle-------------------");
 
                  /*可以通过的ip，*代表所有*/
             response.setHeader("Access-Control-Allow-Origin", "*");
