@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
             user_.setKeyContact(user.getKeyContact());
             user = userRepository.save(user_);
         }
-        System.out.println(user);
+        System.out.println("user:"+user_);
         return  user== null ? false : true;
     }
 
