@@ -43,8 +43,9 @@ public class OnlineCourseArrangementController {
     private RedisTemplate redisTemplate;
 
     @PostMapping("/CourseArrangement")
-    public Result add(NotificationType notificationType, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id) throws Exception {
+    public Result add(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+        NotificationType notificationType = new NotificationType();
         //TODO 有时间再改
         // 设置微信公众号的appid
         config.setAppId(BasicParameters.appID);

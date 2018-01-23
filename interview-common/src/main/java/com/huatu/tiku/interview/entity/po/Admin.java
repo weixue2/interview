@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @Author jbzm
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "t_admin")
-public class Admin extends BaseEntity {
+public class Admin extends BaseEntity implements Serializable {
     private String username;
     private String password;
 }
