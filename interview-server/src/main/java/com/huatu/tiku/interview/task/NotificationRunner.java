@@ -18,7 +18,6 @@ import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -37,12 +36,6 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Slf4j
 public class NotificationRunner {
-
-    @Value("${notify_view}")
-    public String ReportHintURL ;
-
-    @Value("${notify_view}")
-    public String MorningReadingURL;
 
     private final String key = "readings";
 
@@ -109,7 +102,7 @@ public class NotificationRunner {
                 case 2: {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-                    templateMsg.setUrl(MorningReadingURL+notification.getId());
+                    templateMsg.setUrl(BasicParameters.MorningReadingURL+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
@@ -138,7 +131,7 @@ public class NotificationRunner {
                 case 3: {
                     System.out.println("随同了");
                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
-                    templateMsg.setUrl(ReportHintURL+notification.getId());
+                    templateMsg.setUrl(BasicParameters.ReportHintURL+notification.getId());
                     templateMsg.setData(
                             MyTreeMap.createMap(
                                     new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),

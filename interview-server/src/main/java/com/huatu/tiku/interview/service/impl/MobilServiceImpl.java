@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.service.impl;
 import com.huatu.common.exception.BizException;
 import com.huatu.common.utils.env.IpUtils;
 import com.huatu.tiku.interview.constant.ResultEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.PhpResult;
 import com.huatu.tiku.interview.exception.ReqException;
@@ -20,7 +21,6 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -49,9 +49,6 @@ public class MobilServiceImpl implements MobileService {
 
     @Autowired
     UserRepository userRepository;
-    /* 获取用户信息  phone=xxxxx&timeStamp=xxxxxx进行3des加密传参，返回值也是3des加密的   */
-    @Value("${php_get_user_info}")
-    private String PHP_GET_USER_INFO;
 
     @Override
     public User checkPHP(String mobile,String openId,HttpServletRequest request) {
@@ -64,7 +61,7 @@ public class MobilServiceImpl implements MobileService {
         String token = Crypt3Des.encryptMode("phone="+mobile+"&timeStamp="+System.currentTimeMillis());
         System.out.println("token:"+token);
         // 请求php
-        String result = restTemplate.getForObject(PHP_GET_USER_INFO+token,String.class,token);
+        String result = restTemplate.getForObject(WeChatUrlConstant.PHP_GET_USER_INFO+token,String.class,token);
         System.out.println("result:"+result);
         JSONObject jsonobject = JSONObject.fromObject(result);
         PhpResult phpResult= (PhpResult)JSONObject.toBean(jsonobject,PhpResult.class);
@@ -113,8 +110,6 @@ public class MobilServiceImpl implements MobileService {
         sendCaptcha(mobile, clientIp, true);
         request.getSession().setAttribute("openId",openId);
 //        return SuccessMessage.create("发送验证码成功");
-        userRepository.save(user);
-
         return user;
     }
 
