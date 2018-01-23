@@ -38,34 +38,13 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @Autowired
-    WechatTemplateMsgService templateMsgService;
 
-    @Autowired
-    StringRedisTemplate redis;
 
-    @Autowired
-    UserService userService;
 
-    @GetMapping("pushNotify")
-    public Result pushNotify(){
-        String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
-        WechatTemplateMsg templateMsg ;
-        for (User u : userService.findAllUser()) {
-            templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-            templateMsg.setUrl(BasicParameters.MorningReadingURL+6);
-            templateMsg.setData(
-                    MyTreeMap.createMap(
-                            new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
-                            new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
-                            new TemplateMap("keyword2", WechatTemplateMsg.item("我哪知道", "#000000")),
-                            new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
-                    )
-            );
-            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-        }
-        return Result.ok();
-    }
+
+
+
+
 
     @GetMapping
     public Result getPage(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page){
