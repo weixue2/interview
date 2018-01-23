@@ -13,11 +13,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,12 +36,17 @@ public class UserInfoController {
     RestTemplate restTemplate;
     @Autowired
     UserRepository userRepository;
+    @Value("${domainName}")
+    private String domainName;
+    @Value("${phone_check}")
+    private String phoneCheck;
+
 
     @RequestMapping(value = "/api/userView", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
         log.info("--------------开始oauth跳转------------");
-        log.info("----跳转链接:" + "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
-        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/api/userInfo?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+        log.info("----跳转链接:" + "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri="+domainName+"/wx/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
+        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri="+domainName+"/wx/api/userInfo?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
     }
 
 
@@ -65,12 +70,14 @@ public class UserInfoController {
         //有了用户的opendi就可以的到用户的信息了
         //得到用户信息之后返回到一个页面
         ModelAndView view = new ModelAndView();
-        log.info("----用户跳转页面:" + "redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
+
         User user = userRepository.findByOpenId(openid);
         if ((user == null || user.getStatus() != 1)) {
-            view.setViewName("redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=1&openId=" + openid);
+            log.info("----用户跳转页面:" + "redirect:"+phoneCheck+"page=1&openId=" + openid);
+            view.setViewName("redirect:"+phoneCheck+"page=1&openId=" + openid);
         } else {
-            view.setViewName("redirect:http://tkproc.huatu.com/interview-h5/#/fill_information?page=2&openId=" + openid);
+            log.info("----用户跳转页面:" + "redirect:"+phoneCheck+"page=1&openId=" + openid);
+            view.setViewName("redirect:"+phoneCheck+"?page=2&openId=" + openid);
         }
         return view;
     }

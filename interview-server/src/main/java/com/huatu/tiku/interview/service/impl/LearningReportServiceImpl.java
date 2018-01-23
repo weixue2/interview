@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -60,6 +61,10 @@ public class LearningReportServiceImpl  implements LearningReportService {
     StringRedisTemplate redisTemplate;
     @Autowired
     RestTemplate restTemplate;
+    @Value("${dailyReportURL}")
+    private String dailyReportURL;
+
+
     /**
      *  生成每日学习报告
      * @return
@@ -97,7 +102,9 @@ public class LearningReportServiceImpl  implements LearningReportService {
     //推送每日学习报告消息
     private TemplateMsgResult pushDailyReport(String openId)  {
         String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+//        TemplateEnum.DailyReport.
         WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.DailyReport);
+        templateMsg.setUrl(dailyReportURL+openId);
         String templateMsgJson = JsonUtil.toJson(templateMsg);
         TemplateMsgResult result = templateMsgService.sendTemplate(
                 accessToken,
@@ -109,6 +116,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
     private TemplateMsgResult pushTotalReport(String openId)  {
         String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.TotalReport);
+        templateMsg.setUrl(dailyReportURL+openId);
         String templateMsgJson = JsonUtil.toJson(templateMsg);
         TemplateMsgResult result = templateMsgService.sendTemplate(
                 accessToken,

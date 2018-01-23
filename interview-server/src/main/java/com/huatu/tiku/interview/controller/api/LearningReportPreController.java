@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.huatu.tiku.interview.constant.BasicParameters.DailyReportURL;
 
 /**
  * Created by x6 on 2018/1/22.
@@ -29,10 +29,15 @@ import static com.huatu.tiku.interview.constant.BasicParameters.DailyReportURL;
 @Slf4j
 @RequestMapping("/api/lr/pre")
 public class LearningReportPreController {
+    @Value("${dailyReportURL}")
+    private String dailyReportURL;
+    @Value("${domainName}")
+    private String domainName;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
         log.info("--------------开始oauth跳转------------");
-        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/api/lr/pre/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri="+domainName+"/wx/api/lr/pre/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
     }
 
 
@@ -56,7 +61,7 @@ public class LearningReportPreController {
         //有了用户的opendi就可以的到用户的信息了
         //得到用户信息之后返回到一个页面
         ModelAndView view = new ModelAndView();
-        view.setViewName("redirect:"+DailyReportURL + openId);
+        view.setViewName("redirect:"+dailyReportURL + openId);
         return view;
 
     }

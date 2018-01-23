@@ -21,8 +21,6 @@ public class LearningReportController {
     private LearningReportService learningReportService;
 
 
-
-
     /**
      * 生成用户学习报告
      */
