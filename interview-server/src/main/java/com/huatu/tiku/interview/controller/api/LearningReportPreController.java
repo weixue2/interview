@@ -36,7 +36,7 @@ public class LearningReportPreController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
         log.info("--------------开始oauth跳转------------");
-        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/api/lr/pre/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+        return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri=http://weixin.htexam.com/wx/api/lr/pre/oauth?response_type=code&scope=snsapi_base&state=1 &connect_redirect=1#wechat_redirect";
     }
 
 

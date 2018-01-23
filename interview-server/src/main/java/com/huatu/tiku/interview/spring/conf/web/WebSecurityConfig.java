@@ -25,8 +25,8 @@ import java.util.Arrays;
  * @author hanchao
  * @date 2017/12/27 17:06
  */
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.application.name:unknown}")
@@ -46,14 +46,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .formLogin()
-                .loginPage("/auth/tologin")
-                .loginProcessingUrl("/auth/login")
-                .successForwardUrl("/auth/success?login")
-                .failureForwardUrl("/auth/fail")
+                .loginPage("/end/auth/tologin")
+                .loginProcessingUrl("/end/auth/login")
+                .successForwardUrl("/end/auth/success?login")
+                .failureForwardUrl("/end/auth/fail")
                 .and()
                 .logout()
-                .logoutUrl("/auth/logout")
-                .logoutSuccessUrl("/auth/success?logout")
+                .logoutUrl("/end/auth/logout")
+                .logoutSuccessUrl("/end/auth/success?logout")
                 .and()
                 .rememberMe()
                 .rememberMeCookieName(WebParamConsts.REMEMBER_ME_COOKIE)
