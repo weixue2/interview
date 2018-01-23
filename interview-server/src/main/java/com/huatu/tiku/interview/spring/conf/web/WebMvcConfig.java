@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.spring.conf.web;
 import com.huatu.tiku.springboot.users.support.TokenMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -67,6 +68,4 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         converters.add(stringHttpMessageConverter);
         converters.add(new ByteArrayHttpMessageConverter());
     }
-
-
 }
