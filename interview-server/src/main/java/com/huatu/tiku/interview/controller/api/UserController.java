@@ -89,6 +89,7 @@ public class UserController {
             user.setName("");
             user.setSex(-1);
             user.setPhone("");
+            user.setStatus(-1);
             user.setPregnancy(null);
             user.setPhpUserId(0);
 
