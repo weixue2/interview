@@ -4,11 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.common.collect.Lists;
 import com.huatu.common.ErrorResult;
 import com.huatu.common.exception.BizException;
 import com.huatu.tiku.interview.constant.UserConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -16,6 +22,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import java.util.Arrays;
 
 /**
  * @Author jbzm
@@ -59,14 +67,17 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         }
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowCredentials(true)
-                .allowedMethods("GET", "POST", "DELETE", "PUT","OPTIONS")
-                .exposedHeaders("Set-Cookie")
-                .maxAge(3600);
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Lists.newArrayList("*"));
+        configuration.setAllowedMethods(Arrays.asList(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PUT.name()));
+        configuration.setAllowedHeaders(Lists.newArrayList("*"));
+        configuration.setExposedHeaders(Lists.newArrayList(HttpHeaders.SET_COOKIE));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }
