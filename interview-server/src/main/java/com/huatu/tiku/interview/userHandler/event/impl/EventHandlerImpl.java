@@ -83,30 +83,40 @@ public class EventHandlerImpl implements EventHandler {
      */
     @Override
     public String signInHandler(Map<String, String> requestMap) {
-        String h = new SimpleDateFormat("HH").format(new Date());
         String str;
-        //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
-        if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
-            //if (System.currentTimeMillis() % 2 == 1) {
-            log.info("开始签到");
-            str = WxMpXmlOutMessage
-                    .TEXT()
-                    .content("签到成功")
-                    .fromUser(requestMap.get("ToUserName"))
-                    .toUser(requestMap.get("FromUserName"))
-                    .build()
-                    .toXml();
-            SignIn signIn = new SignIn();
-            signIn.setOpenId(requestMap.get("FromUserName"));
-            signIn.setSignTime(new Date());
-            signIn.setBizStatus(1);
-            signIn.setStatus(1);
-            signInRepository.save(signIn);
+        if ("signIn".equals(requestMap.get("EventKey"))) {
+            String h = new SimpleDateFormat("HH").format(new Date());
+            //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
+            if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
+                //if (System.currentTimeMillis() % 2 == 1) {
+                log.info("开始签到");
+                str = WxMpXmlOutMessage
+                        .TEXT()
+                        .content("签到成功")
+                        .fromUser(requestMap.get("ToUserName"))
+                        .toUser(requestMap.get("FromUserName"))
+                        .build()
+                        .toXml();
+                SignIn signIn = new SignIn();
+                signIn.setOpenId(requestMap.get("FromUserName"));
+                signIn.setSignTime(new Date());
+                signIn.setBizStatus(1);
+                signIn.setStatus(1);
+                signInRepository.save(signIn);
+            } else {
+                log.info("签到失败");
+                str = WxMpXmlOutMessage
+                        .TEXT()
+                        .content("签到时间已过")
+                        .fromUser(requestMap.get("ToUserName"))
+                        .toUser(requestMap.get("FromUserName"))
+                        .build().toXml();
+            }
         } else {
-            log.info("签到失败");
+            log.info("外部二维码");
             str = WxMpXmlOutMessage
                     .TEXT()
-                    .content("签到时间已过")
+                    .content("该二维码不可用于签到")
                     .fromUser(requestMap.get("ToUserName"))
                     .toUser(requestMap.get("FromUserName"))
                     .build().toXml();
