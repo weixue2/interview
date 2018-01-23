@@ -60,7 +60,7 @@ public class MorningReadingPushRunner implements CommandLineRunner {
             try {
                 // TODO 获取时间表
                 Object o = stringRedisTemplate.opsForValue().get("readings");
-                if (o != null) {
+                if (o != null&&o.toString().length()>2) {
 
                     List<ReadingTemp> rts = JSON.parseArray(o.toString(), ReadingTemp.class);
                     Calendar cal_a = Calendar.getInstance();
