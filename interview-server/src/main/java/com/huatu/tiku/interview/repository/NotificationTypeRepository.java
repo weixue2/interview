@@ -32,5 +32,7 @@ public interface NotificationTypeRepository extends JpaRepository<NotificationTy
     @Query("select n from NotificationType n where n.pushTime > ?1 and n.status = 1")
     List<NotificationType> findByPushTime(Date date);
 
+    NotificationType findByIdAndStatus(Long id,Integer status);
+
 
 }
