@@ -163,7 +163,7 @@ public class NotificationRunner {
             }
 //            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
             new RunPush(accessToken,templateMsg);
-            System.out.println("一次发送完了");
+//            System.out.println("一次发送完了");
         }
     }
 
@@ -178,12 +178,14 @@ public class NotificationRunner {
         private WechatTemplateMsg templateMsg;
 
         public RunPush(String accessToken, WechatTemplateMsg templateMsg) {
+
             this.accessToken = accessToken;
             this.templateMsg = templateMsg;
         }
 
         @Override
         public void run() {
+            System.out.println("推送了一个");
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
         }
     }
