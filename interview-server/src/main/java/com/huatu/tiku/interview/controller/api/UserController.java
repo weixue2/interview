@@ -4,13 +4,22 @@ import com.google.common.collect.Maps;
 import com.huatu.common.ErrorResult;
 import com.huatu.common.SuccessMessage;
 import com.huatu.common.exception.BizException;
+import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.ResultEnum;
+import com.huatu.tiku.interview.constant.TemplateEnum;
+import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
+import com.huatu.tiku.interview.entity.template.MyTreeMap;
+import com.huatu.tiku.interview.entity.template.TemplateMap;
+import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.MobileService;
 import com.huatu.tiku.interview.service.UserService;
+import com.huatu.tiku.interview.service.WechatTemplateMsgService;
+import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +42,12 @@ public class UserController {
 
     @Autowired
     private MobileService mobileService;
+
+    @Autowired
+    StringRedisTemplate redis;
+
+    @Autowired
+    WechatTemplateMsgService templateMsgService;
 
     @GetMapping("getMobile")
     public Result getMobile(String mobile, String openId, HttpServletRequest req) {
@@ -98,7 +113,25 @@ public class UserController {
         return Result.ok(user);
     }
 
-
+    @GetMapping("pushNotify")
+    public Result pushNotify(){
+        String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
+        WechatTemplateMsg templateMsg ;
+        for (User u : userService.findAllUser()) {
+            templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
+            templateMsg.setUrl(BasicParameters.MorningReadingURL+6);
+            templateMsg.setData(
+                    MyTreeMap.createMap(
+                            new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
+                            new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
+                            new TemplateMap("keyword2", WechatTemplateMsg.item("我哪知道", "#000000")),
+                            new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
+                    )
+            );
+            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+        }
+        return Result.ok();
+    }
 
 
 
