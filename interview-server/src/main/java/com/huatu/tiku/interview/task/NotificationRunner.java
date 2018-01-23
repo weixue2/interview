@@ -74,7 +74,7 @@ public class NotificationRunner {
 //            System.out.println("???sfd");
             List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
             if (rts != null) {
-                System.out.println("qwe");
+//                System.out.println("qwe");
 
                 for (ReadingTemp rt : rts) {
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
