@@ -77,13 +77,14 @@ public class NotificationRunner {
 //                System.out.println("qwe");
 
                 for (ReadingTemp rt : rts) {
-                    log.info("循环");
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
                         System.out.println("xxcv");
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
+
                         PushNotification(rt, notifyService.get(rt.getId()));
                     }
+                    break;
                 }
             }
             insertRedis(rts);
@@ -94,6 +95,7 @@ public class NotificationRunner {
 
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         for (User u : userService.findAllUser()) {
+            System.out.println("用户名："+u.getName()+u.getOpenId());
             WechatTemplateMsg templateMsg = null;
             switch (rt.getType()) {
                 case 1: {
