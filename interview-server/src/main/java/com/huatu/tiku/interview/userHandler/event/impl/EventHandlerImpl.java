@@ -158,7 +158,7 @@ public class EventHandlerImpl implements EventHandler {
                         log.info("----图片id:" + notificationType.getWxImageId());
                         str = WxMpXmlOutMessage
                                 .IMAGE()
-                                .mediaId(notTypePatterns.get(0).getWxImageId())
+                                .mediaId(notificationType.getWxImageId())
                                 .fromUser(requestMap.get("ToUserName"))
                                 .toUser(requestMap.get("FromUserName"))
                                 .build()
