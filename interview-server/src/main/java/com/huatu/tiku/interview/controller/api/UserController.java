@@ -56,6 +56,7 @@ public class UserController {
 //        String openId = requestMap.get("FromUserName");
 //        System.out.println("OpenId等于："+req.getSession().getAttribute("openId"));
 //        mobileService.checkPHP(mobile,openId);
+        log.info("openId:欧喷爱滴"+openId);
         return Result.ok(mobileService.checkPHP(mobile, openId, req));
     }
 

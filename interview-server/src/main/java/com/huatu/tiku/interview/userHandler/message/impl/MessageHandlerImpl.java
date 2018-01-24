@@ -82,6 +82,7 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setDescription("点击图文可以跳转到华图首页");
             a.setPicUrl("http://p1.music.126.net/_mEC5ZpzngngbBioF8dm4Q==/109951162973202394.jpg");
             //这里跳转前端验证
+            log.info("手机验证路径："+phoneCheck+requestMap.get("FromUserName"));
             a.setUrl(phoneCheck + requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
@@ -103,6 +104,7 @@ public class MessageHandlerImpl implements MessageHandler {
             return null;
         }
         if(!requestMap.get("Content").equals("2")){
+            System.out.println("手机验证路径："+phoneCheck+requestMap.get("FromUserName"));
             NewsMessage nm = new NewsMessage(requestMap);
             List<Article> as = new ArrayList<>();
             Article a = new Article();
