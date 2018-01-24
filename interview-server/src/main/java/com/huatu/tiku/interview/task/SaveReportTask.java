@@ -51,7 +51,7 @@ public class SaveReportTask {
             log.info("getServerIp:"+getServerIp());
             //处理业务
             //生成学习报告并推送
-//            learningReportService.dailyReport();
+            learningReportService.dailyReport();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }finally {
