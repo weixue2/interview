@@ -199,9 +199,11 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 .isOrganized(avgIsOrganized)
                 .haveSubstance(avgHaveSubstance);
 
+            int totalCount = 0;
             for(Object[] answerCount:answerCountList){
                 Object practiceType = answerCount[0];
                 Object count = answerCount[1];
+                totalCount = totalCount + Integer.parseInt(count.toString());
                 switch (Integer.parseInt(practiceType.toString())) {
                     case 1: {
                         builder.oneAnswerCount(Integer.parseInt(count.toString()));
@@ -230,6 +232,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 };
             }
 
+        builder.totalAnswerCount(totalCount);
         LearningReport report = builder.build();
         return report;
     }
