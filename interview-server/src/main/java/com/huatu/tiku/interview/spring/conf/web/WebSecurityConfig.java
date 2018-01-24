@@ -25,8 +25,8 @@ import java.util.Arrays;
  * @author hanchao
  * @date 2017/12/27 17:06
  */
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.application.name:unknown}")
@@ -46,14 +46,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .formLogin()
-                .loginPage("/end/auth/tologin")
-                .loginProcessingUrl("/end/auth/login")
-                .successForwardUrl("/end/auth/success?login")
-                .failureForwardUrl("/end/auth/fail")
+                .loginPage("/auth/tologin")
+                .loginProcessingUrl("/auth/login")
+                .successForwardUrl("/auth/success?login")
+                .failureForwardUrl("/auth/fail")
                 .and()
                 .logout()
-                .logoutUrl("/end/auth/logout")
-                .logoutSuccessUrl("/end/auth/success?logout")
+                .logoutUrl("/auth/logout")
+                .logoutSuccessUrl("/auth/success?logout")
                 .and()
                 .rememberMe()
                 .rememberMeCookieName(WebParamConsts.REMEMBER_ME_COOKIE)
@@ -102,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Lists.newArrayList("*"));
-        configuration.setAllowedMethods(Arrays.asList(HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PUT.name()));
+        configuration.setAllowedMethods(Arrays.asList(HttpMethod.OPTIONS.name(),HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.DELETE.name(), HttpMethod.PUT.name()));
         configuration.setAllowedHeaders(Lists.newArrayList("*"));
         configuration.setExposedHeaders(Lists.newArrayList(HttpHeaders.SET_COOKIE));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

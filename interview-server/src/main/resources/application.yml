@@ -116,9 +116,6 @@ management:
   context-path: /_monitor
   add-application-context-header: false
 
-security:
-  basic:
-    authorize-mode: none
 
 
 ## 自定义配置
