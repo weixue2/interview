@@ -77,9 +77,10 @@ public class LearningReportServiceImpl  implements LearningReportService {
         if(CollectionUtils.isNotEmpty(userList)){
             for(User user:userList){
                 long userId = user.getPhpUserId();
+
                 String openId = user.getOpenId();
                 //查询用户当前已存在的报告数目
-                List<LearningReport> reportList = learningReportRepository.findByUserIdOrderByIdAsc(userId);
+                List<LearningReport> reportList = learningReportRepository.findByOpenIdOrderByDaySortAsc(openId);
                 int daySort = 1;
                 if(CollectionUtils.isNotEmpty(reportList)){
                     daySort = reportList.size() + 1;
@@ -132,10 +133,10 @@ public class LearningReportServiceImpl  implements LearningReportService {
     private LearningReport saveDailyReport(long userId,int daySort,String openId) {
 
         //平均分统计
-        List<Object[]> avgList = learningSituationRepository.countTodayAvg(userId);
+        List<Object[]> avgList = learningSituationRepository.countTodayAvg(openId);
 
         //答题数量统计
-        List<Object[]> answerCountList = learningSituationRepository.countTodayAnswerCount(userId);
+        List<Object[]> answerCountList = learningSituationRepository.countTodayAnswerCount(openId);
         LearningReport learningReport = buildReport(avgList.get(0), answerCountList);
         learningReport.setDaySort(daySort);
 
@@ -157,9 +158,9 @@ public class LearningReportServiceImpl  implements LearningReportService {
     private LearningReport saveTotalReport(long userId,String openId) {
 
         //平均分统计
-        List<Object[]> avgList = learningSituationRepository.countTotalAvg(userId);
+        List<Object[]> avgList = learningSituationRepository.countTotalAvg(openId);
         //答题数量统计
-        List<Object[]> answerCountList = learningSituationRepository.countTotalAnswerCount(userId);
+        List<Object[]> answerCountList = learningSituationRepository.countTotalAnswerCount(openId);
         LearningReport learningReport = buildReport(avgList.get(0), answerCountList);
         String format = DateFormatUtil.NORMAL_DAY_FORMAT.format(new Date());
 
@@ -249,7 +250,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
             return Result.build(ResultEnum.OPENID_ERROR);
         }
         //查询用户的所有报告，按天数序号排列
-        List<LearningReport> reportList = learningReportRepository.findByUserIdOrderByIdAsc(user.getPhpUserId());
+        List<LearningReport> reportList = learningReportRepository.findByOpenIdOrderByDaySortAsc(user.getOpenId());
 
         List<ReportResponseVO> resultList = new LinkedList<>();
         for(LearningReport report: reportList){
@@ -275,7 +276,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
             }else if( DAILY_REPORT.getCode() == report.getType()){
                 //老师评语(查询当天学员所有的学习记录)
                 String reportDate = report.getReportDate();
-                List<String> remarkList = learningSituationRepository.findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(reportDate);
+                List<String> remarkList = learningSituationRepository.findRemarksByOpenIdAndAnswerDateAndStatusOrderByGmtCreateAsc(openId,reportDate);
                 reportResponseVO.setRemarkList(remarkList);
             }
             resultList.add(reportResponseVO);

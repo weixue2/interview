@@ -21,9 +21,9 @@ public class BaseEntity {
     protected int bizStatus;
     @Column(columnDefinition = "smallint default 1")
     protected int status;
-    @Column(columnDefinition = "varchar(128) default ''")
+    @Column(columnDefinition = "varchar(128) default 'admin'")
     protected String creator;
-    @Column(columnDefinition = "varchar(128) default ''")
+    @Column(columnDefinition = "varchar(128) default 'admin'")
     protected String modifier;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)

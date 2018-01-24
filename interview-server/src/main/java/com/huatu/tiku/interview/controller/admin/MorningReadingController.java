@@ -28,6 +28,7 @@ public class MorningReadingController {
     public Result add(@RequestBody NotificationType morningReading) throws IOException {
         morningReading.setStatus(1);
         morningReading.setType(2);
+        morningReading.setCreator("admin");
         morningReading.setContent(htmlFileUtil.imgManage(morningReading.getContent(),morningReading.getId()+"",0));
         Long id = readingService.add(morningReading);
         return  Result.ok(id);
