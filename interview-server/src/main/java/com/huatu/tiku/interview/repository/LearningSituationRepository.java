@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,26 +25,26 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
 
 
     @Query(value = "SELECT ifnull(avg(behavior),0) ,ifnull(avg(language_expression),0) ,ifnull(avg(focus_topic),0) ,ifnull(avg(is_organized),0) ,ifnull(avg(have_substance),0) " +
-            "FROM t_learning_situation WHERE user_id = ?1 AND answer_date = curdate()", nativeQuery = true)
-    List<Object[]> countTodayAvg(long userId);
+            "FROM t_learning_situation WHERE open_id = ?1 AND answer_date = curdate()", nativeQuery = true)
+    List<Object[]> countTodayAvg(String openId);
 
 
-    @Query(value = "SELECT practice_content , ifnull(count(1),0) FROM t_learning_situation WHERE user_id = ?1 " +
+    @Query(value = "SELECT practice_content , ifnull(count(1),0) FROM t_learning_situation WHERE open_id = ?1 " +
             "AND answer_date = curdate() GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
-    List<Object[]> countTodayAnswerCount(long userId);
+    List<Object[]> countTodayAnswerCount(String openId);
 
 
 
 
 
     @Query(value = "SELECT ifnull(avg(behavior),0) ,ifnull(avg(language_expression),0) ,ifnull(avg(focus_topic),0) ,ifnull(avg(is_organized),0) ,ifnull(avg(have_substance),0)  " +
-            "FROM t_learning_situation WHERE user_id = ?1 ", nativeQuery = true)
-    List<Object[] > countTotalAvg(long userId);
+            "FROM t_learning_situation WHERE open_id = ?1 ", nativeQuery = true)
+    List<Object[] > countTotalAvg(String openId);
 
 
-    @Query(value = "SELECT practice_content ,ifnull(count(1),0)  FROM t_learning_situation WHERE user_id = ?1 " +
+    @Query(value = "SELECT practice_content ,ifnull(count(1),0)  FROM t_learning_situation WHERE open_id = ?1 " +
             " GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
-    List<Object[]> countTotalAnswerCount(long userId);
+    List<Object[]> countTotalAnswerCount(String openId);
 
 
     List<LearningSituation> findByStatusAndNameLike(int status,String name, Pageable pageRequest);
@@ -53,7 +52,7 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
     long countByStatusAndNameLike( int status,String name);
 
 
-    @Query("select ls.remark from  LearningSituation ls where ls.answerDate = ?1 and ls.status = 1 order by ls.gmtCreate asc")
-    List<String> findRemarksByAnswerDateAndStatusOrderByGmtCreateAsc(String date);
+    @Query("select ls.remark from  LearningSituation ls where ls.openId = ?1 and ls.answerDate = ?2 and ls.status = 1 order by ls.gmtCreate asc")
+    List<String> findRemarksByOpenIdAndAnswerDateAndStatusOrderByGmtCreateAsc(String openId,String date);
 
 }

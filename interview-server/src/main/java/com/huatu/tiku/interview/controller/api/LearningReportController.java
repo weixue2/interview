@@ -51,7 +51,7 @@ public class LearningReportController {
 
 
     /**
-     * 查询用户学习报告
+     * 校验用户当前状态
      */
     @LogPrint
     @GetMapping(value="check",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

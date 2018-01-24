@@ -11,7 +11,7 @@ import java.util.List;
 public interface LearningReportRepository extends JpaRepository<LearningReport, Long> {
 
     //查询用户下的所有报告
-    List<LearningReport> findByUserIdOrderByIdAsc(Long userId);
+    List<LearningReport> findByOpenIdOrderByDaySortAsc(String openId);
 
     //查询用户下的所有报告
     List<LearningReport> findByOpenIdOrderByIdAsc(String openId);
