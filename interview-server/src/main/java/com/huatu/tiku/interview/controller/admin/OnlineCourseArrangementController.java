@@ -47,6 +47,7 @@ public class OnlineCourseArrangementController {
     public Result add(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
         NotificationType notificationType = new NotificationType();
+        notificationType.setCreator("admin");
         //TODO 有时间再改
         // 设置微信公众号的appid
         config.setAppId(BasicParameters.appID);

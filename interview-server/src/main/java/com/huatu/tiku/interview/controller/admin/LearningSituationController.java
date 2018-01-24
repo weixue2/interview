@@ -37,6 +37,7 @@ public class LearningSituationController {
     @LogPrint
     @PostMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result add(@RequestBody LearningSituation learningSituation){
+        learningSituation.setCreator("admin");
         log.info("请求参数learningSituation：{}",learningSituation);
         return learningSituationService.save(learningSituation)? Result.ok(): Result.build(ResultEnum.INSERT_FAIL);
     }
