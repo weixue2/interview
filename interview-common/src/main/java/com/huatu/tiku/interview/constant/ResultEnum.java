@@ -18,18 +18,28 @@ public enum ResultEnum {
     FILE_ERROR(50011, "文件读写错误"),
     UPLOAD_FILE_FAILED(50012, "上传文件失败"),
 
+
+//    未找到微信用户时，提示：服务故障，请取消关注后再重新关注
+//    未知错误时，提示：服务器又调皮了，请稍后重试
+//    参数错误时，提示：服务器又调皮了，请稍后重试
+//    请求失败时，提示：服务器又调皮了，请稍后重试
+//    验证码过期，提示：验证码已过期
+//    验证码错误，提示：验证码不正确
+//    验证通过，提示：验证成功
+
+
     PHP_ERROR(50020, "未知错误"),
     PHP_PARAMETER_ERROR(50021, "参数错误"),
     PHP_MOBILE_ERROR(50022, "学员未购买相关课程"),
     PHP_REQUEST_LOSED(50023, "请求失效"),
 
-    CAPTCHA_EXPIRE(50030, "验证码过期"),
+    CAPTCHA_EXPIRE(50030, "验证码已过期"),
     CAPTCHA_ERROR(50031, "验证码错误"),
     CAPTCHA_PASS(20000, "验证通过"),
 
     PARAMETER_NULL_ERROR(50040, "验证通过"),
 
-    OPENID_ERROR(50041, "未找到该微信用户"),
+    OPENID_ERROR(50041, "服务故障，请取消关注后再重新关注"),
 
     NOTIFICATION_TYPE_ERROR(50042, "推送通知类型错误"),
     PUSH_TIME_ERROR(50043, "推送通知类型错误"),
