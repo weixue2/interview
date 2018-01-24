@@ -70,9 +70,61 @@ public class NotificationPushRunner {
 
                 }
                 // todo 电厂
-
+                List<NotificationType> typeList = new ArrayList<>();
                 if(!pushList.isEmpty()){
-                    pushNotification(pushList ,accessToken);
+                    for(ReadingTemp rt : pushList){
+                        typeList.add(notifyService.findOne(rt.getId()));
+                    }
+                    for (User u : userService.findAllUser()){
+                        for (NotificationType nt : typeList) {
+//                            NotificationType notification = notifyService.get(rt.getId());
+                            WechatTemplateMsg templateMsg = null;
+                            switch (nt.getType()) {
+                                case 1: {
+                                    System.out.println("发送消息。");
+                                    break;
+                                }
+                                case 2: {
+                                    System.out.println("随同了");
+                                    templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
+                                    templateMsg.setUrl(notifyView+nt.getId());
+                                    System.out.println(notifyView+nt.getId());
+                                    templateMsg.setData(
+                                            MyTreeMap.createMap(
+                                                    new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
+                                                    new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
+                                                    new TemplateMap("keyword2", WechatTemplateMsg.item(nt.getTitle(), "#000000")),
+                                                    new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
+                                            )
+                                    );
+
+                                    break;
+                                }
+                                case 3: {
+                                    System.out.println("随同了");
+                                    log.info("随同了");
+                                    templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
+                                    templateMsg.setUrl(notifyView+nt.getId());
+                                    System.out.println(notifyView+nt.getId());
+                                    templateMsg.setData(
+                                            MyTreeMap.createMap(
+                                                    new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
+//                                    new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班", "#000000")),
+                                                    new TemplateMap("keyword2", WechatTemplateMsg.item("2018年2月2日", "#000000")),
+                                                    new TemplateMap("keyword3", WechatTemplateMsg.item("北京", "#000000")),
+                                                    new TemplateMap("keyword4", WechatTemplateMsg.item("400-817-6111", "#000000")),
+                                                    new TemplateMap("remark", WechatTemplateMsg.item("如有疑问，请及时与我们取得联系", "#000000"))
+                                            )
+                                    );
+
+                                    break;
+                                }
+                            }
+//                        templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+                            RunPush runPush = new RunPush(accessToken, templateMsg);
+                            runPush.run();
+                        }
+                    }
                 }
 
             }
@@ -80,62 +132,7 @@ public class NotificationPushRunner {
         }
     }
 
-    private void pushNotification(List<ReadingTemp> pushList,String accessToken){
-        List<NotificationType> typeList = new ArrayList<>();
-        for(ReadingTemp rt : pushList){
-            typeList.add(notifyService.findOne(rt.getId()));
-        }
-        for (User u : userService.findAllUser()){
-            for (NotificationType nt : typeList) {
-//                            NotificationType notification = notifyService.get(rt.getId());
-                WechatTemplateMsg templateMsg = null;
-                switch (nt.getType()) {
-                    case 1: {
-                        System.out.println("发送消息。");
-                        break;
-                    }
-                    case 2: {
-                        System.out.println("随同了");
-                        templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-                        templateMsg.setUrl(notifyView+nt.getId());
-                        System.out.println(notifyView+nt.getId());
-                        templateMsg.setData(
-                                MyTreeMap.createMap(
-                                        new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
-                                        new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
-                                        new TemplateMap("keyword2", WechatTemplateMsg.item(nt.getTitle(), "#000000")),
-                                        new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
-                                )
-                        );
 
-                        break;
-                    }
-                    case 3: {
-                        System.out.println("随同了");
-                        log.info("随同了");
-                        templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
-                        templateMsg.setUrl(notifyView+nt.getId());
-                        System.out.println(notifyView+nt.getId());
-                        templateMsg.setData(
-                                MyTreeMap.createMap(
-                                        new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
-//                                    new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班", "#000000")),
-                                        new TemplateMap("keyword2", WechatTemplateMsg.item("2018年2月2日", "#000000")),
-                                        new TemplateMap("keyword3", WechatTemplateMsg.item("北京", "#000000")),
-                                        new TemplateMap("keyword4", WechatTemplateMsg.item("400-817-6111", "#000000")),
-                                        new TemplateMap("remark", WechatTemplateMsg.item("如有疑问，请及时与我们取得联系", "#000000"))
-                                )
-                        );
-
-                        break;
-                    }
-                }
-//                        templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-                RunPush runPush = new RunPush(accessToken, templateMsg);
-                runPush.run();
-            }
-        }
-    }
 
     private void insertRedis(Object o) {
         redis.opsForValue().set(key, JSON.toJSONString(o));
