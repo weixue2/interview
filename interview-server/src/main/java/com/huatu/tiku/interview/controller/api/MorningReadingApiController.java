@@ -1,4 +1,4 @@
-package com.huatu.tiku.interview.controller.admin;
+package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
@@ -16,21 +16,17 @@ import java.io.IOException;
  * @Description
  */
 @RestController
-@RequestMapping("/end/mr")
-public class MorningReadingController {
+@RequestMapping("/api/mr")
+public class MorningReadingApiController {
+    // df
     @Autowired
     private MorningReadingService readingService;
-    @Autowired
-    HtmlFileUtil htmlFileUtil;
 
     @LogPrint
-    @PostMapping //@requestBody --> Json
-    public Result add(@RequestBody NotificationType morningReading) throws IOException {
-        morningReading.setStatus(1);
-        morningReading.setType(2);
-        morningReading.setContent(htmlFileUtil.imgManage(morningReading.getContent(),morningReading.getId()+"",0));
-        Long id = readingService.add(morningReading);
-        return  Result.ok(id);
+    @GetMapping
+    public Result get(Long id){
+
+        return Result.ok(readingService.get(id));
     }
 
 
