@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
             user_.setName(user.getName());
             user_.setIdCard(user.getIdCard());
             user_.setPregnancy(user.getPregnancy());
+            user_.setStatus(1);
             user_.setNation(user.getNation());
             user_.setKeyContact(user.getKeyContact());
             user = userRepository.save(user_);

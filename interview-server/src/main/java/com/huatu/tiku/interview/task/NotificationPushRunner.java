@@ -8,6 +8,7 @@ import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.template.MyTreeMap;
 import com.huatu.tiku.interview.entity.template.TemplateMap;
+import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
 import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
@@ -153,7 +154,8 @@ public class NotificationPushRunner {
         @Override
         public void run() {
             System.out.println("推送了一个");
-            templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            TemplateMsgResult result = templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+            System.out.println("推送返回："+result);
             try {
                 this.finalize();
             } catch (Throwable throwable) {
