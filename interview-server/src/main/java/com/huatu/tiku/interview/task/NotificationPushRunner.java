@@ -56,13 +56,9 @@ public class NotificationPushRunner {
     public void CheckNotification() {
         String  json = redis.opsForValue().get(key);
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
-//        System.out.println("???");
         if(json.length()>2){
-//            System.out.println("???sfd");
             List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
             if (rts != null) {
-//                System.out.println("qwe");
-
                 List<ReadingTemp> pushList = new ArrayList<>();
                 for (ReadingTemp rt : rts) {
                     if (rt.getStatus() && rt.getDate().before(new Date())) {
@@ -70,14 +66,10 @@ public class NotificationPushRunner {
                         System.out.println(rt.getDate());
                         rt.setStatus(false);
                         pushList.add(rt);
-//                        PushNotification(rt, notifyService.get(rt.getId()));
-//                        break;
                     }
 
                 }
                 // todo 电厂
-//                redis.opsForValue().set("push_list", JSON.toJSONString(pushList));
-//                redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
                 List<NotificationType> typeList = new ArrayList<>();
                 if(!pushList.isEmpty()){
                     for(ReadingTemp rt : pushList){
