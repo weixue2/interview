@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.controller.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huatu.tiku.interview.constant.BasicParameters;
+import com.huatu.tiku.interview.util.LogPrint;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -34,13 +35,15 @@ public class LearningReportPreController {
     @Value("${domainName}")
     private String domainName;
 
+
+    @LogPrint
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String weixinRedirect(HttpServletRequest request, HttpServletResponse response) {
         log.info("--------------开始oauth跳转------------");
         return "redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + BasicParameters.appID + "&redirect_uri="+domainName+"/wx/api/lr/pre/oauth?response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
     }
 
-
+    @LogPrint
     @RequestMapping(value = "/oauth", method = RequestMethod.GET)
     public ModelAndView weixinOAuth(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();

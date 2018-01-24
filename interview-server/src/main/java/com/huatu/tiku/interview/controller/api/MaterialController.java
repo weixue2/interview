@@ -3,7 +3,7 @@ package com.huatu.tiku.interview.controller.api;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.material.MaterialList;
 import com.huatu.tiku.interview.service.MaterialService;
-import com.huatu.tiku.interview.task.AccessTokenThread;
+import com.huatu.tiku.interview.util.LogPrint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.io.File;
 /**
  * @author zhouwei
  * @Description: 与微信对接登陆验证
@@ -30,6 +28,7 @@ public class MaterialController {
 
 
     //上传临时素材
+    @LogPrint
     @RequestMapping(value="/addtem",method = RequestMethod.POST)
     public String add(){
         // 调用接口获取access_token
@@ -47,6 +46,7 @@ public class MaterialController {
     }
 
     //上传永久素材
+    @LogPrint
     @RequestMapping(value="/addper",method = RequestMethod.POST)
     public String addper(){
         // 调用接口获取access_token
@@ -62,6 +62,7 @@ public class MaterialController {
         }
     }
     //根据media_id来获取素材，这里先不写，以后再完善
+    @LogPrint
     @RequestMapping(value = "/get",method = RequestMethod.GET)
     public String get(){
         return null;
@@ -69,6 +70,7 @@ public class MaterialController {
 
 
     //获取素材总数
+    @LogPrint
     @RequestMapping(value="/getall",method = RequestMethod.GET)
     public ModelAndView getall(){
         // 调用接口获取access_token
@@ -79,6 +81,7 @@ public class MaterialController {
     }
 
     //获取素材列表
+    @LogPrint
     @RequestMapping(value = "/getlist",method = RequestMethod.POST)
     public String getlist(){
         // 调用接口获取access_token

@@ -1,9 +1,9 @@
 package com.huatu.tiku.interview.controller.admin;
 
-import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.MorningReadingService;
+import com.huatu.tiku.interview.util.LogPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +18,8 @@ public class MorningReadingController {
     @Autowired
     private MorningReadingService readingService;
 
+
+    @LogPrint
     @PostMapping //@requestBody --> Json
     public Result add(@RequestBody NotificationType morningReading){
         morningReading.setStatus(1);
@@ -26,6 +28,7 @@ public class MorningReadingController {
         return  Result.ok(id);
     }
 
+    @LogPrint
     @GetMapping
     public Result get(Long id){
 

@@ -2,7 +2,7 @@ package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.service.MenuService;
-import com.huatu.tiku.interview.task.AccessTokenThread;
+import com.huatu.tiku.interview.util.LogPrint;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ public class MenuController {
     private MenuService menuService;
 
     //查询全部菜单
+    @LogPrint
     @GetMapping("menus")
     public String getMenu() {
         // 调用接口获取access_token
@@ -44,6 +45,7 @@ public class MenuController {
     }
 
     //创建菜单
+    @LogPrint
     @PostMapping(value = "menus")
     public int createMenu() {
         // 调用接口获取access_token
@@ -63,6 +65,7 @@ public class MenuController {
     }
 
     //删除菜单
+    @LogPrint
     @DeleteMapping(value = "menus")
     public int deleteMenu() {
         // 调用接口获取access_token

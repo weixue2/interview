@@ -3,18 +3,21 @@ package com.huatu.tiku.interview.controller.api;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
-import com.huatu.tiku.interview.entity.*;
+import com.huatu.tiku.interview.entity.WeChatTemplate;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.entity.template.TemplateData;
+import com.huatu.tiku.interview.util.LogPrint;
 import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
@@ -38,6 +41,7 @@ public class TestController {
     StringRedisTemplate redisTemplate;
 
     @GetMapping("template")
+    @LogPrint
     public void template(@RequestParam(required = false) String templateId) {
         templateId = templateId == null ? "NW9COwLjiGuv-xQpIoNpGtZ8M9zYLJxX6mo7Kt-6GbU" : templateId;
         WeChatTemplate wechatTemplate = new WeChatTemplate();
@@ -82,6 +86,7 @@ public class TestController {
     }
 
     @GetMapping("custom")
+    @LogPrint
     public Object sendCustomNews() {
         log.info("sendCustomNews()");
         // 调用接口获取access_token
@@ -103,6 +108,7 @@ public class TestController {
         return result;
     }
     @GetMapping("test1")
+    @LogPrint
     public String test1(){
 //        JedisConnectionFactory jedisConnectionFactory = (JedisConnectionFactory)redisTemplate.getConnectionFactory();
 //        jedisConnectionFactory.setDatabase(1);
@@ -113,6 +119,7 @@ public class TestController {
     }
 
     @GetMapping("test2")
+    @LogPrint
     public Result test2(HttpSession session){
         System.out.println(session.getAttribute("test1996"));
         return Result.ok("xx");
