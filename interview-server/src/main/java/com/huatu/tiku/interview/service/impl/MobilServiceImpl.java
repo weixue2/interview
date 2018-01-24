@@ -84,6 +84,8 @@ public class MobilServiceImpl implements MobileService {
         user.setOpenId(openId);
         System.out.println(user);
 
+        userRepository.save(user);
+
         String clientIp = null;
         try {
             final String real = request.getHeader("X-Real-IP");
