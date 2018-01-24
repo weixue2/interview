@@ -25,12 +25,12 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
 
 
     @Query(value = "SELECT ifnull(avg(behavior),0) ,ifnull(avg(language_expression),0) ,ifnull(avg(focus_topic),0) ,ifnull(avg(is_organized),0) ,ifnull(avg(have_substance),0) " +
-            "FROM t_learning_situation WHERE open_id = ?1 AND answer_date = curdate()", nativeQuery = true)
+            "FROM t_learning_situation WHERE open_id = ?1 AND answer_date = curdate() and status = 1", nativeQuery = true)
     List<Object[]> countTodayAvg(String openId);
 
 
     @Query(value = "SELECT practice_content , ifnull(count(1),0) FROM t_learning_situation WHERE open_id = ?1 " +
-            "AND answer_date = curdate() GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
+            "AND answer_date = curdate() and status = 1 GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
     List<Object[]> countTodayAnswerCount(String openId);
 
 
@@ -38,11 +38,11 @@ public interface LearningSituationRepository extends JpaRepository<LearningSitua
 
 
     @Query(value = "SELECT ifnull(avg(behavior),0) ,ifnull(avg(language_expression),0) ,ifnull(avg(focus_topic),0) ,ifnull(avg(is_organized),0) ,ifnull(avg(have_substance),0)  " +
-            "FROM t_learning_situation WHERE open_id = ?1 ", nativeQuery = true)
+            "FROM t_learning_situation WHERE open_id = ?1 and status = 1 ", nativeQuery = true)
     List<Object[] > countTotalAvg(String openId);
 
 
-    @Query(value = "SELECT practice_content ,ifnull(count(1),0)  FROM t_learning_situation WHERE open_id = ?1 " +
+    @Query(value = "SELECT practice_content ,ifnull(count(1),0)  FROM t_learning_situation WHERE open_id = ?1 and status = 1 " +
             " GROUP BY practice_content ORDER BY practice_content asc", nativeQuery = true)
     List<Object[]> countTotalAnswerCount(String openId);
 

@@ -28,7 +28,7 @@ public class LearningReportController {
      */
     @LogPrint
     @PostMapping(value="daily",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result learningReport(){
+    public Result dailyReport(){
         return learningReportService.dailyReport();
     }
 
