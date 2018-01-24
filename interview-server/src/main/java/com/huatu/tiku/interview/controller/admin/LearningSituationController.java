@@ -51,7 +51,7 @@ public class LearningSituationController {
     @DeleteMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result del(@PathVariable  Long id){
 
-        return learningSituationService.del(id) == 0 ?Result.ok():Result.build(ResultEnum.DELETE_FAIL);
+        return learningSituationService.del(id) == 0 ?Result.build(ResultEnum.DELETE_FAIL):Result.ok();
     }
 
     /**
