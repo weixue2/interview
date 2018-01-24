@@ -4,6 +4,7 @@ import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.entity.po.LearningSituation;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.LearningSituationService;
+import com.huatu.tiku.interview.util.LogPrint;
 import com.huatu.tiku.interview.util.common.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class LearningSituationController {
      * @param learningSituation
      * @return
      */
+    @LogPrint
     @PostMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result add(@RequestBody LearningSituation learningSituation){
         log.info("请求参数learningSituation：{}",learningSituation);
@@ -45,6 +47,7 @@ public class LearningSituationController {
      * @param id
      * @return
      */
+    @LogPrint
     @DeleteMapping(value="/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result del(@PathVariable  Long id){
 
@@ -56,6 +59,7 @@ public class LearningSituationController {
      * @param learningSituation
      * @return
      */
+    @LogPrint
     @PutMapping(value="",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result update(LearningSituation learningSituation){
         learningSituation = learningSituationService.findOne(learningSituation.getId());
@@ -70,6 +74,7 @@ public class LearningSituationController {
     /**
      * 查询某条学习情况记录
      */
+    @LogPrint
     @GetMapping(value="detail/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result detail(@PathVariable  Long id){
         log.info("id：{}",id);
@@ -81,6 +86,7 @@ public class LearningSituationController {
     /**
      * 查询学习情况记录列表
      */
+    @LogPrint
     @GetMapping(value="list",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result list(@RequestParam(name = "name") String name,
                        @RequestParam(name = "page", defaultValue = "1") int page,

@@ -1,11 +1,11 @@
 package com.huatu.tiku.interview.controller.admin;
 
 import com.huatu.tiku.interview.constant.BasicParameters;
-import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.OnlineCourseArrangementService;
+import com.huatu.tiku.interview.util.LogPrint;
 import com.huatu.tiku.interview.util.file.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -42,6 +41,8 @@ public class OnlineCourseArrangementController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+
+    @LogPrint
     @PostMapping("/CourseArrangement")
     public Result add(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
@@ -74,6 +75,7 @@ public class OnlineCourseArrangementController {
         return Result.ok(notificationType);
     }
 
+    @LogPrint
     @GetMapping("/CourseArrangement")
     public Result findById(@RequestParam Long id) {
         return Result.ok(arrangementService.findById(id));

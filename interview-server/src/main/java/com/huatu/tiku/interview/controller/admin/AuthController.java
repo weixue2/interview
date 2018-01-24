@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.controller.admin;
 import com.huatu.common.BaseResult;
 import com.huatu.common.LoginResult;
 import com.huatu.tiku.interview.constant.WebParamConsts;
+import com.huatu.tiku.interview.util.LogPrint;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,12 +27,14 @@ public class AuthController {
      *
      * @return
      */
+    @LogPrint
     @RequestMapping("/tologin")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public BaseResult tologin() {
         return BaseResult.create(LoginResult.UNAUTHORIZED.getCode(), LoginResult.UNAUTHORIZED.getMessage(), "");
     }
 
+    @LogPrint
     @RequestMapping("/denied")
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public BaseResult denied() {
@@ -43,6 +46,7 @@ public class AuthController {
      *
      * @return
      */
+    @LogPrint
     @RequestMapping("/get")
     public Object get() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,7 +58,7 @@ public class AuthController {
         }
     }
 
-
+    @LogPrint
     @RequestMapping(value = "/success", params = "login")
     public BaseResult loginSuccess() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -62,6 +66,7 @@ public class AuthController {
         return BaseResult.create(20000, "", principal);
     }
 
+    @LogPrint
     @RequestMapping(value = "/success", params = "logout")
     public BaseResult logoutSuccess() {
         return BaseResult.create(20000, "操作成功", "");
@@ -73,6 +78,7 @@ public class AuthController {
      * @param request
      * @return
      */
+    @LogPrint
     @RequestMapping("/fail")
     public BaseResult fail(HttpServletRequest request) {
         AuthenticationException authenticationException = (AuthenticationException) request.getAttribute(WebParamConsts.SPRING_SECURITY_EX);

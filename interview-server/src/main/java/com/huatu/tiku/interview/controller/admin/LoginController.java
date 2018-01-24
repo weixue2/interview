@@ -5,10 +5,14 @@ import com.huatu.common.exception.BizException;
 import com.huatu.tiku.interview.entity.po.Admin;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.AdminService;
+import com.huatu.tiku.interview.util.LogPrint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,6 +35,7 @@ public class LoginController {
      * @param request
      * @return
      */
+    @LogPrint
     @PostMapping("login")
     public Result login(String username, String password, HttpServletRequest request) {
         log.info("username: {}  ,password:{} ", username, password);
@@ -48,6 +53,7 @@ public class LoginController {
      *
      * @param request
      */
+    @LogPrint
     @GetMapping("logout")
     public Result logout(HttpServletRequest request) {
         log.info("logout");

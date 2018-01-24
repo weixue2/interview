@@ -1,15 +1,15 @@
 package com.huatu.tiku.interview.controller.admin;
 
-import com.huatu.tiku.interview.constant.ResultEnum;
-import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.UserService;
+import com.huatu.tiku.interview.util.LogPrint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Author jbzm
@@ -22,6 +22,7 @@ public class UserEndController {
     @Autowired
     private UserService userService;
 
+    @LogPrint
     @GetMapping
     public Result findUser(@RequestParam(name = "content",defaultValue = "") String content) {
         return Result.ok(userService.findAllUser(content));

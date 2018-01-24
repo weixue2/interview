@@ -11,6 +11,7 @@ import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.MobileService;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
+import com.huatu.tiku.interview.util.LogPrint;
 import com.huatu.tiku.interview.util.json.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,7 @@ public class UserController {
     private String notifyView;
 
 
+    @LogPrint
     @GetMapping("getMobile")
     public Result getMobile(String mobile, String openId, HttpServletRequest req) {
         // xml请求解析
@@ -57,6 +59,7 @@ public class UserController {
         return Result.ok(mobileService.checkPHP(mobile, openId, req));
     }
 
+    @LogPrint
     @GetMapping(value = "getNext")
     public Result userCaptcha(String mobile, String captcha) {
         mobileService.userCaptcha(mobile, captcha);
@@ -81,6 +84,8 @@ public class UserController {
 //        }
 //        userService.createUser(openId);
 //    }
+
+    @LogPrint
     @PostMapping
     public Result updateUser(@RequestBody User user, HttpServletRequest request) {
         log.info(user.toString());
@@ -89,6 +94,7 @@ public class UserController {
         return userService.updateUser(user, request) ? Result.ok() : Result.build(ResultEnum.INSERT_FAIL);
     }
 
+    @LogPrint
     @GetMapping
     public Result getUserInfo(String openId) {
 //        System.out.println("你知道吗 openId:"+openId);
@@ -111,6 +117,7 @@ public class UserController {
         return Result.ok(user);
     }
 
+    @LogPrint
     @GetMapping("pushNotify")
     public Result pushNotify(){
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);

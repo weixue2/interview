@@ -1,17 +1,15 @@
 package com.huatu.tiku.interview.controller.api;
 
 import com.huatu.tiku.interview.service.CoreService;
+import com.huatu.tiku.interview.util.LogPrint;
 import com.huatu.tiku.interview.util.MessageUtil;
 import com.huatu.tiku.interview.util.SignUtil;
-import com.huatu.tiku.interview.util.WeiXinAccessTokenUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +28,7 @@ public class CoreController {
     @Autowired
     private CoreService coreService;
 
+    @LogPrint
     @PostMapping("process")
     public String post(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // 调用核心业务类接收消息、处理消息跟推送消息
@@ -37,6 +36,7 @@ public class CoreController {
         return coreService.processRequest(MessageUtil.parseXml(request), request, response);
     }
 
+    @LogPrint
     @GetMapping(value = "process")
     public void checkSignature(@RequestParam(name = "signature", required = false) String signature,
                                @RequestParam(name = "nonce", required = false) String nonce,

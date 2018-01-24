@@ -1,29 +1,16 @@
 package com.huatu.tiku.interview.controller.admin;
 
-import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.ResultEnum;
-import com.huatu.tiku.interview.constant.TemplateEnum;
-import com.huatu.tiku.interview.constant.WeChatUrlConstant;
 import com.huatu.tiku.interview.entity.po.NotificationType;
-import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.entity.result.Result;
-import com.huatu.tiku.interview.entity.template.MyTreeMap;
-import com.huatu.tiku.interview.entity.template.TemplateMap;
-import com.huatu.tiku.interview.entity.template.TemplateMsgResult;
-import com.huatu.tiku.interview.entity.template.WechatTemplateMsg;
 import com.huatu.tiku.interview.service.NotificationService;
-import com.huatu.tiku.interview.service.UserService;
-import com.huatu.tiku.interview.service.WechatTemplateMsgService;
+import com.huatu.tiku.interview.util.LogPrint;
 import com.huatu.tiku.interview.util.common.PageUtil;
-import com.huatu.tiku.interview.util.json.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import static com.huatu.tiku.interview.constant.NotificationTypeConstant.REGISTER_REPORT;
 
@@ -39,6 +26,7 @@ public class NotificationController {
     private NotificationService notificationService;
 
 
+    @LogPrint
     @GetMapping
     public Result getPage(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page){
         PageUtil<List<NotificationType>> all = notificationService.findAll(pageSize,page);
@@ -46,6 +34,7 @@ public class NotificationController {
         return Result.ok(all);
     }
 
+    @LogPrint
     @GetMapping("fuzzy")
     public Result fuzzy(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page,String title){
         PageUtil<List<NotificationType>> all = notificationService.findByTitleLimit(pageSize,page,title);
