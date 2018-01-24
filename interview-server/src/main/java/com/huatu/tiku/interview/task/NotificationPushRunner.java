@@ -78,12 +78,16 @@ public class NotificationPushRunner {
                 // todo 电厂
 //                redis.opsForValue().set("push_list", JSON.toJSONString(pushList));
 //                redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
+                List<NotificationType> typeList = new ArrayList<>();
                 if(!pushList.isEmpty()){
+                    for(ReadingTemp rt : pushList){
+                        typeList.add(notifyService.findOne(rt.getId()));
+                    }
                     for (User u : userService.findAllUser()){
-                        for (ReadingTemp rt : pushList) {
-                            NotificationType notification = notifyService.get(rt.getId());
+                        for (NotificationType nt : typeList) {
+//                            NotificationType notification = notifyService.get(rt.getId());
                             WechatTemplateMsg templateMsg = null;
-                            switch (rt.getType()) {
+                            switch (nt.getType()) {
                                 case 1: {
                                     System.out.println("发送消息。");
                                     break;
@@ -91,13 +95,13 @@ public class NotificationPushRunner {
                                 case 2: {
                                     System.out.println("随同了");
                                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-                                    templateMsg.setUrl(notifyView+notification.getId());
-                                    System.out.println(notifyView+notification.getId());
+                                    templateMsg.setUrl(notifyView+nt.getId());
+                                    System.out.println(notifyView+nt.getId());
                                     templateMsg.setData(
                                             MyTreeMap.createMap(
                                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
                                                     new TemplateMap("keyword1", WechatTemplateMsg.item(u.getName(), "#000000")),
-                                                    new TemplateMap("keyword2", WechatTemplateMsg.item(notification.getTitle(), "#000000")),
+                                                    new TemplateMap("keyword2", WechatTemplateMsg.item(nt.getTitle(), "#000000")),
                                                     new TemplateMap("remark", WechatTemplateMsg.item("华图在线祝您顺利上岸！", "#000000"))
                                             )
                                     );
@@ -108,8 +112,8 @@ public class NotificationPushRunner {
                                     System.out.println("随同了");
                                     log.info("随同了");
                                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
-                                    templateMsg.setUrl(notifyView+notification.getId());
-                                    System.out.println(notifyView+notification.getId());
+                                    templateMsg.setUrl(notifyView+nt.getId());
+                                    System.out.println(notifyView+nt.getId());
                                     templateMsg.setData(
                                             MyTreeMap.createMap(
                                                     new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
