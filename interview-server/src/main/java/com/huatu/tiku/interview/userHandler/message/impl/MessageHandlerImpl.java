@@ -104,6 +104,7 @@ public class MessageHandlerImpl implements MessageHandler {
             return null;
         }
         if(!requestMap.get("Content").equals("2")){
+            System.out.println("手机验证路径："+phoneCheck+requestMap.get("FromUserName"));
             NewsMessage nm = new NewsMessage(requestMap);
             List<Article> as = new ArrayList<>();
             Article a = new Article();
