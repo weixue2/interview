@@ -60,7 +60,7 @@ public class NotificationRunner {
             for (NotificationType mr : list) {
                 rts.add(new ReadingTemp(mr.getId(), mr.getPushTime(), true, mr.getType()));
             }
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             insertRedis(rts);
         } else {
             insertRedis("");
