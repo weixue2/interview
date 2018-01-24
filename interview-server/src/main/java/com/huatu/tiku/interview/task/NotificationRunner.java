@@ -68,7 +68,7 @@ public class NotificationRunner {
     }
 
     // 待推送列表
-    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(fixedDelay = 5000)
     public void pushList(){
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         String  json = redis.opsForValue().get("push_list");
