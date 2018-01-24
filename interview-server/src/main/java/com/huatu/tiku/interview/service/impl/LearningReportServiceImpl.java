@@ -277,7 +277,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
             }
             resultList.add(reportResponseVO);
         }
-        return Result.build(100,"查询成功",resultList);
+        return Result.ok(resultList);
     }
 
     @Override

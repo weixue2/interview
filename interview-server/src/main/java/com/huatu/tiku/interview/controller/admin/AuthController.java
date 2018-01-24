@@ -2,7 +2,6 @@ package com.huatu.tiku.interview.controller.admin;
 
 import com.huatu.common.BaseResult;
 import com.huatu.common.LoginResult;
-import com.huatu.common.Result;
 import com.huatu.tiku.interview.constant.WebParamConsts;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2017/12/27 9:56
  */
 @RestController
-@RequestMapping("/end/auth")
+@RequestMapping("/auth")
 public class AuthController {
     /**
      * 适配session过期等的检查

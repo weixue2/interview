@@ -139,8 +139,8 @@ public class NotificationPushRunner {
         redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
     }
 
-    class RunPush implements Runnable{
 
+    class RunPush implements Runnable{
         private String accessToken;
         private WechatTemplateMsg templateMsg;
 

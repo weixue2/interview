@@ -26,8 +26,8 @@ import java.util.List;
 @ServletComponentScan("com.huatu")//servlet扫描配置
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-    @Autowired
-    LoginInterceptor loginInterceptor;
+//    @Autowired
+//    LoginInterceptor loginInterceptor;
 
     @Autowired
     private TokenMethodArgumentResolver tokenMethodArgumentResolver;
@@ -40,10 +40,10 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private StringHttpMessageConverter stringHttpMessageConverter;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(loginInterceptor);
+//    }
 
 
     @Override
