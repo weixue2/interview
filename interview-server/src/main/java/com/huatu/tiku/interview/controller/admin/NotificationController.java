@@ -42,7 +42,7 @@ public class NotificationController {
     @GetMapping
     public Result getPage(@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, @RequestParam(name = "page", defaultValue = "1") Integer page){
         PageUtil<List<NotificationType>> all = notificationService.findAll(pageSize,page);
-        return all.getResult().isEmpty()?Result.build(ResultEnum.ERROR):Result.ok(all);
+        return all.getResult().isEmpty()?Result.ok(""):Result.ok(all);
     }
 
     @GetMapping("fuzzy")
