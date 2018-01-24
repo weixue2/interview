@@ -123,7 +123,9 @@ public class NotificationPushRunner {
                                 break;
                             }
                         }
-                        templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+//                        templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
+                        RunPush runPush = new RunPush(accessToken, templateMsg);
+                        runPush.run();
                     }
                 }
             }
@@ -203,11 +205,11 @@ public class NotificationPushRunner {
         public void run() {
             System.out.println("推送了一个");
             templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-//            try {
-//                this.finalize();
-//            } catch (Throwable throwable) {
-//                throwable.printStackTrace();
-//            }
+            try {
+                this.finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
     }
 }
