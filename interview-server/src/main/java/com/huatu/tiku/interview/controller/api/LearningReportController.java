@@ -45,11 +45,6 @@ public class LearningReportController {
         return learningReportService.learningReport(openId);
     }
 
-
-
-
-
-
     /**
      * 校验用户当前状态
      */
@@ -70,6 +65,16 @@ public class LearningReportController {
     @PostMapping(value="push/{openId}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public TemplateMsgResult push(@PathVariable String openId){
         return learningReportService. pushDailyReport(openId);
+    }
+
+
+    /**
+     * 推送用户学习历程
+     */
+    @LogPrint
+    @PostMapping(value="pushTotal/{openId}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public TemplateMsgResult pushTotal(@PathVariable String openId){
+        return learningReportService. pushTotalReport(openId);
     }
 
 

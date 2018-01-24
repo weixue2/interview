@@ -15,4 +15,8 @@ public interface LearningReportService {
     Result check(String openId);
 
     TemplateMsgResult pushDailyReport(String openId);
+
+
+    TemplateMsgResult pushTotalReport(String openId);
+
 }

@@ -32,6 +32,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.TreeMap;
 
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.DAILY_REPORT;
 import static com.huatu.tiku.interview.constant.ReportTypeConstant.TOTAL_REPORT;
@@ -89,11 +90,11 @@ public class LearningReportServiceImpl  implements LearningReportService {
                     if(daySort <= 6){
                         //不是最后一天（只生成每日报告）
                         saveDailyReport(userId,daySort, openId);
-//                    pushDailyReport(user.getOpenId());
+                        pushDailyReport(user.getOpenId());
                     }else if(daySort == 7){
                         //最后一天（生成每日报告+总体报告）
                         saveTotalReport(userId, openId);
-//                    pushTotalReport(user.getOpenId());
+                        pushTotalReport(user.getOpenId());
                     }
                 }
 
@@ -108,6 +109,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
 //        TemplateEnum.DailyReport.
         WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.DailyReport);
+
         templateMsg.setUrl(dailyReportURL+openId);
         String templateMsgJson = JsonUtil.toJson(templateMsg);
         TemplateMsgResult result = templateMsgService.sendTemplate(
@@ -117,9 +119,19 @@ public class LearningReportServiceImpl  implements LearningReportService {
     }
 
     //推送每日学习报告消息
-    private TemplateMsgResult pushTotalReport(String openId)  {
+    public TemplateMsgResult pushTotalReport(String openId)  {
         String accessToken = stringRedisTemplate.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
         WechatTemplateMsg templateMsg = new WechatTemplateMsg(openId, TemplateEnum.TotalReport);
+
+        //根据openId查询用户姓名
+        List<User> userList = userRepository.findByOpenIdAndStatus(openId, WXStatusEnum.Status.NORMAL.getStatus());
+        String username= "";
+        if(CollectionUtils.isNotEmpty(userList)){
+            username = userList.get(0).getName();
+        }
+        TreeMap<String, TreeMap<String, String>> data = templateMsg.getData();
+        data.put("keyword1", WechatTemplateMsg.item(username,"#000000"));
+        templateMsg.setData(data);
         templateMsg.setUrl(dailyReportURL+openId);
         String templateMsgJson = JsonUtil.toJson(templateMsg);
         TemplateMsgResult result = templateMsgService.sendTemplate(
@@ -148,6 +160,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setType(DAILY_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport.setOpenId(openId);
+        learningReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
         learningReport = learningReportRepository.save(learningReport);
 
         return learningReport;
@@ -171,6 +184,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setType(ReportTypeConstant.TOTAL_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport.setOpenId(openId);
+        learningReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
         learningReport = learningReportRepository.save(learningReport);
 
         return learningReport;
