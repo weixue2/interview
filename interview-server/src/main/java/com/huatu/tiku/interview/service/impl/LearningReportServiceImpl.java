@@ -160,6 +160,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setType(DAILY_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport.setOpenId(openId);
+        learningReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
         learningReport = learningReportRepository.save(learningReport);
 
         return learningReport;
@@ -183,6 +184,7 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setType(ReportTypeConstant.TOTAL_REPORT.getCode());
         learningReport.setUserId(userId);
         learningReport.setOpenId(openId);
+        learningReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
         learningReport = learningReportRepository.save(learningReport);
 
         return learningReport;
