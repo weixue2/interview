@@ -91,7 +91,7 @@ public class EventHandlerImpl implements EventHandler {
         log.info("开始判断该二维码是否我为华图官方签到二维码:" + requestMap.get("EventKey"));
         if ("sign_in".equals(requestMap.get("EventKey"))) {
             String h = new SimpleDateFormat("HH").format(new Date());
-                //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
+            //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
             if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
                 //if (System.currentTimeMillis() % 2 == 1) {
                 log.info("开始签到");
@@ -155,6 +155,7 @@ public class EventHandlerImpl implements EventHandler {
                 for (NotificationType notificationType : notTypePatterns) {
                     if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
                         log.info("----展示图片----");
+                        log.info("----图片id:" + notificationType.getWxImageId());
                         str = WxMpXmlOutMessage
                                 .IMAGE()
                                 .mediaId(notTypePatterns.get(0).getWxImageId())
@@ -183,6 +184,7 @@ public class EventHandlerImpl implements EventHandler {
                     .build()
                     .toXml();
         }
+        log.info("----返回的xml:" + str);
         return str;
     }
 }
