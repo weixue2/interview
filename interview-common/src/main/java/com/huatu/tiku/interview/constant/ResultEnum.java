@@ -20,7 +20,7 @@ public enum ResultEnum {
 
     PHP_ERROR(50020, "未知错误"),
     PHP_PARAMETER_ERROR(50021, "参数错误"),
-    PHP_MOBILE_ERROR(50022, "手机号错误"),
+    PHP_MOBILE_ERROR(50022, "学员未购买相关课程"),
     PHP_REQUEST_LOSED(50023, "请求失效"),
 
     CAPTCHA_EXPIRE(50030, "验证码过期"),
