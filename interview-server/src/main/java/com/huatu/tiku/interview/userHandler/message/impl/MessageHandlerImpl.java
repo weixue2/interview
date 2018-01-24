@@ -83,7 +83,7 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setPicUrl("http://p1.music.126.net/_mEC5ZpzngngbBioF8dm4Q==/109951162973202394.jpg");
             //这里跳转前端验证
             log.info("手机验证路径："+phoneCheck+requestMap.get("FromUserName"));
-            a.setUrl(phoneCheck + requestMap.get("FromUserName"));
+            a.setUrl(phoneCheck + "openId="+requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
             nm.setArticles(as);
@@ -112,7 +112,7 @@ public class MessageHandlerImpl implements MessageHandler {
             a.setDescription("点击图文可以跳转到华图首页");
             a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
             //这里跳转前端验证
-            a.setUrl(phoneCheck + requestMap.get("FromUserName"));
+            a.setUrl(phoneCheck + "openId="+requestMap.get("FromUserName"));
             as.add(a);
             nm.setArticleCount(as.size());
             nm.setArticles(as);

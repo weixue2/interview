@@ -66,7 +66,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(phoneCheck + fromUserName);
+        a.setUrl(phoneCheck +"openId="+ fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
