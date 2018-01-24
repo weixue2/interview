@@ -75,7 +75,7 @@ public class NotificationPushRunner {
                     }
 
                 }
-                // todo
+                // todo 电厂
 //                redis.opsForValue().set("push_list", JSON.toJSONString(pushList));
 //                redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
                 for (User u : userService.findAllUser()){
