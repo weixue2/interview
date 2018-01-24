@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.service.impl;
 
 import com.google.common.collect.Lists;
+import com.huatu.tiku.interview.constant.UserStatusConstant;
 import com.huatu.tiku.interview.entity.po.User;
 import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.UserService;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 //        String openId = "od2aM0j6XSIwjAt2fExHeegjOWn8";
 
         User user_ = userRepository.findByOpenId(user.getOpenId());
-        System.out.println("讓我看看user:"+user_);
+        System.out.println("讓我看看user:" + user_);
         if (user_ != null) {
             user_.setPhone(user.getPhone());
             user_.setSex(user.getSex());
@@ -47,8 +48,8 @@ public class UserServiceImpl implements UserService {
             user_.setKeyContact(user.getKeyContact());
             user = userRepository.save(user_);
         }
-        System.out.println("user:"+user_);
-        return  user== null ? false : true;
+        System.out.println("user:" + user_);
+        return user == null ? false : true;
     }
 
     @Override
@@ -79,6 +80,7 @@ public class UserServiceImpl implements UserService {
                 if (StringUtils.isNotEmpty(content)) {
                     predicates.add(cb.like(root.get("name"), "%" + content + "%"));
                 }
+                predicates.add(cb.equal(root.get("status"), UserStatusConstant.NO_INFO.getStatus()));
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };

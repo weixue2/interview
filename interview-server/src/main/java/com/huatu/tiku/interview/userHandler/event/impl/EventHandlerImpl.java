@@ -66,7 +66,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(phoneCheck + fromUserName);
+        a.setUrl(phoneCheck +"openId="+ fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
@@ -155,9 +155,10 @@ public class EventHandlerImpl implements EventHandler {
                 for (NotificationType notificationType : notTypePatterns) {
                     if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
                         log.info("----展示图片----");
+                        log.info("----图片id:" + notificationType.getWxImageId());
                         str = WxMpXmlOutMessage
                                 .IMAGE()
-                                .mediaId(notTypePatterns.get(0).getWxImageId())
+                                .mediaId(notificationType.getWxImageId())
                                 .fromUser(requestMap.get("ToUserName"))
                                 .toUser(requestMap.get("FromUserName"))
                                 .build()
@@ -183,6 +184,7 @@ public class EventHandlerImpl implements EventHandler {
                     .build()
                     .toXml();
         }
+        log.info("----返回的xml:" + str);
         return str;
     }
 }
