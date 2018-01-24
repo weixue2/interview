@@ -79,23 +79,26 @@ public class LearningReportServiceImpl  implements LearningReportService {
                 long userId = user.getPhpUserId();
 
                 String openId = user.getOpenId();
-                //查询用户当前已存在的报告数目
-                List<LearningReport> reportList = learningReportRepository.findByOpenIdOrderByDaySortAsc(openId);
-                int daySort = 1;
-                if(CollectionUtils.isNotEmpty(reportList)){
-                    daySort = reportList.size() + 1;
+
+                    //查询用户当前已存在的报告数目
+                    List<LearningReport> reportList = learningReportRepository.findByOpenIdOrderByDaySortAsc(openId);
+                    int daySort = 1;
+                    if(CollectionUtils.isNotEmpty(reportList)){
+                        daySort = reportList.size() + 1;
+                    }
+                    if(daySort <= 6){
+                        //不是最后一天（只生成每日报告）
+                        saveDailyReport(userId,daySort, openId);
+//                    pushDailyReport(user.getOpenId());
+                    }else if(daySort == 7){
+                        //最后一天（生成每日报告+总体报告）
+                        saveTotalReport(userId, openId);
+//                    pushTotalReport(user.getOpenId());
+                    }
                 }
-                if(daySort <= 6){
-                    //不是最后一天（只生成每日报告）
-                    saveDailyReport(userId,daySort, openId);
-                    pushDailyReport(user.getOpenId());
-                }else if(daySort == 7){
-                    //最后一天（生成每日报告+总体报告）
-                    saveTotalReport(userId, openId);
-                    pushTotalReport(user.getOpenId());
-                }
+
             }
-        }
+
         return Result.ok();
     }
 
@@ -141,7 +144,6 @@ public class LearningReportServiceImpl  implements LearningReportService {
         learningReport.setDaySort(daySort);
 
         String format = DateFormatUtil.NORMAL_DAY_FORMAT.format(new Date());
-
         learningReport.setReportDate(format);
         learningReport.setType(DAILY_REPORT.getCode());
         learningReport.setUserId(userId);
