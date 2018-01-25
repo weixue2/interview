@@ -48,6 +48,5 @@ public class User {
 //    @Column(columnDefinition="int(2) COMMENT '状态'")
     private Integer status;
 
-
-    private Boolean existStatus;
+    private Boolean agreement;
 }

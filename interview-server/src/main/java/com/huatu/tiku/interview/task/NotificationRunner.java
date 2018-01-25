@@ -13,6 +13,7 @@ import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
+import com.huatu.tiku.interview.util.po.ClussStringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -58,7 +59,8 @@ public class NotificationRunner {
         if (!list.isEmpty()) {
             List<ReadingTemp> rts = new ArrayList<>();
             for (NotificationType mr : list) {
-                rts.add(new ReadingTemp(mr.getId(), mr.getPushTime(), true, mr.getType()));
+                // TODO 班级s
+                rts.add(new ReadingTemp(mr.getId(), mr.getPushTime(), true, mr.getType(), ClussStringUtil.getList(mr.getClassIds())));
             }
             Thread.sleep(1000);
             insertRedis(rts);
