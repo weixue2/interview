@@ -71,7 +71,7 @@ public class OnlineCourseArrangementController {
         notificationType.setImageUrl(fileUrl);
         notificationType.setTitle(title);
         notificationType.setId(id);
-        notificationType.setClassIds(classIds);
+        notificationType.setClassId(classIds);
         arrangementService.add(notificationType);
         return Result.ok(notificationType);
     }

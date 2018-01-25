@@ -175,7 +175,7 @@ public class EventHandlerImpl implements EventHandler {
                     classId = userClassRelation.getClassId();
                 }
                 // 查询用户所属班级的课表图片
-                List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), classId );
+                List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), classId );
 
 //                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
 //                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
