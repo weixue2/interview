@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 /**
  * @author zhouwei
- * @Description: TODO
+ * @Description: 学员信息表
  * @create 2018-01-05 下午4:24
  **/
 
