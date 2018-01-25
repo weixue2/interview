@@ -140,6 +140,7 @@ public class EventHandlerImpl implements EventHandler {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
+
             if ((user == null || user.getStatus() != 1)) {
                 log.info("----查询不到用户信息----");
                 str = WxMpXmlOutMessage
@@ -150,6 +151,11 @@ public class EventHandlerImpl implements EventHandler {
                         .build()
                         .toXml();
             } else {
+                //TODO 查询用户所属班级的课表图片(推送班级为全部or包含学员所属班级)
+                //查询用户所属班级
+
+
+
                 List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
                         (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
                 for (NotificationType notificationType : notTypePatterns) {
