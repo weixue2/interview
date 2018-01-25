@@ -158,7 +158,7 @@ public class EventHandlerImpl implements EventHandler {
                 log.info("----查询不到用户信息----");
                 str = WxMpXmlOutMessage
                         .TEXT()
-                        .content("抱歉，经系统核实您的手机号未购买“2018国考封闭特训班”~若有疑问，请联系客服：400-817-6111")
+                        .content("抱歉，只有已购买《2018国考封闭特训班》课程的学员才能享有该服务。若有疑问，请联系客服：400-817-6111")
                         .fromUser(requestMap.get("ToUserName"))
                         .toUser(requestMap.get("FromUserName"))
                         .build()
