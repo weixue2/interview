@@ -3,6 +3,7 @@ package com.huatu.tiku.interview.service.impl;
 import com.google.common.collect.Lists;
 import com.huatu.tiku.interview.constant.UserStatusConstant;
 import com.huatu.tiku.interview.entity.po.User;
+import com.huatu.tiku.interview.repository.ClassInfoRepository;
 import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +25,9 @@ import java.util.List;
  **/
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    ClassInfoRepository classInfoRepository;
     @Autowired
     UserRepository userRepository;
 
@@ -95,6 +99,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long getCluss(String openId) {
+
         return null;
     }
 
