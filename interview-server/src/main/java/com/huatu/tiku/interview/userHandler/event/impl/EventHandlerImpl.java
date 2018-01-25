@@ -1,7 +1,5 @@
 package com.huatu.tiku.interview.userHandler.event.impl;
 
-import com.huatu.common.utils.date.DateFormatUtil;
-import com.huatu.common.utils.date.DateUtil;
 import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.NotificationTypeConstant;
 import com.huatu.tiku.interview.constant.WXStatusEnum;
@@ -167,14 +165,14 @@ public class EventHandlerImpl implements EventHandler {
                         .toXml();
             } else {
                 // 查询用户所属班级
-                String classId = "";
+                long classId = 0;
                 //查询用户所属班级
                 List<UserClassRelation> userClassRelationList = userClassRelationRepository.findByOpenIdAndStatus(user.getOpenId(), WXStatusEnum.Status.NORMAL.getStatus());
                 if(CollectionUtils.isEmpty(userClassRelationList)){
                     log.info("用户没有所属班级");
                 }else{
                     UserClassRelation userClassRelation = userClassRelationList.get(0);
-                    classId = userClassRelation.getClassId()+"";
+                    classId = userClassRelation.getClassId();
                 }
                 // 查询用户所属班级的课表图片
                 List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), classId );
