@@ -125,7 +125,7 @@ public class NotificationPushRunner {
                                     templateMsg.setData(
                                             MyTreeMap.createMap(
                                                     new TemplateMap("first", WechatTemplateMsg.item("亲爱的" + u.getName() + "同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
-//                                    new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班", "#000000")),
+                                                    new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班", "#000000")),
                                                     new TemplateMap("keyword2", WechatTemplateMsg.item("2018年2月2日", "#000000")),
                                                     new TemplateMap("keyword3", WechatTemplateMsg.item("北京", "#000000")),
                                                     new TemplateMap("keyword4", WechatTemplateMsg.item("400-817-6111", "#000000")),
