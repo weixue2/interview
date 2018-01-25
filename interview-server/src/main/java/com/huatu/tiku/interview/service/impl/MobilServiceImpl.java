@@ -60,6 +60,7 @@ public class MobilServiceImpl implements MobileService {
         }
         String token = Crypt3Des.encryptMode("phone="+mobile+"&timeStamp="+System.currentTimeMillis());
         System.out.println("token:"+token);
+        System.out.println("手机："+mobile);
         // 请求php
         String result = restTemplate.getForObject(WeChatUrlConstant.PHP_GET_USER_INFO+token,String.class,token);
         System.out.println("result:"+result);
