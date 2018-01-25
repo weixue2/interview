@@ -49,5 +49,5 @@ public class User {
     private Integer status;
 
 
-    private Boolean existStatus;
+    private Boolean agreement;
 }

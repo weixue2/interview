@@ -46,6 +46,7 @@ public enum ResultEnum {
     LOGIN_ERROR(50044, "用户名或密码错误"),
 
     CLASS_CAST_ERROR(50050,"班级唯一标识无法识别"),
+    Agreement_ERROR(50051,"用户不同意协议"),
             ;
     private Integer code;
 

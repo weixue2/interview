@@ -93,4 +93,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByStatus(1);
     }
 
+    @Override
+    public Long getCluss(String openId) {
+        return null;
+    }
+
 }
