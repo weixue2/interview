@@ -199,7 +199,7 @@ public class EventHandlerImpl implements EventHandler {
                 } else {
                     str = WxMpXmlOutMessage
                             .TEXT()
-                            .content("暂无课程安排，请联系助教")
+                            .content("课程安排即将推出~")
                             .fromUser(requestMap.get("ToUserName"))
                             .toUser(requestMap.get("FromUserName"))
                             .build()
