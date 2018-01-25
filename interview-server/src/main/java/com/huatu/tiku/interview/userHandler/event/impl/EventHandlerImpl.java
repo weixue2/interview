@@ -64,8 +64,8 @@ public class EventHandlerImpl implements EventHandler {
         NewsMessage nm = new NewsMessage(requestMap);
         List<Article> as = new ArrayList<>();
         Article a = new Article();
-        a.setTitle("谢谢您的关注！!");
-        a.setDescription("点击图文可以跳转到华图首页");
+        a.setTitle("封闭特训，赢在面试！");
+        a.setDescription("为了保证您的学习效果与体验，请您务必进入填写信息，同华图在线APP完成账号绑定。");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
         a.setUrl(phoneCheck + "openId=" + fromUserName);
