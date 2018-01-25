@@ -89,6 +89,9 @@ public class UserController {
     @LogPrint
     @PostMapping
     public Result updateUser(@RequestBody User user, HttpServletRequest request) {
+        if (user.getAgreement() == null){
+            user.setAgreement(false);
+        }
         if(!user.getAgreement()){
             return Result.build(ResultEnum.Agreement_ERROR);
         }
