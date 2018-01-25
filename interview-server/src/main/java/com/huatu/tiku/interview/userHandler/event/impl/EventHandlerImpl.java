@@ -97,7 +97,7 @@ public class EventHandlerImpl implements EventHandler {
             String h = new SimpleDateFormat("HH").format(new Date());
             //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
-            if ((user == null || user.getStatus() != 1)) {
+            if ((user != null || user.getStatus() == 1)) {
                 if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
                     log.info("开始签到");
                     String time = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date());
@@ -170,18 +170,18 @@ public class EventHandlerImpl implements EventHandler {
                 String classId = "0";
                 //查询用户所属班级
                 List<UserClassRelation> userClassRelationList = userClassRelationRepository.findByOpenIdAndStatus(user.getOpenId(), WXStatusEnum.Status.NORMAL.getStatus());
-                if(CollectionUtils.isEmpty(userClassRelationList)){
+                if (CollectionUtils.isEmpty(userClassRelationList)) {
                     log.info("用户没有所属班级，为用户推送最新默认课表");
-                }else{
+                } else {
                     UserClassRelation userClassRelation = userClassRelationList.get(0);
-                    classId = userClassRelation.getClassId()+"";
+                    classId = userClassRelation.getClassId() + "";
                 }
                 // 查询用户所属班级的课表图片
                 List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsLikeOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), "%" + classId + "%");
 
 //                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
 //                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
-                if(CollectionUtils.isNotEmpty(imageList)){
+                if (CollectionUtils.isNotEmpty(imageList)) {
                     for (NotificationType notificationType : imageList) {
                         if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
                             log.info("----展示图片----");
@@ -196,7 +196,7 @@ public class EventHandlerImpl implements EventHandler {
                             break;
                         }
                     }
-                }else{
+                } else {
                     str = WxMpXmlOutMessage
                             .TEXT()
                             .content("暂无课程安排，请联系助教")
