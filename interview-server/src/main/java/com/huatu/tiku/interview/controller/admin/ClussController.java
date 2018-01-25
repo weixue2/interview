@@ -15,7 +15,7 @@ import java.util.List;
  * @Description
  */
 @RestController
-@RequestMapping("/end/cc")
+@RequestMapping("/end/class")
 public class ClussController {
 
     @Autowired
