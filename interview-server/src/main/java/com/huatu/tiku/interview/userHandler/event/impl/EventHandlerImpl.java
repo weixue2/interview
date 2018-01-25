@@ -1,5 +1,7 @@
 package com.huatu.tiku.interview.userHandler.event.impl;
 
+import com.huatu.common.utils.date.DateFormatUtil;
+import com.huatu.common.utils.date.DateUtil;
 import com.huatu.tiku.interview.constant.BasicParameters;
 import com.huatu.tiku.interview.constant.NotificationTypeConstant;
 import com.huatu.tiku.interview.constant.WXStatusEnum;
@@ -50,6 +52,8 @@ public class EventHandlerImpl implements EventHandler {
     private String phoneCheck;
     @Autowired
     private UserClassRelationRepository userClassRelationRepository;
+    private static final String SIGN_SUCC_MSG = "恭喜，您于%s签到成功。";
+
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
@@ -66,7 +70,7 @@ public class EventHandlerImpl implements EventHandler {
         a.setDescription("点击图文可以跳转到华图首页");
         a.setPicUrl(BasicParameters.IMAGE_SUBSCRIBE_001);
         //这里跳转前端验证
-        a.setUrl(phoneCheck +"openId="+ fromUserName);
+        a.setUrl(phoneCheck + "openId=" + fromUserName);
         as.add(a);
         nm.setArticleCount(as.size());
         nm.setArticles(as);
@@ -92,27 +96,39 @@ public class EventHandlerImpl implements EventHandler {
         if ("sign_in".equals(requestMap.get("EventKey"))) {
             String h = new SimpleDateFormat("HH").format(new Date());
             //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
-            if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
-                //if (System.currentTimeMillis() % 2 == 1) {
-                log.info("开始签到");
-                str = WxMpXmlOutMessage
-                        .TEXT()
-                        .content("签到成功")
-                        .fromUser(requestMap.get("ToUserName"))
-                        .toUser(requestMap.get("FromUserName"))
-                        .build()
-                        .toXml();
-                SignIn signIn = new SignIn();
-                signIn.setOpenId(requestMap.get("FromUserName"));
-                signIn.setSignTime(new Date());
-                signIn.setBizStatus(1);
-                signIn.setStatus(1);
-                signInRepository.save(signIn);
+            User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
+            if ((user != null && user.getStatus() == 1)) {
+                if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
+                    log.info("开始签到");
+                    String time = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date());
+                    String timeStr = String.format(SIGN_SUCC_MSG, time);
+                    str = WxMpXmlOutMessage
+                            .TEXT()
+                            .content(timeStr)
+                            .fromUser(requestMap.get("ToUserName"))
+                            .toUser(requestMap.get("FromUserName"))
+                            .build()
+                            .toXml();
+                    SignIn signIn = new SignIn();
+                    signIn.setOpenId(requestMap.get("FromUserName"));
+                    signIn.setSignTime(new Date());
+                    signIn.setBizStatus(1);
+                    signIn.setStatus(1);
+                    signInRepository.save(signIn);
+                } else {
+                    log.info("签到失败");
+                    str = WxMpXmlOutMessage
+                            .TEXT()
+                            .content("未在签到时间内签到")
+                            .fromUser(requestMap.get("ToUserName"))
+                            .toUser(requestMap.get("FromUserName"))
+                            .build().toXml();
+                }
             } else {
-                log.info("签到失败");
+                log.info("该用户不是100w项目用户");
                 str = WxMpXmlOutMessage
                         .TEXT()
-                        .content("签到时间已过")
+                        .content("签到失败")
                         .fromUser(requestMap.get("ToUserName"))
                         .toUser(requestMap.get("FromUserName"))
                         .build().toXml();
@@ -140,7 +156,6 @@ public class EventHandlerImpl implements EventHandler {
         String str = null;
         if ("course".equals(requestMap.get("EventKey"))) {
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
-
             if ((user == null || user.getStatus() != 1)) {
                 log.info("----查询不到用户信息----");
                 str = WxMpXmlOutMessage
@@ -155,18 +170,18 @@ public class EventHandlerImpl implements EventHandler {
                 String classId = "0";
                 //查询用户所属班级
                 List<UserClassRelation> userClassRelationList = userClassRelationRepository.findByOpenIdAndStatus(user.getOpenId(), WXStatusEnum.Status.NORMAL.getStatus());
-                if(CollectionUtils.isEmpty(userClassRelationList)){
+                if (CollectionUtils.isEmpty(userClassRelationList)) {
                     log.info("用户没有所属班级，为用户推送最新默认课表");
-                }else{
+                } else {
                     UserClassRelation userClassRelation = userClassRelationList.get(0);
-                    classId = userClassRelation.getClassId()+"";
+                    classId = userClassRelation.getClassId() + "";
                 }
                 // 查询用户所属班级的课表图片
                 List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsLikeOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), "%" + classId + "%");
 
 //                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
 //                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
-                if(CollectionUtils.isNotEmpty(imageList)){
+                if (CollectionUtils.isNotEmpty(imageList)) {
                     for (NotificationType notificationType : imageList) {
                         if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
                             log.info("----展示图片----");
@@ -181,10 +196,10 @@ public class EventHandlerImpl implements EventHandler {
                             break;
                         }
                     }
-                }else{
+                } else {
                     str = WxMpXmlOutMessage
                             .TEXT()
-                            .content("暂无课程安排，请联系助教")
+                            .content("课程安排即将推出~")
                             .fromUser(requestMap.get("ToUserName"))
                             .toUser(requestMap.get("FromUserName"))
                             .build()
