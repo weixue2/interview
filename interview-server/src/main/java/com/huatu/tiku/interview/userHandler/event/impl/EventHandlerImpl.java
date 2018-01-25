@@ -1,25 +1,24 @@
 package com.huatu.tiku.interview.userHandler.event.impl;
 
 import com.huatu.tiku.interview.constant.BasicParameters;
+import com.huatu.tiku.interview.constant.NotificationTypeConstant;
 import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.entity.Article;
 import com.huatu.tiku.interview.entity.message.NewsMessage;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.po.SignIn;
 import com.huatu.tiku.interview.entity.po.User;
-import com.huatu.tiku.interview.repository.LearningReportRepository;
-import com.huatu.tiku.interview.repository.NotificationTypeRepository;
-import com.huatu.tiku.interview.repository.SignInRepository;
-import com.huatu.tiku.interview.repository.UserRepository;
+import com.huatu.tiku.interview.entity.po.UserClassRelation;
+import com.huatu.tiku.interview.repository.*;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.userHandler.event.EventHandler;
 import com.huatu.tiku.interview.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +48,8 @@ public class EventHandlerImpl implements EventHandler {
     private LearningReportRepository learningReportRepository;
     @Value("${phone_check}")
     private String phoneCheck;
-
+    @Autowired
+    private UserClassRelationRepository userClassRelationRepository;
 
     @Override
     public String subscribeHandler(Map<String, String> requestMap) {
@@ -151,26 +151,45 @@ public class EventHandlerImpl implements EventHandler {
                         .build()
                         .toXml();
             } else {
-                //TODO 查询用户所属班级的课表图片(推送班级为全部or包含学员所属班级)
+                // 查询用户所属班级
+                String classId = "0";
                 //查询用户所属班级
+                List<UserClassRelation> userClassRelationList = userClassRelationRepository.findByOpenIdAndStatus(user.getOpenId(), WXStatusEnum.Status.NORMAL.getStatus());
+                if(CollectionUtils.isEmpty(userClassRelationList)){
+                    log.info("用户没有所属班级，为用户推送最新默认课表");
+                }else{
+                    UserClassRelation userClassRelation = userClassRelationList.get(0);
+                    classId = userClassRelation.getClassId()+"";
+                }
+                // 查询用户所属班级的课表图片
+                List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsLikeOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), "%" + classId + "%");
 
-
-
-                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
-                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
-                for (NotificationType notificationType : notTypePatterns) {
-                    if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
-                        log.info("----展示图片----");
-                        log.info("----图片id:" + notificationType.getWxImageId());
-                        str = WxMpXmlOutMessage
-                                .IMAGE()
-                                .mediaId(notificationType.getWxImageId())
-                                .fromUser(requestMap.get("ToUserName"))
-                                .toUser(requestMap.get("FromUserName"))
-                                .build()
-                                .toXml();
-                        break;
+//                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
+//                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
+                if(CollectionUtils.isNotEmpty(imageList)){
+                    for (NotificationType notificationType : imageList) {
+                        if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
+                            log.info("----展示图片----");
+                            log.info("----图片id:" + notificationType.getWxImageId());
+                            str = WxMpXmlOutMessage
+                                    .IMAGE()
+                                    .mediaId(notificationType.getWxImageId())
+                                    .fromUser(requestMap.get("ToUserName"))
+                                    .toUser(requestMap.get("FromUserName"))
+                                    .build()
+                                    .toXml();
+                            break;
+                        }
                     }
+                }else{
+                    str = WxMpXmlOutMessage
+                            .TEXT()
+                            .content("暂无课程安排，请联系助教")
+                            .fromUser(requestMap.get("ToUserName"))
+                            .toUser(requestMap.get("FromUserName"))
+                            .build()
+                            .toXml();
+
                 }
             }
         } else if ("conn_service".equals(requestMap.get("EventKey"))) {
