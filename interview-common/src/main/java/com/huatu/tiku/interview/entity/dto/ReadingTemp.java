@@ -16,13 +16,13 @@ public class ReadingTemp implements Serializable {
     private Date date;
     private Integer type;
     private Boolean status;
-    private String[] classes;
-    public ReadingTemp(Long id, Date date, Boolean status,Integer type,String[] classes) {
+    private Long classId;
+    public ReadingTemp(Long id, Date date, Boolean status,Integer type,Long classId) {
         this.id = id;
         this.date = date;
         this.status = status;
         this.type = type;
-        this.classes = classes;
+        this.classId = classId;
     }
 
     public ReadingTemp() {
