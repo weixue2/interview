@@ -97,7 +97,7 @@ public class EventHandlerImpl implements EventHandler {
             String h = new SimpleDateFormat("HH").format(new Date());
             //设置签到时间    08:00-09:00    13:00-14:00   18:00-19:00
             User user = userRepository.findByOpenId(requestMap.get("FromUserName"));
-            if ((user != null || user.getStatus() == 1)) {
+            if ((user != null && user.getStatus() == 1)) {
                 if (Integer.parseInt(h) < 9 && Integer.parseInt(h) >= 8 || Integer.parseInt(h) < 14 && Integer.parseInt(h) >= 13 || Integer.parseInt(h) < 19 && Integer.parseInt(h) >= 18) {
                     log.info("开始签到");
                     String time = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date());
