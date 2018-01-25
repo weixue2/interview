@@ -81,17 +81,17 @@ public class NotificationPushRunner {
                         Long cluss = userService.getCluss(u.getOpenId());
                         for (NotificationType nt : typeList) {
                             Boolean is = true;
-                            if(!nt.getClassIds().equals("0")){
-                                for (String s : ClussStringUtil.getList(nt.getClassIds())) {
-                                    if (!Long.valueOf(s).toString().equals(cluss.toString())) {
-                                        is = false;
-                                    }
+                            if (!nt.getClassId().equals("0")) {
+
+                                if (!nt.getClassId().equals(cluss)) {
+                                    is = false;
                                 }
-//                            if (!is){
-//                                continue;
-//                            }
-                            }else if(cluss == 0){
-//                                continue;
+
+                                if (!is) {
+                                    continue;
+                                }
+                            } else if (cluss == 0) {
+                                continue;
                             }
 //                            NotificationType notification = notifyService.get(rt.getId());
                             WechatTemplateMsg templateMsg = null;

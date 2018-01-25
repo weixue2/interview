@@ -45,7 +45,7 @@ public class NotificationType extends BaseEntity implements Serializable {
 
 
     //关联班级id（全部班级：0   多选班级：id1,id2,id3）
-    private String classIds;
+    private Long classId;
 
 
 }
