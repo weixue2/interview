@@ -119,7 +119,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public NotificationType saveRegisterReport(NotificationType registerReport) {
-
+        registerReport.setCreator("admin");
         registerReport.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
         registerReport.setBizStatus(WXStatusEnum.BizStatus.ONLINE.getBizSatus());
         return notificationTypeRepository.save(registerReport);

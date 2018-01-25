@@ -105,7 +105,7 @@ public class AccessTokenThread {
      * 释放定时任务锁
      */
     private void unlock() {
-        String lockKey = RedisKeyConstant.SAVE_REPORT_LOCK;
+        String lockKey = RedisKeyConstant.GET_TOKEN_LOCK;
         String currentServer = (String)redisTemplate.opsForValue().get(lockKey);
 
         log.info("current server={}",currentServer);
@@ -130,7 +130,7 @@ public class AccessTokenThread {
     private boolean getLock() {
         ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
 
-        String lockKey = RedisKeyConstant.SAVE_REPORT_LOCK;
+        String lockKey = RedisKeyConstant.GET_TOKEN_LOCK;
         String value = opsForValue.get(lockKey);
         log.info("get lock timestamp={}",System.currentTimeMillis());
         String serverIp = "";
