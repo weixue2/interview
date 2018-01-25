@@ -60,7 +60,7 @@ public class NotificationRunner {
             List<ReadingTemp> rts = new ArrayList<>();
             for (NotificationType mr : list) {
                 // TODO 班级s
-                rts.add(new ReadingTemp(mr.getId(), mr.getPushTime(), true, mr.getType(), ClussStringUtil.getList(mr.getClassIds())));
+                rts.add(new ReadingTemp(mr.getId(), mr.getPushTime(), true, mr.getType(), mr.getClassId()));
             }
             Thread.sleep(1000);
             insertRedis(rts);
