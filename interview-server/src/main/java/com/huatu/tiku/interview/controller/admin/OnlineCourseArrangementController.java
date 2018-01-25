@@ -41,7 +41,6 @@ public class OnlineCourseArrangementController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-
     @LogPrint
     @PostMapping("/CourseArrangement")
     public Result add(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id,@RequestParam String classIds) throws Exception {
