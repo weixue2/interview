@@ -167,21 +167,21 @@ public class EventHandlerImpl implements EventHandler {
                         .toXml();
             } else {
                 // 查询用户所属班级
-                String classId = "0";
+                String classId = "";
                 //查询用户所属班级
                 List<UserClassRelation> userClassRelationList = userClassRelationRepository.findByOpenIdAndStatus(user.getOpenId(), WXStatusEnum.Status.NORMAL.getStatus());
-                if (CollectionUtils.isEmpty(userClassRelationList)) {
-                    log.info("用户没有所属班级，为用户推送最新默认课表");
-                } else {
+                if(CollectionUtils.isEmpty(userClassRelationList)){
+                    log.info("用户没有所属班级");
+                }else{
                     UserClassRelation userClassRelation = userClassRelationList.get(0);
-                    classId = userClassRelation.getClassId() + "";
+                    classId = userClassRelation.getClassId()+"";
                 }
                 // 查询用户所属班级的课表图片
-                List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsLikeOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), "%" + classId + "%");
+                List<NotificationType> imageList = notificationTypeRepository.findByTypeAndClassIdsOrderByGmtCreateDesc(NotificationTypeConstant.ONLINE_COURSE_ARRANGEMENT.getCode(), classId );
 
 //                List<NotificationType> notTypePatterns = notificationTypeRepository.findByBizStatusAndStatus
 //                        (new Sort(Sort.Direction.DESC, "gmtModify"), WXStatusEnum.BizStatus.ONLINE.getBizSatus(), WXStatusEnum.Status.NORMAL.getStatus());
-                if (CollectionUtils.isNotEmpty(imageList)) {
+                if(CollectionUtils.isNotEmpty(imageList)){
                     for (NotificationType notificationType : imageList) {
                         if (StringUtils.isNotEmpty(notificationType.getWxImageId())) {
                             log.info("----展示图片----");
@@ -196,7 +196,7 @@ public class EventHandlerImpl implements EventHandler {
                             break;
                         }
                     }
-                } else {
+                }else{
                     str = WxMpXmlOutMessage
                             .TEXT()
                             .content("课程安排即将推出~")

@@ -35,7 +35,7 @@ public interface NotificationTypeRepository extends JpaRepository<NotificationTy
     NotificationType findByIdAndStatus(Long id,Integer status);
 
 
-    List<NotificationType> findByTypeAndClassIdsLikeOrderByGmtCreateDesc(int type ,String classId);
+    List<NotificationType> findByTypeAndClassIdsOrderByGmtCreateDesc(int type ,String classId);
 
 
 }
