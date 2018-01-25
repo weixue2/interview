@@ -58,6 +58,8 @@ public class NotificationController {
             return  Result.build(ResultEnum.PUSH_TIME_ERROR);
         }
 
+
+
         NotificationType notificationType = notificationService.saveRegisterReport(registerReport);
         return  notificationType != null ?Result.ok(notificationType):Result.build(ResultEnum.INSERT_FAIL);
     }
