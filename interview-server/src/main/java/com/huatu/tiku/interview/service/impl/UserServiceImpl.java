@@ -1,8 +1,13 @@
 package com.huatu.tiku.interview.service.impl;
 
 import com.google.common.collect.Lists;
+import com.huatu.tiku.interview.constant.ResultEnum;
 import com.huatu.tiku.interview.constant.UserStatusConstant;
 import com.huatu.tiku.interview.entity.po.User;
+import com.huatu.tiku.interview.entity.po.UserClassRelation;
+import com.huatu.tiku.interview.exception.ReqException;
+import com.huatu.tiku.interview.repository.ClassInfoRepository;
+import com.huatu.tiku.interview.repository.UserClassRelationRepository;
 import com.huatu.tiku.interview.repository.UserRepository;
 import com.huatu.tiku.interview.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +29,12 @@ import java.util.List;
  **/
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    ClassInfoRepository classInfoRepository;
+
+    @Autowired
+    UserClassRelationRepository userClassRelationRepository;
     @Autowired
     UserRepository userRepository;
 
@@ -91,6 +102,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUser() {
         return userRepository.findByStatus(1);
+    }
+
+    @Override
+    public Long getCluss(String openId) {
+        List<UserClassRelation> list = userClassRelationRepository.findByOpenIdAndStatus(openId, 1);
+        // 如果学员所在班级大于1，报错
+        if(list.size() > 1){
+            throw new ReqException(ResultEnum.CLASS_UNIQUE_ERROR);
+        }
+        if(list.isEmpty()){
+//            throw new ReqException(ResultEnum.CLASS_NULL_ERROR);
+            return 0L;
+        }
+
+        return list.get(0).getClassId();
     }
 
 }

@@ -21,4 +21,6 @@ public interface UserService {
 
     List<User> findAllUser(String content);
     List<User> findAllUser();
+
+    Long getCluss(String openId);
 }

@@ -2,7 +2,6 @@ package com.huatu.tiku.interview.entity.po;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
@@ -43,6 +42,10 @@ public class NotificationType extends BaseEntity implements Serializable {
      * 推送内容
      */
     private String content;
+
+
+    //关联班级id（全部班级：0   多选班级：id1,id2,id3）
+    private String classIds;
 
 
 }

@@ -43,7 +43,13 @@ public enum ResultEnum {
 
     NOTIFICATION_TYPE_ERROR(50042, "推送通知类型错误"),
     PUSH_TIME_ERROR(50043, "推送通知类型错误"),
-    LOGIN_ERROR(50044, "用户名或密码错误");
+    LOGIN_ERROR(50044, "用户名或密码错误"),
+
+    CLASS_CAST_ERROR(50050,"班级唯一标识无法识别"),
+    Agreement_ERROR(50051,"用户不同意协议"),
+    CLASS_UNIQUE_ERROR(50052,"学员所在班级不唯一"),
+    CLASS_NULL_ERROR(50053,"学员不在任何班级"),
+            ;
     private Integer code;
 
     private String message;

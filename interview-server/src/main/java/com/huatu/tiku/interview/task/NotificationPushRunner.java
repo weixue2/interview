@@ -14,6 +14,7 @@ import com.huatu.tiku.interview.service.NotificationService;
 import com.huatu.tiku.interview.service.UserService;
 import com.huatu.tiku.interview.service.WechatTemplateMsgService;
 import com.huatu.tiku.interview.util.json.JsonUtil;
+import com.huatu.tiku.interview.util.po.ClussStringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,9 +56,9 @@ public class NotificationPushRunner {
 
     @Scheduled(fixedDelay = 1 * 1000)
     public void CheckNotification() {
-        String  json = redis.opsForValue().get(key);
+        String json = redis.opsForValue().get(key);
         String accessToken = redis.opsForValue().get(WeChatUrlConstant.ACCESS_TOKEN_KEY);
-        if(json.length()>2){
+        if (json.length() > 2) {
             List<ReadingTemp> rts = JSON.parseArray(json, ReadingTemp.class);
             if (rts != null) {
                 List<ReadingTemp> pushList = new ArrayList<>();
@@ -72,12 +73,26 @@ public class NotificationPushRunner {
                 }
                 // todo 电厂
                 List<NotificationType> typeList = new ArrayList<>();
-                if(!pushList.isEmpty()){
-                    for(ReadingTemp rt : pushList){
+                if (!pushList.isEmpty()) {
+                    for (ReadingTemp rt : pushList) {
                         typeList.add(notifyService.findOne(rt.getId()));
                     }
-                    for (User u : userService.findAllUser()){
+                    for (User u : userService.findAllUser()) {
+                        Long cluss = userService.getCluss(u.getOpenId());
                         for (NotificationType nt : typeList) {
+                            Boolean is = true;
+                            if(!nt.getClassIds().equals("0")){
+                                for (String s : ClussStringUtil.getList(nt.getClassIds())) {
+                                    if (!Long.valueOf(s).toString().equals(cluss.toString())) {
+                                        is = false;
+                                    }
+                                }
+//                            if (!is){
+//                                continue;
+//                            }
+                            }else if(cluss == 0){
+//                                continue;
+                            }
 //                            NotificationType notification = notifyService.get(rt.getId());
                             WechatTemplateMsg templateMsg = null;
                             switch (nt.getType()) {
@@ -88,8 +103,8 @@ public class NotificationPushRunner {
                                 case 2: {
                                     System.out.println("随同了");
                                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.MorningReading);
-                                    templateMsg.setUrl(notifyView+nt.getId());
-                                    System.out.println(notifyView+nt.getId());
+                                    templateMsg.setUrl(notifyView + nt.getId());
+                                    System.out.println(notifyView + nt.getId());
                                     templateMsg.setData(
                                             MyTreeMap.createMap(
                                                     new TemplateMap("first", WechatTemplateMsg.item("今日热点已新鲜出炉~", "#000000")),
@@ -105,12 +120,12 @@ public class NotificationPushRunner {
                                     System.out.println("随同了");
                                     log.info("随同了");
                                     templateMsg = new WechatTemplateMsg(u.getOpenId(), TemplateEnum.ReportHint);
-                                    templateMsg.setUrl(notifyView+nt.getId());
-                                    System.out.println(notifyView+nt.getId());
+                                    templateMsg.setUrl(notifyView + nt.getId());
+                                    System.out.println(notifyView + nt.getId());
                                     templateMsg.setData(
                                             MyTreeMap.createMap(
-                                                    new TemplateMap("first", WechatTemplateMsg.item("亲爱的"+u.getName()+"同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
-//                                    new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班", "#000000")),
+                                                    new TemplateMap("first", WechatTemplateMsg.item("亲爱的" + u.getName() + "同学，您购买的《2018国考封闭特训班》课程即将开课，请务必及时报到。", "#000000")),
+                                                    new TemplateMap("keyword1", WechatTemplateMsg.item("2018国考封闭特训班", "#000000")),
                                                     new TemplateMap("keyword2", WechatTemplateMsg.item("2018年2月2日", "#000000")),
                                                     new TemplateMap("keyword3", WechatTemplateMsg.item("北京", "#000000")),
                                                     new TemplateMap("keyword4", WechatTemplateMsg.item("400-817-6111", "#000000")),
@@ -134,14 +149,13 @@ public class NotificationPushRunner {
     }
 
 
-
     private void insertRedis(Object o) {
         redis.opsForValue().set(key, JSON.toJSONString(o));
         redis.expire(key, 2 * 3600 * 1000, TimeUnit.SECONDS);
     }
 
 
-    class RunPush implements Runnable{
+    class RunPush implements Runnable {
         private String accessToken;
         private WechatTemplateMsg templateMsg;
 
@@ -155,7 +169,7 @@ public class NotificationPushRunner {
         public void run() {
             System.out.println("推送了一个");
             TemplateMsgResult result = templateMsgService.sendTemplate(accessToken, JsonUtil.toJson(templateMsg));
-            System.out.println("推送返回："+result);
+            System.out.println("推送返回：" + result);
             try {
                 this.finalize();
             } catch (Throwable throwable) {
