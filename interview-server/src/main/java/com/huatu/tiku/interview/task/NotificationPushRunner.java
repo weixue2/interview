@@ -86,9 +86,9 @@ public class NotificationPushRunner {
                                     is = false;
                                 }
                             }
-                            if (!is){
-                                continue;
-                            }
+//                            if (!is){
+//                                continue;
+//                            }
 //                            NotificationType notification = notifyService.get(rt.getId());
                             WechatTemplateMsg templateMsg = null;
                             switch (nt.getType()) {
