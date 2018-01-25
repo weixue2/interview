@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * Created by x6 on 2018/1/25.
+ * 学员-班级关系
  */
 
 @Entity
@@ -35,9 +36,14 @@ public class UserClassRelation   extends BaseEntity  implements Serializable {
     //班级id
     private long classId;
 
-    //绑定时间（精确到天）
-    private String boundDate;
-    
+    //绑定时间（开始时间）
+    private String startTime;
+    //绑定时间（结束时间）
+    private String endTime;
+
+
+    //绑定类型(0  短期绑定   1长期绑定)
+    private int  boundType;
     
     
 
