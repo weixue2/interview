@@ -43,7 +43,7 @@ public class OnlineCourseArrangementController {
 
     @LogPrint
     @PostMapping("/CourseArrangement")
-    public Result add(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id,@RequestParam Long classIds) throws Exception {
+    public Result add(@RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam Long id,@RequestParam Long classId) throws Exception {
         WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
         NotificationType notificationType = new NotificationType();
         notificationType.setCreator("admin");
@@ -71,7 +71,7 @@ public class OnlineCourseArrangementController {
         notificationType.setImageUrl(fileUrl);
         notificationType.setTitle(title);
         notificationType.setId(id);
-        notificationType.setClassId(classIds);
+        notificationType.setClassId(classId);
         arrangementService.add(notificationType);
         return Result.ok(notificationType);
     }
