@@ -1,5 +1,6 @@
 package com.huatu.tiku.interview.controller.admin;
 
+import com.huatu.tiku.interview.constant.WXStatusEnum;
 import com.huatu.tiku.interview.entity.po.NotificationType;
 import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.MorningReadingService;
@@ -26,7 +27,8 @@ public class MorningReadingController {
     @LogPrint
     @PostMapping //@requestBody --> Json
     public Result add(@RequestBody NotificationType morningReading) throws IOException {
-        morningReading.setStatus(1);
+        morningReading.setStatus(WXStatusEnum.Status.NORMAL.getStatus());
+        morningReading.setBizStatus(WXStatusEnum.BizStatus.ONLINE.getBizSatus());
         morningReading.setType(2);
         morningReading.setCreator("admin");
         morningReading.setContent(htmlFileUtil.imgManage(morningReading.getContent(),morningReading.getId()+"",0));
