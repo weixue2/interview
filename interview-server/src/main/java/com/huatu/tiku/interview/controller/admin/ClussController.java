@@ -1,6 +1,7 @@
 package com.huatu.tiku.interview.controller.admin;
 
 import com.huatu.tiku.interview.entity.po.ClassInfo;
+import com.huatu.tiku.interview.entity.result.Result;
 import com.huatu.tiku.interview.service.ClassInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,8 @@ public class ClussController {
     private ClassInfoService classInfoService;
 
     @GetMapping("list")
-    public List<ClassInfo> getList(){
+    public Result getList(){
 
-        return classInfoService.getList();
+        return Result.ok(classInfoService.getList());
     }
 }
